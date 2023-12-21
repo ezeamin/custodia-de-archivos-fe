@@ -1,0 +1,8 @@
+.chip-animated {
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+.bordered {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}

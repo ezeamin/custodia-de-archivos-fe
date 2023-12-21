@@ -1,0 +1,66 @@
+.bordered-table,
+.bordered-table tr th,
+.bordered-table tr td {
+  border: 1px solid #ccc;
+}
+
+.hovered-table tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  -ms-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+
+.padding-normal,
+.padding-normal tr th,
+.padding-normal tr td {
+  padding: 7.5px;
+}
+.padding-large,
+.padding-large tr th,
+.padding-large tr td {
+  padding: 15px;
+}
+
+.personalized-table {
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  -ms-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.personalized-table tr th {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.table-shadow {
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.table-small,
+.table-small tr th,
+.table-small tr td {
+  font-size: 12px;
+}
+.table-large,
+.table-large tr th,
+.table-large tr td {
+  font-size: 18px;
+}
+
+.rounded-table tr th:first-child {
+  border-top-left-radius: 10px;
+}
+.rounded-table tr th:last-child {
+  border-top-right-radius: 10px;
+}
+.rounded-table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+.rounded-table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}

@@ -1,0 +1,84 @@
+'use client';
+
+import { useState } from 'react';
+
+import { useHydrate } from 'hooks';
+
+import { cn } from 'utilities';
+
+import Icon from '../Icon/Icon';
+import InputController from '../InputController/InputController';
+import type { FormSchemas } from 'form-schemas';
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
+
+import type { InputProps } from '../TextInput/TextInput.types';
+
+const PasswordInput = <T extends FormSchemas>(
+  props: InputProps<T>
+): JSX.Element => {
+  const { className = '', control, name, label, dti, ...rest } = props;
+
+  const [displayPass, setDisplayPass] = useState(false);
+
+  const hydrated = useHydrate();
+
+  const handleChange = (): void => {
+    setDisplayPass((prev) => !prev);
+  };
+
+  return (
+    <fieldset className={cn('form-control w-72', className)}>
+      <label className="text-lg" htmlFor={name as string}>
+        {label}
+      </label>
+      <InputController
+        control={control}
+        defaultValue=""
+        name={name}
+        render={({ field, fieldState: { error } }) => (
+          <div
+            className={`relative input input-bordered overflow-hidden bg-gray-100 dark:bg-slate-700 mt-1 ${
+              error ? 'border-error' : ''
+            }`}
+          >
+            <input
+              className="w-[90%] input border-0 px-0 h-full bg-gray-100 dark:bg-slate-700"
+              data-testid={dti}
+              disabled={!hydrated || rest.disabled}
+              id={name as string}
+              onBlur={field.onBlur}
+              onChange={field.onChange}
+              placeholder={rest.placeholder ?? 'Ingrese un valor'}
+              ref={field.ref}
+              type={displayPass ? 'text' : 'password'}
+              value={field.value as string}
+              {...rest}
+            />
+            <button
+              className="absolute block z-50 h-full w-[40px] p-0 bottom-0 top-0 right-0 btn btn-ghost rounded-btn"
+              disabled={!hydrated || rest.disabled}
+              onClick={handleChange}
+              type="button"
+            >
+              {displayPass ? (
+                <Icon
+                  className="flex w-full text-gray-600 dark:text-gray-400"
+                  iconComponent={<IoMdEyeOff />}
+                  title="Ocultar contraseña"
+                />
+              ) : (
+                <Icon
+                  className="flex w-full text-gray-600 dark:text-gray-400"
+                  iconComponent={<IoMdEye />}
+                  title="Mostrar contraseña"
+                />
+              )}
+            </button>
+          </div>
+        )}
+      />
+    </fieldset>
+  );
+};
+
+export default PasswordInput;

@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+/* GLOBAL THEMING -------------------------------------------- */
+
+:root {
+  --background: radial-gradient(
+    circle 600px at 26% 0%,
+    rgb(9, 16, 34) 0.1%,
+    rgb(48, 48, 48) 100%
+  );
+  font-family: 'Roboto Slab', 'Arial';
+
+  --header-background: #325d85;
+  --button-text-color: #ffffff;
+}
+
+[data-theme='light'] {
+  --background: radial-gradient(
+    circle 815px at 26% 0%,
+    rgb(223, 228, 240) 0.2%,
+    rgb(216, 216, 216) 100%
+  );
+
+  --header-background: white;
+  --button-text-color: #000000;
+}
+
+/* GENERAL ------------------------------------------------ */
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+/* GLOBAL COMPONENTS ----------------------------------- */
+
+.header-scrolling {
+  background-color: var(--header-background);
+  box-shadow: 0 2px 10px 10px #5757572d;
+
+  & a,
+  & button {
+    color: var(--button-text-color) !important;
+  }
+}
+
+.loading-page {
+  height: calc(100vh - 150px);
+}
+
+/* UTILITY CLASSES ------------------------------------- */
