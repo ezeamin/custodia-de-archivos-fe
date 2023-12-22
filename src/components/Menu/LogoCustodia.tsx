@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import icon from 'img/icon.png';
+import icon from '/img/icon.png';
 
 const LogoCustodia = (): JSX.Element => {
   return (

@@ -1,11 +1,14 @@
+import { AiFillHome } from 'react-icons/ai';
+
 import { Route } from './interface';
 
 export const routes: Route[] = [
   {
     id: 1000,
     title: 'Login',
-    description: 'Login page',
+    description: 'Login',
     path: '/auth',
+    hidden: true,
     options: [],
     subpaths: [
       {
@@ -33,5 +36,14 @@ export const routes: Route[] = [
         subpaths: [],
       },
     ],
+  },
+  {
+    id: 2000,
+    title: 'Inicio',
+    icon: <AiFillHome />,
+    description: 'Inicio',
+    path: '/',
+    options: [],
+    subpaths: [],
   },
 ];

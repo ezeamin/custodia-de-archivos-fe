@@ -3,7 +3,7 @@ const daisyuiLib = require('daisyui');
 const daisyuiTheme = require('daisyui/src/theming/themes');
 
 module.exports = {
-  content: ['../../packages/**/*.{ts,tsx}', '../../apps/**/*.{ts,tsx}'],
+  content: ['src/**/*.{ts,tsx}'],
   darkMode: ['class', '[data-theme="dark"]'],
   daisyui: {
     themes: [

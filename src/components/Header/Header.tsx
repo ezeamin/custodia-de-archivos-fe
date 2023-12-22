@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import icon from 'img/icon.png';
+import icon from '/img/icon.png';
 
 import useOptions from '@/hooks/useOptions';
 import { usePortrait } from '@/hooks/usePortrait';
@@ -9,7 +9,6 @@ import OptionButton from './OptionButton';
 import ProfileAvatar from '@/components/Common/ProfileAvatar';
 import ThemeTogglerButton from '@/components/Common/ThemeTogglerButton';
 import PortraitMenu from '@/components/Menu/PortraitMenu';
-import { Skeleton } from '@/components/ui';
 
 const Header = (): JSX.Element => {
   const [isScrolling, setIsScrolling] = useState(false);
@@ -52,20 +51,6 @@ const Header = (): JSX.Element => {
   // RENDER
   // ---------------------------------------------------------------------
 
-  // Loading (not yet hydrated)
-  if (isPortrait === undefined) {
-    return (
-      <header
-        className={`sticky top-0 w-full py-5 flex justify-between items-center px-7 md:px-10 transition-colors ${
-          isScrolling ? 'header-scrolling' : ''
-        }`}
-      >
-        <Skeleton />
-        <Skeleton type="circle" />
-      </header>
-    );
-  }
-
   // Portrait & Hydrated
   if (isPortrait) {
     return (
@@ -76,7 +61,7 @@ const Header = (): JSX.Element => {
       >
         <img
           alt="Poder Judicial de Tucumán"
-          className="w-12 h-12"
+          className="w-12 h-12 rounded-md"
           height={100}
           src={icon}
           width={100}
