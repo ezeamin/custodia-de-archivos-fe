@@ -1,8 +1,6 @@
-'use client';
-
 import { useEffect, useMemo, useState } from 'react';
 
-import { cn, removeLineBreaks } from 'utilities';
+import { cn, removeLineBreaks } from '@/utilities';
 
 import type { CheckboxProps } from './Checkbox.types';
 
@@ -12,7 +10,6 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
     className = '',
     colorDark = '',
     colorLight = '',
-    dti,
     disabled = false,
     label = '',
     textColorDark = '',
@@ -39,7 +36,6 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
           ${textColorDark ? `dark:${textColorDark}` : ''}`,
           className
         )}
-        data-testid={dti}
         disabled={disabledState}
         type="checkbox"
       />

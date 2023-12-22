@@ -1,5 +1,4 @@
 import './Spinner.styles.css';
-
 import type { SpinnerProps } from './Spinner.types';
 
 const Spinner = (props: SpinnerProps): JSX.Element => {

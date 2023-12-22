@@ -1,5 +1,3 @@
-'use client';
-
 // no types for react-error-boundary
 import { Component, type ReactNode } from 'react';
 
@@ -20,7 +18,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   static getDerivedStateFromError(/* error: Error */): { hasError: boolean } {
-    // Update state so the next render will show the fallback UI.
+    // Update state so the next render will show the fallback @/components/ui.
     return { hasError: true };
   }
 
@@ -37,7 +35,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     } = this;
 
     if (hasError) {
-      // You can render any custom fallback UI
+      // You can render any custom fallback @/components/ui
       return <ErrorPage />;
     }
 

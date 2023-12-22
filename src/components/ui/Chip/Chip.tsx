@@ -1,15 +1,9 @@
-'use client';
-
 import { useState } from 'react';
-
-import { cn, removeLineBreaks } from 'utilities';
-
-import { DTI, DTI_LIST } from 'dti';
-
 import { MdClose } from 'react-icons/md';
 
-import './Chip.styles.css';
+import { cn, removeLineBreaks } from '@/utilities';
 
+import './Chip.styles.css';
 import type { ChipPropsType } from './Chip.types';
 
 /**
@@ -19,7 +13,6 @@ import type { ChipPropsType } from './Chip.types';
  * @param colorDark - The color of the button in dark mode. You can provide a DaisyUI color class to be applied in dark mode. Example: 'btn-info'.
  * @param colorLight - The color of the button in light mode. You can provide a DaisyUI color class to be applied in light mode. Example: 'btn-ghost'.
  * @param deletable - Will display a delete icon which changes appearance on hover.
- * @param dti - Data Test ID for testing purposes.
  * @param onDelete - Event handler for the button's delete event.
  * @param size - Controlling the font size of the element.
  * @returns JSX.Element The rendered Icon component.
@@ -48,7 +41,6 @@ const Chip = (props: ChipPropsType): JSX.Element => {
     colorDark = '',
     colorLight = '',
     deletable = false,
-    dti,
     onDelete,
     size,
   } = props;
@@ -76,13 +68,11 @@ const Chip = (props: ChipPropsType): JSX.Element => {
       tooltip`,
         className
       )}
-      data-testid={dti}
     >
       {children}
       {deletable ? (
         <button
           className="chip-animated bg-slate-600 dark:bg-slate-700 hover:bg-slate-500 rounded-full"
-          data-testid={DTI(DTI_LIST.BUTTON('close'))}
           onClick={handleDelete}
           style={{ marginLeft: '5px', marginTop: '5px' }}
           type="button"

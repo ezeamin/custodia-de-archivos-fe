@@ -1,9 +1,6 @@
-'use client';
-
-import { cn, removeLineBreaks } from 'utilities';
+import { cn, removeLineBreaks } from '@/utilities';
 
 import './Table.styles.css';
-
 import type { TablePropsType } from './Table.types';
 
 /**

@@ -1,4 +1,4 @@
-import { type AnyProp } from '../../types';
+import type { AnyProp } from '@/interface';
 
 export interface SkeletonProps extends AnyProp {
   type?: 'circle' | 'rect';

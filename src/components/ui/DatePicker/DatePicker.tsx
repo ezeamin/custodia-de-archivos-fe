@@ -1,9 +1,6 @@
-'use client';
-
 import { useEffect, useRef } from 'react';
 
-import { cn } from 'utilities';
-
+import { cn } from '@/utilities';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
@@ -12,8 +9,6 @@ import type {
   DatePickerProps,
   OptionsDatePickerProps,
 } from './DatePicker.types';
-
-/* eslint-disable tsdoc/syntax -- tsdoc messes up with jsdoc*/
 
 const optionsDefaultValues: OptionsDatePickerProps = {
   enableTime: false,
@@ -55,7 +50,6 @@ const optionsDefaultValues: OptionsDatePickerProps = {
 const DatePicker = (props: DatePickerProps): JSX.Element => {
   const {
     className = '',
-    dti,
     error = false,
     name,
     onChange,
@@ -97,7 +91,6 @@ const DatePicker = (props: DatePickerProps): JSX.Element => {
         }`,
         className
       )}
-      data-testid={dti}
       disabled={disabled}
       name={name}
       placeholder={placeholder || 'Seleccione la Fecha'}

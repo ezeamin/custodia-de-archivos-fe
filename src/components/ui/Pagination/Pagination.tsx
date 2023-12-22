@@ -1,20 +1,14 @@
-'use client';
-
 import { useEffect } from 'react';
-
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
-import { DTI, DTI_LIST } from 'dti';
-
-import IconButton from '../IconButton/IconButton';
 import {
   MdChevronLeft,
   MdChevronRight,
   MdFirstPage,
   MdLastPage,
 } from 'react-icons/md';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 import type { PaginationPropsType } from './Pagination.types';
+import IconButton from '@/components/ui/IconButton/IconButton';
 
 /**
  * A custom Pagination component.
@@ -28,14 +22,14 @@ import type { PaginationPropsType } from './Pagination.types';
 const Pagination = (props: PaginationPropsType): JSX.Element => {
   const { totalElements, onPageChange = () => {} } = props;
 
-  const router = useRouter();
-  const pathname = usePathname();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   // ----------------------------------------------
   // SEARCH PARAMS VALIDATION
   // ----------------------------------------------
 
-  const [...arraySearchParams] = useSearchParams();
+  const [arraySearchParams] = useSearchParams();
   const searchParams = Object.fromEntries(arraySearchParams);
   const page = Number(searchParams.page) || 0;
 
@@ -58,7 +52,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
     const newSearchParams = { ...searchParams, page: newPage };
     const newSearchString = new URLSearchParams(newSearchParams).toString();
 
-    router.push(`${pathname}?${newSearchString}`);
+    navigate(`${pathname}?${newSearchString}`);
 
     onPageChange(event, 0);
   };
@@ -68,7 +62,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
     const newPage = String(page - 1);
     const newSearchParams = { ...searchParams, page: newPage };
     const newSearchString = new URLSearchParams(newSearchParams).toString();
-    router.push(`${pathname}?${newSearchString}`);
+    navigate(`${pathname}?${newSearchString}`);
 
     onPageChange(event, page - 1);
   };
@@ -78,7 +72,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
     const newPage = String(page + 1);
     const newSearchParams = { ...searchParams, page: newPage };
     const newSearchString = new URLSearchParams(newSearchParams).toString();
-    router.push(`${pathname}?${newSearchString}`);
+    navigate(`${pathname}?${newSearchString}`);
 
     onPageChange(event, page + 1);
   };
@@ -88,7 +82,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
     const newPage = String(availablePages - 1);
     const newSearchParams = { ...searchParams, page: newPage };
     const newSearchString = new URLSearchParams(newSearchParams).toString();
-    router.push(`${pathname}?${newSearchString}`);
+    navigate(`${pathname}?${newSearchString}`);
 
     onPageChange(event, availablePages - 1);
   };
@@ -108,19 +102,16 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
         entries: newEntries,
       };
       const newSearchString = new URLSearchParams(newSearchParams).toString();
-      router.push(`${pathname}?${newSearchString}`);
+      navigate(`${pathname}?${newSearchString}`);
     }
-  }, [pathname, router, searchParams]);
+  }, [pathname, navigate, searchParams]);
 
   // ----------------------------------------------
   // RENDER
   // ----------------------------------------------
 
   return (
-    <div
-      className="flow-root w-full"
-      data-testid={DTI(DTI_LIST.PAGINATION.PAGE_SELECTOR)}
-    >
+    <div className="flow-root w-full">
       <IconButton
         className={`float-left ${
           !(page === 0) ? 'hover:bg-slate-500' : ''
@@ -128,7 +119,6 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
         colorDark="dark:bg-slate-700"
         colorLight="bg-slate-600"
         disabled={page === 0}
-        dti={DTI(DTI_LIST.BUTTON('first'))}
         iconComponent={<MdFirstPage color="#fff" />}
         label="Primera Página"
         onClick={handleFirstPageButtonClick}
@@ -140,7 +130,6 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
         colorDark="dark:bg-slate-700"
         colorLight="bg-slate-600"
         disabled={page === 0}
-        dti={DTI(DTI_LIST.BUTTON('prev'))}
         iconComponent={<MdChevronLeft color="#fff" />}
         label="Página Anterior"
         onClick={handleBackButtonClick}
@@ -152,7 +141,6 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
         colorDark="dark:bg-slate-700"
         colorLight="bg-slate-600"
         disabled={page === availablePages - 1}
-        dti={DTI(DTI_LIST.BUTTON('last'))}
         iconComponent={<MdLastPage color="#fff" />}
         label="Última Página"
         onClick={handleLastPageButtonClick}
@@ -164,7 +152,6 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
         colorDark="dark:bg-slate-700"
         colorLight="bg-slate-600"
         disabled={page === availablePages - 1}
-        dti={DTI(DTI_LIST.BUTTON('next'))}
         iconComponent={<MdChevronRight color="#fff" />}
         label="Próxima Página"
         onClick={handleNextButtonClick}

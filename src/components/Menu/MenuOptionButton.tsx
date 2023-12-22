@@ -1,29 +1,25 @@
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { Button } from 'ui';
+import { Button } from '@/components/ui';
 
-import { DTI, DTI_LIST } from 'dti';
-
-import { type MenuOptionButtonProps } from '../interface';
+import type { MenuOptionButtonProps } from '@/components/interface';
 
 const MenuOptionButton = (props: MenuOptionButtonProps): JSX.Element => {
   // Tomo los props
   const { option } = props;
 
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handlePrevious = (): void => {
-    router.back();
+    navigate(-1);
   };
 
-  if (option.url === -1)
+  if (option.path === -1)
     return (
       <Button
         className="duration-500 flex gap-x-4 items-center h-10 mb-4 px-4 rounded-lg shadow dark:text-white"
         colorDark="dark:bg-slate-600"
         colorLight="bg-sky-100"
-        dti={DTI(DTI_LIST.BUTTON(option.description))}
         lowerCase
         onClick={handlePrevious}
         unstyled
@@ -38,7 +34,6 @@ const MenuOptionButton = (props: MenuOptionButtonProps): JSX.Element => {
         className="duration-500 flex gap-x-4 items-center h-10 mb-4 px-4 rounded-lg shadow dark:text-white"
         colorDark="dark:bg-slate-600"
         colorLight="bg-sky-100"
-        dti={DTI(DTI_LIST.BUTTON(option.description))}
         lowerCase
         onClick={option.action}
         unstyled
@@ -50,8 +45,7 @@ const MenuOptionButton = (props: MenuOptionButtonProps): JSX.Element => {
   return (
     <Link
       className="bg-sky-100 dark:bg-slate-600 duration-500 flex gap-x-4 items-center h-10 mb-5 px-4 rounded-lg shadow dark:text-white"
-      data-testid={DTI(DTI_LIST.MENU.LINK(option.id))}
-      href={option.url}
+      to={option.path}
     >
       {option.description}
     </Link>

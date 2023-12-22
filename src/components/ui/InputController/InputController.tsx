@@ -1,8 +1,7 @@
-'use client';
-
-import type { FormSchemas } from 'form-schemas';
 import { Controller } from 'react-hook-form';
 import type { Path, PathValue } from 'react-hook-form';
+
+import type { FormSchemas } from '@/form-schemas';
 
 import type { ControllerProps } from './InputController.types';
 

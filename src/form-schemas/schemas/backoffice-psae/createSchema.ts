@@ -1,10 +1,11 @@
+import { z } from 'zod';
+
 import {
   emailRules,
   lastnameRules,
   nameRules,
   usernameRules,
 } from '../../rules/rules';
-import { z } from 'zod';
 
 export const createSchema = z.object({
   email: emailRules(true),

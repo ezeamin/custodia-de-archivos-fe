@@ -1,12 +1,9 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 
-import { cn, removeLineBreaks } from 'utilities';
-
-import Icon from '../Icon/Icon';
+import { cn, removeLineBreaks } from '@/utilities';
 
 import type { ButtonPropsType } from './Button.types';
+import Icon from '@/components/ui/Icon/Icon';
 
 /**
  * Generates the ARIA label for the button.
@@ -87,7 +84,6 @@ const Button = (props: ButtonPropsType): JSX.Element => {
     children,
     colorDark = '',
     colorLight = '',
-    dti,
     disabled = false,
     endIcon,
     glass = false,
@@ -155,12 +151,11 @@ const Button = (props: ButtonPropsType): JSX.Element => {
       ${size}
       ${sizeText}
       ${textColorLight} 
-      ${textColorDark ? textColorDark : defaultColor}
+      ${textColorDark ?? defaultColor}
       ${unbordered ? 'border-0' : ''}
       ${withoutAnimation ? 'no-animation' : ''}`,
         className
       )}
-      data-testid={dti}
       disabled={disabledState || loading}
       name={name}
       onClick={onClick}

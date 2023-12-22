@@ -1,4 +1,4 @@
-import type { Option } from '../../interface';
+import type { Route, RouteOption } from '@/constants/interface';
 import type { AnyProp } from '@/interface';
 
 // ----------------------------------------------------------------------
@@ -15,19 +15,12 @@ export interface LogoutButtonProps extends AnyProps {
 }
 
 export interface MenuModuleButtonProps extends AnyProps {
-  el: {
-    id: number;
-    img: {
-      src: string;
-    };
-    description: string;
-    url: string;
-  };
+  el: Route;
   open?: boolean;
 }
 
 export interface MenuOptionButtonProps extends AnyProp {
-  option: Option;
+  option: RouteOption;
 }
 
 // ----------------------------------------------------------------------

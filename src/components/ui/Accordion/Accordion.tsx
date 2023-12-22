@@ -1,8 +1,6 @@
-'use client';
-
 import { useState } from 'react';
 
-import { cn, removeLineBreaks } from 'utilities';
+import { cn, removeLineBreaks } from '@/utilities';
 
 import type { AccordionPropsType } from './Accordion.types';
 

@@ -1,14 +1,9 @@
-'use client';
-
-import { useHydrate } from 'hooks';
-
-import { cn } from 'utilities';
-
-import ComboBox from '../ComboBox/ComboBox';
-import InputController from '../InputController/InputController';
-import type { FormSchemas } from 'form-schemas';
+import type { FormSchemas } from '@/form-schemas';
+import { cn } from '@/utilities';
 
 import type { ComboBoxInputProps } from './ComboBoxInput.types';
+import ComboBox from '@/components/ui/ComboBox/ComboBox';
+import InputController from '@/components/ui/InputController/InputController';
 
 const ComboBoxInput = <T extends FormSchemas>(
   props: ComboBoxInputProps<T>
@@ -16,7 +11,6 @@ const ComboBoxInput = <T extends FormSchemas>(
   const {
     className = '',
     control,
-    dti,
     inputClassName = '',
     name,
     label,
@@ -24,8 +18,6 @@ const ComboBoxInput = <T extends FormSchemas>(
     placeholder,
     ...rest
   } = props;
-
-  const hydrated = useHydrate();
 
   return (
     <fieldset className={cn('form-control w-72', className)}>
@@ -39,8 +31,7 @@ const ComboBoxInput = <T extends FormSchemas>(
         render={({ field, fieldState: { error } }) => (
           <ComboBox<T>
             controller={field}
-            disabled={!hydrated || rest.disabled}
-            dti={dti}
+            disabled={rest.disabled}
             error={!!error}
             id={name as string}
             inputClassName={inputClassName}

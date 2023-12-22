@@ -1,23 +1,16 @@
-'use client';
-
-import { useHydrate } from 'hooks';
-
-import { cn } from 'utilities';
-
-import DatePicker from '../DatePicker/DatePicker';
-import InputController from '../InputController/InputController';
-import type { FormSchemas } from 'form-schemas';
+import type { FormSchemas } from '@/form-schemas';
+import { cn } from '@/utilities';
 
 import type { InputProps } from './DateInput.types';
+import DatePicker from '@/components/ui/DatePicker/DatePicker';
+import InputController from '@/components/ui/InputController/InputController';
 
 // TODO: Improve typing for this component!!
 
 const DateInput = <T extends FormSchemas>(
   props: InputProps<T>
 ): JSX.Element => {
-  const { control, name, label, className = '', dti, ...rest } = props;
-
-  const hydrated = useHydrate();
+  const { control, name, label, className = '', ...rest } = props;
 
   return (
     <fieldset className={cn('form-control ', className)}>
@@ -34,8 +27,7 @@ const DateInput = <T extends FormSchemas>(
           fieldState: { error },
         }) => (
           <DatePicker
-            disabled={!hydrated || rest.disabled}
-            dti={dti}
+            disabled={rest.disabled}
             error={Boolean(error)}
             name={inputName}
             // TODO: Check this! Throws error when building project

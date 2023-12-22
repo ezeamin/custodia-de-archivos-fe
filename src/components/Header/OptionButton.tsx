@@ -1,29 +1,23 @@
-'use client';
+import { Link, useNavigate } from 'react-router-dom';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui';
 
-import { Button } from 'ui';
-
-import { DTI, DTI_LIST } from 'dti';
-
-import type { MenuOptionButtonProps } from '../interface';
+import type { MenuOptionButtonProps } from '@/components/interface';
 
 const OptionButton = (props: MenuOptionButtonProps): JSX.Element => {
   const { option } = props;
 
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handlePrevious = (): void => {
-    router.back();
+    navigate(-1);
   };
 
-  if (option.url === -1) {
+  if (option.path === -1) {
     return (
       <Button
         colorDark="dark:btn-ghost"
         colorLight="btn-ghost"
-        dti={DTI(DTI_LIST.BUTTON(option.description))}
         ignoreDefaultColor
         onClick={handlePrevious}
         type="button"
@@ -38,7 +32,6 @@ const OptionButton = (props: MenuOptionButtonProps): JSX.Element => {
       <Button
         colorDark="dark:btn-ghost"
         colorLight="btn-ghost"
-        dti={DTI(DTI_LIST.BUTTON(option.description))}
         ignoreDefaultColor
         onClick={option.action}
       >
@@ -47,11 +40,7 @@ const OptionButton = (props: MenuOptionButtonProps): JSX.Element => {
     );
 
   return (
-    <Link
-      className="btn btn-ghost"
-      data-testid={DTI(DTI_LIST.BUTTON(option.description))}
-      href={option.url}
-    >
+    <Link className="btn btn-ghost" to={option.path}>
       {option.description.toUpperCase()}
     </Link>
   );

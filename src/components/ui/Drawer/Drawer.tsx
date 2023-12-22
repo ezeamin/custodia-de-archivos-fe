@@ -1,13 +1,10 @@
-'use client';
-
-import { DTI, DTI_LIST } from 'dti';
-
-import Grid from '../Grid/Grid';
-import IconButton from '../IconButton/IconButton';
 import { MdClose } from 'react-icons/md';
+
 import { Drawer as VaulDrawer } from 'vaul';
 
 import type { DrawerPropsType } from './Drawer.types';
+import Grid from '@/components/ui/Grid/Grid';
+import IconButton from '@/components/ui/IconButton/IconButton';
 
 /**
  * A custom Drawer component.
@@ -50,7 +47,6 @@ const Drawer = (props: DrawerPropsType): JSX.Element => {
                   <IconButton
                     colorDark="dark:bg-transparent"
                     colorLight="bg-transparent"
-                    dti={DTI(DTI_LIST.BUTTON('close'))}
                     iconComponent={<MdClose />}
                   />
                 </VaulDrawer.Close>

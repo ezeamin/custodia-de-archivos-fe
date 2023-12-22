@@ -1,5 +1,6 @@
-import { emailRules } from '../../rules/rules';
 import { z } from 'zod';
+
+import { emailRules } from '../../rules/rules';
 
 export const restoreSchema = z.object({
   email: emailRules(true),

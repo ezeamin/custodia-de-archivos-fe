@@ -1,13 +1,16 @@
-import useOptions from '../../hooks/useOptions';
+import { BiMenuAltRight } from 'react-icons/bi';
 
-import modules from '../../data/modules';
-import ProfileAvatar from '../ProfileAvatar';
-import ThemeToggler from '../ThemeToggler';
+import { Drawer } from 'vaul';
+
+import useOptions from '@/hooks/useOptions';
+
 import LogoutButton from './LogoutButton';
 import MenuModuleButton from './MenuModuleButton';
 import MenuOptionButton from './MenuOptionButton';
-import { BiMenuAltRight } from 'react-icons/bi';
-import { Drawer } from 'vaul';
+import ProfileAvatar from '@/components/Common/ProfileAvatar';
+import ThemeTogglerButton from '@/components/Common/ThemeTogglerButton';
+
+import { routes } from '@/constants/routes';
 
 const PortraitMenu = (): JSX.Element => {
   const options = useOptions();
@@ -29,7 +32,7 @@ const PortraitMenu = (): JSX.Element => {
                 {/* Avatar */}
                 <ProfileAvatar />
                 {/* Cambiar tema */}
-                <ThemeToggler />
+                <ThemeTogglerButton />
               </Drawer.Title>
             </div>
             <div className="mt-2 flex gap-4 justify-center max-w-md">
@@ -44,7 +47,7 @@ const PortraitMenu = (): JSX.Element => {
             </div>
             <div className="bg-white border-t border-zinc-200 dark:bg-zinc-700 duration-400 mt-auto py-4">
               {/* Botones de los Modulos */}
-              {modules.map((el) => (
+              {routes.map((el) => (
                 <MenuModuleButton el={el} key={el.id} open />
               ))}
             </div>

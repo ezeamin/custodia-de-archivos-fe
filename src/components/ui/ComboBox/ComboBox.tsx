@@ -1,19 +1,13 @@
-'use client';
-
 import { Fragment, useEffect, useState } from 'react';
-
-import { Combobox, Transition } from '@headlessui/react';
-
-import { cn } from 'utilities';
-
-import { DTI, DTI_LIST } from 'dti';
-
-import Button from '../Button/Button';
-import Icon from '../Icon/Icon';
 import type { FieldValues } from 'react-hook-form';
 import { MdCheck, MdClear, MdExpandMore } from 'react-icons/md';
 
+import { cn } from '@/utilities';
+import { Combobox, Transition } from '@headlessui/react';
+
 import type { ComboBoxProps } from './ComboBox.types';
+import Button from '@/components/ui/Button/Button';
+import Icon from '@/components/ui/Icon/Icon';
 
 /**
  * A custom combo box component that provides autocompletion functionality.
@@ -21,7 +15,6 @@ import type { ComboBoxProps } from './ComboBox.types';
  * @param props - The props for the ComboBox component.
  * @param className - Additional CSS class to apply to the component.
  * @param disabled - Specifies whether the combobox is disabled.
- * @param dti - Data Test ID for testing purposes.
  * @param error - Specifies whether the combobox has an error.
  * @param iconCheckProps - Props for the check icon in the component.
  * @param iconClearProps - Props for the clear icon in the component.
@@ -41,7 +34,6 @@ const ComboBox = <T extends FieldValues>(
   const {
     className,
     disabled = false,
-    dti,
     error = false,
     iconCheckProps,
     iconClearProps,
@@ -121,7 +113,6 @@ const ComboBox = <T extends FieldValues>(
                 } ${error ? 'border-error' : ''}`,
                 inputClassName
               )}
-              data-testid={dti}
               displayValue={(option: string) => option}
               id={name}
               onChange={(event) => {
@@ -136,7 +127,6 @@ const ComboBox = <T extends FieldValues>(
                 ariaHidden
                 className="absolute inset-y-0 right-0 flex items-center pr-3 h-auto"
                 colorLight="btn-ghost"
-                dti={DTI(DTI_LIST.BUTTON('clear-cmb'))}
                 onClick={handleClearSelection}
                 type="button"
                 unstyled

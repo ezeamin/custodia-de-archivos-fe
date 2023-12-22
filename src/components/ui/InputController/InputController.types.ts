@@ -1,4 +1,3 @@
-import type { FormSchemas } from 'form-schemas';
 import type {
   ControllerFieldState,
   ControllerRenderProps,
@@ -6,7 +5,9 @@ import type {
   UseFormStateReturn,
 } from 'react-hook-form';
 
-import type { FormHandling } from '../../types';
+import type { FormSchemas } from '@/form-schemas';
+
+import { FormHandling } from '@/components/interface/ui';
 
 export interface ControllerProps<T extends FormSchemas>
   extends FormHandling<T> {

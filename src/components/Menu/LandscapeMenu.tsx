@@ -1,31 +1,19 @@
-'use client';
-
 import { useState } from 'react';
-
-import { Button, Icon } from 'ui';
-
-import { DTI, DTI_LIST } from 'dti';
-
-import modules from '../../data/modules';
-import LogoPjt from './LogoPjt';
-import LogoutButton from './LogoutButton';
-import MenuModuleButton from './MenuModuleButton';
 import { BsChevronLeft } from 'react-icons/bs';
 
-import { type LandscapeMenuProps } from '../interface';
+import LogoCustodia from './LogoCustodia';
+import LogoutButton from './LogoutButton';
+import MenuModuleButton from './MenuModuleButton';
+import { Button, Icon } from '@/components/ui';
+
+import { routes } from '@/constants/routes';
+
+import { type LandscapeMenuProps } from '@/components/interface';
 
 const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
-  // =====================================================================
-  // STATEMENTS ----------------------------------------------------------
-  // =====================================================================
-
   const { children } = props;
 
   const [open, setOpen] = useState(false);
-
-  // =====================================================================
-  // RENDER --------------------------------------------------------------
-  // =====================================================================
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -41,7 +29,6 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
           }`}
           colorDark="dark:bg-gray-700"
           colorLight="bg-sky-100"
-          dti={DTI(DTI_LIST.BUTTON('collapse'))}
           onClick={() => {
             setOpen(!open);
           }}
@@ -54,11 +41,11 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
 
         {/* PJT Logo */}
         <div className="flex items-center mb-8 mt-2">
-          <LogoPjt />
+          <LogoCustodia />
         </div>
 
         {/* Module Buttons */}
-        {modules.map((el) => (
+        {routes.map((el) => (
           <MenuModuleButton el={el} key={el.id} open={open} />
         ))}
 

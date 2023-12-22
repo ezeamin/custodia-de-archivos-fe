@@ -1,14 +1,14 @@
-import type { FormSchemas } from 'form-schemas';
+import type { FormSchemas } from '@/form-schemas';
 
-import type { DataTestId, FormHandling, ListOption } from '../../types';
+import type { FormHandling } from '@/components/interface/ui';
+import type { BasicList } from '@/interface';
 
 export interface ComboBoxInputProps<T extends FormSchemas>
   extends FormHandling<T>,
-    DataTestId,
     Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'required' | 'name'> {
   label: string;
   className?: string;
   inputClassName?: string;
-  options: ListOption[];
+  options: BasicList[];
   placeholder?: string;
 }

@@ -1,10 +1,8 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 
-import { Spinner } from 'ui';
+import { Spinner } from '@/components/ui';
 
-import type { LoadingBackdropProps } from '../interface';
+import type { LoadingBackdropProps } from '@/components/interface';
 
 const LoadingBackdrop = (props: LoadingBackdropProps): JSX.Element => {
   const { open } = props;

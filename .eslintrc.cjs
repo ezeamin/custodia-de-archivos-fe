@@ -43,6 +43,7 @@ module.exports = {
     'postcss.config.ts',
     'tailwind.config.ts',
     'commitlint.config.ts',
+    'vite.config.ts',
   ],
   settings: {
     react: {

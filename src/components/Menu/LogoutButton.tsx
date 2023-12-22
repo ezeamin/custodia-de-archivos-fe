@@ -1,21 +1,17 @@
-import { useRouter } from 'next/navigation';
-
-import { Button, Icon } from 'ui';
-
-import { cn } from 'utilities';
-
-import { DTI, DTI_LIST } from 'dti';
-
 import { FiLogOut } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+
+import { cn } from '@/utilities';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 
 import { type LogoutButtonProps } from '../interface';
+import { Button, Icon } from '@/components/ui';
 
 const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
   const { className, open = true } = props;
 
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handleLogout = (): void => {
     Swal.fire({
@@ -31,7 +27,7 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
       .then((action) => {
         if (action.isConfirmed) {
           sessionStorage.removeItem('token');
-          router.push('/auth');
+          navigate('/auth');
         }
       })
       .catch((err) => {
@@ -50,19 +46,13 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
       )}
       colorDark="dark:bg-error"
       colorLight="bg-red-300"
-      dti={DTI(DTI_LIST.BUTTON('logout'))}
       onClick={handleLogout}
       textColorDark="dark:text-white"
       textColorLight="text-dark"
       type="button"
     >
       <Icon
-        iconComponent={
-          <FiLogOut
-            className="inline-block text-xl"
-            data-testid={DTI(DTI_LIST.BUTTON('logout-icon'))}
-          />
-        }
+        iconComponent={<FiLogOut className="inline-block text-xl" />}
         title="Cerrar Sesión"
       />
 

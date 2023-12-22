@@ -1,8 +1,6 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 
-import { Spinner } from 'ui';
+import { Spinner } from '@/components/ui';
 
 const LoadingPage = (): JSX.Element => {
   const [showMessage, setShowMessage] = useState(false);

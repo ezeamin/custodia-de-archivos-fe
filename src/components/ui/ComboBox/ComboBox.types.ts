@@ -1,15 +1,16 @@
 import type { ControllerRenderProps, FieldValues, Path } from 'react-hook-form';
 
-import type { DataTestId, ListOption } from '../../types';
 import type {
   BgColorProp,
   HeightType,
   TextColorProp,
   WidthType,
-} from '../../types/tailwind';
+} from '../../interface/tailwind';
 import type { IconProps } from '../Icon/Icon.types';
 
-export type ComboBoxProps<T extends FieldValues> = DataTestId & {
+import type { BasicList } from '@/interface';
+
+export type ComboBoxProps<T extends FieldValues> = {
   className?: string;
   controller: ControllerRenderProps<T, Path<T>>;
   disabled?: boolean;
@@ -34,7 +35,7 @@ export type ComboBoxProps<T extends FieldValues> = DataTestId & {
   inputClassName?: string;
   msgError?: string;
   name: string;
-  options: ListOption[];
+  options: BasicList[];
   placeholder: string;
   positionedColorOption?: {
     bgColor: BgColorProp['color'];

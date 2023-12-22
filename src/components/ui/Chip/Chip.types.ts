@@ -1,7 +1,6 @@
-import type { DataTestId } from '../../types';
-import type { ButtonColorType } from '../../types/tailwind';
+import type { ButtonColorType } from '@/components/interface/tailwind';
 
-export type ChipPropsType = DataTestId & {
+export type ChipPropsType = {
   children?: string | React.ReactNode;
   className?: string;
   colorDark?: ButtonColorType['dark'];

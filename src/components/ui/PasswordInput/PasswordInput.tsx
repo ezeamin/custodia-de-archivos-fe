@@ -1,26 +1,19 @@
-'use client';
-
 import { useState } from 'react';
-
-import { useHydrate } from 'hooks';
-
-import { cn } from 'utilities';
-
-import Icon from '../Icon/Icon';
-import InputController from '../InputController/InputController';
-import type { FormSchemas } from 'form-schemas';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 
-import type { InputProps } from '../TextInput/TextInput.types';
+import type { FormSchemas } from '@/form-schemas';
+import { cn } from '@/utilities';
+
+import Icon from '@/components/ui/Icon/Icon';
+import InputController from '@/components/ui/InputController/InputController';
+import type { InputProps } from '@/components/ui/TextInput/TextInput.types';
 
 const PasswordInput = <T extends FormSchemas>(
   props: InputProps<T>
 ): JSX.Element => {
-  const { className = '', control, name, label, dti, ...rest } = props;
+  const { className = '', control, name, label, ...rest } = props;
 
   const [displayPass, setDisplayPass] = useState(false);
-
-  const hydrated = useHydrate();
 
   const handleChange = (): void => {
     setDisplayPass((prev) => !prev);
@@ -43,8 +36,7 @@ const PasswordInput = <T extends FormSchemas>(
           >
             <input
               className="w-[90%] input border-0 px-0 h-full bg-gray-100 dark:bg-slate-700"
-              data-testid={dti}
-              disabled={!hydrated || rest.disabled}
+              disabled={rest.disabled}
               id={name as string}
               onBlur={field.onBlur}
               onChange={field.onChange}
@@ -56,7 +48,7 @@ const PasswordInput = <T extends FormSchemas>(
             />
             <button
               className="absolute block z-50 h-full w-[40px] p-0 bottom-0 top-0 right-0 btn btn-ghost rounded-btn"
-              disabled={!hydrated || rest.disabled}
+              disabled={rest.disabled}
               onClick={handleChange}
               type="button"
             >

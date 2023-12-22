@@ -1,5 +1,3 @@
-'use client';
-
 import { Toaster } from 'sonner';
 
 const SonnerToast = (): JSX.Element => {

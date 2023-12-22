@@ -1,9 +1,7 @@
-'use client';
-
 import { useEffect } from 'react';
+import { useForm as useFormRHF } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm as useFormRHF } from 'react-hook-form';
 import { toast } from 'sonner';
 import type { z, ZodSchema } from 'zod';
 

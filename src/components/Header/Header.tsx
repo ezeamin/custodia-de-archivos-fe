@@ -1,25 +1,21 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 
-import Image from 'next/image';
+import icon from 'img/icon.png';
 
-import useOptions from '../../hooks/useOptions';
-import { usePortrait } from 'hooks';
+import useOptions from '@/hooks/useOptions';
+import { usePortrait } from '@/hooks/usePortrait';
 
-import { Skeleton } from 'ui';
-
-import PortraitMenu from '../Menu/PortraitMenu';
-import ProfileAvatar from '../ProfileAvatar';
-import ThemeToggler from '../ThemeToggler';
 import OptionButton from './OptionButton';
-import { Logo } from 'images';
+import ProfileAvatar from '@/components/Common/ProfileAvatar';
+import ThemeTogglerButton from '@/components/Common/ThemeTogglerButton';
+import PortraitMenu from '@/components/Menu/PortraitMenu';
+import { Skeleton } from '@/components/ui';
 
 const Header = (): JSX.Element => {
   const [isScrolling, setIsScrolling] = useState(false);
 
   // ---------------------------------------------------------------------
-  // HOOKS
+  // @/hooks
   // ---------------------------------------------------------------------
 
   const isPortrait = usePortrait('md');
@@ -78,13 +74,11 @@ const Header = (): JSX.Element => {
           isScrolling ? 'header-scrolling' : ''
         }`}
       >
-        <Image
+        <img
           alt="Poder Judicial de Tucumán"
           className="w-12 h-12"
           height={100}
-          // DO NOT delete, it WILL throw an ESLint error
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- logo is not a component
-          src={typeof Logo === 'object' && 'src' in Logo ? Logo.src : ''}
+          src={icon}
           width={100}
         />
         <PortraitMenu />
@@ -105,7 +99,7 @@ const Header = (): JSX.Element => {
         ))}
       </nav>
       <div className="flex gap-4">
-        <ThemeToggler />
+        <ThemeTogglerButton />
         <ProfileAvatar />
       </div>
     </header>

@@ -1,10 +1,6 @@
-'use client';
-
 import { useState } from 'react';
 
-import { cn, removeLineBreaks } from 'utilities';
-
-import { DTI, DTI_LIST } from 'dti';
+import { cn, removeLineBreaks } from '@/utilities';
 
 import type { TogglePropsType } from './Toggle.types';
 
@@ -32,7 +28,6 @@ const Toggle = (props: TogglePropsType): JSX.Element => {
     className = '',
     defaultChecked = false,
     disabled = false,
-    dti = '',
     label = '',
     size = 'medium',
   } = props;
@@ -106,9 +101,8 @@ const Toggle = (props: TogglePropsType): JSX.Element => {
             rounded-[0.4375rem]`,
           className
         )}
-        data-testid={DTI(DTI_LIST.TOGGLE(dti))}
         disabled={disabled}
-        id={`${dti}-switch`}
+        id={`${label.replaceAll(' ', '_')}-switch`}
         onClick={() => {
           setChecked(!checked);
         }}
@@ -125,7 +119,7 @@ const Toggle = (props: TogglePropsType): JSX.Element => {
             inline-block 
             pl-[0.15rem]`
         )}
-        htmlFor={`${dti}-switch`}
+        htmlFor={`${label.replaceAll(' ', '_')}-switch`}
       >
         {label}
       </label>

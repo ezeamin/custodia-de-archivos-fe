@@ -1,4 +1,4 @@
-import { cn, removeLineBreaks } from 'utilities';
+import { cn, removeLineBreaks } from '@/utilities';
 
 import type { StepperPropsType } from './Stepper.types';
 

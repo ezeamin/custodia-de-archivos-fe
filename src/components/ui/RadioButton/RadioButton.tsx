@@ -1,10 +1,6 @@
-'use client';
-
 import { useState } from 'react';
 
-import { cn, removeLineBreaks } from 'utilities';
-
-import { DTI, DTI_LIST } from 'dti';
+import { cn, removeLineBreaks } from '@/utilities';
 
 import type { RadioButtonProps } from './RadioButton.types';
 
@@ -15,7 +11,6 @@ const RadioButton = (props: RadioButtonProps): JSX.Element => {
     colorDark = '',
     colorLight = '',
     defaultChecked = false,
-    dti = '',
     disabled = false,
     label = '',
     textColorDark = '',
@@ -37,9 +32,8 @@ const RadioButton = (props: RadioButtonProps): JSX.Element => {
           ${textColorDark ? `dark:${textColorDark}` : ''}`,
           className
         )}
-        data-testid={DTI(DTI_LIST.RADIO(dti))}
         disabled={disabled}
-        id={`${dti}-switch`}
+        id={`${label.replaceAll(' ', '_')}-switch`}
         onClick={() => {
           setChecked(!checked);
         }}

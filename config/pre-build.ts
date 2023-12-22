@@ -129,7 +129,7 @@ const runPreBuildScript = async () => {
       console.log('\x1b[33m⚠️  WARNING: Starting ESLint fix...\x1b[0m\n');
     }
     await runCommand(
-      `pnpx eslint . ${fixESLint ? '--fix' : ''}`,
+      `eslint . ${fixESLint ? '--fix' : ''}`,
       'ESLint',
       `ESLint ${fixESLint ? 'check and fix' : 'check'} passed`,
       `ESLint ${fixESLint ? 'check and fix' : 'check'} failed\n\n`

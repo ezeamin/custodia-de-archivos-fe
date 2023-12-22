@@ -1,7 +1,4 @@
-'use client';
-
 import { useMemo } from 'react';
-
 import { IconContext } from 'react-icons';
 
 import type { IconProps } from './Icon.types';

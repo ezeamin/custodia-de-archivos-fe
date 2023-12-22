@@ -1,16 +1,4 @@
-'use client';
-
 import { useState } from 'react';
-
-import { usePortrait } from 'hooks';
-
-import { cn, removeLineBreaks } from 'utilities';
-
-import { DTI, DTI_LIST } from 'dti';
-
-import Grid from '../Grid/Grid';
-import Icon from '../Icon/Icon';
-import IconButton from '../IconButton/IconButton';
 import {
   MdCheckCircleOutline,
   MdClose,
@@ -19,7 +7,14 @@ import {
   MdOutlineHighlightOff,
 } from 'react-icons/md';
 
+import { cn, removeLineBreaks } from '@/utilities';
+
+import { usePortrait } from '@/hooks';
+
 import type { AlertPropsType } from './Alert.types';
+import Grid from '@/components/ui/Grid/Grid';
+import Icon from '@/components/ui/Icon/Icon';
+import IconButton from '@/components/ui/IconButton/IconButton';
 
 /**
  * A custom Alert component.
@@ -72,7 +67,6 @@ const Alert = (props: AlertPropsType): JSX.Element => {
         className
       )}
       container
-      data-testid={DTI(DTI_LIST.DIV('alert'))}
       gap={0}
     >
       {!hideIcon ? (
@@ -115,7 +109,6 @@ const Alert = (props: AlertPropsType): JSX.Element => {
           xs={1}
         >
           <IconButton
-            dti={DTI(DTI_LIST.BUTTON('close'))}
             iconComponent={<MdClose />}
             label="Cerrar"
             onClick={handleClose}

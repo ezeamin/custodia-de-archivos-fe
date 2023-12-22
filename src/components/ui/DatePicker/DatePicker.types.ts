@@ -1,9 +1,7 @@
 import type { CustomLocale } from 'flatpickr/dist/types/locale';
 import type { Options } from 'flatpickr/dist/types/options';
 
-import type { DataTestId } from '../../types';
-
-export interface DatePickerProps extends DataTestId {
+export interface DatePickerProps {
   className?: string;
   disabled?: boolean;
   error?: boolean;

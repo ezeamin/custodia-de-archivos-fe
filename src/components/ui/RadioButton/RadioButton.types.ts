@@ -1,4 +1,7 @@
-import type { CheckboxColorType, TextColorType } from '../../types/tailwind';
+import type {
+  CheckboxColorType,
+  TextColorType,
+} from '@/components/interface/tailwind';
 
 export interface RadioButtonProps {
   ariaLabel: string;
@@ -7,7 +10,6 @@ export interface RadioButtonProps {
   colorLight?: CheckboxColorType['light'];
   defaultChecked?: boolean;
   disabled?: boolean;
-  dti: string;
   id: string;
   label?: string;
   textColorDark?: TextColorType['dark'];

@@ -1,13 +1,8 @@
-'use client';
-
-import { useHydrate } from 'hooks';
-
-import { cn } from 'utilities';
-
-import InputController from '../InputController/InputController';
-import type { FormSchemas } from 'form-schemas';
+import type { FormSchemas } from '@/form-schemas';
+import { cn } from '@/utilities';
 
 import type { InputProps } from './TextInput.types';
+import InputController from '@/components/ui/InputController/InputController';
 
 const TextInput = <T extends FormSchemas>(
   props: InputProps<T>
@@ -18,11 +13,8 @@ const TextInput = <T extends FormSchemas>(
     name,
     label,
     type = 'text',
-    dti,
     ...rest
   } = props;
-
-  const hydrated = useHydrate();
 
   return (
     <fieldset className={cn('form-control w-72', className)}>
@@ -38,8 +30,7 @@ const TextInput = <T extends FormSchemas>(
             className={`input input-bordered bg-gray-100 dark:bg-slate-700 w-full mt-1 ${
               error ? 'border-error' : ''
             }`}
-            data-testid={dti}
-            disabled={!hydrated || rest.disabled}
+            disabled={rest.disabled}
             id={name as string}
             onBlur={field.onBlur}
             onChange={field.onChange}

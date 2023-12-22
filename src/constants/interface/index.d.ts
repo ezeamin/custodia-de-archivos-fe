@@ -4,34 +4,23 @@
 
 export interface Route {
   id: number;
-  img: {
-    src: string;
-  };
-  port: number;
+  title: string;
   description: string;
-  url: string;
-  options: Option[];
-  subpaths?: Subroute[];
+  path: string;
+  options: RouteOption[];
+  subpaths?: Route[];
 }
 
-interface Subroute {
-  id: number;
-  description: string;
-  url: string;
-  options: Option[];
-  subpaths?: Subroute[];
-}
-
-export type Option = {
+export type RouteOption = {
   id: number;
   description: string;
 } & (
   | {
-      url: string | -1;
+      path: string | -1;
       action?: never;
     }
   | {
-      url?: never;
+      path?: never;
       action: () => void;
     }
 );

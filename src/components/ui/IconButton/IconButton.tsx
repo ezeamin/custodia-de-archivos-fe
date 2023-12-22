@@ -1,11 +1,8 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 
-import { cn, removeLineBreaks } from 'utilities';
+import { cn, removeLineBreaks } from '@/utilities';
 
 import './IconButton.styles.css';
-
 import type { IconButtonPropsType } from './IconButton.types';
 
 /**
@@ -15,7 +12,6 @@ import type { IconButtonPropsType } from './IconButton.types';
  * @param colorDark - The color of the button in dark mode. You can provide a DaisyUI color class to be applied in dark mode. Example: 'btn-info'.
  * @param colorLight - The color of the button in light mode. You can provide a DaisyUI color class to be applied in light mode. Example: 'btn-ghost'.
  * @param disabled - Specifies whether the button is disabled.
- * @param dti - Data Test ID for testing purposes.
  * @param iconComponent - The SVG icon component to render.
  * @param label - The title attribute for the icon (used for tooltip).
  * @param onClick - Event handler for the button's click event.
@@ -45,7 +41,6 @@ const IconButton = (props: IconButtonPropsType): JSX.Element => {
     colorDark = '',
     colorLight = '',
     disabled = false,
-    dti,
     iconComponent: IconComponent,
     label = '',
     unbordered = false,
@@ -73,7 +68,6 @@ const IconButton = (props: IconButtonPropsType): JSX.Element => {
       tooltip`,
         className
       )}
-      data-testid={dti}
       data-tip={label || null}
       disabled={disabledState}
       onClick={onClick}
