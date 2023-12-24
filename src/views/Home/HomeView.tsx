@@ -10,7 +10,7 @@ const HomeView = () => {
       <Title title="Bienvenido" />
       <section className="vertically-centered">
         <p className="font-thin max-w-[500px]">
-          Bienvenido al SAP (Sistema de Administración de Usuarios) de Custodia
+          Bienvenido al SAP (Sistema de Administración de Personal) de Custodia
           de Archivos Noroeste SRL. Para comenzar, selecciona una opción del
           {isPortrait
             ? ' menu ubicado en la parte superior del sitio'
