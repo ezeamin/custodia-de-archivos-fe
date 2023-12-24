@@ -18,12 +18,12 @@ const PaginationExample = (): JSX.Element => {
       <div className="md:w-6/12 w-full">
         Width 50%
         <p>{page1}</p>
-        <Pagination onPageChange={changePage1} totalElements={150} />
+        <Pagination totalElements={150} onPageChange={changePage1} />
       </div>
       <div className="w-full">
         Width 100%
         <p>{page2}</p>
-        <Pagination onPageChange={changePage2} totalElements={150} />
+        <Pagination totalElements={150} onPageChange={changePage2} />
       </div>
     </>
   );

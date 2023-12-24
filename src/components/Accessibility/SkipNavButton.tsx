@@ -15,8 +15,6 @@ const SkipNavButton = (): JSX.Element => {
     <a
       aria-label="Saltar navegación"
       href="#main"
-      onBlur={handleBlur}
-      onFocus={handleFocus}
       ref={element}
       style={{
         opacity: 0,
@@ -31,6 +29,8 @@ const SkipNavButton = (): JSX.Element => {
         pointerEvents: 'none',
       }}
       tabIndex={0}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
     >
       Saltar navegación
     </a>

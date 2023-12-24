@@ -36,6 +36,13 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off', // disabled to allow devDependencies
     'react/require-default-props': 'off', // deprecated check
     'import/no-absolute-path': 'off', // disabled to allow absolute paths from public folder
+    'react/jsx-sort-props': [
+      1,
+      {
+        shorthandFirst: true,
+        callbacksLast: true,
+      },
+    ],
   },
   ignorePatterns: [
     'node_modules',

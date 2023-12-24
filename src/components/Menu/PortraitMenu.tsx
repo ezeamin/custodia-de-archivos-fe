@@ -1,19 +1,16 @@
 import { BiMenuAltRight } from 'react-icons/bi';
 
+import { useSession } from '@/stores/useSession';
 import { Drawer } from 'vaul';
-
-import useOptions from '@/hooks/useOptions';
 
 import LogoutButton from './LogoutButton';
 import MenuModuleButton from './MenuModuleButton';
-import MenuOptionButton from './MenuOptionButton';
-import ProfileAvatar from '@/components/Common/ProfileAvatar';
 import ThemeTogglerButton from '@/components/Common/ThemeTogglerButton';
 
 import { routes } from '@/constants/routes';
 
 const PortraitMenu = (): JSX.Element => {
-  const options = useOptions();
+  const { user } = useSession();
 
   return (
     <Drawer.Root>
@@ -28,27 +25,23 @@ const PortraitMenu = (): JSX.Element => {
           <div className="bg-white dark:bg-zinc-700 duration-300 rounded-t-[10px] flex-1 p-4 pb-0">
             <div className="mx-auto w-12 h-1 flex-shrink-0 rounded-full bg-zinc-300 mb-4" />
             <div className="max-w-md">
-              <Drawer.Title className="flex gap-x-4 items-center mb-4 justify-between">
+              <Drawer.Title className="mb-4">
                 {/* Avatar */}
-                <ProfileAvatar />
-                {/* Cambiar tema */}
-                <ThemeTogglerButton />
+                <h2 className="text-center text-xl">
+                  Hola, <span className="font-bold">{user?.name}</span>
+                </h2>
               </Drawer.Title>
-            </div>
-            <div className="mt-2 flex gap-4 justify-center max-w-md">
-              {/* Botones de las Opciones */}
-              {options.map((el) => (
-                <MenuOptionButton key={el.id} option={el} />
-              ))}
             </div>
             <div className="border-t border-zinc-200 py-4 flex gap-4 justify-center max-w-md mx-auto">
               {/* Boton para Cerrar Sesion */}
-              <LogoutButton className="px-4 flex-1 mb-0" open />
+              <LogoutButton open className="px-4 flex-1 mb-0" />
+              {/* Cambiar tema */}
+              <ThemeTogglerButton />
             </div>
             <div className="bg-white border-t border-zinc-200 dark:bg-zinc-700 duration-400 mt-auto py-4">
               {/* Botones de los Modulos */}
               {routes.map((el) => (
-                <MenuModuleButton el={el} key={el.id} open />
+                <MenuModuleButton open el={el} key={el.id} />
               ))}
             </div>
           </div>

@@ -2,15 +2,11 @@ import { useEffect, useState } from 'react';
 
 import icon from '/img/icon.png';
 
-import useOptions from '@/hooks/useOptions';
 import { usePortrait } from '@/hooks/usePortrait';
 
-import OptionButton from './OptionButton';
-import ProfileAvatar from '@/components/Common/ProfileAvatar';
-import ThemeTogglerButton from '@/components/Common/ThemeTogglerButton';
 import PortraitMenu from '@/components/Menu/PortraitMenu';
 
-const Header = (): JSX.Element => {
+const Header = (): JSX.Element | null => {
   const [isScrolling, setIsScrolling] = useState(false);
 
   // ---------------------------------------------------------------------
@@ -18,7 +14,6 @@ const Header = (): JSX.Element => {
   // ---------------------------------------------------------------------
 
   const isPortrait = usePortrait('md');
-  const options = useOptions();
 
   // ---------------------------------------------------------------------
   // USEEFFECT
@@ -51,7 +46,6 @@ const Header = (): JSX.Element => {
   // RENDER
   // ---------------------------------------------------------------------
 
-  // Portrait & Hydrated
   if (isPortrait) {
     return (
       <header
@@ -71,24 +65,7 @@ const Header = (): JSX.Element => {
     );
   }
 
-  // Landscape & Hydrated
-  return (
-    <header
-      className={`duration-300 sticky top-0 flex justify-between w-full pe-10 ps-6 py-5 ${
-        isScrolling ? 'header-scrolling shadow' : ''
-      } transition-colors z-40`}
-    >
-      <nav className="flex gap-2">
-        {options.map((option) => (
-          <OptionButton key={option.id} option={option} />
-        ))}
-      </nav>
-      <div className="flex gap-4">
-        <ThemeTogglerButton />
-        <ProfileAvatar />
-      </div>
-    </header>
-  );
+  return null;
 };
 
 export default Header;

@@ -11,6 +11,7 @@ export interface Route {
   subpaths?: Route[];
   hidden?: boolean;
   icon?: JSX.Element;
+  element: JSX.Element;
 }
 
 export type RouteOption = {

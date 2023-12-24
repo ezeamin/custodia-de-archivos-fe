@@ -38,19 +38,19 @@ const PasswordInput = <T extends FormSchemas>(
               className="w-[90%] input border-0 px-0 h-full bg-gray-100 dark:bg-slate-700"
               disabled={rest.disabled}
               id={name as string}
-              onBlur={field.onBlur}
-              onChange={field.onChange}
               placeholder={rest.placeholder ?? 'Ingrese un valor'}
               ref={field.ref}
               type={displayPass ? 'text' : 'password'}
               value={field.value as string}
+              onBlur={field.onBlur}
+              onChange={field.onChange}
               {...rest}
             />
             <button
               className="absolute block z-50 h-full w-[40px] p-0 bottom-0 top-0 right-0 btn btn-ghost rounded-btn"
               disabled={rest.disabled}
-              onClick={handleChange}
               type="button"
+              onClick={handleChange}
             >
               {displayPass ? (
                 <Icon

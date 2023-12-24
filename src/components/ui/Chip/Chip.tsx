@@ -73,9 +73,9 @@ const Chip = (props: ChipPropsType): JSX.Element => {
       {deletable ? (
         <button
           className="chip-animated bg-slate-600 dark:bg-slate-700 hover:bg-slate-500 rounded-full"
-          onClick={handleDelete}
           style={{ marginLeft: '5px', marginTop: '5px' }}
           type="button"
+          onClick={handleDelete}
         >
           <MdClose />
         </button>

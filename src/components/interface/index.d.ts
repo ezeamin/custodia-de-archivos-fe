@@ -2,6 +2,15 @@ import type { Route, RouteOption } from '@/constants/interface';
 import type { AnyProp } from '@/interface';
 
 // ----------------------------------------------------------------------
+// COMMON
+// ----------------------------------------------------------------------
+
+export interface TitleProps extends AnyProp {
+  title: string;
+  showBackButton?: boolean;
+}
+
+// ----------------------------------------------------------------------
 // MENU
 // ----------------------------------------------------------------------
 

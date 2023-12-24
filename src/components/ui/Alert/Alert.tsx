@@ -54,6 +54,7 @@ const Alert = (props: AlertPropsType): JSX.Element => {
 
   return (
     <Grid
+      container
       className={cn(
         removeLineBreaks`
         ${type === 'error' ? 'bg-red-200 dark:bg-red-800' : ''}
@@ -66,11 +67,10 @@ const Alert = (props: AlertPropsType): JSX.Element => {
         rounded-xl`,
         className
       )}
-      container
       gap={0}
     >
       {!hideIcon ? (
-        <Grid className="md:mr-1" item justifyContent="center" sm={1} xs={2}>
+        <Grid item className="md:mr-1" justifyContent="center" sm={1} xs={2}>
           {type === 'error' ? (
             <Icon
               iconComponent={<MdOutlineHighlightOff />}
@@ -102,17 +102,17 @@ const Alert = (props: AlertPropsType): JSX.Element => {
       </Grid>
       {closable ? (
         <Grid
+          item
           alignItems="start"
           className="m-0 py-0 hidden sm:flex"
-          item
           justifyContent="end"
           xs={1}
         >
           <IconButton
+            unbordered
             iconComponent={<MdClose />}
             label="Cerrar"
             onClick={handleClose}
-            unbordered
           />
         </Grid>
       ) : null}

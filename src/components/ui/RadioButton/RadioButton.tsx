@@ -34,10 +34,10 @@ const RadioButton = (props: RadioButtonProps): JSX.Element => {
         )}
         disabled={disabled}
         id={`${label.replaceAll(' ', '_')}-switch`}
+        type="radio"
         onClick={() => {
           setChecked(!checked);
         }}
-        type="radio"
       />
 
       <label

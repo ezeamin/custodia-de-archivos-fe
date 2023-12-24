@@ -17,12 +17,12 @@ const MenuOptionButton = (props: MenuOptionButtonProps): JSX.Element => {
   if (option.path === -1)
     return (
       <Button
+        lowerCase
+        unstyled
         className="duration-500 flex gap-x-4 items-center h-10 mb-4 px-4 rounded-lg shadow dark:text-white"
         colorDark="dark:bg-slate-600"
         colorLight="bg-sky-100"
-        lowerCase
         onClick={handlePrevious}
-        unstyled
       >
         {option.description}
       </Button>
@@ -31,12 +31,12 @@ const MenuOptionButton = (props: MenuOptionButtonProps): JSX.Element => {
   if ('action' in option)
     return (
       <Button
+        lowerCase
+        unstyled
         className="duration-500 flex gap-x-4 items-center h-10 mb-4 px-4 rounded-lg shadow dark:text-white"
         colorDark="dark:bg-slate-600"
         colorLight="bg-sky-100"
-        lowerCase
         onClick={option.action}
-        unstyled
       >
         {option.description}
       </Button>

@@ -96,9 +96,9 @@ const ComboBox = <T extends FieldValues>(
         aria-describedby="error-message"
         aria-label="Seleccione una opción"
         disabled={disabledState}
-        onChange={handleSelect}
         ref={controller.ref}
         value={selectedOption}
+        onChange={handleSelect}
       >
         <div className={`relative mt-1 ${sizing?.width ? sizing.width : ''}`}>
           <div
@@ -115,21 +115,21 @@ const ComboBox = <T extends FieldValues>(
               )}
               displayValue={(option: string) => option}
               id={name}
+              placeholder={placeholder || 'Seleccione una opción...'}
               onChange={(event) => {
                 setQuery(event.target.value);
               }}
-              placeholder={placeholder || 'Seleccione una opción...'}
             />
 
             {isOptionSelected ? (
               <Button
-                aria-label="Borrar selección"
                 ariaHidden
+                unstyled
+                aria-label="Borrar selección"
                 className="absolute inset-y-0 right-0 flex items-center pr-3 h-auto"
                 colorLight="btn-ghost"
-                onClick={handleClearSelection}
                 type="button"
-                unstyled
+                onClick={handleClearSelection}
               >
                 <Icon
                   className={iconClearProps?.className}

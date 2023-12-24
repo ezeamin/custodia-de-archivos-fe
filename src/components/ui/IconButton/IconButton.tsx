@@ -70,8 +70,8 @@ const IconButton = (props: IconButtonPropsType): JSX.Element => {
       )}
       data-tip={label || null}
       disabled={disabledState}
-      onClick={onClick}
       type="button"
+      onClick={onClick}
     >
       {IconComponent}
     </button>

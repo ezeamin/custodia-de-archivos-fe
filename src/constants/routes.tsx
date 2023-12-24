@@ -1,6 +1,7 @@
 import { AiFillHome } from 'react-icons/ai';
 
 import { Route } from './interface';
+import HomeView from '@/views/Home/HomeView';
 
 export const routes: Route[] = [
   {
@@ -10,6 +11,7 @@ export const routes: Route[] = [
     path: '/auth',
     hidden: true,
     options: [],
+    element: <div />,
     subpaths: [
       {
         id: 1001,
@@ -18,6 +20,7 @@ export const routes: Route[] = [
         path: '/auth/recover-password',
         options: [],
         subpaths: [],
+        element: <div />,
       },
       {
         id: 1002,
@@ -26,14 +29,7 @@ export const routes: Route[] = [
         path: '/auth/reset-password',
         options: [],
         subpaths: [],
-      },
-      {
-        id: 1001,
-        title: 'Recuperar contraseña',
-        description: 'Recuperar contraseña',
-        path: '/auth/recover-password',
-        options: [],
-        subpaths: [],
+        element: <div />,
       },
     ],
   },
@@ -45,5 +41,6 @@ export const routes: Route[] = [
     path: '/',
     options: [],
     subpaths: [],
+    element: <HomeView />,
   },
 ];

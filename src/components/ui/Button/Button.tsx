@@ -158,11 +158,11 @@ const Button = (props: ButtonPropsType): JSX.Element => {
       )}
       disabled={disabledState || loading}
       name={name}
+      value={value}
       onClick={onClick}
       tabIndex={tabIndex}
       // eslint-disable-next-line react/button-has-type -- default value: 'button'
       type={type}
-      value={value}
     >
       {startIcon && !loading ? (
         <Icon

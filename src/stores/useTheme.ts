@@ -12,10 +12,10 @@ const preferredTheme =
   (window.matchMedia('(prefers-color-scheme: dark)').matches
     ? 'dark'
     : 'light');
-document.body.setAttribute('data-theme', preferredTheme);
+document.documentElement.setAttribute('data-theme', preferredTheme);
 
 const updateTheme = (theme: string) => {
-  document.body.setAttribute('data-theme', theme);
+  document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
 };
 

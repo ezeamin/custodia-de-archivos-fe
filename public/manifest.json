@@ -1,0 +1,16 @@
+{
+  "short_name": "SAP | Custodia de Archivos Noroeste",
+  "name": "SAP | Custodia de Archivos Noroeste",
+  "icons": [
+    {
+      "src": "/img/icon.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#d6d6d6",
+  "background_color": "#d6d6d6"
+}

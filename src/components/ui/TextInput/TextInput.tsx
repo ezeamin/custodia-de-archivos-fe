@@ -32,12 +32,12 @@ const TextInput = <T extends FormSchemas>(
             }`}
             disabled={rest.disabled}
             id={name as string}
-            onBlur={field.onBlur}
-            onChange={field.onChange}
             placeholder={rest.placeholder ?? 'Ingrese un valor'}
             ref={field.ref}
             type={type}
             value={field.value as string}
+            onBlur={field.onBlur}
+            onChange={field.onChange}
             {...rest}
           />
         )}

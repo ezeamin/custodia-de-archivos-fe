@@ -21,9 +21,11 @@ const ThemeTogglerButton = (props: ThemeTogglerButtonProps): JSX.Element => {
 
   return (
     <Button
+      unbordered
       className={cn('w-12 h-12 p-0 theme-controller', className)}
-      colorDark="dark:btn-ghost"
-      colorLight="btn-ghost"
+      colorDark="dark:bg-slate-600"
+      colorLight="bg-sky-100"
+      textColorDark="dark:text-white"
       onClick={handleClick}
       {...buttonProps}
     >

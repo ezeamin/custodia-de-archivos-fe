@@ -37,10 +37,10 @@ const Accordion = (props: AccordionPropsType): JSX.Element => {
         <input
           checked={open}
           name="my-accordion"
+          type="radio"
           onClick={() => {
             setOpen(!open);
           }}
-          type="radio"
         />
         <div className="collapse-title text-xl font-medium">{title}</div>
         <div className="collapse-content">{children}</div>

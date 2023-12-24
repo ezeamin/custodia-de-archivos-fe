@@ -103,11 +103,11 @@ const Toggle = (props: TogglePropsType): JSX.Element => {
         )}
         disabled={disabled}
         id={`${label.replaceAll(' ', '_')}-switch`}
+        role="switch"
+        type="checkbox"
         onClick={() => {
           setChecked(!checked);
         }}
-        role="switch"
-        type="checkbox"
       />
       <label
         className={cn(

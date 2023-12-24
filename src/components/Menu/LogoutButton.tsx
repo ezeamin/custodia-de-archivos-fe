@@ -15,8 +15,8 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
 
   const handleLogout = (): void => {
     Swal.fire({
-      title: '¿Está seguro?',
-      text: '¿Quiere cerrar sesión?',
+      title: '¿Estás seguro?',
+      text: '¿Quieres cerrar sesión?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, salir',
@@ -41,15 +41,17 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
   return (
     <Button
       className={cn(
-        `duration-300 hover:bg-red-500 hover:dark:bg-red-700 flex items-center py-2 text-center border-0`,
+        `duration-300 hover:bg-red-500 hover:dark:bg-red-700 flex items-center py-2 text-center border-0 ${
+          !open ? 'flex-col' : ''
+        }`,
         className
       )}
       colorDark="dark:bg-error"
       colorLight="bg-red-300"
-      onClick={handleLogout}
       textColorDark="dark:text-white"
       textColorLight="text-dark"
       type="button"
+      onClick={handleLogout}
     >
       <Icon
         iconComponent={<FiLogOut className="inline-block text-xl" />}
@@ -58,8 +60,8 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
 
       <p
         className={`inline-block ml-2 origin-left ${
-          !open ? 'delay-0 scale-0 hidden' : ''
-        } ${open ? 'delay-100 duration-200' : ''}`}
+          !open ? 'delay-0 scale-0' : ''
+        } ${open ? 'delay-200 duration-200' : ''}`}
       >
         Cerrar Sesión
       </p>

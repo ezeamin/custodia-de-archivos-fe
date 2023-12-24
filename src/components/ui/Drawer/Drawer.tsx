@@ -36,8 +36,8 @@ const Drawer = (props: DrawerPropsType): JSX.Element => {
         <VaulDrawer.Content className="bg-zinc-300 bottom-0 dark:bg-zinc-700 fixed flex flex-col left-0 max-h-[100%] mt-24 right-0 rounded-t-[10px] z-50">
           <div className="flex-1 mb-3 overflow-auto rounded-t-[10px]">
             <Grid
-              className="border-2 border-transparent border-b-gray-200 mb-4"
               container
+              className="border-2 border-transparent border-b-gray-200 mb-4"
             >
               <Grid item sm={11} xs={10}>
                 <VaulDrawer.Title className="text-xl">{title}</VaulDrawer.Title>
@@ -53,14 +53,14 @@ const Drawer = (props: DrawerPropsType): JSX.Element => {
               </Grid>
             </Grid>
             <main className="mx-auto w-full">
-              <Grid alignContent="center" container justifyContent="center">
-                <Grid className="hidden md:block" item md={3} xs={12}>
+              <Grid container alignContent="center" justifyContent="center">
+                <Grid item className="hidden md:block" md={3} xs={12}>
                   &nbsp;
                 </Grid>
-                <Grid className={className} item md={6} xs={12}>
+                <Grid item className={className} md={6} xs={12}>
                   {children}
                 </Grid>
-                <Grid className="hidden md:block" item md={3} xs={12}>
+                <Grid item className="hidden md:block" md={3} xs={12}>
                   &nbsp;
                 </Grid>
               </Grid>
