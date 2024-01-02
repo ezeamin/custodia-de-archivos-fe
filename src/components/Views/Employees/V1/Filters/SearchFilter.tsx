@@ -1,15 +1,15 @@
 import { IoSearch } from 'react-icons/io5';
 import { MdFilterAlt } from 'react-icons/md';
 
+import { usePortrait, useZodForm } from '@/hooks';
+import { useModal } from '@/stores/useModal';
+
+import { Button, Icon, TextInput } from '@/components/ui';
+
 import {
   SearchSchema,
   searchSchema,
 } from '@/form-schemas/schemas/employees/searchSchema';
-import { useModal } from '@/stores/useModal';
-
-import { usePortrait, useZodForm } from '@/hooks';
-
-import { Button, Icon, TextInput } from '@/components/ui';
 
 const SearchFilter = () => {
   const { control, onSubmitMiddleware } = useZodForm(searchSchema);
@@ -33,7 +33,7 @@ const SearchFilter = () => {
         type="button"
         onClick={handleModal}
       >
-        Abrir filtros
+        Filtros
       </Button>
     );
   }
@@ -59,10 +59,11 @@ const SearchFilter = () => {
       </Button>
       <Button
         className="p-3 input-bordered hover:border-gray-500"
+        startIcon={<MdFilterAlt />}
         type="button"
         onClick={handleModal}
       >
-        Otros filtros
+        Filtros
       </Button>
     </form>
   );

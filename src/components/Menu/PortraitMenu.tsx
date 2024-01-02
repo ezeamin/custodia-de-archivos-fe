@@ -1,10 +1,11 @@
 import { BiMenuAltRight } from 'react-icons/bi';
 
-import { useSession } from '@/stores/useSession';
-import { Drawer } from 'vaul';
-
 import LogoutButton from './LogoutButton';
 import MenuModuleButton from './MenuModuleButton';
+import { Drawer } from 'vaul';
+
+import { useSession } from '@/stores/useSession';
+
 import ThemeTogglerButton from '@/components/Common/ThemeTogglerButton';
 
 import { routes } from '@/constants/routes/routes';

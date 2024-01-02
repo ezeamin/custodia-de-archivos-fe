@@ -1,7 +1,10 @@
+import { useLoadingState } from '@/stores/useLoadingState';
+
+import Icon from '@/components/ui/Icon/Icon';
+
 import { cn, removeLineBreaks } from '@/utilities';
 
 import type { ButtonPropsType } from './Button.types';
-import Icon from '@/components/ui/Icon/Icon';
 
 /**
  * Generates the ARIA label for the button.
@@ -117,6 +120,9 @@ const Button = (props: ButtonPropsType): JSX.Element => {
     );
   }
 
+  // disables ALL buttons if something is being loaded
+  const { isLoading } = useLoadingState();
+
   const defaultColor = ignoreDefaultColor || unstyled ? '' : 'dark:text-white';
 
   const textContent =
@@ -126,7 +132,7 @@ const Button = (props: ButtonPropsType): JSX.Element => {
 
   return (
     <button
-      aria-disabled={Boolean(disabled || loading)}
+      aria-disabled={Boolean(disabled || isLoading || loading)}
       aria-hidden={ariaHidden}
       aria-label={generateAriaLabel(children, ariaLabel, 'Botón para')}
       className={cn(
@@ -145,7 +151,7 @@ const Button = (props: ButtonPropsType): JSX.Element => {
       ${withoutAnimation ? 'no-animation' : ''}`,
         className
       )}
-      disabled={disabled || loading}
+      disabled={disabled || isLoading || loading}
       name={name}
       tabIndex={tabIndex}
       // eslint-disable-next-line react/button-has-type -- default value: 'button'

@@ -2,10 +2,12 @@ import { FaSun } from 'react-icons/fa';
 import { IoMoon } from 'react-icons/io5';
 
 import { useTheme } from '@/stores/useTheme';
+
+import { Button } from '@/components/ui';
+
 import { cn } from '@/utilities';
 
-import type { ThemeTogglerButtonProps } from '../interface';
-import { Button } from '@/components/ui';
+import type { ThemeTogglerButtonProps } from '@/components/interface';
 
 const ThemeTogglerButton = (props: ThemeTogglerButtonProps): JSX.Element => {
   const { className, ...buttonProps } = props;

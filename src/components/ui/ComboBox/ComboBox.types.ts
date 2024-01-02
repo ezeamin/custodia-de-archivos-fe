@@ -7,7 +7,6 @@ import type {
   WidthType,
 } from '../../interface/tailwind';
 import type { IconProps } from '../Icon/Icon.types';
-
 import type { BasicList } from '@/interface';
 
 export type ComboBoxProps<T extends FieldValues> = {

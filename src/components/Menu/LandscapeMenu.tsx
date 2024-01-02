@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { BsChevronLeft } from 'react-icons/bs';
 
-import { useSession } from '@/stores/useSession';
-
 import ThemeTogglerButton from '../Common/ThemeTogglerButton';
 import LogoCustodia from './LogoCustodia';
 import LogoutButton from './LogoutButton';
 import MenuModuleButton from './MenuModuleButton';
+
+import { useSession } from '@/stores/useSession';
+
 import { Button, Icon } from '@/components/ui';
 
 import { routes } from '@/constants/routes/routes';
@@ -77,7 +78,7 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
         </div>
       </div>
       {/* Content */}
-      <div className="flex-1 font-semibold overflow-auto relative" id="content">
+      <div className="flex-1 overflow-auto relative" id="content">
         {children}
       </div>
     </div>

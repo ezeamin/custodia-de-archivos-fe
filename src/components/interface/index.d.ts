@@ -39,7 +39,3 @@ export interface MenuOptionButtonProps extends AnyProp {
 export interface ThemeTogglerButtonProps extends AnyProp {
   className?: string;
 }
-
-export interface LoadingBackdropProps extends AnyProp {
-  open: boolean;
-}

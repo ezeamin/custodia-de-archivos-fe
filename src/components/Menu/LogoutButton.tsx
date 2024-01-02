@@ -1,12 +1,14 @@
 import { FiLogOut } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
-import { cn } from '@/utilities';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 
-import { type LogoutButtonProps } from '../interface';
 import { Button, Icon } from '@/components/ui';
+
+import { cn } from '@/utilities';
+
+import { type LogoutButtonProps } from '../interface';
 
 const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
   const { className, open = true } = props;

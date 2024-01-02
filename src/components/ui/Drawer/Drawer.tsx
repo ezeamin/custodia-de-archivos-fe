@@ -2,9 +2,10 @@ import { MdClose } from 'react-icons/md';
 
 import { Drawer as VaulDrawer } from 'vaul';
 
-import type { DrawerPropsType } from './Drawer.types';
 import Grid from '@/components/ui/Grid/Grid';
 import IconButton from '@/components/ui/IconButton/IconButton';
+
+import type { DrawerPropsType } from './Drawer.types';
 
 /**
  * A custom Drawer component.

@@ -1,8 +1,10 @@
-import type { FormSchemas } from '@/form-schemas';
+import InputController from '@/components/ui/InputController/InputController';
+
 import { cn } from '@/utilities';
 
+import type { FormSchemas } from '@/form-schemas';
+
 import type { InputProps } from './TextInput.types';
-import InputController from '@/components/ui/InputController/InputController';
 
 const TextInput = <T extends FormSchemas>(
   props: InputProps<T>

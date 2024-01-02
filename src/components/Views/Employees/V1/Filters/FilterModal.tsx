@@ -1,6 +1,6 @@
-import { useModal } from '@/stores/useModal';
-
 import FilterModalForm from './FilterModalForm';
+
+import { useModal } from '@/stores/useModal';
 
 const FilterModal = () => {
   const { opened, closeModal } = useModal();

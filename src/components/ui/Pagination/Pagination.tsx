@@ -7,8 +7,9 @@ import {
 } from 'react-icons/md';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
-import type { PaginationPropsType } from './Pagination.types';
 import IconButton from '@/components/ui/IconButton/IconButton';
+
+import type { PaginationPropsType } from './Pagination.types';
 
 /**
  * A custom Pagination component.
@@ -113,46 +114,50 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
   return (
     <div className="flow-root w-full">
       <IconButton
-        className={`float-left ${
-          !(page === 0) ? 'hover:bg-slate-500' : ''
+        className={`float-left *:text-black dark:*:text-white ${
+          !(page === 0) ? 'dark:hover:bg-slate-500 hover:bg-gray-200' : ''
         } m-2`}
         colorDark="dark:bg-slate-700"
-        colorLight="bg-slate-600"
+        colorLight="bg-white"
         disabled={page === 0}
-        iconComponent={<MdFirstPage color="#fff" />}
+        iconComponent={<MdFirstPage />}
         label="Primera Página"
         onClick={handleFirstPageButtonClick}
       />
       <IconButton
-        className={`float-left ${
-          !(page === 0) ? 'hover:bg-slate-500' : ''
+        className={`float-left *:text-black dark:*:text-white ${
+          !(page === 0) ? 'dark:hover:bg-slate-500 hover:bg-gray-200' : ''
         } m-2`}
         colorDark="dark:bg-slate-700"
-        colorLight="bg-slate-600"
+        colorLight="bg-white"
         disabled={page === 0}
-        iconComponent={<MdChevronLeft color="#fff" />}
+        iconComponent={<MdChevronLeft />}
         label="Página Anterior"
         onClick={handleBackButtonClick}
       />
       <IconButton
-        className={`float-right ${
-          !(page === availablePages - 1) ? 'hover:bg-slate-500' : ''
+        className={`float-right *:text-black dark:*:text-white ${
+          !(page === availablePages - 1)
+            ? 'dark:hover:bg-slate-500 hover:bg-gray-200'
+            : ''
         } m-2`}
         colorDark="dark:bg-slate-700"
-        colorLight="bg-slate-600"
+        colorLight="bg-white"
         disabled={page === availablePages - 1}
-        iconComponent={<MdLastPage color="#fff" />}
+        iconComponent={<MdLastPage />}
         label="Última Página"
         onClick={handleLastPageButtonClick}
       />
       <IconButton
-        className={`float-right ${
-          !(page === availablePages - 1) ? 'hover:bg-slate-500' : ''
+        className={`float-right *:text-black dark:*:text-white ${
+          !(page === availablePages - 1)
+            ? 'dark:hover:bg-slate-500 hover:bg-gray-200'
+            : ''
         } m-2`}
         colorDark="dark:bg-slate-700"
-        colorLight="bg-slate-600"
+        colorLight="bg-white"
         disabled={page === availablePages - 1}
-        iconComponent={<MdChevronRight color="#fff" />}
+        iconComponent={<MdChevronRight />}
         label="Próxima Página"
         onClick={handleNextButtonClick}
       />

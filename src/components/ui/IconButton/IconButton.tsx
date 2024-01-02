@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 
+import './IconButton.styles.css';
+
 import { cn, removeLineBreaks } from '@/utilities';
 
-import './IconButton.styles.css';
 import type { IconButtonPropsType } from './IconButton.types';
 
 /**

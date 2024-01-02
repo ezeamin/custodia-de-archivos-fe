@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
 
-import { cn } from '@/utilities';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
+
+import { cn } from '@/utilities';
 
 import type {
   DatePickerProps,
