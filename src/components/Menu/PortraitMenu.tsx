@@ -27,7 +27,7 @@ const PortraitMenu = (): JSX.Element => {
             <section className="max-w-md mb-4 text-center">
               <img
                 alt="Logo Custodia de Archivos"
-                className="inline mb-4"
+                className="inline mb-4 rounded-md"
                 src="/img/logo.png"
                 width={150}
               />

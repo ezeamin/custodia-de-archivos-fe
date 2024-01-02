@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.tooltip::before {
+  color: #ffffff !important;
+  font-weight: 100;
+}
+
 .modules-padding {
   @apply px-7 md:px-10 py-5 md:pt-8;
 }

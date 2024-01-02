@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import { cn, removeLineBreaks } from '@/utilities';
 
 import type { ButtonPropsType } from './Button.types';
@@ -104,9 +102,8 @@ const Button = (props: ButtonPropsType): JSX.Element => {
     unstyled = false,
     value,
     withoutAnimation = false,
+    ...rest
   } = props;
-
-  const [disabledState, setDisabledState] = useState(true);
 
   if (activeButton && outlineButton) {
     throw new Error(
@@ -114,19 +111,11 @@ const Button = (props: ButtonPropsType): JSX.Element => {
     );
   }
 
-  if (
-    (startIcon?.iconComponent || endIcon?.iconComponent) &&
-    !children &&
-    !ariaLabel
-  ) {
+  if ((startIcon || endIcon) && !children && !ariaLabel) {
     throw new Error(
       'To improve accessibility it is necessary the ariaLabel prop in the button.'
     );
   }
-
-  useEffect(() => {
-    setDisabledState(disabled);
-  }, [disabled]);
 
   const defaultColor = ignoreDefaultColor || unstyled ? '' : 'dark:text-white';
 
@@ -137,7 +126,7 @@ const Button = (props: ButtonPropsType): JSX.Element => {
 
   return (
     <button
-      aria-disabled={Boolean(disabledState)}
+      aria-disabled={Boolean(disabled || loading)}
       aria-hidden={ariaHidden}
       aria-label={generateAriaLabel(children, ariaLabel, 'Botón para')}
       className={cn(
@@ -156,22 +145,22 @@ const Button = (props: ButtonPropsType): JSX.Element => {
       ${withoutAnimation ? 'no-animation' : ''}`,
         className
       )}
-      disabled={disabledState || loading}
+      disabled={disabled || loading}
       name={name}
-      value={value}
-      onClick={onClick}
       tabIndex={tabIndex}
       // eslint-disable-next-line react/button-has-type -- default value: 'button'
       type={type}
+      value={value}
+      onClick={onClick}
+      {...rest}
     >
       {startIcon && !loading ? (
         <Icon
-          iconComponent={startIcon.iconComponent}
+          iconComponent={startIcon}
           title={
-            startIcon.title ||
-            (typeof children === 'string'
+            typeof children === 'string'
               ? `icon-start-button-${children}`
-              : `icon-start-button`)
+              : `icon-start-button`
           }
         />
       ) : null}
@@ -182,12 +171,11 @@ const Button = (props: ButtonPropsType): JSX.Element => {
 
       {endIcon ? (
         <Icon
-          iconComponent={endIcon.iconComponent}
+          iconComponent={endIcon}
           title={
-            endIcon.title ||
-            (typeof children === 'string'
+            typeof children === 'string'
               ? `icon-end-button-${children}`
-              : `icon-end-button`)
+              : `icon-end-button`
           }
         />
       ) : null}

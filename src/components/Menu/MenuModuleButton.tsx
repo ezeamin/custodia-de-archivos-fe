@@ -15,7 +15,8 @@ const MenuModuleButton = (props: MenuModuleButtonProps): JSX.Element | null => {
 
   const icon = isActivePage ? <FaAngleRight /> : el.icon;
 
-  const selectedOptionColors = 'bg-sky-200 dark:bg-gray-700';
+  const selectedOptionColors =
+    'bg-sky-200 dark:bg-gray-700 dark:text-white hover:bg-sky-300 hover:dark:bg-gray-800';
   const nonSelectedOptionColors =
     'bg-sky-100 dark:bg-slate-600 dark:text-white hover:bg-sky-200 hover:dark:bg-gray-700';
 

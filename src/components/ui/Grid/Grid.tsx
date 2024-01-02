@@ -77,7 +77,7 @@ const Grid = (props: GridProps): JSX.Element => {
 
     if (item && xs) {
       return cn(
-        removeLineBreaks`flex ${XsColTypes[xs]}
+        removeLineBreaks`${XsColTypes[xs]}
         ${lg ? LgColTypes[lg] : ''}
         ${md ? MdColTypes[md] : ''}
         ${sm ? SmColTypes[sm] : ''}

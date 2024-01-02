@@ -10,6 +10,7 @@ const TextInput = <T extends FormSchemas>(
   const {
     className = '',
     control,
+    hideLabel = false,
     name,
     label,
     type = 'text',
@@ -18,9 +19,11 @@ const TextInput = <T extends FormSchemas>(
 
   return (
     <fieldset className={cn('form-control w-72', className)}>
-      <label className="text-lg" htmlFor={name as string}>
-        {label}
-      </label>
+      {!hideLabel && (
+        <label className="text-lg" htmlFor={name as string}>
+          {label}
+        </label>
+      )}
       <InputController
         control={control}
         defaultValue=""
