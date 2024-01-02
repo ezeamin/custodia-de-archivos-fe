@@ -4,6 +4,7 @@ import type { User } from '@/interface';
 
 interface SessionStore {
   user: User | null;
+  isLoggedIn: boolean;
   setUser: (user: User) => void;
   logout: () => void;
 }
@@ -16,6 +17,7 @@ const testUser = {
 
 export const useSession = create<SessionStore>((set) => ({
   user: testUser,
-  setUser: (user) => set({ user }),
-  logout: () => set({ user: null }),
+  isLoggedIn: true, // TODO: Change this to false
+  setUser: (user) => set({ user, isLoggedIn: true }),
+  logout: () => set({ user: null, isLoggedIn: false }),
 }));

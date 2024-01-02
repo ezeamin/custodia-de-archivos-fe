@@ -7,7 +7,7 @@ import LogoutButton from './LogoutButton';
 import MenuModuleButton from './MenuModuleButton';
 import ThemeTogglerButton from '@/components/Common/ThemeTogglerButton';
 
-import { routes } from '@/constants/routes';
+import { routes } from '@/constants/routes/routes';
 
 const PortraitMenu = (): JSX.Element => {
   const { user } = useSession();

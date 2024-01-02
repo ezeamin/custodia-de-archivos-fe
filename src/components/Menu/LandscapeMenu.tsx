@@ -9,7 +9,7 @@ import LogoutButton from './LogoutButton';
 import MenuModuleButton from './MenuModuleButton';
 import { Button, Icon } from '@/components/ui';
 
-import { routes } from '@/constants/routes';
+import { routes } from '@/constants/routes/routes';
 
 import { type LandscapeMenuProps } from '@/components/interface';
 
