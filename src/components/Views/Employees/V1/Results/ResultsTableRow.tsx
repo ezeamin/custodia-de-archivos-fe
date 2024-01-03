@@ -10,7 +10,7 @@ const ResultsTableRow = (props: ResultsTableRowProps) => {
       <td className="text-center">
         <EmployeeStatus status={employee.status} />
       </td>
-      <td className="pl-0">
+      <td className="px-0">
         <img
           alt={`${employee.lastname}, ${employee.firstname}`}
           className="object-cover rounded-md"

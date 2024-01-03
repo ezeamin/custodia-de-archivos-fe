@@ -13,7 +13,7 @@ const ResultsTable = (props: ResultsTableProps) => {
         <thead>
           <tr>
             <th className="w-5" />
-            <th className="pl-0 text-center w-20">Foto</th>
+            <th className="px-0 text-center w-16">Foto</th>
             <th>Apellido, Nombre</th>
             <th className="text-center">Edad</th>
             <th className="text-center">Antiguedad</th>
