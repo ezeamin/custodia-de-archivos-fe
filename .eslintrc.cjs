@@ -29,6 +29,7 @@ module.exports = {
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
 
+    '@typescript-eslint/naming-convention': 'off', // allow API_get... naming
     'import/extensions': 'off', // no extensions are needed in import statements
     'react/jsx-props-no-spreading': 'off',
     'import/order': 'off', // customized order in .prettierrc

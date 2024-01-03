@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+.tooltip::before {
+  color: #ffffff !important;
+  font-weight: 100;
+}
+
 .modules-padding {
-  @apply px-7 md:px-10 py-5 md:pt-8;
+  @apply px-7 md:px-10 mb-14 py-5 md:mb-0 md:pt-10;
 }
 
 .content-card {
-  @apply card shadow bg-white dark:bg-slate-800 p-5;
+  @apply card shadow bg-white dark:bg-slate-800 p-5 border border-gray-300 dark:border-gray-600;
 }
 
 .vertically-centered {

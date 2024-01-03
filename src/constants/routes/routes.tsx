@@ -1,14 +1,16 @@
 import { AiFillHome } from 'react-icons/ai';
 import { IoNotifications, IoPeople, IoSettingsSharp } from 'react-icons/io5';
 
-import type { Route } from '../interface';
 import { paths } from './paths';
+
 import AuthView from '@/views/Auth/AuthView';
 import EmployeeListView from '@/views/Employees/EmployeeListView';
 import HomeView from '@/views/Home/HomeView';
 import NotificationsView from '@/views/Notifications/NotificationsView';
 import SettingsView from '@/views/Settings/SettingsView';
 import UsersView from '@/views/Users/UsersView';
+
+import type { Route } from '../interface';
 
 export const routes: Route[] = [
   {

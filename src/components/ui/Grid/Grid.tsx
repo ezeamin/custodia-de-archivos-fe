@@ -1,5 +1,3 @@
-import { cn, removeLineBreaks } from '@/utilities';
-
 import {
   AlignContentTypes,
   AlignItemsTypes,
@@ -12,6 +10,9 @@ import {
   VerticalAlignTypes,
   XsColTypes,
 } from './Grid.classes';
+
+import { cn, removeLineBreaks } from '@/utilities';
+
 import type { GridProps } from './Grid.types';
 
 /**
@@ -77,7 +78,7 @@ const Grid = (props: GridProps): JSX.Element => {
 
     if (item && xs) {
       return cn(
-        removeLineBreaks`flex ${XsColTypes[xs]}
+        removeLineBreaks`${XsColTypes[xs]}
         ${lg ? LgColTypes[lg] : ''}
         ${md ? MdColTypes[md] : ''}
         ${sm ? SmColTypes[sm] : ''}

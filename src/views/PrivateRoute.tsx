@@ -2,9 +2,9 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 import { useSession } from '@/stores/useSession';
 
-import { PrivateRouteProps } from './interface';
-
 import { paths } from '@/constants/routes/paths';
+
+import { PrivateRouteProps } from './interface';
 
 const PrivateRoute = (props: PrivateRouteProps) => {
   const { element, privateRoute } = props;

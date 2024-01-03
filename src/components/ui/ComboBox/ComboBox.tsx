@@ -2,12 +2,14 @@ import { Fragment, useEffect, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 import { MdCheck, MdClear, MdExpandMore } from 'react-icons/md';
 
-import { cn } from '@/utilities';
 import { Combobox, Transition } from '@headlessui/react';
 
-import type { ComboBoxProps } from './ComboBox.types';
 import Button from '@/components/ui/Button/Button';
 import Icon from '@/components/ui/Icon/Icon';
+
+import { cn } from '@/utilities';
+
+import type { ComboBoxProps } from './ComboBox.types';
 
 /**
  * A custom combo box component that provides autocompletion functionality.

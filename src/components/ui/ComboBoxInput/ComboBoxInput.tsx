@@ -1,9 +1,11 @@
-import type { FormSchemas } from '@/form-schemas';
-import { cn } from '@/utilities';
-
-import type { ComboBoxInputProps } from './ComboBoxInput.types';
 import ComboBox from '@/components/ui/ComboBox/ComboBox';
 import InputController from '@/components/ui/InputController/InputController';
+
+import { cn } from '@/utilities';
+
+import type { FormSchemas } from '@/form-schemas';
+
+import type { ComboBoxInputProps } from './ComboBoxInput.types';
 
 const ComboBoxInput = <T extends FormSchemas>(
   props: ComboBoxInputProps<T>

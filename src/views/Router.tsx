@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import PrivateRoute from './PrivateRoute';
+
 import Header from '@/components/Header/Header';
 import LandscapeMenu from '@/components/Menu/LandscapeMenu';
 

@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 
-import type { FormSchemas } from '@/form-schemas';
-import { cn } from '@/utilities';
-
 import Icon from '@/components/ui/Icon/Icon';
 import InputController from '@/components/ui/InputController/InputController';
+
+import { cn } from '@/utilities';
+
+import type { FormSchemas } from '@/form-schemas';
+
 import type { InputProps } from '@/components/ui/TextInput/TextInput.types';
 
 const PasswordInput = <T extends FormSchemas>(

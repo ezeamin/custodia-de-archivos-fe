@@ -1,8 +1,10 @@
-import type { FormSchemas } from '@/form-schemas';
+import InputController from '@/components/ui/InputController/InputController';
+
 import { cn } from '@/utilities';
 
+import type { FormSchemas } from '@/form-schemas';
+
 import type { InputProps } from './TextInput.types';
-import InputController from '@/components/ui/InputController/InputController';
 
 const TextInput = <T extends FormSchemas>(
   props: InputProps<T>
@@ -10,6 +12,7 @@ const TextInput = <T extends FormSchemas>(
   const {
     className = '',
     control,
+    hideLabel = false,
     name,
     label,
     type = 'text',
@@ -18,9 +21,11 @@ const TextInput = <T extends FormSchemas>(
 
   return (
     <fieldset className={cn('form-control w-72', className)}>
-      <label className="text-lg" htmlFor={name as string}>
-        {label}
-      </label>
+      {!hideLabel && (
+        <label className="text-lg" htmlFor={name as string}>
+          {label}
+        </label>
+      )}
       <InputController
         control={control}
         defaultValue=""

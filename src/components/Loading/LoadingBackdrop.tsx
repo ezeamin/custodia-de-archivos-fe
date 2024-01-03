@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
+import { useLoadingState } from '@/stores/useLoadingState';
+
 import { Spinner } from '@/components/ui';
 
-import type { LoadingBackdropProps } from '@/components/interface';
-
-const LoadingBackdrop = (props: LoadingBackdropProps): JSX.Element => {
-  const { open } = props;
+const LoadingBackdrop = (): JSX.Element => {
+  const { isLoading } = useLoadingState();
 
   const [showMessage, setShowMessage] = useState(false);
 
@@ -14,7 +14,7 @@ const LoadingBackdrop = (props: LoadingBackdropProps): JSX.Element => {
       setShowMessage(true);
     }, 3000);
 
-    if (!open) {
+    if (!isLoading) {
       setShowMessage(false);
       clearTimeout(timer);
     }
@@ -23,12 +23,12 @@ const LoadingBackdrop = (props: LoadingBackdropProps): JSX.Element => {
       clearTimeout(timer);
       setShowMessage(false);
     };
-  }, [open]);
+  }, [isLoading]);
 
   return (
     <div
       className={`w-screen h-screen ${
-        open ? 'block' : 'hidden'
+        isLoading ? 'block' : 'hidden'
       } fixed top-0 left-0 bg-black bg-opacity-60 z-50 flex justify-center items-center"}`}
     >
       <div className="flex flex-col justify-center items-center">

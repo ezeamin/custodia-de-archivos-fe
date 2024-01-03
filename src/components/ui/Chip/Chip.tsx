@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { MdClose } from 'react-icons/md';
 
+import './Chip.styles.css';
+
 import { cn, removeLineBreaks } from '@/utilities';
 
-import './Chip.styles.css';
 import type { ChipPropsType } from './Chip.types';
 
 /**

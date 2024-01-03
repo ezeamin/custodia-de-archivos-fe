@@ -54,3 +54,7 @@ body {
 }
 
 /* UTILITY CLASSES ------------------------------------- */
+
+.table-top-right-rounded {
+  border-top-right-radius: 10px;
+}

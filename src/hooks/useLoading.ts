@@ -1,24 +1,13 @@
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 
-// import { useAppDispatch } from '@/app/hook';
+import { useLoadingState } from '@/stores/useLoadingState';
 
-// import { setLoadingBackdropOpened } from '@/features/loading';
+export const useLoading = (isLoading = false) => {
+  const { setIsLoading } = useLoadingState();
 
-// export const useLoading = (isLoading = false, isUninitialized = true) => {
-//   const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (isLoading) setIsLoading(true);
 
-//   useEffect(() => {
-//     if (isLoading) dispatch(setLoadingBackdropOpened(true));
-
-//     if (!isUninitialized && !isLoading)
-//       dispatch(setLoadingBackdropOpened(false));
-//   }, [
-//     isLoading,
-//     isUninitialized,
-//     dispatch,
-//   ]);
-// };
-
-export const useLoading = (): object => {
-  return {};
+    if (!isLoading) setIsLoading(false);
+  }, [isLoading, setIsLoading]);
 };

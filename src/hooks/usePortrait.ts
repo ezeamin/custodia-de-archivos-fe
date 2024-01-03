@@ -4,7 +4,7 @@ import type { Sizes } from './interface';
 
 const sizes: Sizes = {
   sm: '640px',
-  md: '768px',
+  md: '767px',
   lg: '1024px',
   xl: '1280px',
   '2xl': '1536px',
@@ -15,7 +15,7 @@ export const usePortrait = (size: keyof Sizes = 'md'): boolean | undefined => {
 
   // use window.innerWidth to get the screen size
   useEffect(() => {
-    const mediaQuery = window.matchMedia(`(max-width: ${sizes[size]})`);
+    const mediaQuery = window.matchMedia(`(width <= ${sizes[size]})`);
     mediaQuery.addEventListener('change', (e) => {
       setIsPortrait(e.matches);
     });

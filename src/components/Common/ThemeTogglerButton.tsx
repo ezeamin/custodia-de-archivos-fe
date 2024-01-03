@@ -2,10 +2,12 @@ import { FaSun } from 'react-icons/fa';
 import { IoMoon } from 'react-icons/io5';
 
 import { useTheme } from '@/stores/useTheme';
+
+import { Button } from '@/components/ui';
+
 import { cn } from '@/utilities';
 
-import type { ThemeTogglerButtonProps } from '../interface';
-import { Button } from '@/components/ui';
+import type { ThemeTogglerButtonProps } from '@/components/interface';
 
 const ThemeTogglerButton = (props: ThemeTogglerButtonProps): JSX.Element => {
   const { className, ...buttonProps } = props;
@@ -22,9 +24,13 @@ const ThemeTogglerButton = (props: ThemeTogglerButtonProps): JSX.Element => {
   return (
     <Button
       unbordered
-      className={cn('w-12 h-12 p-0 theme-controller', className)}
+      className={cn(
+        'w-12 h-12 p-0 theme-controller hover:bg-sky-200 dark:hover:bg-slate-700 md:tooltip tooltip-right flex justify-center',
+        className
+      )}
       colorDark="dark:bg-slate-600"
       colorLight="bg-sky-100"
+      data-tip="Cambiar tema"
       textColorDark="dark:text-white"
       onClick={handleClick}
       {...buttonProps}

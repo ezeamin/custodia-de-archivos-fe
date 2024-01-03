@@ -7,14 +7,15 @@ import {
   MdOutlineHighlightOff,
 } from 'react-icons/md';
 
-import { cn, removeLineBreaks } from '@/utilities';
-
 import { usePortrait } from '@/hooks';
 
-import type { AlertPropsType } from './Alert.types';
 import Grid from '@/components/ui/Grid/Grid';
 import Icon from '@/components/ui/Icon/Icon';
 import IconButton from '@/components/ui/IconButton/IconButton';
+
+import { cn, removeLineBreaks } from '@/utilities';
+
+import type { AlertPropsType } from './Alert.types';
 
 /**
  * A custom Alert component.
@@ -57,20 +58,27 @@ const Alert = (props: AlertPropsType): JSX.Element => {
       container
       className={cn(
         removeLineBreaks`
-        ${type === 'error' ? 'bg-red-200 dark:bg-red-800' : ''}
+        ${type === 'error' ? 'bg-red-200 dark:bg-red-900' : ''}
         ${type === 'info' ? 'bg-sky-200 dark:bg-sky-800' : ''}
         ${type === 'success' ? 'bg-green-200 dark:bg-green-800' : ''}
         ${type === 'warning' ? 'bg-orange-200 dark:bg-yellow-800' : ''}
         ${!open ? 'hidden' : ''}
         px-2 md:pr-3 
-        py-2
-        rounded-xl`,
+        py-3
+        rounded-xl
+        dark:text-white`,
         className
       )}
       gap={0}
     >
       {!hideIcon ? (
-        <Grid item className="md:mr-1" justifyContent="center" sm={1} xs={2}>
+        <Grid
+          item
+          className="flex md:mr-1"
+          justifyContent="center"
+          sm={1}
+          xs={2}
+        >
           {type === 'error' ? (
             <Icon
               iconComponent={<MdOutlineHighlightOff />}
@@ -110,6 +118,7 @@ const Alert = (props: AlertPropsType): JSX.Element => {
         >
           <IconButton
             unbordered
+            className="tooltip-left p-0"
             iconComponent={<MdClose />}
             label="Cerrar"
             onClick={handleClose}
