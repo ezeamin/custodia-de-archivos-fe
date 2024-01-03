@@ -118,6 +118,7 @@ const Alert = (props: AlertPropsType): JSX.Element => {
         >
           <IconButton
             unbordered
+            className="tooltip-left p-0"
             iconComponent={<MdClose />}
             label="Cerrar"
             onClick={handleClose}

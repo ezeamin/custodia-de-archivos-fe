@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getEmployees } from '@/api/api-calls/employees';
 
-import { useLoading, usePortrait } from '@/hooks';
+import { useLoading } from '@/hooks';
 
 import { Alert, Pagination } from '@/components/ui';
 
@@ -14,8 +14,6 @@ const isError = false;
 const isLoading = false;
 
 const Results = () => {
-  const isPortrait = usePortrait();
-
   // -------------------------------------------------
   // API
   // -------------------------------------------------
@@ -55,20 +53,13 @@ const Results = () => {
   }
 
   if (data?.data) {
-    if (isPortrait) {
-      return (
-        <section className="mt-5">
-          <ResultsList data={data.data} />
-          <Pagination totalElements={data.totalElements} />
-        </section>
-      );
-    }
-
     return (
-      <>
+      <section className="mt-5 overflow-hidden">
         <ResultsTable data={data.data} />
+        <ResultsList data={data.data} />
+
         <Pagination totalElements={data.totalElements} />
-      </>
+      </section>
     );
   }
 

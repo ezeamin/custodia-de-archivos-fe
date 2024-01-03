@@ -1,7 +1,7 @@
 /* ANIMATIONS ----------------------------------- */
 
 .animate-in-bottom {
-  animation: in-keyframes 0.75s both;
+  animation: in-keyframes-bottom 0.75s both;
 }
 
 .animate-in-right {
@@ -12,7 +12,7 @@
   animation: in-keyframes-top 0.5s both;
 }
 
-@keyframes in-keyframes {
+@keyframes in-keyframes-bottom {
   0% {
     opacity: 0;
     translate: 0 25%;

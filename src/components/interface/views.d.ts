@@ -16,7 +16,9 @@ export interface ResultsTableRowProps {
 }
 
 export interface ResultsListProps extends ResultsTableProps {}
-export interface ResultsListItemProps extends ResultsTableRowProps {}
+export interface ResultsListItemProps extends ResultsTableRowProps {
+  index: number;
+}
 
 export interface EmployeeStatusProps {
   status: Employee['status'];

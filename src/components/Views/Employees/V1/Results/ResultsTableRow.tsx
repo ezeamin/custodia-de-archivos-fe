@@ -13,17 +13,26 @@ const ResultsTableRow = (props: ResultsTableRowProps) => {
       <td className="px-0">
         <img
           alt={`${employee.lastname}, ${employee.firstname}`}
-          className="object-cover rounded-md"
+          className="object-cover rounded-md min-w-[50px]"
           height={80}
           src={employee.imgSrc}
           width={80}
         />
       </td>
-      <td>{`${employee.lastname}, ${employee.firstname}`}</td>
-      <td className="text-center">{employee.age}</td>
-      <td className="text-center">{employee.antiquity}</td>
-      <td>{employee.position}</td>
-      <td>{employee.area}</td>
+      <td>
+        <p className="font-bold lg:font-normal">{`${employee.lastname}, ${employee.firstname}`}</p>
+        <p className="lg:hidden text-xs">Edad: {employee.age} años</p>
+        <p className="lg:hidden text-xs">
+          Antiguedad: {employee.antiquity} años
+        </p>
+      </td>
+      <td className="text-center hidden lg:table-cell">{employee.age}</td>
+      <td className="text-center hidden lg:table-cell">{employee.antiquity}</td>
+      <td>
+        <p>{employee.position}</p>
+        <p className="lg:hidden text-xs">{employee.area}</p>
+      </td>
+      <td className="hidden lg:table-cell">{employee.area}</td>
     </tr>
   );
 };
