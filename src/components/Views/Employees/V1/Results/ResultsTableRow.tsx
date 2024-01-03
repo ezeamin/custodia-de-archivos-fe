@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import EmployeeStatus from './EmployeeStatus';
 
 import { ResultsTableRowProps } from '@/components/interface/views';
@@ -33,6 +35,14 @@ const ResultsTableRow = (props: ResultsTableRowProps) => {
         <p className="lg:hidden text-xs">{employee.area}</p>
       </td>
       <td className="hidden lg:table-cell">{employee.area}</td>
+      <td className="text-end">
+        <Link
+          className="btn btn-primary text-white"
+          to={`/employees/${employee.id}`}
+        >
+          Ver más
+        </Link>
+      </td>
     </tr>
   );
 };

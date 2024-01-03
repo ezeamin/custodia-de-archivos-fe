@@ -48,7 +48,7 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
         }`,
         className
       )}
-      colorDark="dark:bg-error"
+      colorDark="dark:bg-red-800"
       colorLight="bg-red-300"
       textColorDark="dark:text-white"
       textColorLight="text-dark"
@@ -61,7 +61,7 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
       />
 
       <p
-        className={`inline-block ml-2 origin-left ${
+        className={`inline-block font-light ml-2 origin-left ${
           !open ? 'delay-0 scale-0' : ''
         } ${open ? 'delay-200 duration-200' : ''}`}
       >

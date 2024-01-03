@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import icon from '/img/icon.png';
 
@@ -53,13 +54,15 @@ const Header = (): JSX.Element | null => {
           isScrolling ? 'header-scrolling' : ''
         }`}
       >
-        <img
-          alt="Poder Judicial de Tucumán"
-          className="w-12 h-12 rounded-md"
-          height={100}
-          src={icon}
-          width={100}
-        />
+        <Link to="/">
+          <img
+            alt="Poder Judicial de Tucumán"
+            className="w-12 h-12 rounded-md"
+            height={100}
+            src={icon}
+            width={100}
+          />
+        </Link>
         <PortraitMenu />
       </header>
     );

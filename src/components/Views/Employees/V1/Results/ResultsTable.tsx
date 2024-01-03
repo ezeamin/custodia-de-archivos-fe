@@ -1,6 +1,6 @@
 import ResultsTableRow from './ResultsTableRow';
 
-import { Alert, Table } from '@/components/ui';
+import { Table } from '@/components/ui';
 
 import { ResultsTableProps } from '@/components/interface/views';
 
@@ -9,10 +9,6 @@ const ResultsTable = (props: ResultsTableProps) => {
 
   return (
     <section className="hidden md:block">
-      <Alert closable className="mb-3">
-        Haga click sobre un empleado para acceder a más información y a acciones
-        sobre el mismo.
-      </Alert>
       <section className="content-card overflow-x-auto animate-in-bottom">
         <Table rounded transparent zebra>
           <thead>
@@ -23,11 +19,10 @@ const ResultsTable = (props: ResultsTableProps) => {
               <th className="lg:hidden">Datos personales</th>
               <th className="text-center hidden lg:table-cell">Edad</th>
               <th className="text-center hidden lg:table-cell">Antiguedad</th>
-              <th className="lg:hidden table-top-right-rounded">
-                Puesto y area
-              </th>
+              <th className="lg:hidden">Puesto y area</th>
               <th className="hidden lg:table-cell">Puesto</th>
               <th className="hidden lg:table-cell">Area</th>
+              <th />
             </tr>
           </thead>
           <tbody>

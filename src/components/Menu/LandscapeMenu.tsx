@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { BsChevronLeft } from 'react-icons/bs';
+import { IoArrowBackOutline } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 
 import ThemeTogglerButton from '../Common/ThemeTogglerButton';
 import LogoCustodia from './LogoCustodia';
@@ -18,8 +20,13 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
   const { children } = props;
 
   const { user } = useSession();
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
+
+  const handleBackClick = (): void => {
+    navigate(-1);
+  };
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -74,6 +81,19 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
           >
             <LogoutButton className="h-10 flex-1" open={open} />
             <ThemeTogglerButton />
+            {!open && (
+              <Button
+                unbordered
+                className="w-12 h-12 p-0 theme-controller hover:bg-slate-300 dark:hover:bg-slate-700 tooltip tooltip-right flex justify-center"
+                colorDark="dark:bg-slate-600"
+                colorLight="bg-slate-200"
+                data-tip="Volver"
+                textColorDark="dark:text-white"
+                onClick={handleBackClick}
+              >
+                <Icon iconComponent={<IoArrowBackOutline />} title="Volver" />
+              </Button>
+            )}
           </div>
         </div>
       </div>
