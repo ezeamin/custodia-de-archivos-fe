@@ -9,7 +9,7 @@ const ResultsTable = (props: ResultsTableProps) => {
 
   return (
     <section className="hidden md:block">
-      <section className="content-card overflow-x-auto animate-in-bottom">
+      <section className="content-card overflow-x-auto animate-in-bottom a-delay-300">
         <Table rounded transparent zebra>
           <thead>
             <tr>
@@ -19,9 +19,9 @@ const ResultsTable = (props: ResultsTableProps) => {
               <th className="lg:hidden">Datos personales</th>
               <th className="text-center hidden lg:table-cell">Edad</th>
               <th className="text-center hidden lg:table-cell">Antiguedad</th>
-              <th className="lg:hidden">Puesto y area</th>
-              <th className="hidden lg:table-cell">Puesto</th>
-              <th className="hidden lg:table-cell">Area</th>
+              <th className="xl:hidden">Puesto y area</th>
+              <th className="hidden xl:table-cell">Puesto</th>
+              <th className="hidden xl:table-cell">Area</th>
               <th />
             </tr>
           </thead>

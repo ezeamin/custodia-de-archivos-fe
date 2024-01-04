@@ -6,7 +6,7 @@ import { Icon } from '@/components/ui';
 import type { MenuModuleButtonProps } from '@/components/interface';
 
 const MenuModuleButton = (props: MenuModuleButtonProps): JSX.Element | null => {
-  const { el, open = true } = props;
+  const { el } = props;
 
   const location = useLocation();
 
@@ -26,22 +26,13 @@ const MenuModuleButton = (props: MenuModuleButtonProps): JSX.Element | null => {
     <Link
       className={`${
         isActivePage ? selectedOptionColors : nonSelectedOptionColors
-      } duration-300 flex gap-x-4 items-center mb-5 px-4 py-2 rounded-lg shadow tooltip tooltip-right h-12 ${
-        open ? 'w-full' : 'w-12'
-      } ${isActivePage ? 'justify-between' : ''}`}
-      data-tip={!open ? el.description : null}
+      } flex gap-x-4 items-center mb-5 px-4 py-2 rounded-lg shadow h-12 w-full ${
+        isActivePage ? 'justify-between' : ''
+      }`}
       to={el.path}
     >
-      <Icon
-        className="duration-200"
-        iconComponent={open ? icon : el.icon}
-        title={el.title}
-      />
-      <span
-        className={`duration-200 ${!open ? 'scale-0' : ''} origin-left text-l`}
-      >
-        {el.title}
-      </span>
+      <Icon iconComponent={icon} title={el.title} />
+      <span>{el.title}</span>
     </Link>
   );
 };

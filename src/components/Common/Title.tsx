@@ -1,18 +1,45 @@
-import { IoMdArrowRoundBack } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { Button, Icon } from '../ui';
+import { Button } from '../ui';
 
 import { TitleProps } from '@/components/interface';
 
 const Title = (props: TitleProps) => {
-  const { title, showBackButton, ...rest } = props;
+  const { title, buttonText, onClick, href, ...rest } = props;
 
-  const navigate = useNavigate();
+  const isLink = !!href;
+  const showButton = !!('href' in props || 'onClick' in props);
 
-  const handleBack = () => {
-    navigate(-1);
-  };
+  if (isLink) {
+    return (
+      <section
+        className={
+          typeof rest?.className === 'string' ? rest?.className : undefined
+        }
+      >
+        <div className="flex gap-2 justify-between">
+          <h1 className="text-4xl">{title}</h1>
+          {showButton && (
+            <Link
+              className="hidden md:inline-flex btn btn-primary text-white border-none"
+              to={href}
+            >
+              {buttonText?.toUpperCase()}
+            </Link>
+          )}
+        </div>
+        <div className="divider mt-1" />
+        {showButton && (
+          <Link
+            className="md:hidden btn btn-primary text-white border-none w-full mb-3"
+            to={href}
+          >
+            {buttonText?.toUpperCase()}
+          </Link>
+        )}
+      </section>
+    );
+  }
 
   return (
     <section
@@ -22,20 +49,28 @@ const Title = (props: TitleProps) => {
     >
       <div className="flex gap-2 justify-between">
         <h1 className="text-4xl">{title}</h1>
-        {showBackButton && (
+        {showButton && (
           <Button
             unbordered
-            className="hover:bg-slate-500 dark:hover:bg-slate-700 fixed bottom-4 left-4 md:relative md:bottom-0 md:left-0"
-            colorDark="dark:bg-slate-600"
-            colorLight="bg-slate-400"
-            textColorDark="dark:text-white"
-            onClick={handleBack}
+            className="hidden md:inline-flex text-white"
+            colorLight="btn-primary"
+            onClick={onClick}
           >
-            <Icon iconComponent={<IoMdArrowRoundBack />} title="Atrás" />
+            {buttonText?.toUpperCase()}
           </Button>
         )}
       </div>
       <div className="divider mt-1" />
+      {showButton && (
+        <Button
+          unbordered
+          className="md:hidden text-white"
+          colorLight="btn-primary"
+          onClick={onClick}
+        >
+          {buttonText?.toUpperCase()}
+        </Button>
+      )}
     </section>
   );
 };

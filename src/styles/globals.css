@@ -53,6 +53,11 @@ body {
   height: calc(100vh - 150px);
 }
 
+.landscape-menu{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 /* UTILITY CLASSES ------------------------------------- */
 
 .table-top-right-rounded {

@@ -32,15 +32,15 @@ const ResultsTableRow = (props: ResultsTableRowProps) => {
       <td className="text-center hidden lg:table-cell">{employee.antiquity}</td>
       <td>
         <p>{employee.position}</p>
-        <p className="lg:hidden text-xs">{employee.area}</p>
+        <p className="xl:hidden text-xs">{employee.area}</p>
       </td>
-      <td className="hidden lg:table-cell">{employee.area}</td>
+      <td className="hidden xl:table-cell">{employee.area}</td>
       <td className="text-end">
         <Link
           className="btn btn-primary text-white"
           to={`/employees/${employee.id}`}
         >
-          Ver más
+          VER MÁS
         </Link>
       </td>
     </tr>

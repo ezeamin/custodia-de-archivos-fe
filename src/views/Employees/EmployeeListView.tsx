@@ -7,7 +7,11 @@ import Results from '@/components/Views/Employees/V1/Results/Results';
 const EmployeeListView = () => {
   return (
     <>
-      <Title title="Listado de empleados" />
+      <Title
+        buttonText="Crear nuevo usuario"
+        href="/employees/create"
+        title="Listado de empleados"
+      />
       <section className="flex justify-between items-center">
         <SearchFilter />
         <Legend />

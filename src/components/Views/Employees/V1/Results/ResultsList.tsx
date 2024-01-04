@@ -1,4 +1,4 @@
-import ResultsListItem from './ResultsItem';
+import ResultsListItem from './ResultsListItem';
 
 import { ResultsListProps } from '@/components/interface/views';
 
