@@ -16,30 +16,6 @@ const optionalWrapper = <T extends ZodType>(required: boolean, rule: T) => {
 // COMMON RULES
 // ----------------------------------------------------
 
-export const resolutionRules = (required = false) => {
-  const rule = z
-    .string()
-    .max(25, {
-      message: 'El Número de acordada debe tener como máximo 25 caracteres',
-    })
-    .refine(
-      // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
-      (data) => {
-        if (required) {
-          return data.length > 0;
-        }
-
-        return !data || data.length >= 3;
-      },
-      {
-        message: 'El Número de acordada debe tener al menos 3 caracteres',
-      }
-    )
-    .default('');
-
-  return optionalWrapper<typeof rule>(required, rule);
-};
-
 export const dateRules = (required = false) => {
   const rule = z
     .union([z.date(), z.string()])
@@ -67,9 +43,9 @@ export const dateRules = (required = false) => {
   return optionalWrapper<typeof rule>(required, rule);
 };
 
-export const typeRules = (required = false) => {
+export const typeRules = (required = false, typeName = '') => {
   const rule = z.string().min(1, {
-    message: 'Debe seleccionar un tipo',
+    message: `Debe seleccionar un tipo ${typeName ? `de ${typeName}` : ''}`,
   });
 
   return optionalWrapper<typeof rule>(required, rule);
@@ -173,6 +149,7 @@ export const usernameRules = (required = false) => {
 
   return optionalWrapper<typeof rule>(required, rule);
 };
+
 export const booleanRules = (required = false) => {
   const rule = z.boolean().default(false);
 
@@ -183,10 +160,10 @@ export const emailRules = (required = false) => {
   const rule = z
     .string()
     .email({
-      message: 'Debe ingresar un email válido',
+      message: 'Debe ingresar un Email válido',
     })
     .max(100, {
-      message: 'El email debe tener como máximo 100 caracteres',
+      message: 'El Email debe tener como máximo 100 caracteres',
     })
     .refine(
       // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
@@ -198,7 +175,58 @@ export const emailRules = (required = false) => {
         return !data || data.length >= 3;
       },
       {
-        message: 'El email debe tener al menos 3 caracteres',
+        message: 'El Email debe tener al menos 3 caracteres',
+      }
+    )
+    .default('');
+
+  return optionalWrapper<typeof rule>(required, rule);
+};
+
+export const dniRules = (required = false) => {
+  const rule = z
+    .string()
+    .regex(/^\d+$/, {
+      message: 'El DNI debe contener solo números',
+    })
+    .max(8, {
+      message: 'El DNI debe tener 7 u 8 caracteres',
+    })
+    .refine(
+      // Min length is 7 when it does have content (cannot use .min() because it's initially empty and optional)
+      (data) => {
+        if (required) {
+          return data.length > 0;
+        }
+
+        return !data || data.length >= 7;
+      },
+      {
+        message: 'El DNI debe tener 7 u 8 caracteres',
+      }
+    )
+    .default('');
+
+  return optionalWrapper<typeof rule>(required, rule);
+};
+
+export const positionRules = (required = false) => {
+  const rule = z
+    .string()
+    .max(50, {
+      message: 'El Puesto debe tener como máximo 50 caracteres',
+    })
+    .refine(
+      // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
+      (data) => {
+        if (required) {
+          return data.length > 0;
+        }
+
+        return !data || data.length >= 3;
+      },
+      {
+        message: 'El Puesto debe tener al menos 3 caracteres',
       }
     )
     .default('');

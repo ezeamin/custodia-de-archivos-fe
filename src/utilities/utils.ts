@@ -1,3 +1,5 @@
+import { Route } from '@/constants/interface';
+
 /**
  * Usage with template literals. To call the function, do not use parentheses.
  * @param strings -
@@ -21,4 +23,19 @@ export const removeLineBreaks = (
   result = result.replace(/\s+/g, ' ');
 
   return result;
+};
+
+export const flattenRoutes = (routes: Route[]): Route[] => {
+  let flattenedRoutes: Route[] = [];
+
+  routes.forEach((route) => {
+    flattenedRoutes.push(route);
+
+    if (route.subpaths && route.subpaths.length > 0) {
+      const subpaths = flattenRoutes(route.subpaths);
+      flattenedRoutes = flattenedRoutes.concat(subpaths);
+    }
+  });
+
+  return flattenedRoutes;
 };

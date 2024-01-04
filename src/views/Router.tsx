@@ -5,7 +5,7 @@ import PrivateRoute from './PrivateRoute';
 import Header from '@/components/Header/Header';
 import LandscapeMenu from '@/components/Menu/LandscapeMenu';
 
-import { routes } from '@/constants/routes/routes';
+import { flattedRoutes } from '@/constants/routes/routes';
 
 const Router = () => {
   return (
@@ -14,7 +14,7 @@ const Router = () => {
         <Header />
         <main className="modules-padding">
           <Routes>
-            {routes.map((route) => (
+            {flattedRoutes.map((route) => (
               <Route
                 element={
                   <PrivateRoute

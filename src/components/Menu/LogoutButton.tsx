@@ -58,7 +58,7 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
         title="Cerrar Sesión"
       />
 
-      <p className="inline-block font-light ml-2">Cerrar Sesión</p>
+      <p className="inline-block ml-2">Cerrar Sesión</p>
     </Button>
   );
 };

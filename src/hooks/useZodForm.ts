@@ -15,9 +15,19 @@ export const useZodForm = <T extends ZodSchema>(
     control,
     formState: { errors },
     reset,
+    watch,
+    setValue,
   } = useFormRHF<z.infer<typeof validationSchema>>({
     resolver: zodResolver(validationSchema),
   });
+
+  // Watch all fields
+  const watchAllFields = watch();
+
+  // Check if all fields are filled
+  const areAllFieldsFilled =
+    Object.values(watchAllFields).length > 0 &&
+    Object.values(watchAllFields).every((value) => !!value);
 
   useEffect(() => {
     Object.values(errors).forEach((error) => {
@@ -28,9 +38,14 @@ export const useZodForm = <T extends ZodSchema>(
   return {
     onSubmitMiddleware: handleSubmit,
     control,
+
+    // Optional usage
     reset,
+    areAllFieldsFilled,
 
     // Optional usage - Discouraged
     errors,
+    watch,
+    setValue,
   };
 };

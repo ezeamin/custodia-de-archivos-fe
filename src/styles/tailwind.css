@@ -2,9 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.tooltip::before {
+.tooltip::before,
+.md\:tooltip::before {
   color: #ffffff !important;
   font-weight: 100;
+}
+
+.btn.btn-disabled,
+.btn[disabled],
+.btn:disabled {
+  @apply bg-gray-200 dark:bg-gray-700;
 }
 
 .modules-padding {

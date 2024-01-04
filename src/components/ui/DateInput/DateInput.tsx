@@ -29,6 +29,7 @@ const DateInput = <T extends FormSchemas>(
           fieldState: { error },
         }) => (
           <DatePicker
+            className="mt-1"
             disabled={rest.disabled}
             error={Boolean(error)}
             name={inputName}

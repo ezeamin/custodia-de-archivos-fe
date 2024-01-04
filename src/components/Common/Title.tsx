@@ -18,7 +18,7 @@ const Title = (props: TitleProps) => {
         }
       >
         <div className="flex gap-2 justify-between">
-          <h1 className="text-4xl">{title}</h1>
+          <h1 className="text-4xl font-bold">{title}</h1>
           {showButton && (
             <Link
               className="hidden md:inline-flex btn btn-primary text-white border-none"
@@ -48,7 +48,7 @@ const Title = (props: TitleProps) => {
       }
     >
       <div className="flex gap-2 justify-between">
-        <h1 className="text-4xl">{title}</h1>
+        <h1 className="text-4xl font-bold">{title}</h1>
         {showButton && (
           <Button
             unbordered
