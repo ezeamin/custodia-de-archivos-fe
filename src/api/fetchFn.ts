@@ -1,7 +1,7 @@
 import { toast } from 'sonner';
 
 import { API_GlobalResponse } from './interface';
-import { ApiRoute } from './interface/routes';
+import { FetchFnProps } from './interface/fetchFn';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -9,18 +9,32 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
  * @param T - How it comes (API)
  * @param V - How it goes (Frontend)
  */
-export const fetchFn = async <T, V>({
+export const fetchFn = async <T, V = T>({
   request,
   adapter,
-}: {
-  request: ApiRoute;
-  adapter: (data: T) => V | null;
-}): Promise<API_GlobalResponse<T, V>> => {
+  body,
+}: FetchFnProps): Promise<API_GlobalResponse<T, V>> => {
   const fullPath = `${baseUrl}${request.url}`;
 
-  const res = await fetch(fullPath, {
-    method: request.method,
-  });
+  const isFormData = body instanceof FormData;
+
+  const optionObj =
+    request.method === 'POST'
+      ? {
+          method: request.method,
+          headers: {
+            'Content-Type': isFormData
+              ? 'application/form-data'
+              : 'application/json',
+          },
+          body: isFormData ? body : JSON.stringify(body),
+        }
+      : // GET
+        {
+          method: request.method,
+        };
+
+  const res = await fetch(fullPath, optionObj);
   const data = (await res.json()) as API_GlobalResponse<T, V>;
 
   if (!res.ok) {

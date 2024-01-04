@@ -1,3 +1,12 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { areaOptions, genderOptions } from './mocked';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'sonner';
+
+import { postEmployee } from '@/api/api-calls/employees';
+
 import { useZodForm } from '@/hooks';
 
 import {
@@ -9,58 +18,67 @@ import {
 } from '@/components/ui';
 import FileInput from '@/components/ui/FileInput/FileInput';
 
+import { paths } from '@/constants/routes/paths';
+
 import {
   CreateSchema,
   createSchema,
 } from '@/form-schemas/schemas/employees/createSchema';
 
-const genderOptions = [
-  {
-    id: '1',
-    description: 'Masculino',
-  },
-  {
-    id: '2',
-    description: 'Femenino',
-  },
-  {
-    id: '3',
-    description: 'Otro',
-  },
-];
-
-const areaOptions = [
-  {
-    id: '1',
-    description: 'Sistematización',
-  },
-  {
-    id: '2',
-    description: 'Clasificación',
-  },
-  {
-    id: '3',
-    description: 'Atención al cliente',
-  },
-  {
-    id: '4',
-    description: 'Administración',
-  },
-  {
-    id: '5',
-    description: 'Mantenimiento',
-  },
-];
-
 const CreateForm = () => {
-  const { control, onSubmitMiddleware, areAllFieldsFilled, watch, setValue } =
-    useZodForm(createSchema);
+  const {
+    control,
+    onSubmitMiddleware,
+    areAllFieldsFilled,
+    watch,
+    setValue,
+    reset,
+  } = useZodForm(createSchema);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const { mutate: createEmployee } = useMutation({
+    mutationFn: postEmployee,
+    onError: (error) => {
+      setIsLoading(false);
+      toast.error(error.message);
+    },
+    onSuccess: () => {
+      setIsLoading(false);
+      reset();
+      toast.success('Empleado creado con éxito');
+      window.setTimeout(() => {
+        navigate(paths.EMPLOYEES.MAIN);
+      }, 1000);
+    },
+  });
 
   const uploadedImage = watch('imgFile');
 
   const handleSubmit = (data: CreateSchema) => {
-    console.log(data);
-    // TODO: Send loading state to button
+    setIsLoading(true);
+
+    const fd = new FormData();
+
+    fd.append('name', data.name);
+    fd.append('lastname', data.lastname);
+    fd.append('email', data.email);
+    fd.append('dni', data.dni);
+    fd.append('fileNumber', data.fileNumber.toString());
+    fd.append('gender', data.gender);
+    fd.append(
+      'startDate',
+      typeof data.startDate === 'string'
+        ? data.startDate
+        : data.startDate.toISOString()
+    );
+    fd.append('position', data.position);
+    fd.append('area', data.area);
+    fd.append('imgFile', data.imgFile);
+
+    createEmployee(fd);
   };
 
   return (
@@ -178,6 +196,7 @@ const CreateForm = () => {
         className="mt-4"
         colorLight="btn-primary"
         disabled={!areAllFieldsFilled}
+        loading={isLoading}
         type="submit"
       >
         Guardar

@@ -11,16 +11,16 @@ import {
 } from '@/form-schemas/rules/rules';
 
 export const createSchema = z.object({
-  name: nameRules(),
-  lastname: lastnameRules(),
-  email: emailRules(),
-  dni: dniRules(),
+  name: nameRules(true),
+  lastname: lastnameRules(true),
+  email: emailRules(true),
+  dni: dniRules(true),
   gender: typeRules(true, 'género'),
-  startDate: dateRules(),
-  position: positionRules(),
+  startDate: dateRules(true),
+  position: positionRules(true),
   area: typeRules(true, 'área'),
   fileNumber: z.coerce.number().int().positive(),
-  imgFile: z.instanceof(File).optional(),
+  imgFile: z.instanceof(File),
 });
 
 export type CreateSchema = z.infer<typeof createSchema>;

@@ -1,22 +1,26 @@
 import dayjs, { type Dayjs } from 'dayjs';
-import { z, type ZodType } from 'zod';
+import { z } from 'zod';
 
 // ----------------------------------------------------
 // HELPERS
 // ----------------------------------------------------
+type RuleType<T extends z.ZodType, U extends boolean> = U extends true
+  ? T
+  : z.ZodOptional<T>;
 
-const optionalWrapper = <T extends ZodType>(required: boolean, rule: T) => {
-  if (!required) {
-    return z.optional(rule);
-  }
-  return rule;
-};
+export function optionalWrapper<T extends z.ZodType, U extends boolean>(
+  required: U,
+  rule: T
+): RuleType<T, U> {
+  if (required) return rule as RuleType<T, U>;
+  return z.optional(rule) as RuleType<T, U>;
+}
 
 // ----------------------------------------------------
 // COMMON RULES
 // ----------------------------------------------------
 
-export const dateRules = (required = false) => {
+export const dateRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .union([z.date(), z.string()])
     // Check if it's a string (empty field)
@@ -40,18 +44,21 @@ export const dateRules = (required = false) => {
       }
     );
 
-  return optionalWrapper<typeof rule>(required, rule);
+  return optionalWrapper(required, rule);
 };
 
-export const typeRules = (required = false, typeName = '') => {
+export const typeRules = <T extends boolean = false>(
+  required: T,
+  typeName = ''
+) => {
   const rule = z.string().min(1, {
     message: `Debe seleccionar un tipo ${typeName ? `de ${typeName}` : ''}`,
   });
 
-  return optionalWrapper<typeof rule>(required, rule);
+  return optionalWrapper(required, rule);
 };
 
-export const cuilRules = (required = false) => {
+export const cuilRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
     .regex(/^\d+$/, {
@@ -75,10 +82,10 @@ export const cuilRules = (required = false) => {
     )
     .default('');
 
-  return optionalWrapper<typeof rule>(required, rule);
+  return optionalWrapper(required, rule);
 };
 
-export const lastnameRules = (required = false) => {
+export const lastnameRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
     .max(50, {
@@ -99,10 +106,10 @@ export const lastnameRules = (required = false) => {
     )
     .default('');
 
-  return optionalWrapper<typeof rule>(required, rule);
+  return optionalWrapper(required, rule);
 };
 
-export const nameRules = (required = false) => {
+export const nameRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
     .max(50, {
@@ -123,10 +130,10 @@ export const nameRules = (required = false) => {
     )
     .default('');
 
-  return optionalWrapper<typeof rule>(required, rule);
+  return optionalWrapper(required, rule);
 };
 
-export const usernameRules = (required = false) => {
+export const usernameRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
     .max(50, {
@@ -147,16 +154,16 @@ export const usernameRules = (required = false) => {
     )
     .default('');
 
-  return optionalWrapper<typeof rule>(required, rule);
+  return optionalWrapper(required, rule);
 };
 
-export const booleanRules = (required = false) => {
+export const booleanRules = <T extends boolean = false>(required: T) => {
   const rule = z.boolean().default(false);
 
-  return optionalWrapper<typeof rule>(required, rule);
+  return optionalWrapper(required, rule);
 };
 
-export const emailRules = (required = false) => {
+export const emailRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
     .email({
@@ -180,10 +187,10 @@ export const emailRules = (required = false) => {
     )
     .default('');
 
-  return optionalWrapper<typeof rule>(required, rule);
+  return optionalWrapper(required, rule);
 };
 
-export const dniRules = (required = false) => {
+export const dniRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
     .regex(/^\d+$/, {
@@ -207,10 +214,10 @@ export const dniRules = (required = false) => {
     )
     .default('');
 
-  return optionalWrapper<typeof rule>(required, rule);
+  return optionalWrapper(required, rule);
 };
 
-export const positionRules = (required = false) => {
+export const positionRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
     .max(50, {
@@ -231,7 +238,7 @@ export const positionRules = (required = false) => {
     )
     .default('');
 
-  return optionalWrapper<typeof rule>(required, rule);
+  return optionalWrapper(required, rule);
 };
 
 // ----------------------------------------------------
