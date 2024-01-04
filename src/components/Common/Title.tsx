@@ -21,7 +21,7 @@ const Title = (props: TitleProps) => {
           <h1 className="text-4xl font-bold">{title}</h1>
           {showButton && (
             <Link
-              className="hidden md:inline-flex btn btn-primary text-white border-none"
+              className="hidden sm:inline-flex btn btn-primary text-white border-none"
               to={href}
             >
               {buttonText?.toUpperCase()}
@@ -31,7 +31,7 @@ const Title = (props: TitleProps) => {
         <div className="divider mt-1" />
         {showButton && (
           <Link
-            className="md:hidden btn btn-primary text-white border-none w-full mb-3"
+            className="sm:hidden btn btn-primary text-white border-none w-full mb-3"
             to={href}
           >
             {buttonText?.toUpperCase()}
@@ -52,7 +52,7 @@ const Title = (props: TitleProps) => {
         {showButton && (
           <Button
             unbordered
-            className="hidden md:inline-flex text-white"
+            className="hidden sm:inline-flex text-white"
             colorLight="btn-primary"
             onClick={onClick}
           >
@@ -64,7 +64,7 @@ const Title = (props: TitleProps) => {
       {showButton && (
         <Button
           unbordered
-          className="md:hidden text-white"
+          className="sm:hidden text-white"
           colorLight="btn-primary"
           onClick={onClick}
         >

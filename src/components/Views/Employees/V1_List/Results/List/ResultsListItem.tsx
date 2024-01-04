@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import EmployeeStatus from './EmployeeStatus';
+import EmployeeStatus from '../EmployeeStatus';
 
-import { ResultsListItemProps } from '@/components/interface/views';
+import { EmployeesResultsListItemProps } from '@/components/interface/views';
 
-const ResultsListItem = (props: ResultsListItemProps) => {
+const ResultsListItem = (props: EmployeesResultsListItemProps) => {
   const { employee, index } = props;
 
   return (

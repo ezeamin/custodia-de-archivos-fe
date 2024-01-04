@@ -1,25 +1,43 @@
+import { Employee } from '@/api/interface/employees';
+import { Notification } from '@/api/interface/notifications';
+
 // --------------------------------------------------
 // EMPLOYEES
 // --------------------------------------------------
-import { Employee } from '@/api/interface/employees';
 
 export interface FilterModalFormProps {
   closeModal: () => void;
 }
 
-export interface ResultsTableProps {
+export interface EmployeesResultsTableProps {
   data: Employee[];
 }
 
-export interface ResultsTableRowProps {
+export interface EmployeesResultsTableRowProps {
   employee: Employee;
 }
 
-export interface ResultsListProps extends ResultsTableProps {}
-export interface ResultsListItemProps extends ResultsTableRowProps {
+export interface EmployeesResultsListProps extends EmployeesResultsTableProps {}
+export interface EmployeesResultsListItemProps
+  extends EmployeesResultsTableRowProps {
   index: number;
 }
 
 export interface EmployeeStatusProps {
   status: Employee['status'];
+}
+
+// --------------------------------------------------
+// NOTIFICATIONS
+// --------------------------------------------------
+
+export interface NotificationsResultsListProps {
+  data: Notification[];
+  hasBeenRead: boolean;
+}
+
+export interface NotificationsResultsListItemProps {
+  notification: Notification;
+  index: number;
+  hasBeenRead: boolean;
 }

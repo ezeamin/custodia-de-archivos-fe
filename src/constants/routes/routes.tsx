@@ -8,6 +8,10 @@ import CreateEmployeeView from '@/views/Employees/CreateEmployeeView';
 import EmployeeDetailsView from '@/views/Employees/EmployeeDetailsView';
 import EmployeeListView from '@/views/Employees/EmployeeListView';
 import HomeView from '@/views/Home/HomeView';
+import CreateNotificationView from '@/views/Notifications/CreateNotificationView';
+import NotificationDetailView from '@/views/Notifications/NotificationDetailView';
+import NotificationsHistoryView from '@/views/Notifications/NotificationsHistoryView';
+import NotificationsTypesView from '@/views/Notifications/NotificationsTypesView';
 import NotificationsView from '@/views/Notifications/NotificationsView';
 import SettingsView from '@/views/Settings/SettingsView';
 import UsersView from '@/views/Users/UsersView';
@@ -92,7 +96,44 @@ export const routes: Route[] = [
     icon: <IoNotifications />,
     description: 'Centro de notificaciones',
     path: paths.NOTIFICATIONS.MAIN,
-    subpaths: [],
+    subpaths: [
+      {
+        id: 4001,
+        title: 'Crear notificación',
+        description: 'Crear notificación',
+        path: paths.NOTIFICATIONS.CREATE,
+        subpaths: [],
+        privateRoute: true,
+        element: <CreateNotificationView />,
+      },
+      {
+        id: 4002,
+        title: 'Historial de Notificaciones',
+        description: 'Historial notificaciones',
+        path: paths.NOTIFICATIONS.HISTORY,
+        subpaths: [],
+        privateRoute: true,
+        element: <NotificationsHistoryView />,
+      },
+      {
+        id: 4003,
+        title: 'Administrar tipos',
+        description: 'Administrar tipos',
+        path: paths.NOTIFICATIONS.ADMIN_TYPES,
+        subpaths: [],
+        privateRoute: true,
+        element: <NotificationsTypesView />,
+      },
+      {
+        id: 4004,
+        title: 'Notificación',
+        description: 'Notificación',
+        path: paths.NOTIFICATIONS.DETAILS,
+        subpaths: [],
+        privateRoute: true,
+        element: <NotificationDetailView />,
+      },
+    ],
     privateRoute: true,
     element: <NotificationsView />,
   },

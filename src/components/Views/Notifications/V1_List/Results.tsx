@@ -1,15 +1,17 @@
 import ResultsList from './List/ResultsList';
 import { mockedData } from './mocked';
-import ResultsTable from './Table/ResultsTable';
 import { useQuery } from '@tanstack/react-query';
 
-import { getEmployees } from '@/api/api-calls/employees';
+import { getNotifications } from '@/api/api-calls/notifications';
 
 import { useLoading } from '@/hooks';
 
 import { Alert, Pagination } from '@/components/ui';
 
-const data = mockedData;
+const data = {
+  ...mockedData,
+  data: mockedData.data.filter((item) => item.hasBeenRead === false),
+};
 const isError = false;
 const isLoading = false;
 
@@ -19,8 +21,8 @@ const Results = () => {
   // -------------------------------------------------
 
   const { /* data, isLoading, isError, */ refetch } = useQuery({
-    queryKey: ['employees'],
-    queryFn: getEmployees,
+    queryKey: ['notifications'],
+    queryFn: () => getNotifications(false),
   });
 
   useLoading(isLoading);
@@ -54,10 +56,8 @@ const Results = () => {
 
   if (data?.data) {
     return (
-      <section className="mt-5 overflow-hidden">
-        <ResultsTable data={data.data} />
-        <ResultsList data={data.data} />
-
+      <section className="mt-5">
+        <ResultsList data={data.data} hasBeenRead={false} />
         <Pagination totalElements={data.totalElements} />
       </section>
     );
@@ -65,5 +65,4 @@ const Results = () => {
 
   return null;
 };
-
 export default Results;

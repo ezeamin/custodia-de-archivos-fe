@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import EmployeeStatus from './EmployeeStatus';
+import EmployeeStatus from '../EmployeeStatus';
 
-import { ResultsTableRowProps } from '@/components/interface/views';
+import { EmployeesResultsTableRowProps } from '@/components/interface/views';
 
-const ResultsTableRow = (props: ResultsTableRowProps) => {
+const ResultsTableRow = (props: EmployeesResultsTableRowProps) => {
   const { employee } = props;
 
   return (

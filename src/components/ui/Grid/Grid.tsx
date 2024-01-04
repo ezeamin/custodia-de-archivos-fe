@@ -8,6 +8,7 @@ import {
   RowSpanTypes,
   SmColTypes,
   VerticalAlignTypes,
+  XlColTypes,
   XsColTypes,
 } from './Grid.classes';
 
@@ -53,6 +54,7 @@ const Grid = (props: GridProps): JSX.Element => {
     gap = 0,
     item = false,
     justifyContent = '',
+    xl,
     lg,
     md,
     rowSpan = 1,
@@ -79,6 +81,7 @@ const Grid = (props: GridProps): JSX.Element => {
     if (item && xs) {
       return cn(
         removeLineBreaks`${XsColTypes[xs]}
+        ${xl ? XlColTypes[xl] : ''}
         ${lg ? LgColTypes[lg] : ''}
         ${md ? MdColTypes[md] : ''}
         ${sm ? SmColTypes[sm] : ''}

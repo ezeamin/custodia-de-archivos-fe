@@ -10,6 +10,7 @@ export type GridProps = AnyProp &
         md?: never;
         sm?: never;
         xs?: never;
+        xl?: never;
         item?: never;
         rowSpan?: never;
       }
@@ -19,6 +20,7 @@ export type GridProps = AnyProp &
         md?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
         sm?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
         xs: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+        xl?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
         children?: string | React.ReactNode;
         rowSpan?: 1 | 2 | 3 | 4 | 5 | 6;
         container?: never;

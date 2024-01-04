@@ -11,4 +11,14 @@ export const apiRoutes = {
       url: '/employees',
     }),
   },
+  NOTIFICATIONS: {
+    GET_NOTIFICATIONS: ({ params }: { params: string }): ApiRoute => ({
+      method: 'GET',
+      url: `/notifications${params}`,
+    }),
+    POST_NOTIFICATION: (): ApiRoute => ({
+      method: 'POST',
+      url: '/notifications',
+    }),
+  },
 };

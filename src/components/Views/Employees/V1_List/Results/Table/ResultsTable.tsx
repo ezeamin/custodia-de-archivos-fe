@@ -2,9 +2,9 @@ import ResultsTableRow from './ResultsTableRow';
 
 import { Table } from '@/components/ui';
 
-import { ResultsTableProps } from '@/components/interface/views';
+import { EmployeesResultsTableProps } from '@/components/interface/views';
 
-const ResultsTable = (props: ResultsTableProps) => {
+const ResultsTable = (props: EmployeesResultsTableProps) => {
   const { data } = props;
 
   return (
