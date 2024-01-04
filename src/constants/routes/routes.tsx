@@ -4,11 +4,15 @@ import { IoNotifications, IoPeople, IoSettingsSharp } from 'react-icons/io5';
 import { paths } from './paths';
 
 import AuthView from '@/views/Auth/AuthView';
+import CreateEmployeeView from '@/views/Employees/CreateEmployeeView';
+import EmployeeDetailsView from '@/views/Employees/EmployeeDetailsView';
 import EmployeeListView from '@/views/Employees/EmployeeListView';
 import HomeView from '@/views/Home/HomeView';
 import NotificationsView from '@/views/Notifications/NotificationsView';
 import SettingsView from '@/views/Settings/SettingsView';
 import UsersView from '@/views/Users/UsersView';
+
+import { flattenRoutes } from '@/utilities/utils';
 
 import type { Route } from '../interface';
 
@@ -59,7 +63,26 @@ export const routes: Route[] = [
     icon: <IoPeople />,
     description: 'Listado de empleados',
     path: paths.EMPLOYEES.MAIN,
-    subpaths: [],
+    subpaths: [
+      {
+        id: 3001,
+        title: 'Crear empleado',
+        description: 'Crear empleado',
+        path: paths.EMPLOYEES.CREATE,
+        subpaths: [],
+        privateRoute: true,
+        element: <CreateEmployeeView />,
+      },
+      {
+        id: 3002,
+        title: 'Detalle empleado',
+        description: 'Detalle empleado',
+        path: paths.EMPLOYEES.EMPLOYEE_DETAILS,
+        subpaths: [],
+        privateRoute: true,
+        element: <EmployeeDetailsView />,
+      },
+    ],
     privateRoute: true,
     element: <EmployeeListView />,
   },
@@ -94,3 +117,5 @@ export const routes: Route[] = [
     element: <SettingsView />,
   },
 ];
+
+export const flattedRoutes = flattenRoutes(routes);

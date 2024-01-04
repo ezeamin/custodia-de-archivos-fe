@@ -5,10 +5,26 @@ import type { AnyProp } from '@/interface';
 // COMMON
 // ----------------------------------------------------------------------
 
-export interface TitleProps extends AnyProp {
+export type TitleProps = {
   title: string;
-  showBackButton?: boolean;
-}
+} & (
+  | {
+      onClick: () => void;
+      buttonText: string;
+      href?: never;
+    }
+  | {
+      href: string;
+      buttonText: string;
+      onClick?: never;
+    }
+  | {
+      buttonText?: never;
+      href?: never;
+      onClick?: never;
+    }
+) &
+  AnyProp;
 
 // ----------------------------------------------------------------------
 // MENU

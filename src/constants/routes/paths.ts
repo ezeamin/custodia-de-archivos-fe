@@ -8,6 +8,7 @@ export const paths = {
   EMPLOYEES: {
     MAIN: '/employees',
     EMPLOYEE_DETAILS: '/employees/:id',
+    CREATE: '/employees/create',
   },
   NOTIFICATIONS: {
     MAIN: '/notifications',

@@ -1,11 +1,20 @@
-import type { Control } from 'react-hook-form';
+import type { Control, UseFormSetValue } from 'react-hook-form';
+
+import { z } from 'zod';
 
 import type { FormSchemas } from '@/form-schemas';
 
-export interface FormHandling<T extends FormSchemas> {
+export type FormHandling<T extends FormSchemas, TisFile extends boolean> = {
   control: Control<T>;
   name: keyof T;
-}
+} & (TisFile extends true
+  ? {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setValue: UseFormSetValue<any>;
+    }
+  : {
+      setValue?: never;
+    });
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions -- it needs to be a type for the forwardRef to work fine
 export type ListOption = {

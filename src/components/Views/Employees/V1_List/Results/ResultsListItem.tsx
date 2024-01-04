@@ -50,7 +50,7 @@ const ResultsListItem = (props: ResultsListItemProps) => {
             className="btn w-full btn-primary text-white"
             to={`/employees/${employee.id}`}
           >
-            Ver más
+            VER MÁS
           </Link>
         </div>
       </div>

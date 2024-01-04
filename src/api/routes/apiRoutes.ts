@@ -6,5 +6,9 @@ export const apiRoutes = {
       method: 'GET',
       url: `/employees${params}`,
     }),
+    POST_EMPLOYEE: (): ApiRoute => ({
+      method: 'POST',
+      url: '/employees',
+    }),
   },
 };

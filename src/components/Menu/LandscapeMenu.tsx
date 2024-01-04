@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { BsChevronLeft } from 'react-icons/bs';
 import { IoArrowBackOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,44 +20,17 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
   const { user } = useSession();
   const navigate = useNavigate();
 
-  const [open, setOpen] = useState(false);
-
   const handleBackClick = (): void => {
     navigate(-1);
   };
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <div
-        className={`bg-white dark:bg-blue-950 duration-300 h-screen relative hidden md:block z-50 ${
-          open ? 'flex-2 pl-4 pr-4 w-72' : 'flex-3 pl-2 pr-2 w-20'
-        }`}
-      >
-        {/* Open/Close Menu Button */}
-        <Button
-          className={`absolute border-0 min-h-0 cursor-pointer duration-500 h-7 w-7 rounded top-9 -right-3 p-1 shadow ${
-            !open ? 'rotate-180' : ''
-          }`}
-          colorDark="dark:bg-gray-700"
-          colorLight="bg-sky-100"
-          onClick={() => {
-            setOpen(!open);
-          }}
-        >
-          <Icon
-            iconComponent={<BsChevronLeft />}
-            title={open ? 'Cerrar Menú' : 'Abrir Menú'}
-          />
-        </Button>
-
+      <div className="bg-white dark:bg-blue-950 h-screen relative hidden md:block z-50 pl-4 pr-4 w-[17rem] animate-in-left landscape-menu">
         {/* PJT Logo */}
         <div className="mb-5 mt-3">
           <LogoCustodia />
-          <h2
-            className={`text-xl origin-left dark:text-white duration-200 ${
-              !open ? 'hidden scale-0' : 'mt-3'
-            }`}
-          >
+          <h2 className="text-xl dark:text-white mt-3">
             Hola, <span className="font-bold">{user?.name}</span>
           </h2>
         </div>
@@ -67,33 +38,30 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
         {/* Module Buttons */}
         <div className="flex flex-col items-center">
           {routes.map((el) => (
-            <MenuModuleButton el={el} key={el.id} open={open} />
+            <MenuModuleButton el={el} key={el.id} />
           ))}
         </div>
 
         {/* Logout Button */}
         <div className="absolute inset-x-4 bottom-0">
           <hr className="my-2 w-full" />
-          <div
-            className={`flex gap-2 ${
-              !open ? 'flex-col-reverse' : ''
-            } mb-5 duration-200 transition-all`}
-          >
-            <LogoutButton className="h-10 flex-1" open={open} />
+          <div className="flex gap-2 mb-5">
+            <LogoutButton className="h-10 flex-1" />
             <ThemeTogglerButton />
-            {!open && (
-              <Button
-                unbordered
-                className="w-12 h-12 p-0 theme-controller hover:bg-slate-300 dark:hover:bg-slate-700 tooltip tooltip-right flex justify-center"
-                colorDark="dark:bg-slate-600"
-                colorLight="bg-slate-200"
-                data-tip="Volver"
-                textColorDark="dark:text-white"
-                onClick={handleBackClick}
-              >
-                <Icon iconComponent={<IoArrowBackOutline />} title="Volver" />
-              </Button>
-            )}
+            <Button
+              unbordered
+              className="w-12 h-12 p-0 theme-controller hover:bg-slate-300 dark:hover:bg-slate-700 tooltip tooltip-top flex justify-center"
+              colorDark="dark:bg-slate-600"
+              colorLight="bg-slate-200"
+              data-tip="Volver"
+              textColorDark="dark:text-white"
+              onClick={handleBackClick}
+            >
+              <Icon
+                iconComponent={<IoArrowBackOutline size="1.5em" />}
+                title="Volver"
+              />
+            </Button>
           </div>
         </div>
       </div>

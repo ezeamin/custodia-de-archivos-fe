@@ -8,6 +8,10 @@
   animation: in-keyframes-right 0.75s both;
 }
 
+.animate-in-left {
+  animation: in-keyframes-left 0.75s both;
+}
+
 .animate-in-top {
   animation: in-keyframes-top 0.5s both;
 }
@@ -27,6 +31,17 @@
   0% {
     opacity: 0;
     translate: 10% 0;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes in-keyframes-left {
+  0% {
+    opacity: 0;
+    translate: -15% 0;
   }
   100% {
     opacity: 1;

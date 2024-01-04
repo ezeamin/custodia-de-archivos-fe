@@ -137,7 +137,7 @@ const Button = (props: ButtonPropsType): JSX.Element => {
       aria-label={generateAriaLabel(children, ariaLabel, 'Botón para')}
       className={cn(
         removeLineBreaks`
-      ${unstyled ? '' : 'btn'} 
+      ${unstyled ? '' : 'btn disabled:cursor-not-allowed'} 
       ${activeButton ? 'btn-active' : ''}
       ${colorLight} 
       ${colorDark} 

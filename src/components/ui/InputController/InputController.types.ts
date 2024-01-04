@@ -10,7 +10,7 @@ import type { FormSchemas } from '@/form-schemas';
 import { FormHandling } from '@/components/interface/ui';
 
 export interface ControllerProps<T extends FormSchemas>
-  extends FormHandling<T> {
+  extends FormHandling<T, false> {
   defaultValue: string | number | boolean | null;
   render: ({
     field,

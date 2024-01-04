@@ -87,7 +87,7 @@ const DatePicker = (props: DatePickerProps): JSX.Element => {
   return (
     <input
       className={cn(
-        `input input-bordered bg-gray-100 dark:bg-slate-700 ${
+        `input input-bordered bg-gray-100 dark:bg-slate-700 w-full ${
           error && 'border-error'
         }`,
         className
