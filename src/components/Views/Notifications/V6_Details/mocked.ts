@@ -35,6 +35,11 @@ export const mockedData: { data: Notification } = {
         name: 'super_important_pdf.pdf',
         url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
       },
+      {
+        id: generateRandomId(),
+        name: 'sample_image.jpg',
+        url: 'https://www.w3schools.com/w3css/img_lights.jpg',
+      },
     ],
   },
 };

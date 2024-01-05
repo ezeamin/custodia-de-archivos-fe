@@ -15,7 +15,7 @@ const FilterModal = () => {
         opened ? 'modal-open' : ''
       }`}
     >
-      <div className="modal-box bg-white dark:bg-gray-800">
+      <div className="modal-box bg-white dark:bg-gray-800 lg:ml-[272px] border dark:border-gray-500">
         <h3 className="font-bold text-lg">Roles</h3>
         <section className="pt-5">
           <FilterModalForm closeModal={closeModal} />

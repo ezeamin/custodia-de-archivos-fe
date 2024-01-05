@@ -1,5 +1,9 @@
 import { Employee } from '@/api/interface/employees';
-import { Notification, NotificationType } from '@/api/interface/notifications';
+import {
+  Notification,
+  NotificationFile,
+  NotificationType,
+} from '@/api/interface/notifications';
 
 // --------------------------------------------------
 // EMPLOYEES
@@ -59,4 +63,8 @@ export interface NotificationInfoProps {
 
 export interface NotificationInfoContentProps {
   data: Notification;
+}
+
+export interface NotificationFileItemProps {
+  file: NotificationFile;
 }

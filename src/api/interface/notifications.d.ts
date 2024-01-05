@@ -3,6 +3,12 @@
 // ----------------------------------------------------------------------
 import { BasicList } from '@/interface';
 
+export interface NotificationFile {
+  id: string;
+  name: string;
+  url: string;
+}
+
 export interface API_GetNotifications {
   id: string;
   message: string;
@@ -26,11 +32,7 @@ export interface API_GetNotifications {
   };
   date: string;
   hasBeenRead: boolean;
-  files?: {
-    id: string;
-    name: string;
-    url: string;
-  }[];
+  files?: NotificationFile[];
 }
 
 export interface API_GetNotificationsTypes {
