@@ -18,6 +18,7 @@ import {
   ComboBoxInput,
   Grid,
   MultipleComboBoxInput,
+  MultipleFileInput,
   TextAreaInput,
 } from '@/components/ui';
 
@@ -30,13 +31,24 @@ import {
 
 const CreateNotificationForm = () => {
   // -------------------------------------------------
-  // STATES & FORM
+  // FORM
   // -------------------------------------------------
 
-  const { control, onSubmitMiddleware, areAllFieldsFilled, watch, reset } =
+  const { control, onSubmitMiddleware, watch, reset, setValue } =
     useZodForm(createSchema);
 
+  const selectedNotificationType = watch('type');
+  const selectedReceivers = watch('receiver');
+  const message = watch('message');
+  const uploadedFiles = watch('files');
+
+  // -------------------------------------------------
+  // STATES
+  // -------------------------------------------------
+
   const [isLoading, setIsLoading] = useState(false);
+  const [showFileSection, setShowFileSection] = useState(true);
+  const [canSendForm, setCanSendForm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -79,22 +91,29 @@ const CreateNotificationForm = () => {
 
   useLoading(isLoading);
 
-  const selectedNotificationType = watch('type');
-  // const uploadedFiles = watch('files');
-
   // -------------------------------------------------
   // HANDLERS
   // -------------------------------------------------
 
+  const handleShowFileSection = () => {
+    setShowFileSection((prev) => !prev);
+  };
+
   const handleSubmit = (data: CreateSchema) => {
     setIsLoading(true);
+
+    console.log(data);
 
     const fd = new FormData();
 
     fd.append('typeId', data.type.id);
     fd.append('receiverId', JSON.stringify(data.receiver.map((r) => r.id)));
     fd.append('message', data.message);
-    // fd.append('files', data.files);
+    if (data.files) {
+      data.files.forEach((file) => {
+        fd.append('files', file);
+      });
+    }
 
     createNotification(fd);
   };
@@ -103,6 +122,7 @@ const CreateNotificationForm = () => {
   // EFFECTS
   // -------------------------------------------------
 
+  // Fetch notification type for description
   useEffect(() => {
     if (selectedNotificationType) {
       setIsLoading(true);
@@ -115,6 +135,31 @@ const CreateNotificationForm = () => {
     selectedNotificationType,
     getNotificationTypeFn,
     resetNotificationTypeMutation,
+  ]);
+
+  // Enable submit button
+  useEffect(() => {
+    if (showFileSection) {
+      setCanSendForm(
+        !!(
+          selectedNotificationType &&
+          selectedReceivers &&
+          message &&
+          uploadedFiles &&
+          uploadedFiles.length > 0
+        )
+      );
+    } else {
+      setCanSendForm(
+        !!(selectedNotificationType && selectedReceivers && message)
+      );
+    }
+  }, [
+    selectedNotificationType,
+    selectedReceivers,
+    message,
+    uploadedFiles,
+    showFileSection,
   ]);
 
   // -------------------------------------------------
@@ -165,42 +210,32 @@ const CreateNotificationForm = () => {
           />
         </Grid>
       </Grid>
-      {/* <div className="flex gap-3 mb-3 items-end">
-        <div className="w-32 h-32 rounded-md bg-gray-400 overflow-hidden">
-          {uploadedFiles.map((file: File) => (
-            // create badges with the file names and a delete option
-            <div className="flex items-center gap-2 p-2" key={file.name}>
-              <span className="text-sm">{file.name}</span>
-              <button
-                className="btn btn-error"
-                type="button"
-                onClick={() => {
-                  setValue(
-                    'files',
-                    uploadedFiles.filter((f: File) => f.name !== file.name)
-                  );
-                }}
-              >
-                <i className="fas fa-trash"></i>
-              </button>
-            </div>
-          ))}
-        </div>
-        <div>
-          <FileInput<CreateSchema>
-            control={control}
-            disabled={isLoading}
-            label="Seleccione una imagen"
-            name="imgFile"
-            setValue={setValue}
+      <fieldset className="form-control mt-3">
+        <label className="label cursor-pointer" htmlFor="toggle">
+          <span className="">Enviar documentos</span>
+          <input
+            checked={showFileSection}
+            className="toggle [--tglbg:white] dark:[--tglbg:#2d3740] border-gray-400 checked:toggle-primary dark:checked:!bg-white"
+            id="toggle"
+            type="checkbox"
+            onChange={handleShowFileSection}
           />
-        </div>
-      </div> */}
+        </label>
+      </fieldset>
+      {showFileSection && (
+        <MultipleFileInput<CreateSchema>
+          control={control}
+          maxFiles={5}
+          maxSize={10000000} // 10MB
+          name="files"
+          setValue={setValue}
+        />
+      )}
       <Button
         className="mt-4"
         colorLight="btn-primary"
-        disabled={!areAllFieldsFilled}
-        loading={isLoading}
+        disabled={!canSendForm}
+        loading={isLoading && canSendForm}
         type="submit"
       >
         Guardar y enviar

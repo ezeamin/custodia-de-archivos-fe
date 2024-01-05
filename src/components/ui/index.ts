@@ -14,6 +14,7 @@ import Icon from './Icon/Icon';
 import IconButton from './IconButton/IconButton';
 import InputController from './InputController/InputController';
 import MultipleComboBoxInput from './MultipleComboBoxInput/MultipleComboBoxInput';
+import MultipleFileInput from './MultipleFileInput/MultipleFileInput';
 import Pagination from './Pagination/Pagination';
 import PasswordInput from './PasswordInput/PasswordInput';
 import RadioButton from './RadioButton/RadioButton';
@@ -44,6 +45,7 @@ export {
   IconButton,
   InputController,
   MultipleComboBoxInput,
+  MultipleFileInput,
   Pagination,
   PasswordInput,
   RadioButton,

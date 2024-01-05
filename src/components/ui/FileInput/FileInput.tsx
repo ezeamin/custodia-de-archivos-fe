@@ -33,11 +33,11 @@ const FileInput = <T extends FormSchemas>(
       setHasLoadedImage(true);
     }
 
-    setValue('imgFile', file);
+    setValue(name as string, file);
   };
 
   const handleRemove = () => {
-    setValue('imgFile', null);
+    setValue(name as string, null);
     setHasLoadedImage(false);
   };
 
