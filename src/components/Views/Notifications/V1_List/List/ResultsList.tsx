@@ -10,7 +10,7 @@ const ResultsList = (props: NotificationsResultsListProps) => {
   return (
     <Grid container component="section" gap={2}>
       {data.map((notification, index) => (
-        <Grid item key={notification.id} lg={4} md={6} xl={3} xs={12}>
+        <Grid item key={notification.id} lg={4} sm={6} xl={3} xs={12}>
           <ResultsListItem
             hasBeenRead={hasBeenRead}
             index={index}

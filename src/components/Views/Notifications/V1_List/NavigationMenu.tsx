@@ -22,6 +22,13 @@ const NavigationMenu = () => {
         Administrar tipos
         <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
       </Link>
+      <Link
+        className="btn dark:border-gray-500 hover:dark:border-gray-400"
+        to={paths.NOTIFICATIONS.HOUR_SETTINGS}
+      >
+        Administrar horarios
+        <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
+      </Link>
     </section>
   );
 };

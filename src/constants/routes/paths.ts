@@ -16,6 +16,7 @@ export const paths = {
     HISTORY: '/notifications/history',
     ADMIN_TYPES: '/notifications/admin-types',
     DETAILS: '/notifications/:id',
+    HOUR_SETTINGS: '/notifications/hour-settings',
   },
   USERS: {
     MAIN: '/users',
