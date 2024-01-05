@@ -10,6 +10,6 @@ const TypesList = () => {
 
   console.log(data, isLoading, isError);
 
-  return <div>TypesList</div>;
+  return <section className="mt-4">TypesList</section>;
 };
 export default TypesList;
