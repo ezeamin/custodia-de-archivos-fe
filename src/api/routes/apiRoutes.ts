@@ -1,6 +1,12 @@
 import { ApiRoute } from '../interface/routes';
 
 export const apiRoutes = {
+  PARAMS: {
+    GET_ROLES: (): ApiRoute => ({
+      method: 'GET',
+      url: '/params/roles',
+    }),
+  },
   EMPLOYEES: {
     GET_EMPLOYEES: ({ params }: { params: string }): ApiRoute => ({
       method: 'GET',
@@ -33,6 +39,10 @@ export const apiRoutes = {
       url: `/notifications/${id}/read`,
     }),
     GET_NOTIFICATION_RECEIVERS: (): ApiRoute => ({
+      method: 'GET',
+      url: '/notifications/receivers',
+    }),
+    GET_NOTIFICATION_ROLES: (): ApiRoute => ({
       method: 'GET',
       url: '/notifications/receivers',
     }),

@@ -1,5 +1,5 @@
-export interface API_GlobalResponse<T, V> {
-  data: T | V | null;
+export interface API_GlobalResponse<V> {
+  data: V | null;
   message: string | null;
   totalElements?: number;
 }

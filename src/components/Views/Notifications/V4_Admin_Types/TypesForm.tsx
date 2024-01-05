@@ -10,6 +10,7 @@ import {
   postNotificationTypeFn,
   putNotificationTypeFn,
 } from '@/api/api-calls/notifications';
+import { getRolesOptionsFn } from '@/api/api-calls/params';
 
 import { useLoading, useZodForm } from '@/hooks';
 
@@ -56,6 +57,15 @@ const TypesForm = () => {
     enabled: !!(isEditing && idBeingEdited),
   });
 
+  const {
+    // data: rolesOptions,
+    isLoading: isLoadingRoles,
+    isError: isErrorRoles,
+  } = useQuery({
+    queryKey: ['rolesOptions'],
+    queryFn: getRolesOptionsFn,
+  });
+
   const { mutate: createType } = useMutation({
     mutationFn: postNotificationTypeFn,
     onError: (error) => {
@@ -84,9 +94,9 @@ const TypesForm = () => {
     },
   });
 
-  useLoading(isLoadingEditedData);
+  useLoading(isLoadingEditedData || isLoadingRoles);
 
-  if (isErrorEditedData) {
+  if (isErrorEditedData || isErrorRoles) {
     toast.error('Ocurrió un error al obtener la información');
     navigate(paths.NOTIFICATIONS.ADMIN_TYPES);
   }
@@ -185,6 +195,7 @@ const TypesForm = () => {
             label="Roles habilitados"
             name="allowedRoles"
             options={userRoles}
+            // options={rolesOptions?.data}
             placeholder="Elige uno o más roles"
           />
         </Grid>

@@ -1,3 +1,5 @@
+import { Role } from './params';
+
 import { BasicList } from '@/interface';
 
 // ----------------------------------------------------------------------
@@ -42,13 +44,13 @@ export interface API_GetNotificationsTypes {
   description: string;
   startHour: string;
   endHour: string;
-  allowedRoles: BasicList[];
+  allowedRoles: Role[];
 }
 
 export interface API_GetNotificationsReceivers extends BasicList {}
 
 // ----------------------------------------------------------------------
-// Adapters
+// ADAPTERS
 // ----------------------------------------------------------------------
 
 export interface Notification extends API_GetNotifications {}

@@ -33,11 +33,6 @@ import {
   createSchema,
 } from '@/form-schemas/schemas/notifications/createSchema';
 
-import {
-  NotificationReceiver,
-  NotificationType,
-} from '@/api/interface/notifications';
-
 const CreateNotificationForm = () => {
   // -------------------------------------------------
   // FORM
@@ -178,10 +173,10 @@ const CreateNotificationForm = () => {
     ) {
       const receiver = notificationReceivers.data.find(
         (r) => r.id === receiverId
-      ) as NotificationReceiver;
+      );
       const type = notificationTypes.data.find(
         (t) => t.description === 'Respuesta'
-      ) as NotificationType;
+      );
 
       if (!receiver || !type) {
         toast.error(
