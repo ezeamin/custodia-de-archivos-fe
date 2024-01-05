@@ -39,3 +39,5 @@ export const flattenRoutes = (routes: Route[]): Route[] => {
 
   return flattenedRoutes;
 };
+
+export const generateRandomId = () => window.self.crypto.randomUUID();

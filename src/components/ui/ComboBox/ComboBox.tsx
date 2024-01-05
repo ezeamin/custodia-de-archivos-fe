@@ -10,6 +10,7 @@ import Icon from '@/components/ui/Icon/Icon';
 import { cn } from '@/utilities';
 
 import type { ComboBoxProps } from './ComboBox.types';
+import { BasicList } from '@/interface';
 
 /**
  * A custom combo box component that provides autocompletion functionality.
@@ -37,9 +38,6 @@ const ComboBox = <T extends FieldValues>(
     className,
     disabled = false,
     error = false,
-    iconCheckProps,
-    iconClearProps,
-    iconExpandProps,
     inputClassName,
     msgError,
     name,
@@ -54,7 +52,7 @@ const ComboBox = <T extends FieldValues>(
   const [disabledState, setDisabledState] = useState(true);
   const [isOptionSelected, setIsOptionSelected] = useState(false); // Track if an option is selected
   const [query, setQuery] = useState('');
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState<string | null>('');
 
   const filteredOption =
     query === ''
@@ -74,8 +72,8 @@ const ComboBox = <T extends FieldValues>(
   };
 
   const handleSelect = (selected: string | null): void => {
+    setSelectedOption(selected);
     if (selected !== null) {
-      setSelectedOption(selected);
       setIsOptionSelected(true);
     }
     controller.onChange(selected);
@@ -86,7 +84,7 @@ const ComboBox = <T extends FieldValues>(
   }, [disabled]);
 
   useEffect(() => {
-    if (controller.value !== selectedOption) {
+    if (JSON.stringify(controller.value) !== JSON.stringify(selectedOption)) {
       handleSelect(controller.value);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- causes an infinite loop
@@ -105,7 +103,7 @@ const ComboBox = <T extends FieldValues>(
         <div className={`relative mt-1 ${sizing?.width ? sizing.width : ''}`}>
           <div
             aria-label="Combo Box"
-            className="grid relative w-full cursor-default overflow-hidden rounded-lg  bg-gray-100 dark:bg-slate-700 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
+            className="grid relative w-full cursor-default overflow-hidden rounded-lg bg-gray-100 dark:bg-slate-700 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
           >
             <Combobox.Input
               aria-label="Ingrese su selección"
@@ -115,7 +113,7 @@ const ComboBox = <T extends FieldValues>(
                 } ${error ? 'border-error' : ''}`,
                 inputClassName
               )}
-              displayValue={(option: string) => option}
+              displayValue={(option: BasicList) => option.description}
               id={name}
               placeholder={placeholder || 'Seleccione una opción...'}
               onChange={(event) => {
@@ -133,19 +131,7 @@ const ComboBox = <T extends FieldValues>(
                 type="button"
                 onClick={handleClearSelection}
               >
-                <Icon
-                  className={iconClearProps?.className}
-                  color={iconClearProps?.color}
-                  iconComponent={
-                    iconClearProps?.iconComponent ? (
-                      iconClearProps.iconComponent
-                    ) : (
-                      <MdClear />
-                    )
-                  }
-                  size={iconClearProps?.size}
-                  title="icon-clear"
-                />
+                <Icon iconComponent={<MdClear />} title="clear icon" />
               </Button>
             ) : (
               <Combobox.Button
@@ -153,17 +139,8 @@ const ComboBox = <T extends FieldValues>(
                 className="btn-ghost absolute inset-y-0 right-0 flex items-center p-3"
               >
                 <Icon
-                  className={iconExpandProps?.className}
-                  color={iconExpandProps?.color}
-                  iconComponent={
-                    iconExpandProps?.iconComponent ? (
-                      iconExpandProps.iconComponent
-                    ) : (
-                      <MdExpandMore />
-                    )
-                  }
-                  size={iconExpandProps?.size}
-                  title="icon-expand-more"
+                  iconComponent={<MdExpandMore />}
+                  title="expand more icon"
                 />
               </Combobox.Button>
             )}
@@ -177,7 +154,7 @@ const ComboBox = <T extends FieldValues>(
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-40">
+            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-gray-500 dark:*:text-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-40">
               {filteredOption.length === 0 && !query ? (
                 <div
                   aria-atomic="true"
@@ -197,7 +174,7 @@ const ComboBox = <T extends FieldValues>(
                       } ${selected ? `${selectedColorOption}` : ''}`
                     }
                     key={option.id}
-                    value={option.description}
+                    value={option}
                   >
                     {({ selected, active }) => (
                       <>
@@ -208,25 +185,19 @@ const ComboBox = <T extends FieldValues>(
                         >
                           {option.description}
                         </span>
-                        {selected ? (
+                        {selected && (
                           <span
                             className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
                               active ? 'text-rose-500' : 'text-teal-600'
                             }`}
                           >
                             <Icon
-                              className={`${iconCheckProps?.className} h-5 w-5`}
-                              iconComponent={
-                                iconCheckProps?.iconComponent ? (
-                                  iconCheckProps.iconComponent
-                                ) : (
-                                  <MdCheck />
-                                )
-                              }
+                              className="h-5 w-5"
+                              iconComponent={<MdCheck />}
                               title="icon-check"
                             />
                           </span>
-                        ) : null}
+                        )}
                       </>
                     )}
                   </Combobox.Option>

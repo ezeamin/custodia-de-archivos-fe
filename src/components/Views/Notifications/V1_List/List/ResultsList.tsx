@@ -5,7 +5,7 @@ import { Grid } from '@/components/ui';
 import { NotificationsResultsListProps } from '@/components/interface/views';
 
 const ResultsList = (props: NotificationsResultsListProps) => {
-  const { data, hasBeenRead } = props;
+  const { data, hasBeenRead = true } = props;
 
   return (
     <Grid container component="section" gap={2}>

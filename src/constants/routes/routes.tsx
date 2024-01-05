@@ -11,7 +11,7 @@ import HomeView from '@/views/Home/HomeView';
 import CreateNotificationView from '@/views/Notifications/CreateNotificationView';
 import NotificationDetailView from '@/views/Notifications/NotificationDetailView';
 import NotificationsHistoryView from '@/views/Notifications/NotificationsHistoryView';
-import NotificationsHourSettingsView from '@/views/Notifications/NotificationsHourSettingsView';
+import NotificationsSentListView from '@/views/Notifications/NotificationsSentListView';
 import NotificationsTypesView from '@/views/Notifications/NotificationsTypesView';
 import NotificationsView from '@/views/Notifications/NotificationsView';
 import SettingsView from '@/views/Settings/SettingsView';
@@ -147,13 +147,13 @@ export const routes: Route[] = [
       },
       {
         id: 4005,
-        title: 'Administrar horarios',
-        description: 'Administrar horarios',
-        path: paths.NOTIFICATIONS.HOUR_SETTINGS,
+        title: 'Enviadas',
+        description: 'Notificaciones enviadas',
+        path: paths.NOTIFICATIONS.SENT,
         subpaths: [],
         privateRoute: true,
-        element: <NotificationsHourSettingsView />,
-        allowedRoles: ['ADMIN'],
+        element: <NotificationsSentListView />,
+        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
       },
     ],
     privateRoute: true,

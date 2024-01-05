@@ -32,6 +32,34 @@ export const getNotifications = async (read: boolean) => {
   return data;
 };
 
+export const getSentNotifications = async () => {
+  const query = new URLSearchParams();
+  query.set('sent', 'true');
+
+  const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATIONS({
+    params: `?${query.toString()}`,
+  });
+
+  const data = await fetchFn<API_GetNotifications[], Notification[]>({
+    request,
+    adapter: getNotificationsAdapter,
+  });
+
+  return data;
+};
+
+export const postNotification = async (body: FormData) => {
+  const request = apiRoutes.NOTIFICATIONS.POST_NOTIFICATION();
+
+  const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
+    request,
+    adapter: (APIData) => APIData,
+    body,
+  });
+
+  return data;
+};
+
 export const getNotificationTypes = async () => {
   const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION_TYPES();
 

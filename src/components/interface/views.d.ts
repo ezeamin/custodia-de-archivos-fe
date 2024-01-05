@@ -33,7 +33,7 @@ export interface EmployeeStatusProps {
 
 export interface NotificationsResultsListProps {
   data: Notification[];
-  hasBeenRead: boolean;
+  hasBeenRead?: boolean;
 }
 
 export interface NotificationsResultsListItemProps {

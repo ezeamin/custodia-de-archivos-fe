@@ -10,7 +10,7 @@ const EmployeeStatus = (props: EmployeeStatusProps) => {
   let color = '';
   let portraitColors = '';
   let text = '';
-  switch (status) {
+  switch (status.description) {
     case 'active':
       color = 'bg-green-500';
       portraitColors = 'border-green-600 text-green-600';

@@ -1,10 +1,12 @@
+import { generateRandomId } from '@/utilities/utils';
+
 import { Employee } from '@/api/interface/employees';
 
 export const mockedData: { data: Employee[]; totalElements: number } = {
   totalElements: 15,
   data: [
     {
-      id: '1',
+      id: generateRandomId(),
       dni: '123456789',
       imgSrc:
         'https://media.es.wired.com/photos/642df54a5c92c1355e3f3e01/1:1/w_2002,h_2002,c_limit/super%20mario%20bros%20criticas.jpg',
@@ -13,12 +15,12 @@ export const mockedData: { data: Employee[]; totalElements: number } = {
       age: 30,
       antiquity: 2,
       position: 'Software Engineer',
-      area: 'Engineering',
+      area: { id: generateRandomId(), description: 'Engineering' },
       fileNumber: 101,
-      status: 'active',
+      status: { id: generateRandomId(), description: 'active' },
     },
     {
-      id: '2',
+      id: generateRandomId(),
       dni: '987654321',
       imgSrc:
         'https://media.es.wired.com/photos/642df54a5c92c1355e3f3e01/1:1/w_2002,h_2002,c_limit/super%20mario%20bros%20criticas.jpg',
@@ -27,12 +29,12 @@ export const mockedData: { data: Employee[]; totalElements: number } = {
       age: 28,
       antiquity: 1,
       position: 'Marketing Specialist',
-      area: 'Marketing',
+      area: { id: generateRandomId(), description: 'Marketing' },
       fileNumber: 102,
-      status: 'suspended',
+      status: { id: generateRandomId(), description: 'suspended' },
     },
     {
-      id: '3',
+      id: generateRandomId(),
       dni: '654321987',
       imgSrc:
         'https://media.es.wired.com/photos/642df54a5c92c1355e3f3e01/1:1/w_2002,h_2002,c_limit/super%20mario%20bros%20criticas.jpg',
@@ -41,12 +43,12 @@ export const mockedData: { data: Employee[]; totalElements: number } = {
       age: 35,
       antiquity: 3,
       position: 'Financial Analyst',
-      area: 'Finance',
+      area: { id: generateRandomId(), description: 'Finance' },
       fileNumber: 103,
-      status: 'inactive',
+      status: { id: generateRandomId(), description: 'inactive' },
     },
     {
-      id: '4',
+      id: generateRandomId(),
       dni: '111222333',
       imgSrc:
         'https://media.es.wired.com/photos/642df54a5c92c1355e3f3e01/1:1/w_2002,h_2002,c_limit/super%20mario%20bros%20criticas.jpg',
@@ -55,12 +57,12 @@ export const mockedData: { data: Employee[]; totalElements: number } = {
       age: 25,
       antiquity: 1,
       position: 'Graphic Designer',
-      area: 'Design',
+      area: { id: generateRandomId(), description: 'Design' },
       fileNumber: 104,
-      status: 'active',
+      status: { id: generateRandomId(), description: 'active' },
     },
     {
-      id: '5',
+      id: generateRandomId(),
       dni: '444555666',
       imgSrc:
         'https://media.es.wired.com/photos/642df54a5c92c1355e3f3e01/1:1/w_2002,h_2002,c_limit/super%20mario%20bros%20criticas.jpg',
@@ -69,12 +71,12 @@ export const mockedData: { data: Employee[]; totalElements: number } = {
       age: 32,
       antiquity: 2,
       position: 'HR Manager',
-      area: 'Human Resources',
+      area: { id: generateRandomId(), description: 'Human Resources' },
       fileNumber: 105,
-      status: 'suspended',
+      status: { id: generateRandomId(), description: 'suspended' },
     },
     {
-      id: '6',
+      id: generateRandomId(),
       dni: '999888777',
       imgSrc:
         'https://media.es.wired.com/photos/642df54a5c92c1355e3f3e01/1:1/w_2002,h_2002,c_limit/super%20mario%20bros%20criticas.jpg',
@@ -83,12 +85,12 @@ export const mockedData: { data: Employee[]; totalElements: number } = {
       age: 27,
       antiquity: 1,
       position: 'Sales Representative',
-      area: 'Sales',
+      area: { id: generateRandomId(), description: 'Sales' },
       fileNumber: 106,
-      status: 'active',
+      status: { id: generateRandomId(), description: 'active' },
     },
     {
-      id: '7',
+      id: generateRandomId(),
       dni: '333222111',
       imgSrc:
         'https://media.es.wired.com/photos/642df54a5c92c1355e3f3e01/1:1/w_2002,h_2002,c_limit/super%20mario%20bros%20criticas.jpg',
@@ -97,12 +99,12 @@ export const mockedData: { data: Employee[]; totalElements: number } = {
       age: 40,
       antiquity: 5,
       position: 'Operations Manager',
-      area: 'Operations',
+      area: { id: generateRandomId(), description: 'Operations' },
       fileNumber: 107,
-      status: 'inactive',
+      status: { id: generateRandomId(), description: 'inactive' },
     },
     {
-      id: '8',
+      id: generateRandomId(),
       dni: '666777888',
       imgSrc:
         'https://media.es.wired.com/photos/642df54a5c92c1355e3f3e01/1:1/w_2002,h_2002,c_limit/super%20mario%20bros%20criticas.jpg',
@@ -111,12 +113,12 @@ export const mockedData: { data: Employee[]; totalElements: number } = {
       age: 26,
       antiquity: 2,
       position: 'Customer Support Specialist',
-      area: 'Customer Support',
+      area: { id: generateRandomId(), description: 'Customer Support' },
       fileNumber: 108,
-      status: 'suspended',
+      status: { id: generateRandomId(), description: 'suspended' },
     },
     {
-      id: '9',
+      id: generateRandomId(),
       dni: '555444333',
       imgSrc:
         'https://media.es.wired.com/photos/642df54a5c92c1355e3f3e01/1:1/w_2002,h_2002,c_limit/super%20mario%20bros%20criticas.jpg',
@@ -125,12 +127,12 @@ export const mockedData: { data: Employee[]; totalElements: number } = {
       age: 33,
       antiquity: 3,
       position: 'Quality Assurance Analyst',
-      area: 'Quality Assurance',
+      area: { id: generateRandomId(), description: 'Quality Assurance' },
       fileNumber: 109,
-      status: 'active',
+      status: { id: generateRandomId(), description: 'active' },
     },
     {
-      id: '10',
+      id: generateRandomId(),
       dni: '333444555',
       imgSrc:
         'https://media.es.wired.com/photos/642df54a5c92c1355e3f3e01/1:1/w_2002,h_2002,c_limit/super%20mario%20bros%20criticas.jpg',
@@ -139,9 +141,9 @@ export const mockedData: { data: Employee[]; totalElements: number } = {
       age: 29,
       antiquity: 2,
       position: 'Research Scientist',
-      area: 'Research and Development',
+      area: { id: generateRandomId(), description: 'Research and Development' },
       fileNumber: 110,
-      status: 'inactive',
+      status: { id: generateRandomId(), description: 'inactive' },
     },
   ],
 };
