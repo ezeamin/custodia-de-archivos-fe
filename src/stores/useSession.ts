@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+import { userRoles } from '@/constants/userRoles/userRoles';
+
 import type { User } from '@/interface';
 
 interface SessionStore {
@@ -13,6 +15,7 @@ const testUser = {
   id: '1',
   name: 'Test User',
   email: '',
+  role: userRoles.ADMIN,
 };
 
 export const useSession = create<SessionStore>((set) => ({
