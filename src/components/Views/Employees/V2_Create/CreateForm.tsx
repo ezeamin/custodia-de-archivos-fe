@@ -83,7 +83,7 @@ const CreateForm = () => {
 
   return (
     <form
-      className="card content-card"
+      className="card content-card animate-in-bottom a-delay-200"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
       <div className="flex gap-3 mb-3 items-end">

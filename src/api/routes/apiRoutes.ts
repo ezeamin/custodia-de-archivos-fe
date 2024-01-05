@@ -24,12 +24,20 @@ export const apiRoutes = {
       method: 'GET',
       url: '/notifications/types',
     }),
+    GET_NOTIFICATION_TYPE: (id: string): ApiRoute => ({
+      method: 'GET',
+      url: `/notifications/types/${id}`,
+    }),
     POST_NOTIFICATION_TYPE: (): ApiRoute => ({
       method: 'POST',
       url: '/notifications/types',
     }),
     PUT_NOTIFICATION_TYPE: (id: string): ApiRoute => ({
       method: 'PUT',
+      url: `/notifications/types/${id}`,
+    }),
+    DELETE_NOTIFICATION_TYPE: (id: string): ApiRoute => ({
+      method: 'DELETE',
       url: `/notifications/types/${id}`,
     }),
   },

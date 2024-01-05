@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { userRoles } from './mocked';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import {
+  getNotificationType,
   postNotificationType,
   putNotificationType,
 } from '@/api/api-calls/notifications';
 
-import { useZodForm } from '@/hooks';
-import { useIdBeingEdited } from '@/stores/useIdBeingEdited';
+import { useLoading, useZodForm } from '@/hooks';
 
 import {
   Button,
@@ -20,31 +21,40 @@ import {
   TextInput,
 } from '@/components/ui';
 
+import { paths } from '@/constants/routes/paths';
+
 import {
   TypeSchema,
   typeSchema,
 } from '@/form-schemas/schemas/notifications/typeSchema';
-
-import { BasicList } from '@/interface';
 
 const TypesForm = () => {
   const { control, onSubmitMiddleware, areAllFieldsFilled, setValue, reset } =
     useZodForm(typeSchema);
 
   const [isLoading, setIsLoading] = useState(false);
+  const { search } = useLocation(); // ?edit=true&id=*
+  const navigate = useNavigate();
 
-  // -----------------------------------------------------
-  // STORES
-  // -----------------------------------------------------
-
-  const { idBeingEdited, data: dataBeingEdited, clear } = useIdBeingEdited();
-  const isEditing = !!idBeingEdited;
+  const isEditing = search.includes('edit=true') && search.includes('id=');
+  const idBeingEdited = isEditing ? search.split('id=')[1] : null;
 
   // -----------------------------------------------------
   // API
   // -----------------------------------------------------
 
   const queryClient = useQueryClient();
+
+  const {
+    data: dataBeingEdited,
+    isError: isErrorEditedData,
+    isLoading: isLoadingEditedData,
+    isSuccess: isSuccessEditedData,
+  } = useQuery({
+    queryKey: ['notificationTypes', isEditing && idBeingEdited],
+    queryFn: () => getNotificationType(idBeingEdited ?? ''),
+    enabled: !!(isEditing && idBeingEdited),
+  });
 
   const { mutate: createType } = useMutation({
     mutationFn: postNotificationType,
@@ -69,11 +79,17 @@ const TypesForm = () => {
     onSuccess: () => {
       setIsLoading(false);
       reset(); // Clear form values
-      clear(); // Clear editing store values
       toast.success('Tipo de Notificación modificada con éxito');
       queryClient.invalidateQueries({ queryKey: ['notificationTypes'] });
     },
   });
+
+  useLoading(isLoadingEditedData);
+
+  if (isErrorEditedData) {
+    toast.error('Ocurrió un error al obtener la información');
+    navigate(paths.NOTIFICATIONS.ADMIN_TYPES);
+  }
 
   // -----------------------------------------------------
   // HANDLERS
@@ -91,29 +107,25 @@ const TypesForm = () => {
     }
   };
 
+  const handleCancelEdit = () => {
+    navigate(paths.NOTIFICATIONS.ADMIN_TYPES);
+  };
+
   // -----------------------------------------------------
   // EFFECTS
   // -----------------------------------------------------
 
   // Set values in form if editing
   useEffect(() => {
-    if (isEditing) {
-      setValue('title', dataBeingEdited?.title as string);
-      setValue('description', dataBeingEdited?.description as string);
-      setValue('startHour', dataBeingEdited?.startHour as string);
-      setValue('endHour', dataBeingEdited?.endHour as string);
-      setValue('allowedRoles', dataBeingEdited?.allowedRoles as BasicList[]);
+    if (isEditing && isSuccessEditedData && dataBeingEdited?.data) {
+      setValue('title', dataBeingEdited?.data.title);
+      setValue('description', dataBeingEdited?.data.description);
+      setValue('startHour', dataBeingEdited?.data.startHour);
+      setValue('endHour', dataBeingEdited?.data.endHour);
+      setValue('allowedRoles', dataBeingEdited?.data.allowedRoles);
     }
-  }, [
-    dataBeingEdited?.allowedRoles,
-    dataBeingEdited?.description,
-    dataBeingEdited?.endHour,
-    dataBeingEdited?.startHour,
-    dataBeingEdited?.title,
-    idBeingEdited,
-    isEditing,
-    setValue,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccessEditedData, isEditing, setValue]);
 
   // -----------------------------------------------------
   // RENDER
@@ -121,7 +133,7 @@ const TypesForm = () => {
 
   return (
     <form
-      className="card content-card"
+      className="card content-card animate-in-bottom a-delay-400"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
       <Grid container gap={2}>
@@ -177,15 +189,31 @@ const TypesForm = () => {
           />
         </Grid>
       </Grid>
-      <Button
-        className="mt-4"
-        colorLight="btn-primary"
-        disabled={!areAllFieldsFilled}
-        loading={isLoading}
-        type="submit"
-      >
-        Guardar
-      </Button>
+      <Grid container className="mt-4" gap={2}>
+        <Grid item sm={isEditing ? 9 : 12} xs={12}>
+          <Button
+            className="w-full"
+            colorLight="btn-primary"
+            disabled={!areAllFieldsFilled || isLoadingEditedData}
+            loading={isLoading}
+            type="submit"
+          >
+            Guardar
+          </Button>
+        </Grid>
+        <Grid item sm={3} xs={12}>
+          {isEditing && (
+            <Button
+              className="w-full"
+              disabled={isLoadingEditedData}
+              loading={isLoading}
+              onClick={handleCancelEdit}
+            >
+              Cancelar edición
+            </Button>
+          )}
+        </Grid>
+      </Grid>
     </form>
   );
 };

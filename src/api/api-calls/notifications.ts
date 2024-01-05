@@ -43,6 +43,17 @@ export const getNotificationTypes = async () => {
   return data;
 };
 
+export const getNotificationType = async (id: string) => {
+  const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION_TYPE(id);
+
+  const data = await fetchFn<API_GetNotificationsTypes, NotificationType>({
+    request,
+    adapter: getNotificationsTypesAdapter,
+  });
+
+  return data;
+};
+
 export const postNotificationType = async (body: Record<string, unknown>) => {
   const request = apiRoutes.NOTIFICATIONS.POST_NOTIFICATION_TYPE();
 
@@ -71,6 +82,17 @@ export const putNotificationType = async (body: Record<string, unknown>) => {
     request,
     adapter: (APIData) => APIData,
     body: dataToBeSent,
+  });
+
+  return data;
+};
+
+export const deleteNotificationType = async (id: string) => {
+  const request = apiRoutes.NOTIFICATIONS.DELETE_NOTIFICATION_TYPE(id);
+
+  const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
+    request,
+    adapter: (APIData) => APIData,
   });
 
   return data;

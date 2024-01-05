@@ -24,6 +24,7 @@ export interface API_GetNotifications {
 
 export interface API_GetNotificationsTypes {
   id: string;
+  title: string;
   description: string;
   startHour: string;
   endHour: string;

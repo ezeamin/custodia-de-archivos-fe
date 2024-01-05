@@ -33,6 +33,7 @@ export const getNotificationsTypesAdapter = (
 ): NotificationType[] => {
   return data.map((notification) => ({
     id: notification.id,
+    title: notification.title,
     description: notification.description,
     startHour: notification.startHour,
     endHour: notification.endHour,
