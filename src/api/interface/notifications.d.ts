@@ -1,7 +1,8 @@
+import { BasicList } from '@/interface';
+
 // ----------------------------------------------------------------------
 // API
 // ----------------------------------------------------------------------
-import { BasicList } from '@/interface';
 
 export interface NotificationFile {
   id: string;
@@ -44,6 +45,8 @@ export interface API_GetNotificationsTypes {
   allowedRoles: BasicList[];
 }
 
+export interface API_GetNotificationsReceivers extends BasicList {}
+
 // ----------------------------------------------------------------------
 // Adapters
 // ----------------------------------------------------------------------
@@ -51,3 +54,5 @@ export interface API_GetNotificationsTypes {
 export interface Notification extends API_GetNotifications {}
 
 export interface NotificationType extends API_GetNotificationsTypes {}
+
+export interface NotificationReceiver extends API_GetNotificationsReceivers {}

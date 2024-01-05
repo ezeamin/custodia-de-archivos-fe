@@ -4,14 +4,17 @@ import { apiRoutes } from '../routes/apiRoutes';
 import {
   getNotificationAdapter,
   getNotificationsAdapter,
+  getNotificationsReceiversAdapter,
   getNotificationsTypesAdapter,
 } from '../adapters/notifications';
 
 import { API_EmptyResponse, EmptyResponse } from '../interface';
 import {
   API_GetNotifications,
+  API_GetNotificationsReceivers,
   API_GetNotificationsTypes,
   Notification,
+  NotificationReceiver,
   NotificationType,
 } from '@/api/interface/notifications';
 
@@ -82,6 +85,20 @@ export const postNotificationFn = async (body: FormData) => {
     request,
     adapter: (APIData) => APIData,
     body,
+  });
+
+  return data;
+};
+
+export const getNotificationReceiversFn = async () => {
+  const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION_RECEIVERS();
+
+  const data = await fetchFn<
+    API_GetNotificationsReceivers[],
+    NotificationReceiver[]
+  >({
+    request,
+    adapter: getNotificationsReceiversAdapter,
   });
 
   return data;

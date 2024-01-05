@@ -32,6 +32,10 @@ export const apiRoutes = {
       method: 'PUT',
       url: `/notifications/${id}/read`,
     }),
+    GET_NOTIFICATION_RECEIVERS: (): ApiRoute => ({
+      method: 'GET',
+      url: '/notifications/receivers',
+    }),
     GET_NOTIFICATION_TYPES: (): ApiRoute => ({
       method: 'GET',
       url: '/notifications/types',
