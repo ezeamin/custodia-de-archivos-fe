@@ -47,7 +47,7 @@ const CreateNotificationForm = () => {
   // -------------------------------------------------
 
   const [isLoading, setIsLoading] = useState(false);
-  const [showFileSection, setShowFileSection] = useState(true);
+  const [showFileSection, setShowFileSection] = useState(false);
   const [canSendForm, setCanSendForm] = useState(false);
 
   const navigate = useNavigate();
