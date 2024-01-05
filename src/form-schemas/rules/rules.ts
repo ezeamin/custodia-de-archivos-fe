@@ -47,6 +47,17 @@ export const dateRules = <T extends boolean = false>(required: T) => {
   return optionalWrapper(required, rule);
 };
 
+export const hourRules = <T extends boolean = false>(required: T) => {
+  const rule = z
+    .string()
+    .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
+      message: 'La hora debe tener el formato HH:MM',
+    })
+    .default('');
+
+  return optionalWrapper(required, rule);
+};
+
 export const typeRules = <T extends boolean = false>(
   required: T,
   typeName = ''
@@ -126,6 +137,30 @@ export const nameRules = <T extends boolean = false>(required: T) => {
       },
       {
         message: 'El Nombre debe tener al menos 3 caracteres',
+      }
+    )
+    .default('');
+
+  return optionalWrapper(required, rule);
+};
+
+export const textRules = <T extends boolean = false>(required: T) => {
+  const rule = z
+    .string()
+    .max(1000, {
+      message: 'El Texto debe tener como máximo 1000 caracteres',
+    })
+    .refine(
+      // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
+      (data) => {
+        if (required) {
+          return data.length > 0;
+        }
+
+        return !data || data.length >= 3;
+      },
+      {
+        message: 'El Texto debe tener al menos 3 caracteres',
       }
     )
     .default('');
@@ -241,6 +276,20 @@ export const positionRules = <T extends boolean = false>(required: T) => {
   return optionalWrapper(required, rule);
 };
 
+export const multipleValuesRules = <T extends boolean = false>(required: T) => {
+  // each value is of type {id: string, description: string}, that's an interface called BasicList
+  const rule = z
+    .array(
+      z.object({
+        id: z.string(),
+        description: z.string(),
+      })
+    )
+    .default([]);
+
+  return optionalWrapper(required, rule);
+};
+
 // ----------------------------------------------------
 // COMMON REFINES
 // ----------------------------------------------------
@@ -287,4 +336,17 @@ fromDateAndToDate.msg = (field: 'toDate' | 'fromDate') => ({
     field === 'toDate' ? 'hasta' : 'desde'
   }, debe ingresar también una fecha ${field === 'toDate' ? 'desde' : 'hasta'}`,
   path: [field],
+});
+
+export const fromHourBeforeToHour = (data: {
+  startHour: string;
+  endHour: string;
+}) => {
+  if (!data.startHour || !data.endHour) return true;
+  if (data.startHour === data.endHour) return true;
+  return data.startHour < data.endHour;
+};
+
+fromHourBeforeToHour.msg = () => ({
+  message: 'La hora de inicio debe ser menor a la hora de fin',
 });

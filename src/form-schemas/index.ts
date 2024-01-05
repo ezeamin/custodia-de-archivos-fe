@@ -1,5 +1,6 @@
 import { EmployeesSchemas } from './schemas/employees';
 import { LoginSchemas } from './schemas/login';
+import { NotificationSchemas } from './schemas/notifications';
 
 /**
  * This folder should include all validations schemas across the project.
@@ -13,4 +14,4 @@ import { LoginSchemas } from './schemas/login';
  */
 
 // Use | to join all validation schemas types.
-export type FormSchemas = EmployeesSchemas | LoginSchemas;
+export type FormSchemas = EmployeesSchemas | LoginSchemas | NotificationSchemas;

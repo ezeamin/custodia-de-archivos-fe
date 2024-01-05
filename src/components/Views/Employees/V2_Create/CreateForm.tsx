@@ -101,6 +101,7 @@ const CreateForm = () => {
         <div>
           <FileInput<CreateSchema>
             control={control}
+            disabled={isLoading}
             label="Seleccione una imagen"
             name="imgFile"
             setValue={setValue}
@@ -112,6 +113,7 @@ const CreateForm = () => {
           <TextInput<CreateSchema>
             className="w-full"
             control={control}
+            disabled={isLoading}
             label="Nombre"
             name="name"
             placeholder="Juan"
@@ -121,6 +123,7 @@ const CreateForm = () => {
           <TextInput<CreateSchema>
             className="w-full"
             control={control}
+            disabled={isLoading}
             label="Apellido"
             name="lastname"
             placeholder="Pérez"
@@ -130,6 +133,7 @@ const CreateForm = () => {
           <TextInput<CreateSchema>
             className="w-full"
             control={control}
+            disabled={isLoading}
             label="Email"
             name="email"
             placeholder="juanperez@gmail.com"
@@ -139,6 +143,7 @@ const CreateForm = () => {
           <TextInput<CreateSchema>
             className="w-full"
             control={control}
+            disabled={isLoading}
             label="DNI"
             name="dni"
             placeholder="15235647"
@@ -148,6 +153,7 @@ const CreateForm = () => {
           <TextInput<CreateSchema>
             className="w-full"
             control={control}
+            disabled={isLoading}
             label="Nro. Legajo"
             name="fileNumber"
             placeholder="1000"
@@ -157,6 +163,7 @@ const CreateForm = () => {
           <ComboBoxInput<CreateSchema>
             className="w-full"
             control={control}
+            disabled={isLoading}
             label="Género"
             name="gender"
             options={genderOptions}
@@ -167,6 +174,7 @@ const CreateForm = () => {
           <DateInput<CreateSchema>
             className="w-full"
             control={control}
+            disabled={isLoading}
             label="Fecha de alta"
             name="startDate"
             placeholder="01/01/2024"
@@ -176,6 +184,7 @@ const CreateForm = () => {
           <TextInput<CreateSchema>
             className="w-full"
             control={control}
+            disabled={isLoading}
             label="Puesto"
             name="position"
             placeholder="Mecánico"
@@ -185,6 +194,7 @@ const CreateForm = () => {
           <ComboBoxInput<CreateSchema>
             className="w-full"
             control={control}
+            disabled={isLoading}
             label="Área"
             name="area"
             options={areaOptions}

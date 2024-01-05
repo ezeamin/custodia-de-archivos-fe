@@ -1,6 +1,13 @@
-import { API_GetNotifications } from '../interface/notifications';
+import {
+  API_GetNotifications,
+  API_GetNotificationsTypes,
+  Notification,
+  NotificationType,
+} from '../interface/notifications';
 
-export const getNotificationsAdapter = (data: API_GetNotifications[]) => {
+export const getNotificationsAdapter = (
+  data: API_GetNotifications[]
+): Notification[] => {
   return data.map((notification) => ({
     id: notification.id,
     text: notification.text,
@@ -18,5 +25,17 @@ export const getNotificationsAdapter = (data: API_GetNotifications[]) => {
     date: notification.date,
     hasBeenRead: notification.hasBeenRead,
     files: notification.files,
+  }));
+};
+
+export const getNotificationsTypesAdapter = (
+  data: API_GetNotificationsTypes[]
+): NotificationType[] => {
+  return data.map((notification) => ({
+    id: notification.id,
+    description: notification.description,
+    startHour: notification.startHour,
+    endHour: notification.endHour,
+    allowedRoles: notification.allowedRoles,
   }));
 };

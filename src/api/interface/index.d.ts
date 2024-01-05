@@ -4,6 +4,6 @@ export interface API_GlobalResponse<T, V> {
   totalElements?: number;
 }
 
-export interface EmptyResponse {}
+export interface API_EmptyResponse {}
 
-export interface API_PostEmptyResponse extends EmptyResponse {}
+export interface EmptyResponse extends API_EmptyResponse {}

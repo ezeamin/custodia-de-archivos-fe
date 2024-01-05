@@ -8,9 +8,11 @@ import ComboBoxInput from './ComboBoxInput/ComboBoxInput';
 import DateInput from './DateInput/DateInput';
 import Drawer from './Drawer/Drawer';
 import Grid from './Grid/Grid';
+import HourInput from './HourInput/HourInput';
 import Icon from './Icon/Icon';
 import IconButton from './IconButton/IconButton';
 import InputController from './InputController/InputController';
+import MultipleComboBoxInput from './MultipleComboBoxInput/MultipleComboBoxInput';
 import Pagination from './Pagination/Pagination';
 import PasswordInput from './PasswordInput/PasswordInput';
 import RadioButton from './RadioButton/RadioButton';
@@ -34,9 +36,11 @@ export {
   DateInput,
   Drawer,
   Grid,
+  HourInput,
   Icon,
   IconButton,
   InputController,
+  MultipleComboBoxInput,
   Pagination,
   PasswordInput,
   RadioButton,
