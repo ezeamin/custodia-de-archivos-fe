@@ -3,7 +3,7 @@ import { mockedData } from './mocked';
 import ResultsTable from './Table/ResultsTable';
 import { useQuery } from '@tanstack/react-query';
 
-import { getEmployees } from '@/api/api-calls/employees';
+import { getEmployeesFn } from '@/api/api-calls/employees';
 
 import { useLoading } from '@/hooks';
 
@@ -20,7 +20,7 @@ const Results = () => {
 
   const { /* data, isLoading, isError, */ refetch } = useQuery({
     queryKey: ['employees'],
-    queryFn: getEmployees,
+    queryFn: getEmployeesFn,
   });
 
   useLoading(isLoading);

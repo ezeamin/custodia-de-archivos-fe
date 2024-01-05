@@ -5,7 +5,7 @@ import { areaOptions, genderOptions } from './mocked';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { postEmployee } from '@/api/api-calls/employees';
+import { postEmployeeFn } from '@/api/api-calls/employees';
 
 import { useZodForm } from '@/hooks';
 
@@ -40,7 +40,7 @@ const CreateForm = () => {
   const navigate = useNavigate();
 
   const { mutate: createEmployee } = useMutation({
-    mutationFn: postEmployee,
+    mutationFn: postEmployeeFn,
     onError: (error) => {
       setIsLoading(false);
       toast.error(error.message);

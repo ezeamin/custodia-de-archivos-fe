@@ -6,9 +6,9 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import {
-  getNotificationType,
-  postNotificationType,
-  putNotificationType,
+  getNotificationTypeFn,
+  postNotificationTypeFn,
+  putNotificationTypeFn,
 } from '@/api/api-calls/notifications';
 
 import { useLoading, useZodForm } from '@/hooks';
@@ -52,12 +52,12 @@ const TypesForm = () => {
     isSuccess: isSuccessEditedData,
   } = useQuery({
     queryKey: ['notificationTypes', isEditing && idBeingEdited],
-    queryFn: () => getNotificationType(idBeingEdited ?? ''),
+    queryFn: () => getNotificationTypeFn(idBeingEdited ?? ''),
     enabled: !!(isEditing && idBeingEdited),
   });
 
   const { mutate: createType } = useMutation({
-    mutationFn: postNotificationType,
+    mutationFn: postNotificationTypeFn,
     onError: (error) => {
       setIsLoading(false);
       toast.error(error.message);
@@ -71,7 +71,7 @@ const TypesForm = () => {
   });
 
   const { mutate: editType } = useMutation({
-    mutationFn: putNotificationType,
+    mutationFn: putNotificationTypeFn,
     onError: (error) => {
       setIsLoading(false);
       toast.error(error.message);

@@ -10,11 +10,15 @@ export interface API_GetNotifications {
     firstname: string;
     lastname: string;
     id: string;
+    email?: string;
+    imgSrc?: string;
   };
   receiver: {
     firstname: string;
     lastname: string;
     id: string;
+    email?: string;
+    imgSrc?: string;
   };
   type: {
     id: string;
@@ -22,7 +26,11 @@ export interface API_GetNotifications {
   };
   date: string;
   hasBeenRead: boolean;
-  files?: string[];
+  files?: {
+    id: string;
+    name: string;
+    url: string;
+  }[];
 }
 
 export interface API_GetNotificationsTypes {

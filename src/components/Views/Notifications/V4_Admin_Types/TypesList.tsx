@@ -2,7 +2,7 @@ import ResultsList from './List/ResultsList';
 import { typesList } from './mocked';
 import { useQuery } from '@tanstack/react-query';
 
-import { getNotificationTypes } from '@/api/api-calls/notifications';
+import { getNotificationTypesFn } from '@/api/api-calls/notifications';
 
 import { useLoading } from '@/hooks';
 
@@ -19,7 +19,7 @@ const TypesList = () => {
 
   const { /* data, isLoading, isError, */ refetch } = useQuery({
     queryKey: ['notificationTypes'],
-    queryFn: getNotificationTypes,
+    queryFn: getNotificationTypesFn,
   });
 
   useLoading(isLoading);
@@ -53,7 +53,7 @@ const TypesList = () => {
 
   if (data?.data) {
     return (
-      <section className="mt-4 animate-in-bottom a-delay-600">
+      <section className="mt-4 animate-in-bottom a-delay-600 overflow-hidden">
         <ResultsList data={data.data} />
       </section>
     );

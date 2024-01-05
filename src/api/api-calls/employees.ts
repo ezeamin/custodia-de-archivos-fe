@@ -7,7 +7,7 @@ import { getEmployeesAdapter } from '../adapters/employees';
 import { API_EmptyResponse } from '../interface';
 import { API_GetEmployees, Employee } from '../interface/employees';
 
-export const getEmployees = async () => {
+export const getEmployeesFn = async () => {
   const { search } = window.location;
 
   const request = apiRoutes.EMPLOYEES.GET_EMPLOYEES({ params: search });
@@ -20,7 +20,7 @@ export const getEmployees = async () => {
   return data;
 };
 
-export const postEmployee = async (body: FormData) => {
+export const postEmployeeFn = async (body: FormData) => {
   const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE();
 
   const data = await fetchFn<API_EmptyResponse>({

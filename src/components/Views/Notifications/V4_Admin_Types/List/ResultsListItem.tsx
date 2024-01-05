@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 
-import { deleteNotificationType } from '@/api/api-calls/notifications';
+import { deleteNotificationTypeFn } from '@/api/api-calls/notifications';
 
 import { useLoading } from '@/hooks';
 import { useModal } from '@/stores/useModal';
@@ -34,7 +34,7 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
   const queryClient = useQueryClient();
 
   const { mutate: removeType } = useMutation({
-    mutationFn: deleteNotificationType,
+    mutationFn: deleteNotificationTypeFn,
     onError: (error) => {
       setIsLoading(false);
       toast.error(error.message);

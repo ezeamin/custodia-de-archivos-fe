@@ -24,7 +24,6 @@ export const mockedData: { data: Notification[]; totalElements: number } = {
       },
       date: '2024-01-04T10:30:00Z',
       hasBeenRead: false,
-      files: ['document1.pdf'],
     },
     {
       id: generateRandomId(),
@@ -65,7 +64,6 @@ export const mockedData: { data: Notification[]; totalElements: number } = {
       },
       date: '2024-01-04T12:15:00Z',
       hasBeenRead: false,
-      files: ['image1.jpg', 'image2.png'],
     },
     {
       id: generateRandomId(),
@@ -127,7 +125,6 @@ export const mockedData: { data: Notification[]; totalElements: number } = {
       },
       date: '2024-01-04T16:45:00Z',
       hasBeenRead: false,
-      files: ['document2.docx'],
     },
     {
       id: generateRandomId(),
@@ -212,7 +209,6 @@ export const mockedData: { data: Notification[]; totalElements: number } = {
       },
       date: '2024-01-04T23:45:00Z',
       hasBeenRead: true,
-      files: ['image3.jpg', 'image4.png'],
     },
   ],
 };

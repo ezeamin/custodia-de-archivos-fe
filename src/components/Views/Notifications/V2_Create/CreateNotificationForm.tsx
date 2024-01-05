@@ -6,8 +6,8 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import {
-  getNotificationType,
-  postNotification,
+  getNotificationTypeFn,
+  postNotificationFn,
 } from '@/api/api-calls/notifications';
 
 import { useLoading, useZodForm } from '@/hooks';
@@ -57,7 +57,7 @@ const CreateNotificationForm = () => {
   // -------------------------------------------------
 
   const { mutate: createNotification } = useMutation({
-    mutationFn: postNotification,
+    mutationFn: postNotificationFn,
     onError: (error) => {
       setIsLoading(false);
       toast.error(error.message);
@@ -74,10 +74,10 @@ const CreateNotificationForm = () => {
 
   const {
     data: notificationType,
-    mutate: getNotificationTypeFn,
+    mutate: getNotificationType,
     reset: resetNotificationTypeMutation,
   } = useMutation({
-    mutationFn: getNotificationType,
+    mutationFn: getNotificationTypeFn,
     onError: () => {
       setIsLoading(false);
       toast.error(
@@ -126,7 +126,7 @@ const CreateNotificationForm = () => {
   useEffect(() => {
     if (selectedNotificationType) {
       setIsLoading(true);
-      getNotificationTypeFn(selectedNotificationType.id);
+      getNotificationType(selectedNotificationType.id);
     } else {
       setIsLoading(false);
       resetNotificationTypeMutation();

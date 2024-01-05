@@ -50,3 +50,13 @@ export interface NotificationsTypeResultsListItemProps {
   notificationType: NotificationType;
   index: number;
 }
+
+export interface NotificationInfoProps {
+  data: Notification;
+  showReadAlert: boolean;
+  isLoadingRead: boolean;
+}
+
+export interface NotificationInfoContentProps {
+  data: Notification;
+}

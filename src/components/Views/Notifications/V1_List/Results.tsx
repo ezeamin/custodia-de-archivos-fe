@@ -2,7 +2,7 @@ import ResultsList from './List/ResultsList';
 import { mockedData } from './mocked';
 import { useQuery } from '@tanstack/react-query';
 
-import { getNotifications } from '@/api/api-calls/notifications';
+import { getNotificationsFn } from '@/api/api-calls/notifications';
 
 import { useLoading } from '@/hooks';
 
@@ -22,7 +22,7 @@ const Results = () => {
 
   const { /* data, isLoading, isError, */ refetch } = useQuery({
     queryKey: ['notifications'],
-    queryFn: () => getNotifications(false),
+    queryFn: () => getNotificationsFn(false),
   });
 
   useLoading(isLoading);
@@ -56,7 +56,7 @@ const Results = () => {
 
   if (data?.data) {
     return (
-      <section className="mt-5">
+      <section className="mt-5 overflow-hidden">
         <ResultsList data={data.data} hasBeenRead={false} />
         <Pagination totalElements={data.totalElements} />
       </section>

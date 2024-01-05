@@ -28,6 +28,27 @@ export const getNotificationsAdapter = (
   }));
 };
 
+export const getNotificationAdapter = (
+  data: API_GetNotifications
+): Notification => ({
+  id: data.id,
+  message: data.message,
+  issuer: {
+    firstname: data.issuer.firstname,
+    lastname: data.issuer.lastname,
+    id: data.issuer.id,
+  },
+  receiver: {
+    firstname: data.receiver.firstname,
+    lastname: data.receiver.lastname,
+    id: data.receiver.id,
+  },
+  type: data.type,
+  date: data.date,
+  hasBeenRead: data.hasBeenRead,
+  files: data.files,
+});
+
 export const getNotificationsTypesAdapter = (
   data: API_GetNotificationsTypes[]
 ): NotificationType[] => {
