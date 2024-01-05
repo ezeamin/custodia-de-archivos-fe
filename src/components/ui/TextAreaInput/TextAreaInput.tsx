@@ -1,0 +1,56 @@
+import InputController from '@/components/ui/InputController/InputController';
+
+import { cn } from '@/utilities';
+
+import type { FormSchemas } from '@/form-schemas';
+
+import type { InputProps } from '@/components/ui/TextInput/TextInput.types';
+
+const TextAreaInput = <T extends FormSchemas>(
+  props: InputProps<T>
+): JSX.Element => {
+  const {
+    className = '',
+    control,
+    hideLabel = false,
+    name,
+    label,
+    type = 'text',
+    ...rest
+  } = props;
+
+  return (
+    <fieldset className={cn('form-control w-72', className)}>
+      {!hideLabel && (
+        <label className="text-lg" htmlFor={name as string}>
+          {label}
+        </label>
+      )}
+      <InputController
+        control={control}
+        defaultValue=""
+        name={name}
+        render={({ field, fieldState: { error } }) => (
+          <textarea
+            className={`textarea textarea-bordered bg-gray-100 dark:bg-slate-700 w-full mt-1 ${
+              error ? 'border-error' : ''
+            }`}
+            disabled={rest.disabled}
+            id={name as string}
+            placeholder={rest.placeholder ?? 'Ingrese un valor'}
+            ref={field.ref}
+            type={type}
+            value={field.value as string}
+            // @ts-expect-error -- Somehow TS detects these functions are for an input, but that isn't defined!
+            onBlur={field.onBlur}
+            // @ts-expect-error -- Somehow TS detects these functions are for an input, but that isn't defined!
+            onChange={field.onChange}
+            {...rest}
+          />
+        )}
+      />
+    </fieldset>
+  );
+};
+
+export default TextAreaInput;

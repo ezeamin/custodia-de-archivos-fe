@@ -11,9 +11,15 @@ export interface API_GetEmployees {
   age: number;
   antiquity: number;
   position: string;
-  area: string;
+  area: {
+    id: string;
+    description: string;
+  };
   fileNumber: number;
-  status: 'active' | 'suspended' | 'inactive';
+  status: {
+    id: string;
+    description: 'active' | 'suspended' | 'inactive';
+  };
 }
 
 // ----------------------------------------------------------------------

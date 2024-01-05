@@ -18,7 +18,7 @@ const ResultsListItem = (props: NotificationsResultsListItemProps) => {
         <div>
           <h2 className="card-title">{`${notification.issuer.lastname}, ${notification.issuer.firstname}`}</h2>
           <div className="flex flex-col justify-between gap-2">
-            <p>{notification.type}</p>
+            <p>{notification.type.description}</p>
             <p className="text-sm">Fecha: {formattedDate}</p>
           </div>
         </div>

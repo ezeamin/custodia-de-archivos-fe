@@ -5,7 +5,7 @@ import { BasicList } from '@/interface';
 
 export interface API_GetNotifications {
   id: string;
-  text: string;
+  message: string;
   issuer: {
     firstname: string;
     lastname: string;
@@ -16,7 +16,10 @@ export interface API_GetNotifications {
     lastname: string;
     id: string;
   };
-  type: string;
+  type: {
+    id: string;
+    description: string;
+  };
   date: string;
   hasBeenRead: boolean;
   files?: string[];

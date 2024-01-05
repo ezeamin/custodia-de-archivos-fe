@@ -62,8 +62,11 @@ export const typeRules = <T extends boolean = false>(
   required: T,
   typeName = ''
 ) => {
-  const rule = z.string().min(1, {
-    message: `Debe seleccionar un tipo ${typeName ? `de ${typeName}` : ''}`,
+  const rule = z.object({
+    id: z.string().uuid({
+      message: `Debe ingresar un ID válido para el ${typeName}`,
+    }),
+    description: z.string(),
   });
 
   return optionalWrapper(required, rule);
@@ -147,6 +150,7 @@ export const nameRules = <T extends boolean = false>(required: T) => {
 export const textRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
+    .trim()
     .max(1000, {
       message: 'El Texto debe tener como máximo 1000 caracteres',
     })
@@ -286,6 +290,14 @@ export const multipleValuesRules = <T extends boolean = false>(required: T) => {
       })
     )
     .default([]);
+
+  return optionalWrapper(required, rule);
+};
+
+export const idRules = <T extends boolean = false>(required: T) => {
+  const rule = z.string().uuid({
+    message: 'Debe ingresar un ID válido',
+  });
 
   return optionalWrapper(required, rule);
 };

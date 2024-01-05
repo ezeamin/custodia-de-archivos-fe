@@ -24,7 +24,7 @@ export const fetchFn = async <T, V = T>({
           method: request.method,
           headers: {
             'Content-Type': isFormData
-              ? 'application/form-data'
+              ? 'multipart/form-data'
               : 'application/json',
           },
           body: isFormData ? body : JSON.stringify(body),

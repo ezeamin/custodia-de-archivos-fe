@@ -6,7 +6,6 @@ import type {
   TextColorProp,
   WidthType,
 } from '../../interface/tailwind';
-import type { IconProps } from '../Icon/Icon.types';
 import type { BasicList } from '@/interface';
 
 export type ComboBoxProps<T extends FieldValues> = {
@@ -14,23 +13,6 @@ export type ComboBoxProps<T extends FieldValues> = {
   controller: ControllerRenderProps<T, Path<T>>;
   disabled?: boolean;
   error?: boolean;
-  iconCheckProps?: {
-    className?: IconProps['className'];
-    iconComponent?: IconProps['iconComponent'];
-    size?: IconProps['size'];
-  };
-  iconClearProps?: {
-    color?: IconProps['color'];
-    className?: IconProps['className'];
-    iconComponent?: IconProps['iconComponent'];
-    size?: IconProps['size'];
-  };
-  iconExpandProps?: {
-    color?: IconProps['color'];
-    className?: IconProps['className'];
-    iconComponent?: IconProps['iconComponent'];
-    size?: IconProps['size'];
-  };
   inputClassName?: string;
   msgError?: string;
   name: string;

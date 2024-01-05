@@ -1,14 +1,18 @@
 import { generateRandomId } from '@/utilities/utils';
 
-export const genderOptions = {
+export const typeOptions = {
   data: [
     {
       id: generateRandomId(),
-      description: 'Masculino',
+      description: 'Administrativa',
     },
     {
       id: generateRandomId(),
-      description: 'Femenino',
+      description: 'Mantenimiento',
+    },
+    {
+      id: generateRandomId(),
+      description: 'Nueva documentación',
     },
     {
       id: generateRandomId(),
@@ -17,27 +21,27 @@ export const genderOptions = {
   ],
 };
 
-export const areaOptions = {
+export const receiverOptions = {
   data: [
     {
       id: generateRandomId(),
-      description: 'Sistematización',
+      description: 'Todos los empleados',
     },
     {
       id: generateRandomId(),
-      description: 'Clasificación',
+      description: 'González, Juan',
     },
     {
       id: generateRandomId(),
-      description: 'Atención al cliente',
+      description: 'Paredes, Armando',
     },
     {
       id: generateRandomId(),
-      description: 'Administración',
+      description: 'Zurita, Elva',
     },
     {
       id: generateRandomId(),
-      description: 'Mantenimiento',
+      description: 'Tec, Elvis',
     },
   ],
 };

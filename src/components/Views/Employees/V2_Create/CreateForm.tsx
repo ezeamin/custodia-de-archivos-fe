@@ -13,10 +13,10 @@ import {
   Button,
   ComboBoxInput,
   DateInput,
+  FileInput,
   Grid,
   TextInput,
 } from '@/components/ui';
-import FileInput from '@/components/ui/FileInput/FileInput';
 
 import { paths } from '@/constants/routes/paths';
 
@@ -67,7 +67,7 @@ const CreateForm = () => {
     fd.append('email', data.email);
     fd.append('dni', data.dni);
     fd.append('fileNumber', data.fileNumber.toString());
-    fd.append('gender', data.gender);
+    fd.append('genderId', data.gender.id);
     fd.append(
       'startDate',
       typeof data.startDate === 'string'
@@ -75,7 +75,7 @@ const CreateForm = () => {
         : data.startDate.toISOString()
     );
     fd.append('position', data.position);
-    fd.append('area', data.area);
+    fd.append('areaId', data.area.id);
     fd.append('imgFile', data.imgFile);
 
     createEmployee(fd);
@@ -166,7 +166,7 @@ const CreateForm = () => {
             disabled={isLoading}
             label="Género"
             name="gender"
-            options={genderOptions}
+            options={genderOptions.data}
             placeholder="Seleccione un género"
           />
         </Grid>
@@ -197,7 +197,7 @@ const CreateForm = () => {
             disabled={isLoading}
             label="Área"
             name="area"
-            options={areaOptions}
+            options={areaOptions.data}
             placeholder="Seleccione un area"
           />
         </Grid>

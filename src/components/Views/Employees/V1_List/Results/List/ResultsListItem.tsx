@@ -31,7 +31,8 @@ const ResultsListItem = (props: EmployeesResultsListItemProps) => {
               Puesto: <span className="font-bold">{employee.position}</span>
             </p>
             <p>
-              Area: <span className="font-bold">{employee.area}</span>
+              Area:{' '}
+              <span className="font-bold">{employee.area.description}</span>
             </p>
           </div>
           <div>

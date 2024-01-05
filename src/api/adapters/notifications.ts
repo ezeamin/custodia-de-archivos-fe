@@ -10,7 +10,7 @@ export const getNotificationsAdapter = (
 ): Notification[] => {
   return data.map((notification) => ({
     id: notification.id,
-    text: notification.text,
+    message: notification.message,
     issuer: {
       firstname: notification.issuer.firstname,
       lastname: notification.issuer.lastname,
