@@ -8,6 +8,11 @@ import CreateEmployeeView from '@/views/Employees/CreateEmployeeView';
 import EmployeeDetailsView from '@/views/Employees/EmployeeDetailsView';
 import EmployeeListView from '@/views/Employees/EmployeeListView';
 import HomeView from '@/views/Home/HomeView';
+import CreateNotificationView from '@/views/Notifications/CreateNotificationView';
+import NotificationDetailView from '@/views/Notifications/NotificationDetailView';
+import NotificationsHistoryView from '@/views/Notifications/NotificationsHistoryView';
+import NotificationsHourSettingsView from '@/views/Notifications/NotificationsHourSettingsView';
+import NotificationsTypesView from '@/views/Notifications/NotificationsTypesView';
 import NotificationsView from '@/views/Notifications/NotificationsView';
 import SettingsView from '@/views/Settings/SettingsView';
 import UsersView from '@/views/Users/UsersView';
@@ -34,6 +39,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: false,
         element: <AuthView />,
+        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
       },
       {
         id: 1002,
@@ -43,8 +49,10 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <AuthView />,
+        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
       },
     ],
+    allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
   },
   {
     id: 2000,
@@ -56,6 +64,7 @@ export const routes: Route[] = [
     element: <HomeView />,
     privateRoute: true,
     hidden: true,
+    allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
   },
   {
     id: 3000,
@@ -72,6 +81,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <CreateEmployeeView />,
+        allowedRoles: ['ADMIN', 'READ_ONLY'],
       },
       {
         id: 3002,
@@ -81,10 +91,12 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <EmployeeDetailsView />,
+        allowedRoles: ['ADMIN', 'READ_ONLY'],
       },
     ],
     privateRoute: true,
     element: <EmployeeListView />,
+    allowedRoles: ['ADMIN', 'READ_ONLY'],
   },
   {
     id: 4000,
@@ -92,9 +104,61 @@ export const routes: Route[] = [
     icon: <IoNotifications />,
     description: 'Centro de notificaciones',
     path: paths.NOTIFICATIONS.MAIN,
-    subpaths: [],
+    subpaths: [
+      {
+        id: 4001,
+        title: 'Crear notificación',
+        description: 'Crear notificación',
+        path: paths.NOTIFICATIONS.CREATE,
+        subpaths: [],
+        privateRoute: true,
+        element: <CreateNotificationView />,
+        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+      },
+      {
+        id: 4002,
+        title: 'Historial de Notificaciones',
+        description: 'Historial notificaciones',
+        path: paths.NOTIFICATIONS.HISTORY,
+        subpaths: [],
+        privateRoute: true,
+        element: <NotificationsHistoryView />,
+        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+      },
+      {
+        id: 4003,
+        title: 'Administrar tipos',
+        description: 'Administrar tipos',
+        path: paths.NOTIFICATIONS.ADMIN_TYPES,
+        subpaths: [],
+        privateRoute: true,
+        element: <NotificationsTypesView />,
+        allowedRoles: ['ADMIN'],
+      },
+      {
+        id: 4004,
+        title: 'Detalle Notificación',
+        description: 'Detalle Notificación',
+        path: paths.NOTIFICATIONS.DETAILS,
+        subpaths: [],
+        privateRoute: true,
+        element: <NotificationDetailView />,
+        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+      },
+      {
+        id: 4005,
+        title: 'Administrar horarios',
+        description: 'Administrar horarios',
+        path: paths.NOTIFICATIONS.HOUR_SETTINGS,
+        subpaths: [],
+        privateRoute: true,
+        element: <NotificationsHourSettingsView />,
+        allowedRoles: ['ADMIN'],
+      },
+    ],
     privateRoute: true,
     element: <NotificationsView />,
+    allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
   },
   {
     id: 5000,
@@ -105,6 +169,7 @@ export const routes: Route[] = [
     subpaths: [],
     privateRoute: true,
     element: <UsersView />,
+    allowedRoles: ['ADMIN', 'READ_ONLY'],
   },
   {
     id: 6000,
@@ -115,7 +180,20 @@ export const routes: Route[] = [
     subpaths: [],
     privateRoute: true,
     element: <SettingsView />,
+    allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
   },
 ];
 
 export const flattedRoutes = flattenRoutes(routes);
+
+export const adminRoutes = routes.filter((route) =>
+  route.allowedRoles.includes('ADMIN')
+);
+
+export const employeeRoutes = routes.filter((route) =>
+  route.allowedRoles.includes('EMPLOYEE')
+);
+
+export const readOnlyRoutes = routes.filter((route) =>
+  route.allowedRoles.includes('READ_ONLY')
+);

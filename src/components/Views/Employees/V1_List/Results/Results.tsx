@@ -1,6 +1,6 @@
+import ResultsList from './List/ResultsList';
 import { mockedData } from './mocked';
-import ResultsList from './ResultsList';
-import ResultsTable from './ResultsTable';
+import ResultsTable from './Table/ResultsTable';
 import { useQuery } from '@tanstack/react-query';
 
 import { getEmployees } from '@/api/api-calls/employees';
@@ -65,4 +65,5 @@ const Results = () => {
 
   return null;
 };
+
 export default Results;

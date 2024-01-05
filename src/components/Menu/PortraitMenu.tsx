@@ -7,16 +7,16 @@ import LogoutButton from './LogoutButton';
 import MenuModuleButton from './MenuModuleButton';
 import { Drawer } from 'vaul';
 
+import useGetUserAllowedRoutes from '@/hooks/useGetUserAllowedRoutes';
 import { useSession } from '@/stores/useSession';
 
 import ThemeTogglerButton from '@/components/Common/ThemeTogglerButton';
-
-import { routes } from '@/constants/routes/routes';
 
 const PortraitMenu = (): JSX.Element => {
   const { user } = useSession();
 
   const navigate = useNavigate();
+  const routes = useGetUserAllowedRoutes();
 
   const handleBackClick = (): void => {
     navigate(-1);

@@ -6,11 +6,10 @@ import LogoCustodia from './LogoCustodia';
 import LogoutButton from './LogoutButton';
 import MenuModuleButton from './MenuModuleButton';
 
+import useGetUserAllowedRoutes from '@/hooks/useGetUserAllowedRoutes';
 import { useSession } from '@/stores/useSession';
 
 import { Button, Icon } from '@/components/ui';
-
-import { routes } from '@/constants/routes/routes';
 
 import { type LandscapeMenuProps } from '@/components/interface';
 
@@ -18,6 +17,7 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
   const { children } = props;
 
   const { user } = useSession();
+  const routes = useGetUserAllowedRoutes();
   const navigate = useNavigate();
 
   const handleBackClick = (): void => {

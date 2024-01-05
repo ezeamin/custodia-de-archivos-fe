@@ -1,8 +1,8 @@
 import ResultsListItem from './ResultsListItem';
 
-import { ResultsListProps } from '@/components/interface/views';
+import { EmployeesResultsListProps } from '@/components/interface/views';
 
-const ResultsList = (props: ResultsListProps) => {
+const ResultsList = (props: EmployeesResultsListProps) => {
   const { data } = props;
 
   return (

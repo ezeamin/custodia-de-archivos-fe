@@ -15,6 +15,7 @@ const FileInput = <T extends FormSchemas>(
   const {
     className = '',
     control,
+    disabled = false,
     hideLabel = false,
     name,
     label,
@@ -57,6 +58,7 @@ const FileInput = <T extends FormSchemas>(
               className={`file-input file-input-sm md:file-input-md file-input-ghost focus:bg-gray-200 dark:focus:bg-gray-800 border border-gray-300 dark:border-gray-500 w-full max-w-xs ${
                 error ? 'border-error' : ''
               }`}
+              disabled={disabled}
               id={name as string}
               ref={field.ref}
               type="file"

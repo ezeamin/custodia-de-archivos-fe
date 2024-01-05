@@ -1,6 +1,7 @@
 // ----------------------------------------------------------------------
 // ROUTES
 // ----------------------------------------------------------------------
+import { UserRole } from '../userRoles/userRoles';
 
 export interface Route {
   id: number;
@@ -12,4 +13,5 @@ export interface Route {
   icon?: JSX.Element;
   element: JSX.Element;
   privateRoute: boolean;
+  allowedRoles: UserRole[];
 }

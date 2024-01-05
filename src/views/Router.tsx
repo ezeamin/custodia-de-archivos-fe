@@ -18,6 +18,7 @@ const Router = () => {
               <Route
                 element={
                   <PrivateRoute
+                    allowedRoles={route.allowedRoles}
                     element={route.element}
                     privateRoute={route.privateRoute}
                   />
