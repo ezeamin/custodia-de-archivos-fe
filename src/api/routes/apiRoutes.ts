@@ -6,6 +6,14 @@ export const apiRoutes = {
       method: 'GET',
       url: '/params/roles',
     }),
+    GET_GENDERS: (): ApiRoute => ({
+      method: 'GET',
+      url: '/params/genders',
+    }),
+    GET_AREAS: (): ApiRoute => ({
+      method: 'GET',
+      url: '/params/areas',
+    }),
   },
   EMPLOYEES: {
     GET_EMPLOYEES: ({ params }: { params: string }): ApiRoute => ({
