@@ -233,6 +233,7 @@ const CreateNotificationForm = () => {
             className="w-full"
             control={control}
             disabled={isLoading}
+            helperText="Si algún empleado no figura, puede que no tenga usuario creado"
             label="Receptor(es)"
             name="receiver"
             options={mockedReceiverOptions.data}

@@ -1,8 +1,8 @@
 // import { useZodForm } from '@/hooks';
-import { FilterModalFormProps } from '@/components/interface/views';
+import { useModal } from '@/stores/useModal';
 
-const FilterModalForm = (props: FilterModalFormProps) => {
-  const { closeModal } = props;
+const FilterModalForm = () => {
+  const { closeModal } = useModal();
 
   //   const { control, handleSubmitMiddleware } = useZodForm(searchSchema);
 

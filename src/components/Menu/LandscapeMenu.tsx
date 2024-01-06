@@ -1,10 +1,10 @@
 import { IoArrowBackOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
-import ThemeTogglerButton from '../Common/ThemeTogglerButton';
 import LogoCustodia from './LogoCustodia';
 import LogoutButton from './LogoutButton';
 import MenuModuleButton from './MenuModuleButton';
+import ThemeTogglerButton from './ThemeTogglerButton';
 
 import useGetUserAllowedRoutes from '@/hooks/useGetUserAllowedRoutes';
 import { useSession } from '@/stores/useSession';

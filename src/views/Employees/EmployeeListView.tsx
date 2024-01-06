@@ -1,5 +1,6 @@
 import Title from '@/components/Common/Title';
-import FilterModal from '@/components/Views/Employees/V1_List/Filters/FilterModal';
+import { Modal } from '@/components/ui';
+import FilterModalForm from '@/components/Views/Employees/V1_List/Filters/FilterModalForm';
 import Legend from '@/components/Views/Employees/V1_List/Filters/Legend';
 import SearchFilter from '@/components/Views/Employees/V1_List/Filters/SearchFilter';
 import Results from '@/components/Views/Employees/V1_List/Results/Results';
@@ -20,7 +21,9 @@ const EmployeeListView = () => {
       </section>
       <Results />
 
-      <FilterModal />
+      <Modal title="Filtrar resultados">
+        <FilterModalForm />
+      </Modal>
     </>
   );
 };

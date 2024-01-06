@@ -12,6 +12,7 @@ const TextInput = <T extends FormSchemas>(
   const {
     className = '',
     control,
+    helperText = '',
     hideLabel = false,
     name,
     label,
@@ -47,6 +48,11 @@ const TextInput = <T extends FormSchemas>(
           />
         )}
       />
+      {helperText && (
+        <p className="text-sm text-gray-400 dark:text-gray-400 mt-1">
+          {helperText}
+        </p>
+      )}
     </fieldset>
   );
 };

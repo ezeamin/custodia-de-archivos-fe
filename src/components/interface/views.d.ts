@@ -9,10 +9,6 @@ import {
 // EMPLOYEES
 // --------------------------------------------------
 
-export interface FilterModalFormProps {
-  closeModal: () => void;
-}
-
 export interface EmployeesResultsTableProps {
   data: Employee[];
 }

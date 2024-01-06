@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { areaOptions, genderOptions } from './mocked';
-import { useMutation } from '@tanstack/react-query';
+import {
+  areaOptions as mockedAreaOptions,
+  genderOptions as mockedGenderOptions,
+} from './mocked';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { postEmployeeFn } from '@/api/api-calls/employees';
+import { getAreaOptionsFn, getGenderOptionsFn } from '@/api/api-calls/params';
 
-import { useZodForm } from '@/hooks';
+import { useLoading, useZodForm } from '@/hooks';
 
 import {
   Button,
@@ -26,6 +30,10 @@ import {
 } from '@/form-schemas/schemas/employees/createSchema';
 
 const CreateForm = () => {
+  // -------------------------------------------------
+  // FORM & STATES
+  // -------------------------------------------------
+
   const {
     control,
     onSubmitMiddleware,
@@ -38,6 +46,30 @@ const CreateForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  // -------------------------------------------------
+  // API
+  // -------------------------------------------------
+
+  const {
+    // data: genderOptions,
+    isLoading: isLoadingGenders,
+    isError: isErrorGenders,
+    status: statusGenders,
+  } = useQuery({
+    queryKey: ['genderOptions'],
+    queryFn: getGenderOptionsFn,
+  });
+
+  const {
+    // data: areaOptions,
+    isLoading: isLoadingAreas,
+    isError: isErrorAreas,
+    status: statusAreas,
+  } = useQuery({
+    queryKey: ['areaOptions'],
+    queryFn: getAreaOptionsFn,
+  });
 
   const { mutate: createEmployee } = useMutation({
     mutationFn: postEmployeeFn,
@@ -54,6 +86,20 @@ const CreateForm = () => {
       }, 1000);
     },
   });
+
+  useLoading(isLoadingGenders, statusGenders);
+  useLoading(isLoadingAreas, statusAreas);
+
+  if (isErrorAreas || isErrorGenders) {
+    toast.error(
+      'Error al cargar datos necesarios para crear un empleado. Reintente más tarde'
+    );
+    navigate(paths.EMPLOYEES.MAIN);
+  }
+
+  // -------------------------------------------------
+  // HANDLERS
+  // -------------------------------------------------
 
   const uploadedImage = watch('imgFile');
 
@@ -80,6 +126,10 @@ const CreateForm = () => {
 
     createEmployee(fd);
   };
+
+  // -------------------------------------------------
+  // RENDER
+  // -------------------------------------------------
 
   return (
     <form
@@ -166,7 +216,8 @@ const CreateForm = () => {
             disabled={isLoading}
             label="Género"
             name="gender"
-            options={genderOptions.data}
+            options={mockedGenderOptions.data}
+            // options={genderOptions?.data}
             placeholder="Seleccione un género"
           />
         </Grid>
@@ -197,7 +248,8 @@ const CreateForm = () => {
             disabled={isLoading}
             label="Área"
             name="area"
-            options={areaOptions.data}
+            options={mockedAreaOptions.data}
+            // options={areaOptions?.data}
             placeholder="Seleccione un area"
           />
         </Grid>

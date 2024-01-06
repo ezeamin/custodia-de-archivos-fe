@@ -8,6 +8,7 @@ export interface ComboBoxInputProps<T extends FormSchemas>
     Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'required' | 'name'> {
   label: string;
   className?: string;
+  helperText?: string;
   inputClassName?: string;
   options: BasicList[];
   placeholder?: string;

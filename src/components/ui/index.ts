@@ -13,6 +13,7 @@ import HourInput from './HourInput/HourInput';
 import Icon from './Icon/Icon';
 import IconButton from './IconButton/IconButton';
 import InputController from './InputController/InputController';
+import Modal from './Modal/Modal';
 import MultipleComboBoxInput from './MultipleComboBoxInput/MultipleComboBoxInput';
 import MultipleFileInput from './MultipleFileInput/MultipleFileInput';
 import Pagination from './Pagination/Pagination';
@@ -44,6 +45,7 @@ export {
   Icon,
   IconButton,
   InputController,
+  Modal,
   MultipleComboBoxInput,
   MultipleFileInput,
   Pagination,
