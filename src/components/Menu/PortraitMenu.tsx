@@ -10,7 +10,7 @@ import { Drawer } from 'vaul';
 import useGetUserAllowedRoutes from '@/hooks/useGetUserAllowedRoutes';
 import { useSession } from '@/stores/useSession';
 
-import ThemeTogglerButton from '@/components/Common/ThemeTogglerButton';
+import ThemeTogglerButton from '@/components/Menu/ThemeTogglerButton';
 
 const PortraitMenu = (): JSX.Element => {
   const { user } = useSession();

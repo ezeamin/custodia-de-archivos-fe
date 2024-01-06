@@ -30,11 +30,11 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  background: var(--background) !important;
 }
 
 body {
   min-height: 100vh;
-  background: var(--background);
 }
 
 /* GLOBAL COMPONENTS ----------------------------------- */
