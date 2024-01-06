@@ -29,7 +29,7 @@ const Header = (): JSX.Element | null => {
     const onScroll = (): void => {
       const { scrollTop } = content;
 
-      if (scrollTop >= 70) {
+      if (scrollTop >= 50) {
         setIsScrolling(true);
       } else {
         setIsScrolling(false);

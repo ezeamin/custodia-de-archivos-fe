@@ -42,7 +42,7 @@ const PortraitMenu = (): JSX.Element => {
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/40 z-50 backdrop-blur-[1px]" />
           <Drawer.Content className="bg-zinc-700 flex flex-col rounded-t-[10px] mt-24 fixed bottom-0 left-0 right-0 z-50">
-            <div className="bg-white dark:bg-zinc-700 duration-300 rounded-t-[10px] p-4 pb-0">
+            <div className="bg-white dark:bg-zinc-700 rounded-t-[10px] p-4 pb-0">
               <div className="mx-auto w-12 h-1 flex-shrink-0 rounded-full bg-zinc-300 mb-4" />
               <section className="mb-4 text-center">
                 <img

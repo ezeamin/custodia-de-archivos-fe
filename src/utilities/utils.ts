@@ -41,3 +41,9 @@ export const flattenRoutes = (routes: Route[]): Route[] => {
 };
 
 export const generateRandomId = () => window.self.crypto.randomUUID();
+
+export const changeMeta = (theme: string) => {
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute('content', theme === 'light' ? '#ffffff' : '#325d85');
+};

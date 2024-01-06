@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import type { Sizes } from './interface';
 
@@ -11,16 +11,22 @@ const sizes: Sizes = {
 };
 
 export const usePortrait = (size: keyof Sizes = 'md'): boolean | undefined => {
-  const [isPortrait, setIsPortrait] = useState<boolean | undefined>(undefined);
+  const mediaQuery = useMemo(
+    () => window.matchMedia(`(width <= ${sizes[size]})`),
+    [size]
+  );
+
+  const [isPortrait, setIsPortrait] = useState<boolean | undefined>(
+    mediaQuery.matches
+  );
 
   // use window.innerWidth to get the screen size
   useEffect(() => {
-    const mediaQuery = window.matchMedia(`(width <= ${sizes[size]})`);
     mediaQuery.addEventListener('change', (e) => {
       setIsPortrait(e.matches);
     });
     setIsPortrait(mediaQuery.matches);
-  }, [size]);
+  }, [size, mediaQuery]);
 
   return isPortrait;
 };
