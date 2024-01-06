@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 
+import { usePortraitMenu } from '@/stores/usePortraitMenu';
+
 import { Button, Icon } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
@@ -15,8 +17,10 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
   const { className } = props;
 
   const navigate = useNavigate();
+  const { closeMenu } = usePortraitMenu();
 
   const handleLogout = (): void => {
+    closeMenu();
     Swal.fire({
       title: '¿Estás seguro?',
       text: '¿Quieres cerrar sesión?',

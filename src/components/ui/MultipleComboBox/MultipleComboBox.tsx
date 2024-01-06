@@ -90,12 +90,12 @@ const MultipleComboBox = <T extends FieldValues>(
         <div className={`relative mt-1 ${sizing?.width ? sizing.width : ''}`}>
           <div
             aria-label="Combo Box"
-            className="grid relative w-full cursor-default overflow-hidden rounded-lg  bg-gray-100 dark:bg-slate-700 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
+            className="grid relative w-full cursor-default overflow-hidden rounded-lg bg-gray-100 dark:bg-slate-700 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
           >
             <Combobox.Input
               aria-label="Ingrese su selección"
               className={cn(
-                `input input-bordered bg-transparent focus:outline-none w-full ${
+                `input input-bordered bg-transparent focus:outline-none w-full pr-[45px] ${
                   sizing?.height ? sizing.height : ''
                 } ${error ? 'border-error' : ''}`,
                 inputClassName
@@ -112,7 +112,7 @@ const MultipleComboBox = <T extends FieldValues>(
 
             <Combobox.Button
               aria-label="Expandir/comprimir opciones"
-              className="btn-ghost absolute inset-y-0 right-0 flex items-center p-3"
+              className="absolute inset-y-0 right-0 flex items-center p-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 hover:dark:bg-slate-800 border border-gray-300 border-l-0 dark:border-gray-600"
             >
               <Icon iconComponent={<MdExpandMore />} title="expand more icon" />
             </Combobox.Button>

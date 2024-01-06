@@ -26,7 +26,7 @@ const PortraitMenu = (): JSX.Element => {
   return (
     <>
       <Button
-        className="fixed bottom-4 left-4 w-12 h-12 border-gray-300 dark:border-gray-500"
+        className="fixed bottom-4 left-4 w-12 h-12 border-gray-300 dark:border-gray-500 z-10"
         colorDark="dark:bg-slate-600"
         colorLight="bg-slate-200"
         textColorDark="dark:text-white"
@@ -36,7 +36,10 @@ const PortraitMenu = (): JSX.Element => {
       </Button>
       <Drawer.Root shouldScaleBackground open={opened} onClose={closeMenu}>
         <Drawer.Portal>
-          <Drawer.Overlay className="fixed inset-0 bg-black/40 z-50 backdrop-blur-[1px]" />
+          <Drawer.Overlay
+            className="fixed inset-0 bg-black/40 z-50 backdrop-blur-[1px]"
+            onClick={closeMenu}
+          />
           <Drawer.Content className="bg-zinc-700 flex flex-col rounded-t-[10px] mt-24 fixed bottom-0 left-0 right-0 z-50">
             <div className="bg-white dark:bg-zinc-700 rounded-t-[10px] p-4 pb-1">
               <div className="mx-auto w-12 h-1 flex-shrink-0 rounded-full bg-zinc-300 mb-4" />

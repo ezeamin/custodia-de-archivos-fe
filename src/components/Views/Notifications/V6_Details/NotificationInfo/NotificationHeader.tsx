@@ -33,8 +33,8 @@ const NotificationHeader = (props: NotificationInfoContentProps) => {
           iconComponent={<FaArrowDownLong size="1.75em" />}
           title="Envia a"
         />
-        <div className="flex flex-row-reverse md:flex-col-reverse items-end lg:flex-row self-start sm:self-end md:self-auto gap-3">
-          <div className="md:text-end">
+        <div className="flex flex-row self-end md:flex-col-reverse items-end lg:flex-row md:self-auto gap-3">
+          <div className="text-end">
             <h3 className="text-lg font-bold">{`${data.receiver.lastname}, ${data.receiver.firstname}`}</h3>
             <p className="text-sm">{data.receiver.email}</p>
           </div>

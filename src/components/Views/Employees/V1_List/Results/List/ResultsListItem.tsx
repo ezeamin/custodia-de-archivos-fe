@@ -19,7 +19,7 @@ const ResultsListItem = (props: EmployeesResultsListItemProps) => {
           </h2>
           <EmployeeStatus status={employee.status} />
         </div>
-        <div className="flex justify-between gap-2">
+        <div className="flex justify-between gap-3">
           <div>
             <p>
               Edad: <span className="font-bold">{employee.age} años</span>
@@ -38,7 +38,7 @@ const ResultsListItem = (props: EmployeesResultsListItemProps) => {
           <div>
             <img
               alt={`${employee.lastname}, ${employee.firstname}`}
-              className="w-[70px] sm:w-[100px] object-cover rounded-md"
+              className="min-w-[70px] w-[70px] sm:w-[100px] object-cover rounded-md"
               height={70}
               src={employee.imgSrc}
               width={70}

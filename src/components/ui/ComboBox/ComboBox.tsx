@@ -108,7 +108,7 @@ const ComboBox = <T extends FieldValues>(
             <Combobox.Input
               aria-label="Ingrese su selección"
               className={cn(
-                `input input-bordered bg-transparent focus:outline-none w-full ${
+                `input input-bordered bg-transparent focus:outline-none w-full pr-[45px] ${
                   sizing?.height ? sizing.height : ''
                 } ${error ? 'border-error' : ''}`,
                 inputClassName
@@ -126,8 +126,7 @@ const ComboBox = <T extends FieldValues>(
                 ariaHidden
                 unstyled
                 aria-label="Borrar selección"
-                className="absolute inset-y-0 right-0 flex items-center px-3 h-auto"
-                colorLight="btn-ghost"
+                className="absolute inset-y-0 right-0 flex items-center px-3 h-auto bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 hover:dark:bg-slate-800 border border-gray-300 border-l-0 dark:border-gray-600"
                 type="button"
                 onClick={handleClearSelection}
               >
@@ -136,7 +135,7 @@ const ComboBox = <T extends FieldValues>(
             ) : (
               <Combobox.Button
                 aria-label="Expandir/comprimir opciones"
-                className="btn-ghost absolute inset-y-0 right-0 flex items-center p-3"
+                className="absolute inset-y-0 right-0 flex items-center p-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 hover:dark:bg-slate-800 border border-gray-300 border-l-0 dark:border-gray-600"
               >
                 <Icon
                   iconComponent={<MdExpandMore />}
