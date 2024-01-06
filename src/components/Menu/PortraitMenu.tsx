@@ -1,4 +1,3 @@
-import { BiMenuAltRight } from 'react-icons/bi';
 import { IoArrowBackOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +7,7 @@ import MenuModuleButton from './MenuModuleButton';
 import { Drawer } from 'vaul';
 
 import useGetUserAllowedRoutes from '@/hooks/useGetUserAllowedRoutes';
+import { usePortraitMenu } from '@/stores/usePortraitMenu';
 import { useSession } from '@/stores/useSession';
 
 import ThemeTogglerButton from '@/components/Menu/ThemeTogglerButton';
@@ -17,6 +17,7 @@ const PortraitMenu = (): JSX.Element => {
 
   const navigate = useNavigate();
   const routes = useGetUserAllowedRoutes();
+  const { opened, closeMenu } = usePortraitMenu();
 
   const handleBackClick = (): void => {
     navigate(-1);
@@ -33,12 +34,7 @@ const PortraitMenu = (): JSX.Element => {
       >
         <Icon iconComponent={<IoArrowBackOutline />} title="Volver" />
       </Button>
-      <Drawer.Root>
-        <Drawer.Trigger asChild>
-          <button color="btn-ghost" type="button">
-            <BiMenuAltRight size="3em" />
-          </button>
-        </Drawer.Trigger>
+      <Drawer.Root shouldScaleBackground open={opened} onClose={closeMenu}>
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/40 z-50 backdrop-blur-[1px]" />
           <Drawer.Content className="bg-zinc-700 flex flex-col rounded-t-[10px] mt-24 fixed bottom-0 left-0 right-0 z-50">

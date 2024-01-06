@@ -1,9 +1,12 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import { usePortraitMenu } from './usePortraitMenu';
+
 const useScrollToTop = () => {
   // Extracts pathname property(key) from an object
   const { pathname } = useLocation();
+  const { closeMenu } = usePortraitMenu();
 
   // Automatically scrolls to top whenever pathname changes
   useEffect(() => {
@@ -11,7 +14,8 @@ const useScrollToTop = () => {
       .getElementById('content')
       ?.scrollTo({ top: 0, behavior: 'smooth' });
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [pathname]);
+    closeMenu();
+  }, [pathname, closeMenu]);
 };
 
 export default useScrollToTop;
