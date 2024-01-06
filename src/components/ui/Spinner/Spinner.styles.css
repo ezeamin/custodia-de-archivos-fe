@@ -16,6 +16,7 @@
 .sk-cube-grid .sk-cube1 {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
+  border-top-left-radius: 7px;
 }
 .sk-cube-grid .sk-cube2 {
   -webkit-animation-delay: 0.3s;
@@ -48,6 +49,7 @@
 .sk-cube-grid .sk-cube9 {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
+  border-bottom-right-radius: 7px;
 }
 
 @-webkit-keyframes sk-cubeGridScaleDelay {

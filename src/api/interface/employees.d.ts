@@ -23,7 +23,7 @@ export interface API_GetEmployees {
 }
 
 // ----------------------------------------------------------------------
-// Adapters
+// ADAPTERS
 // ----------------------------------------------------------------------
 
 export interface Employee extends API_GetEmployees {}

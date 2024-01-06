@@ -6,10 +6,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import {
-  getNotificationType,
-  postNotificationType,
-  putNotificationType,
+  getNotificationTypeFn,
+  postNotificationTypeFn,
+  putNotificationTypeFn,
 } from '@/api/api-calls/notifications';
+import { getRolesOptionsFn } from '@/api/api-calls/params';
 
 import { useLoading, useZodForm } from '@/hooks';
 
@@ -50,14 +51,25 @@ const TypesForm = () => {
     isError: isErrorEditedData,
     isLoading: isLoadingEditedData,
     isSuccess: isSuccessEditedData,
+    status: statusEditedData,
   } = useQuery({
     queryKey: ['notificationTypes', isEditing && idBeingEdited],
-    queryFn: () => getNotificationType(idBeingEdited ?? ''),
+    queryFn: () => getNotificationTypeFn(idBeingEdited ?? ''),
     enabled: !!(isEditing && idBeingEdited),
   });
 
+  const {
+    // data: rolesOptions,
+    isLoading: isLoadingRoles,
+    isError: isErrorRoles,
+    status: statusRoles,
+  } = useQuery({
+    queryKey: ['rolesOptions'],
+    queryFn: getRolesOptionsFn,
+  });
+
   const { mutate: createType } = useMutation({
-    mutationFn: postNotificationType,
+    mutationFn: postNotificationTypeFn,
     onError: (error) => {
       setIsLoading(false);
       toast.error(error.message);
@@ -71,7 +83,7 @@ const TypesForm = () => {
   });
 
   const { mutate: editType } = useMutation({
-    mutationFn: putNotificationType,
+    mutationFn: putNotificationTypeFn,
     onError: (error) => {
       setIsLoading(false);
       toast.error(error.message);
@@ -84,7 +96,15 @@ const TypesForm = () => {
     },
   });
 
-  useLoading(isLoadingEditedData);
+  useLoading(isLoadingRoles, statusRoles);
+  useLoading(isLoadingEditedData, statusEditedData);
+
+  if (isErrorRoles) {
+    toast.error(
+      'Ocurrió un error al obtener la información necesaria para cargar el formulario'
+    );
+    navigate(paths.NOTIFICATIONS.MAIN);
+  }
 
   if (isErrorEditedData) {
     toast.error('Ocurrió un error al obtener la información');
@@ -185,6 +205,7 @@ const TypesForm = () => {
             label="Roles habilitados"
             name="allowedRoles"
             options={userRoles}
+            // options={rolesOptions?.data}
             placeholder="Elige uno o más roles"
           />
         </Grid>

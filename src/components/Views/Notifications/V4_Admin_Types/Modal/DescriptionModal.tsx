@@ -22,7 +22,7 @@ const DescriptionModal = () => {
           opened ? 'modal-open' : ''
         }`}
       >
-        <div className="modal-box bg-white dark:bg-gray-800">
+        <div className="modal-box bg-white dark:bg-gray-800 lg:ml-[272px]border dark:border-gray-500">
           <h3 className="font-bold text-lg">{data.title}</h3>
           <section className="pt-5">{data.description}</section>
           <div className="modal-action">

@@ -1,7 +1,16 @@
+import { Role } from './params';
+
+import { BasicList } from '@/interface';
+
 // ----------------------------------------------------------------------
 // API
 // ----------------------------------------------------------------------
-import { BasicList } from '@/interface';
+
+export interface NotificationFile {
+  id: string;
+  name: string;
+  url: string;
+}
 
 export interface API_GetNotifications {
   id: string;
@@ -10,11 +19,15 @@ export interface API_GetNotifications {
     firstname: string;
     lastname: string;
     id: string;
+    email?: string;
+    imgSrc?: string;
   };
   receiver: {
     firstname: string;
     lastname: string;
     id: string;
+    email?: string;
+    imgSrc?: string;
   };
   type: {
     id: string;
@@ -22,7 +35,7 @@ export interface API_GetNotifications {
   };
   date: string;
   hasBeenRead: boolean;
-  files?: string[];
+  files?: NotificationFile[];
 }
 
 export interface API_GetNotificationsTypes {
@@ -31,13 +44,17 @@ export interface API_GetNotificationsTypes {
   description: string;
   startHour: string;
   endHour: string;
-  allowedRoles: BasicList[];
+  allowedRoles: Role[];
 }
 
+export interface API_GetNotificationsReceivers extends BasicList {}
+
 // ----------------------------------------------------------------------
-// Adapters
+// ADAPTERS
 // ----------------------------------------------------------------------
 
 export interface Notification extends API_GetNotifications {}
 
 export interface NotificationType extends API_GetNotificationsTypes {}
+
+export interface NotificationReceiver extends API_GetNotificationsReceivers {}

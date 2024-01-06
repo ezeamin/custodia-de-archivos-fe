@@ -13,7 +13,7 @@ export const fetchFn = async <T, V = T>({
   request,
   adapter,
   body,
-}: FetchFnProps): Promise<API_GlobalResponse<T, V>> => {
+}: FetchFnProps): Promise<API_GlobalResponse<V>> => {
   const fullPath = `${baseUrl}${request.url}`;
 
   const isFormData = body instanceof FormData;
@@ -35,7 +35,7 @@ export const fetchFn = async <T, V = T>({
         };
 
   const res = await fetch(fullPath, optionObj);
-  const data = (await res.json()) as API_GlobalResponse<T, V>;
+  const data = (await res.json()) as API_GlobalResponse<V>;
 
   if (!res.ok) {
     toast.error(data.message || 'Ocurrió un error al leer la información.');

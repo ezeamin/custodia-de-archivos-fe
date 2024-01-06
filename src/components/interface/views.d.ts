@@ -1,5 +1,9 @@
 import { Employee } from '@/api/interface/employees';
-import { Notification, NotificationType } from '@/api/interface/notifications';
+import {
+  Notification,
+  NotificationFile,
+  NotificationType,
+} from '@/api/interface/notifications';
 
 // --------------------------------------------------
 // EMPLOYEES
@@ -49,4 +53,18 @@ export interface NotificationsTypeResultsListProps {
 export interface NotificationsTypeResultsListItemProps {
   notificationType: NotificationType;
   index: number;
+}
+
+export interface NotificationInfoProps {
+  data: Notification;
+  showReadAlert: boolean;
+  isLoadingRead: boolean;
+}
+
+export interface NotificationInfoContentProps {
+  data: Notification;
+}
+
+export interface NotificationFileItemProps {
+  file: NotificationFile;
 }

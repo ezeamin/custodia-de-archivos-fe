@@ -3,5 +3,5 @@ export interface AlertPropsType {
   className?: string;
   closable?: boolean;
   hideIcon?: boolean;
-  type?: 'error' | 'info' | 'success' | 'warning';
+  type?: 'error' | 'info' | 'success' | 'warning' | 'loading';
 }

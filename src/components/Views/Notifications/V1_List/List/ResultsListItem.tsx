@@ -37,7 +37,7 @@ const ResultsListItem = (props: NotificationsResultsListItemProps) => {
         </footer>
       </div>
       {!hasBeenRead && (
-        <span className="indicator-item badge badge-error animate-pulse" />
+        <span className="indicator-item badge badge-error animate-pulse top-5 right-5" />
       )}
     </article>
   );

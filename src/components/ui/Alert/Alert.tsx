@@ -62,6 +62,7 @@ const Alert = (props: AlertPropsType): JSX.Element => {
         ${type === 'info' ? 'bg-sky-200 dark:bg-sky-800' : ''}
         ${type === 'success' ? 'bg-green-200 dark:bg-green-800' : ''}
         ${type === 'warning' ? 'bg-orange-200 dark:bg-yellow-800' : ''}
+        ${type === 'loading' ? 'bg-gray-100 dark:bg-gray-800' : ''}
         ${!open ? 'hidden' : ''}
         px-2 md:pr-3 
         py-3
@@ -102,6 +103,9 @@ const Alert = (props: AlertPropsType): JSX.Element => {
               size="1.5em"
               title="Warning"
             />
+          ) : null}
+          {type === 'loading' ? (
+            <span className="loading loading-spinner" />
           ) : null}
         </Grid>
       ) : null}

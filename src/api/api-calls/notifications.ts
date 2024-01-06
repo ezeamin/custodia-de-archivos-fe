@@ -2,19 +2,23 @@ import { fetchFn } from '../fetchFn';
 import { apiRoutes } from '../routes/apiRoutes';
 
 import {
+  getNotificationAdapter,
   getNotificationsAdapter,
+  getNotificationsReceiversAdapter,
   getNotificationsTypesAdapter,
 } from '../adapters/notifications';
 
 import { API_EmptyResponse, EmptyResponse } from '../interface';
 import {
   API_GetNotifications,
+  API_GetNotificationsReceivers,
   API_GetNotificationsTypes,
   Notification,
+  NotificationReceiver,
   NotificationType,
 } from '@/api/interface/notifications';
 
-export const getNotifications = async (read: boolean) => {
+export const getNotificationsFn = async (read: boolean) => {
   const { search } = window.location;
 
   const query = new URLSearchParams(search);
@@ -32,7 +36,7 @@ export const getNotifications = async (read: boolean) => {
   return data;
 };
 
-export const getSentNotifications = async () => {
+export const getSentNotificationsFn = async () => {
   const query = new URLSearchParams();
   query.set('sent', 'true');
 
@@ -48,7 +52,33 @@ export const getSentNotifications = async () => {
   return data;
 };
 
-export const postNotification = async (body: FormData) => {
+export const getNotificationFn = async (id: string) => {
+  const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION({
+    id,
+  });
+
+  const data = await fetchFn<API_GetNotifications, Notification>({
+    request,
+    adapter: getNotificationAdapter,
+  });
+
+  return data;
+};
+
+export const readNotificationFn = async (id: string) => {
+  const request = apiRoutes.NOTIFICATIONS.READ_NOTIFICATION({
+    id,
+  });
+
+  const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
+    request,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const postNotificationFn = async (body: FormData) => {
   const request = apiRoutes.NOTIFICATIONS.POST_NOTIFICATION();
 
   const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
@@ -60,7 +90,21 @@ export const postNotification = async (body: FormData) => {
   return data;
 };
 
-export const getNotificationTypes = async () => {
+export const getNotificationReceiversFn = async () => {
+  const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION_RECEIVERS();
+
+  const data = await fetchFn<
+    API_GetNotificationsReceivers[],
+    NotificationReceiver[]
+  >({
+    request,
+    adapter: getNotificationsReceiversAdapter,
+  });
+
+  return data;
+};
+
+export const getNotificationTypesFn = async () => {
   const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION_TYPES();
 
   const data = await fetchFn<API_GetNotificationsTypes[], NotificationType[]>({
@@ -71,8 +115,8 @@ export const getNotificationTypes = async () => {
   return data;
 };
 
-export const getNotificationType = async (id: string) => {
-  const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION_TYPE(id);
+export const getNotificationTypeFn = async (id: string) => {
+  const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION_TYPE({ id });
 
   const data = await fetchFn<API_GetNotificationsTypes, NotificationType>({
     request,
@@ -82,7 +126,7 @@ export const getNotificationType = async (id: string) => {
   return data;
 };
 
-export const postNotificationType = async (body: Record<string, unknown>) => {
+export const postNotificationTypeFn = async (body: Record<string, unknown>) => {
   const request = apiRoutes.NOTIFICATIONS.POST_NOTIFICATION_TYPE();
 
   const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
@@ -94,12 +138,14 @@ export const postNotificationType = async (body: Record<string, unknown>) => {
   return data;
 };
 
-export const putNotificationType = async (body: Record<string, unknown>) => {
+export const putNotificationTypeFn = async (body: Record<string, unknown>) => {
   if (!body.id || typeof body.id !== 'string') {
     throw new Error('Missing or invalid id');
   }
 
-  const request = apiRoutes.NOTIFICATIONS.PUT_NOTIFICATION_TYPE(body.id);
+  const request = apiRoutes.NOTIFICATIONS.PUT_NOTIFICATION_TYPE({
+    id: body.id,
+  });
 
   const dataToBeSent = {
     ...body,
@@ -115,8 +161,8 @@ export const putNotificationType = async (body: Record<string, unknown>) => {
   return data;
 };
 
-export const deleteNotificationType = async (id: string) => {
-  const request = apiRoutes.NOTIFICATIONS.DELETE_NOTIFICATION_TYPE(id);
+export const deleteNotificationTypeFn = async (id: string) => {
+  const request = apiRoutes.NOTIFICATIONS.DELETE_NOTIFICATION_TYPE({ id });
 
   const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
     request,
