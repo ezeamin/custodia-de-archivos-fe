@@ -14,6 +14,7 @@ const MultipleComboBoxInput = <T extends FormSchemas>(
   const {
     className = '',
     control,
+    helperText = '',
     inputClassName = '',
     name,
     label,
@@ -46,6 +47,11 @@ const MultipleComboBoxInput = <T extends FormSchemas>(
           />
         )}
       />
+      {helperText && (
+        <p className="text-sm text-gray-400 dark:text-gray-400 mt-1">
+          {helperText}
+        </p>
+      )}
     </fieldset>
   );
 };

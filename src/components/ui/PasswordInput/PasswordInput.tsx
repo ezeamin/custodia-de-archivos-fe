@@ -13,7 +13,14 @@ import type { InputProps } from '@/components/ui/TextInput/TextInput.types';
 const PasswordInput = <T extends FormSchemas>(
   props: InputProps<T>
 ): JSX.Element => {
-  const { className = '', control, name, label, ...rest } = props;
+  const {
+    className = '',
+    control,
+    helperText = '',
+    name,
+    label,
+    ...rest
+  } = props;
 
   const [displayPass, setDisplayPass] = useState(false);
 
@@ -71,6 +78,11 @@ const PasswordInput = <T extends FormSchemas>(
           </div>
         )}
       />
+      {helperText && (
+        <p className="text-sm text-gray-400 dark:text-gray-400 mt-1">
+          {helperText}
+        </p>
+      )}
     </fieldset>
   );
 };

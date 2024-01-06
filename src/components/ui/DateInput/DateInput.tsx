@@ -12,7 +12,14 @@ import type { InputProps } from './DateInput.types';
 const DateInput = <T extends FormSchemas>(
   props: InputProps<T>
 ): JSX.Element => {
-  const { control, name, label, className = '', ...rest } = props;
+  const {
+    control,
+    helperText = '',
+    name,
+    label,
+    className = '',
+    ...rest
+  } = props;
 
   return (
     <fieldset className={cn('form-control ', className)}>
@@ -40,6 +47,11 @@ const DateInput = <T extends FormSchemas>(
           />
         )}
       />
+      {helperText && (
+        <p className="text-sm text-gray-400 dark:text-gray-400 mt-1">
+          {helperText}
+        </p>
+      )}
     </fieldset>
   );
 };
