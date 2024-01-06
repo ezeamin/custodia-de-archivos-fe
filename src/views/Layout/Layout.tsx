@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import { Outlet, ScrollRestoration } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import useScrollToTop from '../../stores/useScrollToTop';
 import { useTheme } from '@/stores/useTheme';
@@ -19,19 +19,12 @@ const Layout = () => {
   }, [theme]);
 
   return (
-    <>
-      <ScrollRestoration
-        getKey={(location) => {
-          return location.pathname;
-        }}
-      />
-      <LandscapeMenu>
-        <Header />
-        <main className="modules-padding">
-          <Outlet />
-        </main>
-      </LandscapeMenu>
-    </>
+    <LandscapeMenu>
+      <Header />
+      <main className="modules-padding">
+        <Outlet />
+      </main>
+    </LandscapeMenu>
   );
 };
 
