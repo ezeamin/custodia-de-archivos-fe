@@ -18,12 +18,12 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch } = useQuery({
+  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
     queryKey: ['employees'],
     queryFn: getEmployeesFn,
   });
 
-  useLoading(isLoading);
+  useLoading(isLoading, status);
 
   // -------------------------------------------------
   // HANDLERS

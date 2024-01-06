@@ -69,6 +69,7 @@ const CreateNotificationForm = () => {
     data: notificationTypes,
     isLoading: isLoadingTypes,
     isError: isErrorTypes,
+    status: statusTypes,
   } = useQuery({
     queryKey: ['notificationTypes'],
     queryFn: getNotificationTypesFn,
@@ -78,6 +79,7 @@ const CreateNotificationForm = () => {
     data: notificationReceivers,
     isLoading: isLoadingReceivers,
     isError: isErrorReceivers,
+    status: statusReceivers,
   } = useQuery({
     queryKey: ['receiverOptions'],
     queryFn: getNotificationReceiversFn,
@@ -105,7 +107,8 @@ const CreateNotificationForm = () => {
     );
   }
 
-  useLoading(isLoading || isLoadingTypes || isLoadingReceivers);
+  useLoading(isLoadingTypes, statusTypes);
+  useLoading(isLoadingReceivers, statusReceivers);
 
   // -------------------------------------------------
   // HANDLERS

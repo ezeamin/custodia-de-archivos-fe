@@ -17,12 +17,12 @@ const TypesList = () => {
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch } = useQuery({
+  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
     queryKey: ['notificationTypes'],
     queryFn: getNotificationTypesFn,
   });
 
-  useLoading(isLoading);
+  useLoading(isLoading, status);
 
   // -------------------------------------------------
   // HANDLERS

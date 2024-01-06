@@ -51,6 +51,7 @@ const TypesForm = () => {
     isError: isErrorEditedData,
     isLoading: isLoadingEditedData,
     isSuccess: isSuccessEditedData,
+    status: statusEditedData,
   } = useQuery({
     queryKey: ['notificationTypes', isEditing && idBeingEdited],
     queryFn: () => getNotificationTypeFn(idBeingEdited ?? ''),
@@ -61,6 +62,7 @@ const TypesForm = () => {
     // data: rolesOptions,
     isLoading: isLoadingRoles,
     isError: isErrorRoles,
+    status: statusRoles,
   } = useQuery({
     queryKey: ['rolesOptions'],
     queryFn: getRolesOptionsFn,
@@ -94,9 +96,17 @@ const TypesForm = () => {
     },
   });
 
-  useLoading(isLoadingEditedData || isLoadingRoles);
+  useLoading(isLoadingRoles, statusRoles);
+  useLoading(isLoadingEditedData, statusEditedData);
 
-  if (isErrorEditedData || isErrorRoles) {
+  if (isErrorRoles) {
+    toast.error(
+      'Ocurrió un error al obtener la información necesaria para cargar el formulario'
+    );
+    navigate(paths.NOTIFICATIONS.MAIN);
+  }
+
+  if (isErrorEditedData) {
     toast.error('Ocurrió un error al obtener la información');
     navigate(paths.NOTIFICATIONS.ADMIN_TYPES);
   }

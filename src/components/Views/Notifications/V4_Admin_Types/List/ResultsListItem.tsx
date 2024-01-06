@@ -33,7 +33,7 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
 
   const queryClient = useQueryClient();
 
-  const { mutate: removeType } = useMutation({
+  const { mutate: removeType, status } = useMutation({
     mutationFn: deleteNotificationTypeFn,
     onError: (error) => {
       setIsLoading(false);
@@ -46,7 +46,7 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
     },
   });
 
-  useLoading(isLoading);
+  useLoading(isLoading, status);
 
   // -----------------------------------------------------
   // HANDLERS

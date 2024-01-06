@@ -38,7 +38,7 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch } = useQuery({
+  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
     queryKey: [`notification_${notificationId}`],
     queryFn: () => getNotificationFn(notificationId!),
   });
@@ -55,7 +55,7 @@ const Results = () => {
     },
   });
 
-  useLoading(isLoading);
+  useLoading(isLoading, status);
 
   // -------------------------------------------------
   // HANDLERS

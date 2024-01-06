@@ -2,12 +2,16 @@ import { useEffect } from 'react';
 
 import { useLoadingState } from '@/stores/useLoadingState';
 
-export const useLoading = (isLoading = false) => {
+type statusType = 'idle' | 'pending' | 'success' | 'error';
+
+// eslint-disable-next-line @typescript-eslint/default-param-last
+export const useLoading = (isLoading = false, status: statusType) => {
   const { setIsLoading } = useLoadingState();
 
   useEffect(() => {
-    if (isLoading) setIsLoading(true);
+    if (isLoading && status === 'pending') setIsLoading(true);
 
-    if (!isLoading) setIsLoading(false);
-  }, [isLoading, setIsLoading]);
+    if (!isLoading && (status === 'success' || status === 'error'))
+      setIsLoading(false);
+  }, [isLoading, status, setIsLoading]);
 };

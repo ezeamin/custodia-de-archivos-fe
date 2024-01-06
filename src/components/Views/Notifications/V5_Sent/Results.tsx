@@ -20,12 +20,12 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch } = useQuery({
+  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
     queryKey: ['sent_notifications'],
     queryFn: () => getSentNotificationsFn(),
   });
 
-  useLoading(isLoading);
+  useLoading(isLoading, status);
 
   // -------------------------------------------------
   // HANDLERS
