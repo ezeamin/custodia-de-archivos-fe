@@ -22,8 +22,8 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
   const handleLogout = (): void => {
     closeMenu();
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: '¿Quieres cerrar sesión?',
+      title: '¿Está seguro?',
+      text: '¿Quiere cerrar sesión?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, salir',
@@ -33,7 +33,7 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
     })
       .then((action) => {
         if (action.isConfirmed) {
-          sessionStorage.removeItem('token');
+          sessionStorage.removeItem('refresh_token'); //! TODO: Check if it saves here or in cookies
           navigate(paths.AUTH.LOGIN);
         }
       })
