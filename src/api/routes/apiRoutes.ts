@@ -24,6 +24,10 @@ export const apiRoutes = {
       method: 'GET',
       url: `/employees/${id}`,
     }),
+    GET_EMPLOYEE_DOCS: ({ id }: { id: string }): ApiRoute => ({
+      method: 'GET',
+      url: `/employees/${id}/docs`,
+    }),
     POST_EMPLOYEE: (): ApiRoute => ({
       method: 'POST',
       url: '/employees',

@@ -4,7 +4,7 @@ import CreateForm from '@/components/Views/Employees/V2_Create/CreateForm';
 const CreateEmployeeView = () => {
   return (
     <>
-      <Title title="Crear nuevo empleado" />
+      <Title title="Crear Nuevo Empleado" />
       <CreateForm />
     </>
   );

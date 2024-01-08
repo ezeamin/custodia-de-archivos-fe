@@ -11,15 +11,18 @@ export type TitleProps = {
   | {
       onClick: () => void;
       buttonText: string;
+      buttonClassName?: string;
       href?: never;
     }
   | {
       href: string;
       buttonText: string;
+      buttonClassName?: string;
       onClick?: never;
     }
   | {
       buttonText?: never;
+      buttonClassName?: never;
       href?: never;
       onClick?: never;
     }

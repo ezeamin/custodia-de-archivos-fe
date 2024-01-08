@@ -1,4 +1,8 @@
-import { Employee, MinimalEmployee } from '@/api/interface/employees';
+import {
+  Employee,
+  EmployeeDoc,
+  MinimalEmployee,
+} from '@/api/interface/employees';
 import {
   Notification,
   NotificationFile,
@@ -38,6 +42,10 @@ export interface EmployeeDataFieldProps {
   label: string;
   value: string | number | React.ReactNode | undefined | null;
   className?: string;
+}
+
+export interface EditDocumentsFormProps {
+  data: EmployeeDoc[];
 }
 
 // --------------------------------------------------

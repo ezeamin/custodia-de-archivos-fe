@@ -2,10 +2,19 @@ import { Link } from 'react-router-dom';
 
 import { Button } from '../ui';
 
+import { cn } from '@/utilities';
+
 import { TitleProps } from '@/components/interface';
 
 const Title = (props: TitleProps) => {
-  const { title, buttonText, onClick, href, ...rest } = props;
+  const {
+    title,
+    buttonText,
+    onClick,
+    href,
+    buttonClassName = '',
+    ...rest
+  } = props;
 
   const isLink = !!href;
   const showButton = !!('href' in props || 'onClick' in props);
@@ -21,7 +30,10 @@ const Title = (props: TitleProps) => {
           <h1 className="text-4xl font-bold">{title}</h1>
           {showButton && (
             <Link
-              className="hidden sm:inline-flex btn btn-primary text-white border-none"
+              className={cn(
+                'hidden sm:inline-flex btn btn-primary text-white border-none',
+                buttonClassName
+              )}
               to={href}
             >
               {buttonText?.toUpperCase()}
@@ -31,7 +43,10 @@ const Title = (props: TitleProps) => {
         <div className="divider mt-1" />
         {showButton && (
           <Link
-            className="sm:hidden btn btn-primary text-white border-none w-full mb-3"
+            className={cn(
+              'sm:hidden btn btn-primary text-white border-none w-full mb-3',
+              buttonClassName
+            )}
             to={href}
           >
             {buttonText?.toUpperCase()}
@@ -52,7 +67,7 @@ const Title = (props: TitleProps) => {
         {showButton && (
           <Button
             unbordered
-            className="hidden sm:inline-flex text-white"
+            className={cn('hidden sm:inline-flex text-white', buttonClassName)}
             colorLight="btn-primary"
             onClick={onClick}
           >
@@ -64,7 +79,7 @@ const Title = (props: TitleProps) => {
       {showButton && (
         <Button
           unbordered
-          className="sm:hidden text-white"
+          className={cn('sm:hidden text-white', buttonClassName)}
           colorLight="btn-primary"
           onClick={onClick}
         >

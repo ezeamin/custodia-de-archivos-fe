@@ -13,7 +13,7 @@ const EmployeeListView = () => {
       <Title
         buttonText="Crear nuevo empleado"
         href={paths.EMPLOYEES.CREATE}
-        title="Listado de empleados"
+        title="Listado de Empleados"
       />
       <section className="flex justify-between items-center">
         <SearchFilter />

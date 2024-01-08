@@ -1,7 +1,9 @@
 import {
   API_GetEmployee,
+  API_GetEmployeeDocs,
   API_GetEmployees,
   Employee,
+  EmployeeDoc,
   MinimalEmployee,
 } from '@/api/interface/employees';
 
@@ -45,3 +47,13 @@ export const getEmployeeAdapter = (data: API_GetEmployee): Employee => ({
   fileNumber: data.fileNumber,
   status: data.status,
 });
+
+export const getEmployeeDocsAdapter = (
+  data: API_GetEmployeeDocs[]
+): EmployeeDoc[] => {
+  return data.map((doc) => ({
+    id: doc.id,
+    name: doc.name,
+    url: doc.url,
+  }));
+};

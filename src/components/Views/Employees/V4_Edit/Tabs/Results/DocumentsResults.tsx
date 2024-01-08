@@ -1,25 +1,20 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import EmployeeJobDetails from './EmployeeInfo/EmployeeJobDetails';
-import EmployeeTabs from './EmployeeInfo/EmployeeTabs';
-import { mockedEmployee } from './mocked';
+import EditDocumentsForm from '../Forms/EditDocumentsForm';
+import { mockedDocs } from './mocked';
 import { useQuery } from '@tanstack/react-query';
-import { toast } from 'sonner';
 
-import { getEmployeeFn } from '@/api/api-calls/employees';
+import { getEmployeeDocsFn } from '@/api/api-calls/employees';
 
 import { useLoading } from '@/hooks';
 
 import { Alert } from '@/components/ui';
 
-import { uuidRegex } from '@/constants/regex/regex';
-import { paths } from '@/constants/routes/paths';
-
-const data = mockedEmployee;
+const data = mockedDocs;
 const isError = false;
 const isLoading = false;
 
-const Results = () => {
+const DocumentsResults = () => {
   // -------------------------------------------------
   // STATE & PARAMS
   // -------------------------------------------------
@@ -27,20 +22,13 @@ const Results = () => {
   const params = useParams();
   const { id: employeeId } = params;
 
-  const navigate = useNavigate();
-
-  if (!employeeId || !uuidRegex.test(employeeId)) {
-    toast.error('El ID del empleado es inválido');
-    navigate(paths.EMPLOYEES.MAIN);
-  }
-
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
   const { /* data, isLoading, isError, */ refetch, status } = useQuery({
-    queryKey: [`employee_${employeeId}`],
-    queryFn: () => getEmployeeFn(employeeId!),
+    queryKey: [`employeeDocs_${employeeId}`],
+    queryFn: () => getEmployeeDocsFn(employeeId!),
   });
 
   useLoading(isLoading, status);
@@ -74,18 +62,12 @@ const Results = () => {
 
   if (data?.data) {
     return (
-      <section className="mt-5 overflow-hidden flex flex-col-reverse md:flex-row gap-3">
-        <article className="md:w-[50%] lg:w-[30%] xl:w-[20%]">
-          <EmployeeJobDetails data={data.data} />
-        </article>
-        <article className="md:w-[50%] lg:w-[70%] xl:w-[80%]">
-          <EmployeeTabs />
-        </article>
+      <section className="mt-5 overflow-hidden">
+        <EditDocumentsForm data={data.data} />
       </section>
     );
   }
 
   return null;
 };
-
-export default Results;
+export default DocumentsResults;

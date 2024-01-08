@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom';
+import { FaPencil } from 'react-icons/fa6';
+import { Link, useParams } from 'react-router-dom';
 
 import { mockedEmployee } from '../../mocked';
 import EmployeeDataField from '../EmployeeDataField';
@@ -7,7 +8,7 @@ import dayjs from 'dayjs';
 
 import { getEmployeeFn } from '@/api/api-calls/employees';
 
-import { Grid } from '@/components/ui';
+import { Grid, Icon } from '@/components/ui';
 
 const data = mockedEmployee;
 
@@ -38,7 +39,12 @@ const EmployeePersonalTab = () => {
   return (
     <>
       <article>
-        <h2 className="text-lg mb-2 font-bold">Información personal</h2>
+        <div className="flex mb-2 justify-between items-center">
+          <h2 className="text-lg font-bold">Información personal</h2>
+          <Link to={`/employees/${employeeId}/edit/personal`}>
+            <Icon iconComponent={<FaPencil size="1em" />} title="Editar" />
+          </Link>
+        </div>
         <Grid container component="section" gap={2}>
           <Grid item lg={6} xs={12}>
             <EmployeeDataField
@@ -71,7 +77,12 @@ const EmployeePersonalTab = () => {
       </article>
       <div className="divider" />
       <article>
-        <h2 className="text-lg mb-2 font-bold">Contacto</h2>
+        <div className="flex mb-2 justify-between items-center">
+          <h2 className="text-lg font-bold">Contacto</h2>
+          <Link to={`/employees/${employeeId}/edit/contact`}>
+            <Icon iconComponent={<FaPencil size="1em" />} title="Editar" />
+          </Link>
+        </div>
         <Grid container component="section" gap={2}>
           <Grid item xs={12}>
             <EmployeeDataField label="Email" value={data?.data?.email} />

@@ -44,9 +44,16 @@ export interface API_GetEmployee extends API_GetEmployees {
   departureDate: string | null;
 }
 
+export interface API_GetEmployeeDocs {
+  id: string;
+  name: string;
+  url: string;
+}
+
 // ----------------------------------------------------------------------
 // ADAPTERS
 // ----------------------------------------------------------------------
 
 export interface MinimalEmployee extends API_GetEmployees {}
 export interface Employee extends API_GetEmployee {}
+export interface EmployeeDoc extends API_GetEmployeeDocs {}

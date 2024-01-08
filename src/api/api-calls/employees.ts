@@ -7,8 +7,10 @@ import { getEmployeeAdapter, getEmployeesAdapter } from '../adapters/employees';
 import { API_EmptyResponse } from '../interface';
 import {
   API_GetEmployee,
+  API_GetEmployeeDocs,
   API_GetEmployees,
   Employee,
+  EmployeeDoc,
   MinimalEmployee,
 } from '../interface/employees';
 
@@ -31,6 +33,17 @@ export const getEmployeeFn = async (id: string) => {
   const data = await fetchFn<API_GetEmployee, Employee>({
     request,
     adapter: getEmployeeAdapter,
+  });
+
+  return data;
+};
+
+export const getEmployeeDocsFn = async (id: string) => {
+  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_DOCS({ id });
+
+  const data = await fetchFn<API_GetEmployeeDocs[], EmployeeDoc[]>({
+    request,
+    adapter: (APIData) => APIData,
   });
 
   return data;

@@ -1,10 +1,10 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import EmployeeJobDetails from './EmployeeInfo/EmployeeJobDetails';
-import EmployeeTabs from './EmployeeInfo/EmployeeTabs';
-import { mockedEmployee } from './mocked';
+import { mockedEmployee } from '../../../V3_Details/mocked';
+import EditContactForm from '../Forms/EditContactForm';
+import EditJobForm from '../Forms/EditJobForm';
+import EditPersonalForm from '../Forms/EditPersonalForm';
 import { useQuery } from '@tanstack/react-query';
-import { toast } from 'sonner';
 
 import { getEmployeeFn } from '@/api/api-calls/employees';
 
@@ -12,27 +12,17 @@ import { useLoading } from '@/hooks';
 
 import { Alert } from '@/components/ui';
 
-import { uuidRegex } from '@/constants/regex/regex';
-import { paths } from '@/constants/routes/paths';
-
 const data = mockedEmployee;
 const isError = false;
 const isLoading = false;
 
-const Results = () => {
+const GlobalEmployeeResults = () => {
   // -------------------------------------------------
   // STATE & PARAMS
   // -------------------------------------------------
 
   const params = useParams();
-  const { id: employeeId } = params;
-
-  const navigate = useNavigate();
-
-  if (!employeeId || !uuidRegex.test(employeeId)) {
-    toast.error('El ID del empleado es inválido');
-    navigate(paths.EMPLOYEES.MAIN);
-  }
+  const { id: employeeId, subtab: editSubtab } = params;
 
   // -------------------------------------------------
   // API
@@ -73,19 +63,24 @@ const Results = () => {
   }
 
   if (data?.data) {
-    return (
-      <section className="mt-5 overflow-hidden flex flex-col-reverse md:flex-row gap-3">
-        <article className="md:w-[50%] lg:w-[30%] xl:w-[20%]">
-          <EmployeeJobDetails data={data.data} />
-        </article>
-        <article className="md:w-[50%] lg:w-[70%] xl:w-[80%]">
-          <EmployeeTabs />
-        </article>
-      </section>
-    );
+    let renderedComp = null;
+    switch (editSubtab) {
+      case 'personal':
+        renderedComp = <EditPersonalForm data={data.data} />;
+        break;
+      case 'job':
+        renderedComp = <EditJobForm data={data.data} />;
+        break;
+      case 'contact':
+        renderedComp = <EditContactForm data={data.data} />;
+        break;
+      default:
+        break;
+    }
+
+    return <section className="mt-5 overflow-hidden">{renderedComp}</section>;
   }
 
   return null;
 };
-
-export default Results;
+export default GlobalEmployeeResults;
