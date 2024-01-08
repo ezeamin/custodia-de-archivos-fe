@@ -1,4 +1,4 @@
-import { Employee } from '@/api/interface/employees';
+import { Employee, MinimalEmployee } from '@/api/interface/employees';
 import {
   Notification,
   NotificationFile,
@@ -10,11 +10,11 @@ import {
 // --------------------------------------------------
 
 export interface EmployeesResultsTableProps {
-  data: Employee[];
+  data: MinimalEmployee[];
 }
 
 export interface EmployeesResultsTableRowProps {
-  employee: Employee;
+  employee: MinimalEmployee;
 }
 
 export interface EmployeesResultsListProps extends EmployeesResultsTableProps {}
@@ -24,7 +24,19 @@ export interface EmployeesResultsListItemProps
 }
 
 export interface EmployeeStatusProps {
-  status: Employee['status'];
+  status: MinimalEmployee['status'];
+  expanded?: boolean;
+  className?: string;
+}
+
+export interface EmployeeInfoProps {
+  data: Employee;
+}
+
+export interface EmployeeDetailsElementProps {
+  name: string;
+  value: string | React.ReactNode;
+  className?: string;
 }
 
 // --------------------------------------------------

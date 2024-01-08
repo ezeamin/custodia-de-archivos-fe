@@ -20,7 +20,7 @@ export const apiRoutes = {
       method: 'GET',
       url: `/employees${params}`,
     }),
-    GET_EMPLOYEE: (id: string): ApiRoute => ({
+    GET_EMPLOYEE: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}`,
     }),

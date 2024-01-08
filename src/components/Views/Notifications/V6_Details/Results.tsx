@@ -15,6 +15,7 @@ import { useLoading } from '@/hooks';
 
 import { Alert } from '@/components/ui';
 
+import { uuidRegex } from '@/constants/regex/regex';
 import { paths } from '@/constants/routes/paths';
 
 const data = mockedData;
@@ -30,7 +31,7 @@ const Results = () => {
   const [isLoadingReadNotification, setIsLoadingReadNotification] =
     useState(false);
 
-  if (!notificationId) {
+  if (!notificationId || !uuidRegex.test(notificationId)) {
     navigate(paths.NOTIFICATIONS.MAIN);
   }
 

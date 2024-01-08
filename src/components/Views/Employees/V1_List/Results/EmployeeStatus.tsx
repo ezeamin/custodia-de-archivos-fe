@@ -1,9 +1,11 @@
 import { usePortrait } from '@/hooks';
 
+import { cn } from '@/utilities';
+
 import { EmployeeStatusProps } from '@/components/interface/views';
 
 const EmployeeStatus = (props: EmployeeStatusProps) => {
-  const { status } = props;
+  const { status, expanded, className = '' } = props;
 
   const isPortrait = usePortrait();
 
@@ -26,19 +28,28 @@ const EmployeeStatus = (props: EmployeeStatusProps) => {
       portraitColors = 'border-orange-600 text-orange-600';
       text = 'Suspendido';
       break;
+    case 'deleted':
+      color = 'bg-gray-500';
+      portraitColors = 'border-gray-600 text-gray-600';
+      text = 'Eliminado';
+      break;
     default:
       break;
   }
 
-  if (isPortrait) {
+  if (isPortrait || expanded) {
     return (
-      <span className={`badge badge-outline ${portraitColors}`}>
+      <span className={cn(`badge badge-outline ${portraitColors}`, className)}>
         <span className={`${color} w-3 h-3 rounded-full inline-block mr-2`} />
         <p>{text}</p>
       </span>
     );
   }
 
-  return <span className={`${color} w-3 h-3 rounded-full inline-block`} />;
+  return (
+    <span
+      className={cn(`${color} w-3 h-3 rounded-full inline-block`, className)}
+    />
+  );
 };
 export default EmployeeStatus;
