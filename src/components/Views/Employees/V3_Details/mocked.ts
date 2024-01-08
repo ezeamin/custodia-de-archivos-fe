@@ -13,6 +13,10 @@ export const mockedEmployee: { data: Employee } = {
     birthdate: '1990-01-01T00:00:00.000Z',
     age: 30,
     antiquity: 2,
+    gender: {
+      id: generateRandomId(),
+      description: 'Hombre pecho peludo',
+    },
     registrationDate: '2020-01-01T00:00:00.000Z',
     departureDate: null,
     phone: '+5493815038570',

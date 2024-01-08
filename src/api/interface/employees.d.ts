@@ -36,6 +36,10 @@ export interface API_GetEmployee extends API_GetEmployees {
   address: API_Address;
   phone: string;
   email: string;
+  gender: {
+    id: string;
+    description: string;
+  };
   registrationDate: string;
   departureDate: string | null;
 }

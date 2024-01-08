@@ -27,15 +27,16 @@ export interface EmployeeStatusProps {
   status: MinimalEmployee['status'];
   expanded?: boolean;
   className?: string;
+  noBadge?: boolean;
 }
 
 export interface EmployeeInfoProps {
   data: Employee;
 }
 
-export interface EmployeeDetailsElementProps {
-  name: string;
-  value: string | React.ReactNode;
+export interface EmployeeDataFieldProps {
+  label: string;
+  value: string | number | React.ReactNode | undefined | null;
   className?: string;
 }
 

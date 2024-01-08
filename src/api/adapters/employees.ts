@@ -35,6 +35,7 @@ export const getEmployeeAdapter = (data: API_GetEmployee): Employee => ({
   phone: data.phone,
   email: data.email,
   age: data.age,
+  gender: data.gender,
   antiquity: data.antiquity,
   registrationDate: data.registrationDate,
   departureDate: data.departureDate,

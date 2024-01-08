@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import EmployeeStatus from '../V1_List/Results/EmployeeStatus';
-import EmployeeInfo from './EmployeeInfo/EmployeeInfo';
+import EmployeeJobDetails from './EmployeeInfo/EmployeeJobDetails';
+import EmployeeTabs from './EmployeeInfo/EmployeeTabs';
 import { mockedEmployee } from './mocked';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -10,7 +10,6 @@ import { getEmployeeFn } from '@/api/api-calls/employees';
 
 import { useLoading } from '@/hooks';
 
-import Title from '@/components/Common/Title';
 import { Alert } from '@/components/ui';
 
 import { uuidRegex } from '@/constants/regex/regex';
@@ -61,7 +60,7 @@ const Results = () => {
   if (isError) {
     return (
       <>
-        <Title title="Error" />
+        {/* <Title title="Error" /> */}
         <Alert className="mt-3 animate-in-right a-delay-500" type="error">
           <p>
             Ocurrió un error leyendo la información. Por favor, intente
@@ -78,24 +77,18 @@ const Results = () => {
 
   if (data?.data) {
     return (
-      <>
-        <div className="flex gap-4 items-center">
-          <h1 className="text-4xl font-bold">{`${data.data.lastname}, ${data.data.firstname}`}</h1>
-          <EmployeeStatus
-            expanded
-            className="hidden md:inline-flex"
-            status={data.data.status}
-          />
-        </div>
-        <div className="divider mt-1" />
-        <section className="mt-5 overflow-hidden">
-          <EmployeeInfo data={data.data} />
-        </section>
-      </>
+      <section className="mt-5 overflow-hidden flex flex-col-reverse md:flex-row gap-3">
+        <article className="md:w-[50%] lg:w-[30%] xl:w-[20%]">
+          <EmployeeJobDetails data={data.data} />
+        </article>
+        <article className="md:w-[50%] lg:w-[70%] xl:w-[80%]">
+          <EmployeeTabs />
+        </article>
+      </section>
     );
   }
 
-  return <Title title="Cargando..." />;
+  return null;
 };
 
 export default Results;

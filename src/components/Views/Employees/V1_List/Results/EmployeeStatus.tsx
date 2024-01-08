@@ -5,7 +5,7 @@ import { cn } from '@/utilities';
 import { EmployeeStatusProps } from '@/components/interface/views';
 
 const EmployeeStatus = (props: EmployeeStatusProps) => {
-  const { status, expanded, className = '' } = props;
+  const { status, expanded, noBadge, className = '' } = props;
 
   const isPortrait = usePortrait();
 
@@ -35,6 +35,15 @@ const EmployeeStatus = (props: EmployeeStatusProps) => {
       break;
     default:
       break;
+  }
+
+  if (noBadge) {
+    return (
+      <div className="flex">
+        <span className={`${color} w-3 h-3 rounded-full inline-block mr-2`} />
+        <p>{text}</p>
+      </div>
+    );
   }
 
   if (isPortrait || expanded) {
