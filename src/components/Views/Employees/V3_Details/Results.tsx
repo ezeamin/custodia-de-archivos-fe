@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 
 import { getEmployeeFn } from '@/api/api-calls/employees';
 
-import { useLoading } from '@/hooks';
+import { useLoading, usePortrait } from '@/hooks';
 
 import { Alert } from '@/components/ui';
 
@@ -25,7 +25,7 @@ const Results = () => {
   // -------------------------------------------------
 
   const params = useParams();
-  const { id: employeeId } = params;
+  const { id: employeeId, tab: currentTab } = params;
 
   const navigate = useNavigate();
 
@@ -33,6 +33,8 @@ const Results = () => {
     toast.error('El ID del empleado es inválido');
     navigate(paths.EMPLOYEES.MAIN);
   }
+
+  const isPortrait = usePortrait();
 
   // -------------------------------------------------
   // API
@@ -72,11 +74,14 @@ const Results = () => {
     );
   }
 
+  const showJobDetails =
+    !isPortrait || (currentTab === 'personal' && isPortrait);
+
   if (data?.data) {
     return (
       <section className="mt-5 overflow-hidden flex flex-col-reverse md:flex-row gap-3">
         <article className="md:w-[50%] lg:w-[30%] xl:w-[20%]">
-          <EmployeeJobDetails data={data.data} />
+          {showJobDetails && <EmployeeJobDetails data={data.data} />}
         </article>
         <article className="md:w-[50%] lg:w-[70%] xl:w-[80%]">
           <EmployeeTabs />

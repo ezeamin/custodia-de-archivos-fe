@@ -48,6 +48,10 @@ export interface EditDocumentsFormProps {
   data: EmployeeDoc[];
 }
 
+export interface DocumentItemProps {
+  doc: EmployeeDoc | undefined;
+}
+
 // --------------------------------------------------
 // NOTIFICATIONS
 // --------------------------------------------------

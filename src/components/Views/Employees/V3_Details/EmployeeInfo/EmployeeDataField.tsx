@@ -4,9 +4,7 @@ const EmployeeDataField = (props: EmployeeDataFieldProps) => {
   const { label, value } = props;
 
   if (value !== 0 && !value) {
-    return (
-      <div className="animate-pulse bg-gray-300 dark:bg-gray-700 rounded-md h-[52px]" />
-    );
+    return <div className="custom-skeleton rounded-md h-[52px]" />;
   }
 
   // React node

@@ -10,7 +10,7 @@ export const mockedDocs = {
     },
     {
       id: generateRandomId(),
-      name: 'hola2.pdf',
+      name: 'Captura de pantalla 2024-01-08 113146.png',
       url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
     },
     {

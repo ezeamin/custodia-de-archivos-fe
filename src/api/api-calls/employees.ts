@@ -60,3 +60,20 @@ export const postEmployeeFn = async (body: FormData) => {
 
   return data;
 };
+
+export const deleteFileFn = async ({
+  employeeId,
+  fileId,
+}: {
+  employeeId: string;
+  fileId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.DELETE_FILE({ fileId, employeeId });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};

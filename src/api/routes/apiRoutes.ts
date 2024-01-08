@@ -32,6 +32,16 @@ export const apiRoutes = {
       method: 'POST',
       url: '/employees',
     }),
+    DELETE_FILE: ({
+      employeeId,
+      fileId,
+    }: {
+      employeeId: string;
+      fileId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/docs/${fileId}`,
+    }),
   },
   NOTIFICATIONS: {
     GET_NOTIFICATIONS: ({ params }: { params: string }): ApiRoute => ({

@@ -2,19 +2,15 @@ import { IoDocumentAttach } from 'react-icons/io5';
 
 import { Button, Icon } from '@/components/ui';
 
+import { openFile } from '@/utilities/utils';
+
 import { NotificationFileItemProps } from '@/components/interface/views';
 
 const FileItem = (props: NotificationFileItemProps) => {
   const { file } = props;
 
   const handleDownload = () => {
-    const a = document.createElement('a');
-    a.href = file.url;
-    a.target = '_blank';
-    a.download = file.name;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    openFile(file.url, file.name);
   };
 
   return (
