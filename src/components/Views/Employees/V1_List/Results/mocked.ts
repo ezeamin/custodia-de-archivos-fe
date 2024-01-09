@@ -1,8 +1,8 @@
 import { generateRandomId } from '@/utilities/utils';
 
-import { Employee } from '@/api/interface/employees';
+import { MinimalEmployee } from '@/api/interface/employees';
 
-export const mockedData: { data: Employee[]; totalElements: number } = {
+export const mockedData: { data: MinimalEmployee[]; totalElements: number } = {
   totalElements: 15,
   data: [
     {

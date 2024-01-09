@@ -1,4 +1,10 @@
-import { Employee } from '@/api/interface/employees';
+import { ModalStore } from '@/stores/useModal';
+
+import {
+  Employee,
+  EmployeeDoc,
+  MinimalEmployee,
+} from '@/api/interface/employees';
 import {
   Notification,
   NotificationFile,
@@ -10,11 +16,11 @@ import {
 // --------------------------------------------------
 
 export interface EmployeesResultsTableProps {
-  data: Employee[];
+  data: MinimalEmployee[];
 }
 
 export interface EmployeesResultsTableRowProps {
-  employee: Employee;
+  employee: MinimalEmployee;
 }
 
 export interface EmployeesResultsListProps extends EmployeesResultsTableProps {}
@@ -24,7 +30,38 @@ export interface EmployeesResultsListItemProps
 }
 
 export interface EmployeeStatusProps {
-  status: Employee['status'];
+  status: MinimalEmployee['status'];
+  expanded?: boolean;
+  className?: string;
+  noBadge?: boolean;
+}
+
+export interface EmployeeInfoProps {
+  data: Employee;
+}
+
+export interface EmployeeDataFieldProps {
+  label: string;
+  value: string | number | React.ReactNode | undefined | null;
+  className?: string;
+}
+
+export interface EditDocumentsFormProps {
+  data: EmployeeDoc[];
+}
+
+export interface DocumentItemProps {
+  doc: EmployeeDoc | undefined;
+}
+
+export interface ChangeDocModalData extends ModalStore {
+  data: {
+    employeeId: string;
+    doc: {
+      id: string;
+      name: string;
+    };
+  };
 }
 
 // --------------------------------------------------

@@ -5,6 +5,7 @@ import { paths } from './paths';
 
 import AuthView from '@/views/Auth/AuthView';
 import CreateEmployeeView from '@/views/Employees/CreateEmployeeView';
+import EditEmployeeView from '@/views/Employees/EditEmployeeView';
 import EmployeeDetailsView from '@/views/Employees/EmployeeDetailsView';
 import EmployeeListView from '@/views/Employees/EmployeeListView';
 import HomeView from '@/views/Home/HomeView';
@@ -92,6 +93,16 @@ export const routes: Route[] = [
         privateRoute: true,
         element: <EmployeeDetailsView />,
         allowedRoles: ['ADMIN', 'READ_ONLY'],
+      },
+      {
+        id: 3003,
+        title: 'Editar empleado',
+        description: 'Editar empleado',
+        path: paths.EMPLOYEES.EMPLOYEE_DETAILS_EDIT,
+        subpaths: [],
+        privateRoute: true,
+        element: <EditEmployeeView />,
+        allowedRoles: ['ADMIN'],
       },
     ],
     privateRoute: true,

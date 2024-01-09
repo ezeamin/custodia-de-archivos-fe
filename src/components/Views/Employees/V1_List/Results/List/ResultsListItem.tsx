@@ -49,7 +49,7 @@ const ResultsListItem = (props: EmployeesResultsListItemProps) => {
         <div className="card-actions">
           <Link
             className="btn w-full btn-primary text-white"
-            to={`/employees/${employee.id}`}
+            to={`/employees/${employee.id}/personal`}
           >
             VER MÁS
           </Link>

@@ -8,13 +8,14 @@ import { toast } from 'sonner';
 
 import {
   getNotificationFn,
-  readNotificationFn,
+  putReadNotificationFn,
 } from '@/api/api-calls/notifications';
 
 import { useLoading } from '@/hooks';
 
 import { Alert } from '@/components/ui';
 
+import { uuidRegex } from '@/constants/regex/regex';
 import { paths } from '@/constants/routes/paths';
 
 const data = mockedData;
@@ -30,7 +31,7 @@ const Results = () => {
   const [isLoadingReadNotification, setIsLoadingReadNotification] =
     useState(false);
 
-  if (!notificationId) {
+  if (!notificationId || !uuidRegex.test(notificationId)) {
     navigate(paths.NOTIFICATIONS.MAIN);
   }
 
@@ -44,7 +45,7 @@ const Results = () => {
   });
 
   const { mutate: readNotification } = useMutation({
-    mutationFn: () => readNotificationFn(notificationId!),
+    mutationFn: () => putReadNotificationFn(notificationId!),
     onError: () => {
       setIsLoadingReadNotification(false);
       toast.error('Ocurrió un error al marcar la notificación como leída');

@@ -47,3 +47,13 @@ export const changeMeta = (theme: string) => {
     .querySelector('meta[name="theme-color"]')
     ?.setAttribute('content', theme === 'light' ? '#ffffff' : '#325d85');
 };
+
+export const openFile = (url: string, name: string) => {
+  const a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+};

@@ -38,7 +38,7 @@ const ResultsTableRow = (props: EmployeesResultsTableRowProps) => {
       <td className="text-end">
         <Link
           className="btn btn-primary text-white"
-          to={`/employees/${employee.id}`}
+          to={`/employees/${employee.id}/personal`}
         >
           VER MÁS
         </Link>

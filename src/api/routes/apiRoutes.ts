@@ -20,13 +20,37 @@ export const apiRoutes = {
       method: 'GET',
       url: `/employees${params}`,
     }),
-    GET_EMPLOYEE: (id: string): ApiRoute => ({
+    GET_EMPLOYEE: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}`,
+    }),
+    GET_EMPLOYEE_DOCS: ({ id }: { id: string }): ApiRoute => ({
+      method: 'GET',
+      url: `/employees/${id}/docs`,
     }),
     POST_EMPLOYEE: (): ApiRoute => ({
       method: 'POST',
       url: '/employees',
+    }),
+    PUT_FILE: ({
+      employeeId,
+      fileId,
+    }: {
+      employeeId: string;
+      fileId: string;
+    }): ApiRoute => ({
+      method: 'PUT',
+      url: `/employees/${employeeId}/docs/${fileId}`,
+    }),
+    DELETE_FILE: ({
+      employeeId,
+      fileId,
+    }: {
+      employeeId: string;
+      fileId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/docs/${fileId}`,
     }),
   },
   NOTIFICATIONS: {

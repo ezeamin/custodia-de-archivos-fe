@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface ModalStore {
+export interface ModalStore {
   opened: boolean;
   data: unknown;
   openModal: () => void;

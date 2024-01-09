@@ -65,7 +65,7 @@ export const getNotificationFn = async (id: string) => {
   return data;
 };
 
-export const readNotificationFn = async (id: string) => {
+export const putReadNotificationFn = async (id: string) => {
   const request = apiRoutes.NOTIFICATIONS.READ_NOTIFICATION({
     id,
   });
