@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { deleteFileFn } from '@/api/api-calls/employees';
 
 import { useLoading } from '@/hooks';
+import { useModal } from '@/stores/useModal';
 
 import { Button, Icon } from '@/components/ui';
 
@@ -20,6 +21,7 @@ const DocumentItem = (props: DocumentItemProps) => {
   const { doc } = props;
 
   const { id: employeeId } = useParams();
+  const { openModal, setModalData } = useModal();
 
   // -------------------------------------------------
   // API
@@ -31,8 +33,13 @@ const DocumentItem = (props: DocumentItemProps) => {
 
   const { mutate: deleteFile, status: deleteStatus } = useMutation({
     mutationFn: deleteFileFn,
-    onError: () => {
+    onError: (e) => {
       setIsLoading(false);
+      toast.error(
+        e instanceof Error
+          ? e.message
+          : 'Ocurrió un error eliminando el archivo. Intente nuevamente más tarde'
+      );
     },
     onSuccess: () => {
       setIsLoading(false);
@@ -53,7 +60,16 @@ const DocumentItem = (props: DocumentItemProps) => {
     if (doc) openFile(doc.url, doc.name);
   };
 
-  const handleRename = () => {};
+  const handleRename = () => {
+    setModalData({
+      employeeId: employeeId!,
+      doc: {
+        id: doc?.id,
+        name: doc?.name,
+      },
+    });
+    openModal();
+  };
 
   const handleDelete = () => {
     Swal.fire({
@@ -80,14 +96,14 @@ const DocumentItem = (props: DocumentItemProps) => {
   // Loading
   if (!doc) {
     return (
-      <article className="flex gap-2 items-center justify-between md:items-start md:justify-normal border border-gray-400 p-3 md:p-0 rounded-md md:border-none">
-        <div className="w-20 h-20 pl-3 md:pl-0 rounded-md custom-skeleton" />
+      <article className="flex gap-2 items-center justify-between lg:items-start lg:justify-normal border border-gray-400 p-3 lg:p-0 rounded-md lg:border-none">
+        <div className="w-20 h-20 pl-3 lg:pl-0 rounded-md custom-skeleton" />
         <div className="flex flex-col justify-between gap-3 w-1/2">
-          <span className="text-sm hidden md:block custom-skeleton h-[20px] rounded-md w-1/2" />
-          <div className="flex flex-col md:flex-row gap-2 w-full">
-            <span className="custom-skeleton w-full md:w-[61px] h-[48px] rounded-md" />
-            <span className="custom-skeleton w-full md:w-[122px] h-[48px] rounded-md" />
-            <span className="custom-skeleton w-full md:w-[100px] h-[48px] rounded-md" />
+          <span className="text-sm hidden lg:block custom-skeleton h-[20px] rounded-md w-1/2" />
+          <div className="flex flex-col lg:flex-row gap-2 w-full">
+            <span className="custom-skeleton w-full lg:w-[61px] h-[48px] rounded-md" />
+            <span className="custom-skeleton w-full lg:w-[122px] h-[48px] rounded-md" />
+            <span className="custom-skeleton w-full lg:w-[100px] h-[48px] rounded-md" />
           </div>
         </div>
       </article>
@@ -101,19 +117,19 @@ const DocumentItem = (props: DocumentItemProps) => {
       : doc.name;
 
   return (
-    <article className="flex gap-2 items-center justify-between md:items-start md:justify-normal border border-gray-400 p-3 md:p-0 rounded-md md:border-none">
-      <div className="w-20 h-20 pl-3 md:pl-0 rounded-md md:border md:border-gray-400 flex flex-col items-center justify-center gap-2">
+    <article className="flex gap-2 items-center justify-between lg:items-start lg:justify-normal border border-gray-400 p-3 lg:p-0 rounded-md lg:border-none">
+      <div className="w-20 h-20 pl-3 lg:pl-0 rounded-md lg:border lg:border-gray-400 flex flex-col items-center justify-center gap-2">
         <Icon
           className="w-8 h-8"
           iconComponent={<IoDocumentAttach />}
           title="documento"
         />
         <span className="text-sm font-bold">{extension}</span>
-        <span className="text-sm text-center md:hidden">{shortenedName}</span>
+        <span className="text-sm text-center lg:hidden">{shortenedName}</span>
       </div>
       <div className="flex flex-col justify-between gap-3">
-        <span className="text-sm hidden md:block">{shortenedName}</span>
-        <div className="flex flex-col md:flex-row gap-2">
+        <span className="text-sm hidden lg:block">{shortenedName}</span>
+        <div className="flex flex-col lg:flex-row gap-2">
           <Button
             className="border border-gray-400 hover:border-gray-500 dark:hover:border-gray-300"
             onClick={handleOpen}

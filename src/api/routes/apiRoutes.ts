@@ -32,6 +32,16 @@ export const apiRoutes = {
       method: 'POST',
       url: '/employees',
     }),
+    PUT_FILE: ({
+      employeeId,
+      fileId,
+    }: {
+      employeeId: string;
+      fileId: string;
+    }): ApiRoute => ({
+      method: 'PUT',
+      url: `/employees/${employeeId}/docs/${fileId}`,
+    }),
     DELETE_FILE: ({
       employeeId,
       fileId,

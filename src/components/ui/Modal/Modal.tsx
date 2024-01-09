@@ -1,9 +1,17 @@
 import { useModal } from '@/stores/useModal';
 
+import { Button } from '@/components/ui/';
+
 import { ModalProps } from './Modal.types';
 
 const Modal = (props: ModalProps) => {
-  const { title, children } = props;
+  const {
+    title,
+    children,
+    submitButton = false,
+    submitButtonText = 'Guardar',
+    loading = false,
+  } = props;
 
   const { opened, closeModal } = useModal();
 
@@ -24,6 +32,17 @@ const Modal = (props: ModalProps) => {
           <button className="btn" type="button" onClick={handleClose}>
             Cerrar
           </button>
+          {submitButton && (
+            <Button
+              lowerCase
+              colorLight="btn-primary"
+              loading={loading}
+              textColorLight="text-white"
+              type="submit"
+            >
+              {submitButtonText}
+            </Button>
+          )}
         </div>
       </div>
     </dialog>

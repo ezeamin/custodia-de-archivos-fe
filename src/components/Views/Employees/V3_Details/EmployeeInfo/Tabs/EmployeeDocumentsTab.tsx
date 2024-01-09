@@ -1,7 +1,9 @@
+import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
 
 import { mockedDocs } from '../../../V4_Edit/Tabs/Results/mocked';
-import DocumentItem from '../Extra/DocumentItem';
+import ChangeDocumentNameModal from '../Extra/Documents/ChangeDocumentNameModal';
+import DocumentItem from '../Extra/Documents/DocumentItem';
 import { useQuery } from '@tanstack/react-query';
 
 import { getEmployeeDocsFn } from '@/api/api-calls/employees';
@@ -63,11 +65,12 @@ const EmployeeDocumentsTab = () => {
       </Alert>
       <Grid container gap={3}>
         {data.data.map((doc) => (
-          <Grid item key={doc.id} sm={6} xs={12}>
+          <Grid item key={doc.id} md={12} sm={6} xl={6} xs={12}>
             <DocumentItem doc={doc} />
           </Grid>
         ))}
       </Grid>
+      {createPortal(<ChangeDocumentNameModal />, document.body)}
     </>
   );
 };

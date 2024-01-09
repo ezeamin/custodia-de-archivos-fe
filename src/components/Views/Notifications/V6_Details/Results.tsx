@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 
 import {
   getNotificationFn,
-  readNotificationFn,
+  putReadNotificationFn,
 } from '@/api/api-calls/notifications';
 
 import { useLoading } from '@/hooks';
@@ -45,7 +45,7 @@ const Results = () => {
   });
 
   const { mutate: readNotification } = useMutation({
-    mutationFn: () => readNotificationFn(notificationId!),
+    mutationFn: () => putReadNotificationFn(notificationId!),
     onError: () => {
       setIsLoadingReadNotification(false);
       toast.error('Ocurrió un error al marcar la notificación como leída');

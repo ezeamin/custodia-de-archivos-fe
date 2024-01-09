@@ -61,6 +61,26 @@ export const postEmployeeFn = async (body: FormData) => {
   return data;
 };
 
+export const putFileFn = async ({
+  employeeId,
+  fileId,
+  body,
+}: {
+  employeeId: string;
+  fileId: string;
+  body: Record<string, unknown>;
+}) => {
+  const request = apiRoutes.EMPLOYEES.PUT_FILE({ fileId, employeeId });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    body,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
 export const deleteFileFn = async ({
   employeeId,
   fileId,

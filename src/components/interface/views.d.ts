@@ -1,3 +1,5 @@
+import { ModalStore } from '@/stores/useModal';
+
 import {
   Employee,
   EmployeeDoc,
@@ -50,6 +52,16 @@ export interface EditDocumentsFormProps {
 
 export interface DocumentItemProps {
   doc: EmployeeDoc | undefined;
+}
+
+export interface ChangeDocModalData extends ModalStore {
+  data: {
+    employeeId: string;
+    doc: {
+      id: string;
+      name: string;
+    };
+  };
 }
 
 // --------------------------------------------------
