@@ -14,7 +14,13 @@ npm install -g pnpm
 pnpm install
 ```
 
-3. Iniciar servidor
+3. Habilitar Husky
+
+```bash
+npx husky install
+```
+
+4. Iniciar servidor
 
 ```bash
 pnpm dev
