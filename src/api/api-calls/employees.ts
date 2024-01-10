@@ -6,6 +6,7 @@ import {
   getEmployeeAbsencesAdapter,
   getEmployeeAdapter,
   getEmployeeDocsAdapter,
+  getEmployeeExtraHoursAdapter,
   getEmployeeFormalWarningAdapter,
   getEmployeeFormalWarningsAdapter,
   getEmployeeLateArrivalAdapter,
@@ -28,6 +29,7 @@ import {
   API_GetEmployee,
   API_GetEmployeeDocs,
   API_GetEmployees,
+  API_GetExtraHours,
   API_GetFormalWarnings,
   API_GetHistory,
   API_GetLateArrivals,
@@ -38,6 +40,7 @@ import {
   API_PostUser,
   Employee,
   EmployeeDoc,
+  ExtraHours,
   FormalWarning,
   History,
   LateArrival,
@@ -377,6 +380,17 @@ export const getEmployeeLateArrivalFn = async ({
   const data = await fetchFn<API_GetLateArrivals, LateArrival>({
     request,
     adapter: getEmployeeLateArrivalAdapter,
+  });
+
+  return data;
+};
+
+export const getEmployeeExtraHoursFn = async (id: string) => {
+  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_EXTRA_HOURS({ id });
+
+  const data = await fetchFn<API_GetExtraHours[], ExtraHours[]>({
+    request,
+    adapter: getEmployeeExtraHoursAdapter,
   });
 
   return data;

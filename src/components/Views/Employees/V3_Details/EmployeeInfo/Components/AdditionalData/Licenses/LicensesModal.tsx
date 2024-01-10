@@ -11,7 +11,7 @@ const LicensesModal = (props: LicensesProps) => {
   if (!data) return null;
 
   return (
-    <Modal id="licenses" title="Llegadas tarde">
+    <Modal id="licenses" title="Licencias">
       <section className="hidden sm:block">
         <Table data={data} />
       </section>

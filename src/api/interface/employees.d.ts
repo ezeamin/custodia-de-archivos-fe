@@ -123,6 +123,12 @@ export interface API_GetLateArrivals {
   date: string;
 }
 
+export interface API_GetExtraHours {
+  id: string;
+  date: string;
+  hours: number;
+}
+
 // ----------------------------------------------------------------------
 // ADAPTERS
 // ----------------------------------------------------------------------
@@ -140,3 +146,4 @@ export interface FormalWarning extends API_GetFormalWarnings {}
 export interface Training extends API_GetTrainings {}
 export interface TrainingType extends API_GetTrainingsTypes {}
 export interface LateArrival extends API_GetLateArrivals {}
+export interface ExtraHours extends API_GetExtraHours {}

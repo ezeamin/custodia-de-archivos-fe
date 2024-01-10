@@ -96,7 +96,7 @@ const Results = () => {
       )}
 
       {data.data && data.data.length === 0 && (
-        <p className="text-center my-3">No hay inasistencias registradas</p>
+        <p className="text-center my-3">No hay llegadas tarde registradas</p>
       )}
 
       {createPortal(<Modal data={data?.data} />, document.body)}

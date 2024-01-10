@@ -156,6 +156,10 @@ export const apiRoutes = {
       method: 'GET',
       url: `/employees/${employeeId}/late-arrivals/${lateArrivalId}`,
     }),
+    GET_EMPLOYEE_EXTRA_HOURS: ({ id }: { id: string }): ApiRoute => ({
+      method: 'GET',
+      url: `/employees/${id}/extra-hours`,
+    }),
   },
   NOTIFICATIONS: {
     GET_NOTIFICATIONS: ({ params }: { params: string }): ApiRoute => ({

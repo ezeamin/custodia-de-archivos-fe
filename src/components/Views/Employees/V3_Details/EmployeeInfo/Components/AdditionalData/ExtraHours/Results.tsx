@@ -1,21 +1,21 @@
 import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
 
-import { mockedLicenses } from '../../../../mocked';
-import Modal from './LicensesModal';
-import List from './List/LicensesList';
-import Table from './Table/LicensesTable';
+import { mockedExtraHours } from '../../../../mocked';
+import Modal from './ExtraHoursModal';
+import List from './List/ExtraHoursList';
+import Table from './Table/ExtraHoursTable';
 import { useQuery } from '@tanstack/react-query';
 
-import { getEmployeeLicensesFn } from '@/api/api-calls/employees';
+import { getEmployeeExtraHoursFn } from '@/api/api-calls/employees';
 
 import { useLoading } from '@/hooks';
 import { useModal } from '@/stores/useModal';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
-import { Alert, Button } from '@/components/ui';
+import { Button } from '@/components/ui';
 
-const data = mockedLicenses;
+const data = mockedExtraHours;
 const isLoading = false;
 const isError = false;
 
@@ -34,8 +34,8 @@ const Results = () => {
   // -------------------------------------------------
 
   const { /* data, isLoading, isError, */ refetch, status } = useQuery({
-    queryKey: [`employeeLicenses_${employeeId}`],
-    queryFn: () => getEmployeeLicensesFn(employeeId!),
+    queryKey: [`employeeExtraHours_${employeeId}`],
+    queryFn: () => getEmployeeExtraHoursFn(employeeId!),
   });
 
   useLoading(isLoading, status);
@@ -49,7 +49,7 @@ const Results = () => {
   };
 
   const handleSeeMore = () => {
-    openModal('licenses');
+    openModal('extraHours');
   };
 
   // -------------------------------------------------
@@ -59,7 +59,7 @@ const Results = () => {
   if (isError) {
     return (
       <>
-        <h2 className="text-lg font-bold mb-3">Licencias</h2>
+        <h2 className="text-lg font-bold mb-3">Horas extra</h2>
         <ErrorMessage refetch={handleRetry} />
       </>
     );
@@ -67,7 +67,7 @@ const Results = () => {
 
   return (
     <>
-      <h2 className="text-lg font-bold mb-3">Licencias</h2>
+      <h2 className="text-lg font-bold mb-3">Horas extra</h2>
       {isLoading && (
         <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-3">
           <div className="rounded-md custom-skeleton w-full sm:w-1/2 md:w-full lg:w-1/2 h-[100px]" />
@@ -77,10 +77,6 @@ const Results = () => {
 
       {data.data && data.data.length > 0 && (
         <>
-          <Alert className="mb-3">
-            La diferencia de días incluye fines de semana y feriados. No se hace
-            distinción de días hábiles y no hábiles.
-          </Alert>
           <section className="hidden sm:block">
             <Table data={data.data.slice(0, 10)} />
           </section>
@@ -100,7 +96,7 @@ const Results = () => {
       )}
 
       {data.data && data.data.length === 0 && (
-        <p className="text-center my-3">No hay licencias registradas</p>
+        <p className="text-center my-3">No hay horas extra registradas</p>
       )}
 
       {createPortal(<Modal data={data?.data} />, document.body)}

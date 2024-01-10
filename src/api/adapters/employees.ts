@@ -4,6 +4,7 @@ import {
   API_GetEmployee,
   API_GetEmployeeDocs,
   API_GetEmployees,
+  API_GetExtraHours,
   API_GetFormalWarnings,
   API_GetHistory,
   API_GetLateArrivals,
@@ -15,6 +16,7 @@ import {
   API_PostUser,
   Employee,
   EmployeeDoc,
+  ExtraHours,
   FormalWarning,
   History,
   LateArrival,
@@ -233,3 +235,13 @@ export const getEmployeeLateArrivalAdapter = (
   id: data.id,
   date: data.date,
 });
+
+export const getEmployeeExtraHoursAdapter = (
+  data: API_GetExtraHours[]
+): ExtraHours[] => {
+  return data.map((element) => ({
+    id: element.id,
+    date: element.date,
+    hours: element.hours,
+  }));
+};
