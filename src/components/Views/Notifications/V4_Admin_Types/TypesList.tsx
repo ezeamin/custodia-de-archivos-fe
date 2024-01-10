@@ -6,7 +6,7 @@ import { getNotificationTypesFn } from '@/api/api-calls/notifications';
 
 import { useLoading } from '@/hooks';
 
-import { Alert } from '@/components/ui';
+import ErrorMessage from '@/components/Error/ErrorMessage';
 
 const data = typesList;
 const isLoading = false;
@@ -37,18 +37,7 @@ const TypesList = () => {
   // -------------------------------------------------
 
   if (isError) {
-    return (
-      <Alert className="mt-3 animate-in-right a-delay-500" type="error">
-        <p>
-          Ocurrió un error leyendo la información. Por favor, intente nuevamente
-          en unos instantes o reintente utilizando el botón debajo de este
-          mensaje.
-        </p>
-        <button className="btn mt-2" type="button" onClick={handleRetry}>
-          Reintentar
-        </button>
-      </Alert>
-    );
+    return <ErrorMessage refetch={handleRetry} />;
   }
 
   if (data?.data) {

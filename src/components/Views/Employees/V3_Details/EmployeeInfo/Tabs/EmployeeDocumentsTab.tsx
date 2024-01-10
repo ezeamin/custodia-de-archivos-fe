@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getEmployeeDocsFn } from '@/api/api-calls/employees';
 
+import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Grid } from '@/components/ui';
 
 const data = mockedDocs;
@@ -49,16 +50,7 @@ const EmployeeDocumentsTab = () => {
     return (
       <>
         <h2 className="text-lg font-bold">Documentos</h2>
-        <Alert className="mt-3 animate-in-right a-delay-500" type="error">
-          <p>
-            Ocurrió un error leyendo la información. Por favor, intente
-            nuevamente en unos instantes o reintente utilizando el botón debajo
-            de este mensaje.
-          </p>
-          <button className="btn mt-2" type="button" onClick={handleRetry}>
-            Reintentar
-          </button>
-        </Alert>
+        <ErrorMessage refetch={handleRetry} />
       </>
     );
   }

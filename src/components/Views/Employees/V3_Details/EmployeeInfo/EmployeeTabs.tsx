@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import EmployeeAditionalDataTab from './Tabs/EmployeeAditionalDataTab';
+import EmployeeAdditionalDataTab from './Tabs/EmployeeAdditionalDataTab';
 import EmployeeDocumentsTab from './Tabs/EmployeeDocumentsTab';
 import EmployeeHistoryTab from './Tabs/EmployeeHistoryTab';
 import EmployeePersonalTab from './Tabs/EmployeePersonalTab';
@@ -22,7 +22,7 @@ const EmployeeTabs = () => {
       renderedComp = <EmployeeHistoryTab />;
       break;
     case 'additional-data':
-      renderedComp = <EmployeeAditionalDataTab />;
+      renderedComp = <EmployeeAdditionalDataTab />;
       break;
     default:
       navigate(`/employees/${employeeId}/personal`);

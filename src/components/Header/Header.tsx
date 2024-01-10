@@ -57,9 +57,9 @@ const Header = (): JSX.Element | null => {
   // ---------------------------------------------------------------------
 
   return (
-    <div className="md:hidden">
+    <div className="md:hidden sticky top-0 w-full z-40 ">
       <header
-        className={`z-40 py-5 ps-7 pe-5 flex justify-between sticky top-0 w-full transition-colors ${
+        className={`py-5 ps-7 pe-5 flex justify-between transition-colors ${
           isScrolling ? 'header-scrolling' : ''
         }`}
       >

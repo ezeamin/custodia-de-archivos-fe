@@ -1,29 +1,33 @@
-import ResultsList from '../V1_List/List/ResultsList';
-import { mockedData } from '../V1_List/mocked';
+import { useParams } from 'react-router-dom';
+
+import { mockedFormalWarnings } from '../../../../mocked';
 import { useQuery } from '@tanstack/react-query';
 
-import { getNotificationsFn } from '@/api/api-calls/notifications';
+import { getEmployeeFormalWarningsFn } from '@/api/api-calls/employees';
 
 import { useLoading } from '@/hooks';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
-import { Pagination } from '@/components/ui';
 
-const data = {
-  ...mockedData,
-  data: mockedData.data.filter((item) => item.hasBeenRead === true),
-};
-const isError = false;
+const data = mockedFormalWarnings;
 const isLoading = false;
+const isError = false;
 
 const Results = () => {
+  // -------------------------------------------------
+  // STATE & PARAMS
+  // -------------------------------------------------
+
+  const params = useParams();
+  const { id: employeeId } = params;
+
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
   const { /* data, isLoading, isError, */ refetch, status } = useQuery({
-    queryKey: ['notifications'],
-    queryFn: () => getNotificationsFn(true),
+    queryKey: [`employeeFormalWarnings_${employeeId}`],
+    queryFn: () => getEmployeeFormalWarningsFn(employeeId!),
   });
 
   useLoading(isLoading, status);
@@ -41,18 +45,14 @@ const Results = () => {
   // -------------------------------------------------
 
   if (isError) {
-    return <ErrorMessage refetch={handleRetry} />;
-  }
-
-  if (data?.data) {
     return (
-      <section className="mt-5 overflow-hidden">
-        <ResultsList hasBeenRead data={data.data} />
-        <Pagination totalElements={data.totalElements} />
-      </section>
+      <>
+        <h2 className="text-lg font-bold mb-3">Historial de cambios</h2>
+        <ErrorMessage refetch={handleRetry} />
+      </>
     );
   }
 
-  return null;
+  return <div>Results</div>;
 };
 export default Results;

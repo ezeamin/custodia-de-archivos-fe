@@ -1,9 +1,12 @@
 import { ModalStore } from '@/stores/useModal';
 
 import {
+  Absence,
   Employee,
   EmployeeDoc,
   History,
+  LateArrival,
+  License,
   MinimalEmployee,
 } from '@/api/interface/employees';
 import {
@@ -80,6 +83,30 @@ export interface HistoryDataProps {
 
 export interface HistoryElementProps {
   data: History;
+}
+
+export interface AbsenceProps {
+  data: Absence[];
+}
+
+export interface AbsenceElementProps {
+  data: Absence;
+}
+
+export interface LateArrivalsProps {
+  data: LateArrival[];
+}
+
+export interface LateArrivalsElementProps {
+  data: LateArrival;
+}
+
+export interface LicensesProps {
+  data: License[];
+}
+
+export interface LicensesElementProps {
+  data: License;
 }
 
 // --------------------------------------------------

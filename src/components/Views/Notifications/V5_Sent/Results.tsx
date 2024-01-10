@@ -6,7 +6,8 @@ import { getSentNotificationsFn } from '@/api/api-calls/notifications';
 
 import { useLoading } from '@/hooks';
 
-import { Alert, Pagination } from '@/components/ui';
+import ErrorMessage from '@/components/Error/ErrorMessage';
+import { Pagination } from '@/components/ui';
 
 const data = {
   ...mockedData,
@@ -40,18 +41,7 @@ const Results = () => {
   // -------------------------------------------------
 
   if (isError) {
-    return (
-      <Alert className="mt-3 animate-in-right a-delay-500" type="error">
-        <p>
-          Ocurrió un error leyendo la información. Por favor, intente nuevamente
-          en unos instantes o reintente utilizando el botón debajo de este
-          mensaje.
-        </p>
-        <button className="btn mt-2" type="button" onClick={handleRetry}>
-          Reintentar
-        </button>
-      </Alert>
-    );
+    return <ErrorMessage refetch={handleRetry} />;
   }
 
   if (data?.data) {
