@@ -13,6 +13,12 @@ const NewUserModal = () => {
         El usuario ha sido creado correctamente. Se ha enviado un correo
         electrónico al empleado con las instrucciones para activar su cuenta.
       </Alert>
+      <div className="divider" />
+      <p>
+        El usuario será el DNI del empleado, y la contraseña que se muestra a
+        continuación será temporal. El empleado deberá cambiarla cuando se
+        loguee por primera vez
+      </p>
       <h2 className="mt-3 mb-2">
         Usuario: <b>{data?.data?.username}</b>
       </h2>

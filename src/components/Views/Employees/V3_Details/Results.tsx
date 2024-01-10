@@ -113,9 +113,13 @@ const Results = () => {
         {!data.data.user && (
           <Alert closable className="mb-3">
             <b>Atencion: este empleado no tiene usuario asignado</b>. Si desea
-            hacerlo, haga click en el siguiente botón:
-            <div className="flex justify-end">
-              <Button loading={isLoadingCreateUser} onClick={handleCreateUser}>
+            hacerlo, haga click en el siguiente botón.
+            <div>
+              <Button
+                className="mt-3"
+                loading={isLoadingCreateUser}
+                onClick={handleCreateUser}
+              >
                 Crear usuario
               </Button>
             </div>
