@@ -15,7 +15,7 @@ const DescriptionModal = () => {
     typeof data.description === 'string'
   ) {
     return (
-      <Modal title={data.title}>
+      <Modal id="notificationTypeDescription" title={data.title}>
         <p>{data.description}</p>
       </Modal>
     );

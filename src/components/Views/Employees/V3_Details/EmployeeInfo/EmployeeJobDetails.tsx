@@ -1,6 +1,7 @@
-import EmployeeStatus from '../../V1_List/Results/EmployeeStatus';
 import EmployeeDataField from './EmployeeDataField';
 import dayjs from 'dayjs';
+
+import EmployeeStatus from '@/components/Views/Employees/V1_List/Results/EmployeeStatus';
 
 import { EmployeeInfoProps } from '@/components/interface/views';
 

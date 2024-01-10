@@ -68,7 +68,7 @@ const DocumentItem = (props: DocumentItemProps) => {
         name: doc?.name,
       },
     });
-    openModal();
+    openModal('changeDocument');
   };
 
   const handleDelete = () => {

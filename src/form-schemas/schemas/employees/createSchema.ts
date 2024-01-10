@@ -20,7 +20,9 @@ export const createSchema = z.object({
   position: positionRules(true),
   area: typeRules(true, 'área'),
   fileNumber: z.coerce.number().int().positive(),
-  imgFile: z.instanceof(File),
+  imgFile: z.instanceof(File, {
+    message: 'El archivo es requerido',
+  }),
 });
 
 export type CreateSchema = z.infer<typeof createSchema>;

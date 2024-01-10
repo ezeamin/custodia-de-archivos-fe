@@ -2,8 +2,10 @@ import {
   API_GetEmployee,
   API_GetEmployeeDocs,
   API_GetEmployees,
+  API_GetHistory,
   Employee,
   EmployeeDoc,
+  History,
   MinimalEmployee,
 } from '@/api/interface/employees';
 
@@ -55,5 +57,17 @@ export const getEmployeeDocsAdapter = (
     id: doc.id,
     name: doc.name,
     url: doc.url,
+  }));
+};
+
+export const getEmployeeHistoryAdapter = (
+  data: API_GetHistory[]
+): History[] => {
+  return data.map((element) => ({
+    id: element.id,
+    previousValue: element.previousValue,
+    newValue: element.newValue,
+    field: element.field,
+    date: element.date,
   }));
 };

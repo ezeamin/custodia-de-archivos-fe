@@ -2,15 +2,21 @@ import { fetchFn } from '../fetchFn';
 
 import { apiRoutes } from '@/api/routes/apiRoutes';
 
-import { getEmployeeAdapter, getEmployeesAdapter } from '../adapters/employees';
+import {
+  getEmployeeAdapter,
+  getEmployeeDocsAdapter,
+  getEmployeesAdapter,
+} from '../adapters/employees';
 
 import { API_EmptyResponse } from '../interface';
 import {
   API_GetEmployee,
   API_GetEmployeeDocs,
   API_GetEmployees,
+  API_GetHistory,
   Employee,
   EmployeeDoc,
+  History,
   MinimalEmployee,
 } from '../interface/employees';
 
@@ -43,7 +49,18 @@ export const getEmployeeDocsFn = async (id: string) => {
 
   const data = await fetchFn<API_GetEmployeeDocs[], EmployeeDoc[]>({
     request,
-    adapter: (APIData) => APIData,
+    adapter: getEmployeeDocsAdapter,
+  });
+
+  return data;
+};
+
+export const getEmployeeHistoryFn = async (id: string) => {
+  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_HISTORY({ id });
+
+  const data = await fetchFn<API_GetHistory[], History[]>({
+    request,
+    adapter: getEmployeeHistoryFn,
   });
 
   return data;
@@ -51,6 +68,24 @@ export const getEmployeeDocsFn = async (id: string) => {
 
 export const postEmployeeFn = async (body: FormData) => {
   const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE();
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body,
+  });
+
+  return data;
+};
+
+export const postFileFn = async ({
+  employeeId,
+  body,
+}: {
+  employeeId: string;
+  body: FormData;
+}) => {
+  const request = apiRoutes.EMPLOYEES.POST_FILE({ employeeId });
 
   const data = await fetchFn<API_EmptyResponse>({
     request,

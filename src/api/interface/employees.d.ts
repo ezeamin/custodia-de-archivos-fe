@@ -50,6 +50,14 @@ export interface API_GetEmployeeDocs {
   url: string;
 }
 
+export interface API_GetHistory {
+  id: string;
+  previousValue: string;
+  newValue: string;
+  field: string;
+  date: string;
+}
+
 // ----------------------------------------------------------------------
 // ADAPTERS
 // ----------------------------------------------------------------------
@@ -57,3 +65,4 @@ export interface API_GetEmployeeDocs {
 export interface MinimalEmployee extends API_GetEmployees {}
 export interface Employee extends API_GetEmployee {}
 export interface EmployeeDoc extends API_GetEmployeeDocs {}
+export interface History extends API_GetHistory {}

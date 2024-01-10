@@ -92,7 +92,12 @@ const ChangeDocumentNameModal = () => {
 
   return (
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
-      <Modal submitButton loading={isLoading} title="Cambiar nombre">
+      <Modal
+        submitButton
+        id="changeDocument"
+        loading={isLoading}
+        title="Cambiar nombre"
+      >
         <Alert className="mb-3">
           <b>
             No incluya la extensión del archivo, espacios ni caracteres

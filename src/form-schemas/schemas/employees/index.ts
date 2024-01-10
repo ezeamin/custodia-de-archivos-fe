@@ -1,3 +1,4 @@
+import { AddDocumentSchema } from './addDocumentSchema';
 import { ChangeDocNameSchema } from './changeDocNameSchema';
 import { CreateSchema } from './createSchema';
 import type { SearchSchema } from './searchSchema';
@@ -6,4 +7,5 @@ import type { SearchSchema } from './searchSchema';
 export type EmployeesSchemas =
   | SearchSchema
   | CreateSchema
-  | ChangeDocNameSchema;
+  | ChangeDocNameSchema
+  | AddDocumentSchema;

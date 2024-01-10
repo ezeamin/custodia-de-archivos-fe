@@ -22,7 +22,7 @@ const SearchFilter = () => {
   };
 
   const handleModal = () => {
-    openModal();
+    openModal('employeeSearchFilter');
   };
 
   if (isPortrait) {

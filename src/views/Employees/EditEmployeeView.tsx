@@ -3,12 +3,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
 import Title from '@/components/Common/Title';
-import DocumentsResults from '@/components/Views/Employees/V4_Edit/Tabs/Results/DocumentsResults';
 import GlobalEmployeeResults from '@/components/Views/Employees/V4_Edit/Tabs/Results/GlobalEmployeeResults';
 
 import { uuidRegex } from '@/constants/regex/regex';
 
-const validEditTabs = ['personal', 'job', 'contact', 'documents'];
+const validEditTabs = [
+  'personal',
+  'job',
+  'contact',
+  'documents',
+  'additional-data',
+];
 
 const EditEmployeeView = () => {
   const { id: employeeId, subtab: editSubtab } = useParams();
@@ -25,13 +30,6 @@ const EditEmployeeView = () => {
     navigate(`/employees/${employeeId}/personal`);
   }
 
-  const renderedComp =
-    editSubtab === 'documents' ? (
-      <DocumentsResults />
-    ) : (
-      <GlobalEmployeeResults />
-    );
-
   return (
     <>
       <Title
@@ -40,7 +38,7 @@ const EditEmployeeView = () => {
         href={`/employees/${employeeId}/personal`}
         title="Editar Empleado"
       />
-      {renderedComp}
+      <GlobalEmployeeResults />
     </>
   );
 };

@@ -32,6 +32,10 @@ export const apiRoutes = {
       method: 'POST',
       url: '/employees',
     }),
+    POST_FILE: ({ employeeId }: { employeeId: string }): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/${employeeId}/docs`,
+    }),
     PUT_FILE: ({
       employeeId,
       fileId,
@@ -51,6 +55,10 @@ export const apiRoutes = {
     }): ApiRoute => ({
       method: 'DELETE',
       url: `/employees/${employeeId}/docs/${fileId}`,
+    }),
+    GET_EMPLOYEE_HISTORY: ({ id }: { id: string }): ApiRoute => ({
+      method: 'GET',
+      url: `/employees/${id}/history`,
     }),
   },
   NOTIFICATIONS: {

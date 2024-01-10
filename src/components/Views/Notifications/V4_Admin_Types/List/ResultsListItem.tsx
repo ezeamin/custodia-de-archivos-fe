@@ -72,7 +72,7 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
 
   const handleDescription = () => {
     setModalData(notificationType);
-    openModal();
+    openModal("notificationTypeDescription");
   };
 
   return (

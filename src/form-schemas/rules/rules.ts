@@ -302,6 +302,35 @@ export const idRules = <T extends boolean = false>(required: T) => {
   return optionalWrapper(required, rule);
 };
 
+export const fileNameRules = <T extends boolean = false>(required: T) => {
+  const rule = z
+    .string()
+    .trim()
+    .max(35, {
+      message: 'El Nombre debe tener menos de 35 caracteres',
+    })
+    .regex(/^[a-zA-Z0-9]*$/, {
+      message:
+        'El Nombre no puede contener espacios, caracteres especiales ni puntos',
+    })
+    .refine(
+      // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
+      (data) => {
+        if (required) {
+          return data.length > 0;
+        }
+
+        return !data || data.length >= 2;
+      },
+      {
+        message: 'El Nombre debe tener al menos 2 caracteres',
+      }
+    )
+    .default('');
+
+  return optionalWrapper(required, rule);
+};
+
 // ----------------------------------------------------
 // COMMON REFINES
 // ----------------------------------------------------

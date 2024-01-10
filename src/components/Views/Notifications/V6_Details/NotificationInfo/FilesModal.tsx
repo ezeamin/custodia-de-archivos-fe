@@ -8,7 +8,7 @@ const FilesModal = (props: NotificationInfoContentProps) => {
   const { data } = props;
 
   return (
-    <Modal title="Archivos adjuntos">
+    <Modal id="filesModal" title="Archivos adjuntos">
       <div className="flex flex-col gap-3">
         {data.files?.map((file) => <FileItem file={file} key={file.id} />)}
       </div>

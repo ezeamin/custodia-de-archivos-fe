@@ -20,17 +20,18 @@ const FileInput = <T extends FormSchemas>(
     name,
     label,
     setValue,
+    inputClassName,
     ...rest
   } = props;
 
-  const [hasLoadedImage, setHasLoadedImage] = useState(false);
+  const [hasLoadedFile, setHasLoadedFile] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
     if (!file) {
-      setHasLoadedImage(false);
+      setHasLoadedFile(false);
     } else {
-      setHasLoadedImage(true);
+      setHasLoadedFile(true);
     }
 
     setValue(name as string, file);
@@ -38,7 +39,7 @@ const FileInput = <T extends FormSchemas>(
 
   const handleRemove = () => {
     setValue(name as string, null);
-    setHasLoadedImage(false);
+    setHasLoadedFile(false);
   };
 
   return (
@@ -55,9 +56,12 @@ const FileInput = <T extends FormSchemas>(
           name={name}
           render={({ field, fieldState: { error } }) => (
             <input
-              className={`file-input file-input-sm md:file-input-md file-input-ghost focus:bg-gray-200 dark:focus:bg-gray-800 border border-gray-300 dark:border-gray-500 w-full max-w-xs ${
-                error ? 'border-error' : ''
-              }`}
+              className={cn(
+                `file-input file-input-sm md:file-input-md file-input-ghost focus:bg-gray-200 dark:focus:bg-gray-800 border border-gray-300 dark:border-gray-500 w-full max-w-xs ${
+                  error ? 'border-error' : ''
+                }`,
+                inputClassName
+              )}
               disabled={disabled}
               id={name as string}
               ref={field.ref}
@@ -70,8 +74,8 @@ const FileInput = <T extends FormSchemas>(
         />
         <Button
           className="border border-gray-300 md:tooltip md:tooltip-bottom btn-sm md:btn-md inline-block"
-          data-tip="Borrar imagen"
-          disabled={!hasLoadedImage}
+          data-tip="Borrar archivo"
+          disabled={!hasLoadedFile}
           onClick={handleRemove}
         >
           <Icon
@@ -79,7 +83,7 @@ const FileInput = <T extends FormSchemas>(
             iconComponent={<IoTrashBin />}
             title="Borrar"
           />
-          <p className="md:hidden">BORRAR IMAGEN</p>
+          <p className="md:hidden">BORRAR ARCHIVO</p>
         </Button>
       </div>
     </fieldset>

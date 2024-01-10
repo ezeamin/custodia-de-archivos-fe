@@ -19,7 +19,7 @@ const NotificationBody = (props: NotificationInfoContentProps) => {
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY - HH:mm:ss');
 
   const handleClick = () => {
-    openModal();
+    openModal('filesModal');
   };
 
   return (
