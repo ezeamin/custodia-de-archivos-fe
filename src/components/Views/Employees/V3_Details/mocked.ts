@@ -33,6 +33,7 @@ export const mockedEmployee: { data: Employee } = {
     },
     fileNumber: 101,
     status: { id: generateRandomId(), description: 'active' },
+    user: null,
   },
 };
 

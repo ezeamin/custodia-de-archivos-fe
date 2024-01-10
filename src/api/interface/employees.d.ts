@@ -42,6 +42,9 @@ export interface API_GetEmployee extends API_GetEmployees {
   };
   registrationDate: string;
   departureDate: string | null;
+  user: {
+    id: string;
+  } | null;
 }
 
 export interface API_GetEmployeeDocs {
@@ -62,6 +65,11 @@ export interface API_GetHistory {
   };
 }
 
+export interface API_PostUser {
+  username: string;
+  password: string;
+}
+
 // ----------------------------------------------------------------------
 // ADAPTERS
 // ----------------------------------------------------------------------
@@ -70,3 +78,4 @@ export interface MinimalEmployee extends API_GetEmployees {}
 export interface Employee extends API_GetEmployee {}
 export interface EmployeeDoc extends API_GetEmployeeDocs {}
 export interface History extends API_GetHistory {}
+export interface User extends API_PostUser {}

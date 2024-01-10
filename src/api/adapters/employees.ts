@@ -3,10 +3,12 @@ import {
   API_GetEmployeeDocs,
   API_GetEmployees,
   API_GetHistory,
+  API_PostUser,
   Employee,
   EmployeeDoc,
   History,
   MinimalEmployee,
+  User,
 } from '@/api/interface/employees';
 
 // TODO: Check if this information is all needed.
@@ -48,6 +50,7 @@ export const getEmployeeAdapter = (data: API_GetEmployee): Employee => ({
   address: data.address,
   fileNumber: data.fileNumber,
   status: data.status,
+  user: data.user,
 });
 
 export const getEmployeeDocsAdapter = (
@@ -75,3 +78,8 @@ export const getEmployeeHistoryAdapter = (
     },
   }));
 };
+
+export const postUserAdapter = (data: API_PostUser): User => ({
+  username: data.username,
+  password: data.password,
+});

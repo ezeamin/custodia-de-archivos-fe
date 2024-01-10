@@ -1,16 +1,19 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import EmployeeJobDetails from './EmployeeInfo/EmployeeJobDetails';
 import EmployeeTabs from './EmployeeInfo/EmployeeTabs';
+import NewUserModal from './EmployeeInfo/NewUserModal';
 import { mockedEmployee } from './mocked';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { getEmployeeFn } from '@/api/api-calls/employees';
+import { getEmployeeFn, postUserFn } from '@/api/api-calls/employees';
 
 import { useLoading, usePortrait } from '@/hooks';
+import { useModal } from '@/stores/useModal';
 
-import { Alert } from '@/components/ui';
+import { Alert, Button } from '@/components/ui';
 
 import { uuidRegex } from '@/constants/regex/regex';
 import { paths } from '@/constants/routes/paths';
@@ -36,13 +39,35 @@ const Results = () => {
 
   const isPortrait = usePortrait();
 
+  const { openModal, setModalData } = useModal();
+
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
+  const [isLoadingCreateUser, setIsLoadingCreateUser] = useState(false);
+
+  const queryClient = useQueryClient();
+
   const { /* data, isLoading, isError, */ refetch, status } = useQuery({
     queryKey: [`employee_${employeeId}`],
     queryFn: () => getEmployeeFn(employeeId!),
+  });
+
+  const { mutate: createUser } = useMutation({
+    mutationFn: postUserFn,
+    onError: (error) => {
+      setIsLoadingCreateUser(false);
+      toast.error(error.message);
+    },
+    onSuccess: (res) => {
+      setIsLoadingCreateUser(false);
+      setModalData(res);
+      openModal('newUser');
+      queryClient.invalidateQueries({
+        queryKey: [`employee_${employeeId}`],
+      });
+    },
   });
 
   useLoading(isLoading, status);
@@ -53,6 +78,11 @@ const Results = () => {
 
   const handleRetry = () => {
     refetch();
+  };
+
+  const handleCreateUser = () => {
+    setIsLoadingCreateUser(true);
+    createUser(employeeId!);
   };
 
   // -------------------------------------------------
@@ -79,14 +109,28 @@ const Results = () => {
 
   if (data?.data) {
     return (
-      <section className="mt-5 overflow-hidden flex flex-col-reverse lg:flex-row gap-3">
-        <article className="md:w-[100%] lg:w-[30%] xl:w-[20%]">
-          {showJobDetails && <EmployeeJobDetails data={data.data} />}
-        </article>
-        <article className="md:w-[100%] lg:w-[70%] xl:w-[80%]">
-          <EmployeeTabs />
-        </article>
-      </section>
+      <>
+        {!data.data.user && (
+          <Alert closable className="mb-3">
+            <b>Atencion: este empleado no tiene usuario asignado</b>. Si desea
+            hacerlo, haga click en el siguiente botón:
+            <div className="flex justify-end">
+              <Button loading={isLoadingCreateUser} onClick={handleCreateUser}>
+                Crear usuario
+              </Button>
+            </div>
+          </Alert>
+        )}
+        <section className="mt-5 overflow-hidden flex flex-col-reverse lg:flex-row gap-3">
+          <article className="md:w-[100%] lg:w-[30%] xl:w-[20%]">
+            {showJobDetails && <EmployeeJobDetails data={data.data} />}
+          </article>
+          <article className="md:w-[100%] lg:w-[70%] xl:w-[80%]">
+            <EmployeeTabs />
+          </article>
+        </section>
+        <NewUserModal />
+      </>
     );
   }
 

@@ -65,6 +65,15 @@ export interface ChangeDocModalData extends ModalStore {
   };
 }
 
+export interface NewUserModalData extends ModalStore {
+  data: {
+    data: {
+      username: string;
+      password: string;
+    };
+  };
+}
+
 export interface HistoryDataProps {
   data: History[];
 }

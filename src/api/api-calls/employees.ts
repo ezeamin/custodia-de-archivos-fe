@@ -6,6 +6,7 @@ import {
   getEmployeeAdapter,
   getEmployeeDocsAdapter,
   getEmployeesAdapter,
+  postUserAdapter,
 } from '../adapters/employees';
 
 import { API_EmptyResponse } from '../interface';
@@ -14,11 +15,13 @@ import {
   API_GetEmployeeDocs,
   API_GetEmployees,
   API_GetHistory,
+  API_PostUser,
   Employee,
   EmployeeDoc,
   History,
   MinimalEmployee,
 } from '../interface/employees';
+import { User } from '@/interface';
 
 export const getEmployeesFn = async () => {
   const { search } = window.location;
@@ -128,6 +131,18 @@ export const deleteFileFn = async ({
   const data = await fetchFn<API_EmptyResponse>({
     request,
     adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const postUserFn = async (employeeId: string) => {
+  const request = apiRoutes.EMPLOYEES.POST_USER();
+
+  const data = await fetchFn<API_PostUser, User>({
+    request,
+    adapter: postUserAdapter,
+    body: { employeeId },
   });
 
   return data;

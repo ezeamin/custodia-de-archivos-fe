@@ -60,6 +60,10 @@ export const apiRoutes = {
       method: 'GET',
       url: `/employees/${id}/history`,
     }),
+    POST_USER: (): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/users`,
+    }),
   },
   NOTIFICATIONS: {
     GET_NOTIFICATIONS: ({ params }: { params: string }): ApiRoute => ({
