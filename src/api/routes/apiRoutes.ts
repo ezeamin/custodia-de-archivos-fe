@@ -68,97 +68,93 @@ export const apiRoutes = {
       method: 'GET',
       url: `/employees/${id}/absences`,
     }),
-    GET_EMPLOYEE_ABSENCE: ({
+    POST_EMPLOYEE_ABSENCE: ({
       employeeId,
-      absenceId,
     }: {
       employeeId: string;
-      absenceId: string;
     }): ApiRoute => ({
-      method: 'GET',
-      url: `/employees/${employeeId}/absences/${absenceId}`,
+      method: 'POST',
+      url: `/employees/${employeeId}/absences`,
     }),
     GET_EMPLOYEE_LICENCES: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/licences`,
     }),
-    GET_EMPLOYEE_LICENSE: ({
-      employeeId,
-      licenseId,
-    }: {
-      employeeId: string;
-      licenseId: string;
-    }): ApiRoute => ({
-      method: 'GET',
-      url: `/employees/${employeeId}/licences/${licenseId}`,
-    }),
     GET_EMPLOYEE_LICENCES_TYPES: (): ApiRoute => ({
       method: 'GET',
       url: `/employees/licences/types`,
+    }),
+    POST_EMPLOYEE_LICENSE: ({
+      employeeId,
+    }: {
+      employeeId: string;
+    }): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/${employeeId}/licences`,
     }),
     GET_EMPLOYEE_VACATIONS: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/vacations`,
     }),
-    GET_EMPLOYEE_VACATION: ({
+    POST_EMPLOYEE_VACATION: ({
       employeeId,
-      vacationId,
     }: {
       employeeId: string;
-      vacationId: string;
     }): ApiRoute => ({
-      method: 'GET',
-      url: `/employees/${employeeId}/vacations/${vacationId}`,
+      method: 'POST',
+      url: `/employees/${employeeId}/vacations`,
     }),
     GET_EMPLOYEE_FORMAL_WARNINGS: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/formal-warnings`,
     }),
-    GET_EMPLOYEE_FORMAL_WARNING: ({
+    POST_EMPLOYEE_FORMAL_WARNING: ({
       employeeId,
-      formalWarningId,
     }: {
       employeeId: string;
-      formalWarningId: string;
     }): ApiRoute => ({
-      method: 'GET',
-      url: `/employees/${employeeId}/formal-warnings/${formalWarningId}`,
+      method: 'POST',
+      url: `/employees/${employeeId}/formal-warnings`,
     }),
     GET_EMPLOYEE_TRAININGS: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/trainings`,
     }),
-    GET_EMPLOYEE_TRAINING: ({
-      employeeId,
-      trainingId,
-    }: {
-      employeeId: string;
-      trainingId: string;
-    }): ApiRoute => ({
-      method: 'GET',
-      url: `/employees/${employeeId}/trainings/${trainingId}`,
-    }),
     GET_EMPLOYEE_TRAININGS_TYPES: (): ApiRoute => ({
       method: 'GET',
       url: `/employees/trainings/types`,
+    }),
+    POST_EMPLOYEE_TRAINING: ({
+      employeeId,
+    }: {
+      employeeId: string;
+    }): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/${employeeId}/trainings`,
     }),
     GET_EMPLOYEE_LATE_ARRIVALS: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/late-arrivals`,
     }),
-    GET_EMPLOYEE_LATE_ARRIVAL: ({
+    POST_EMPLOYEE_LATE_ARRIVAL: ({
       employeeId,
-      lateArrivalId,
     }: {
       employeeId: string;
-      lateArrivalId: string;
     }): ApiRoute => ({
-      method: 'GET',
-      url: `/employees/${employeeId}/late-arrivals/${lateArrivalId}`,
+      method: 'POST',
+      url: `/employees/${employeeId}/late-arrivals`,
     }),
     GET_EMPLOYEE_EXTRA_HOURS: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/extra-hours`,
+    }),
+    POST_EMPLOYEE_EXTRA_HOUR: ({
+      employeeId,
+    }: {
+      employeeId: string;
+    }): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/${employeeId}/extra-hours`,
     }),
   },
   NOTIFICATIONS: {

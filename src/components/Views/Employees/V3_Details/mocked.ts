@@ -6,6 +6,7 @@ import {
   FormalWarning,
   LateArrival,
   License,
+  LicenseType,
   Training,
   Vacation,
 } from '@/api/interface/employees';
@@ -182,19 +183,19 @@ const generateMockedVacations = (count: number): { data: Vacation[] } => {
 // Generate 10 mocked vacations
 export const mockedVacations: { data: Vacation[] } = generateMockedVacations(3);
 
-const generateRandomTypeDescription = (): string => {
-  const typeDescriptions = [
-    'Licencia por maternidad',
-    'Licencia por paternidad',
-    'Licencia médica',
-    'Licencia de estudio',
-    'Licencia especial',
-    'Licencia sin goce de sueldo',
-    'Permiso por duelo',
-    'Licencia por mudanza',
-    'Licencia remunerada',
-  ];
+const typeDescriptions = [
+  'Licencia por maternidad',
+  'Licencia por paternidad',
+  'Licencia médica',
+  'Licencia de estudio',
+  'Licencia especial',
+  'Licencia sin goce de sueldo',
+  'Permiso por duelo',
+  'Licencia por mudanza',
+  'Licencia remunerada',
+];
 
+const generateRandomTypeDescription = (): string => {
   return typeDescriptions[Math.floor(Math.random() * typeDescriptions.length)];
 };
 
@@ -353,3 +354,15 @@ const generateMockedFormalWarnings = (
 // Generate 10 mocked formal warnings
 export const mockedFormalWarnings: { data: FormalWarning[] } =
   generateMockedFormalWarnings(10);
+
+const generateMockedLicensesTypes = () => {
+  const newArr = typeDescriptions.map((license) => ({
+    id: generateRandomId(),
+    description: license,
+  }));
+
+  return { data: newArr };
+};
+
+export const mockedLicensesTypes: { data: LicenseType[] } =
+  generateMockedLicensesTypes();

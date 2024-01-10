@@ -4,19 +4,19 @@ import { useParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { postFileFn } from '@/api/api-calls/employees';
+import { postEmployeeLateArrivalFn } from '@/api/api-calls/employees';
 
 import { useZodForm } from '@/hooks';
 import { useModal } from '@/stores/useModal';
 
-import { FileInput, Modal, TextInput } from '@/components/ui';
+import { Alert, DateInput, HourInput, Modal } from '@/components/ui';
 
 import {
-  AddDocumentSchema,
-  addDocumentSchema,
-} from '@/form-schemas/schemas/employees/addDocumentSchema';
+  AddNewLateArrivalSchema,
+  addNewLateArrivalSchema,
+} from '@/form-schemas/schemas/employees/addNewLateArrivalSchema';
 
-const AddNewDocumentModal = () => {
+const AddNewLateArrivalModal = () => {
   // -------------------------------------------------
   // STATE & FORM
   // -------------------------------------------------
@@ -25,8 +25,9 @@ const AddNewDocumentModal = () => {
   const { id: employeeId } = params;
 
   const { closeModal } = useModal();
-  const { control, onSubmitMiddleware, setValue, reset } =
-    useZodForm(addDocumentSchema);
+  const { control, onSubmitMiddleware, reset } = useZodForm(
+    addNewLateArrivalSchema
+  );
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,23 +37,23 @@ const AddNewDocumentModal = () => {
 
   const queryClient = useQueryClient();
 
-  const { mutate: addFile } = useMutation({
-    mutationFn: postFileFn,
+  const { mutate: addLateArrival } = useMutation({
+    mutationFn: postEmployeeLateArrivalFn,
     onError: () => {
       setIsLoading(false);
       closeModal();
       reset();
       toast.error(
-        'Ocurrió un error guardando el documento. Intente nuevamente más tarde'
+        'Ocurrió un error guardando la llegada tarde. Intente nuevamente más tarde'
       );
     },
     onSuccess: () => {
       setIsLoading(false);
       closeModal();
       reset();
-      toast.success(`El documento fue agregado correctamente`);
+      toast.success(`La llegada tarde fue registrada correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeDocs_${employeeId}`],
+        queryKey: [`employeeLateArrivals_${employeeId}`],
       });
     },
   });
@@ -61,21 +62,17 @@ const AddNewDocumentModal = () => {
   // HANDLERS
   // -------------------------------------------------
 
-  const handleSubmit = (formData: AddDocumentSchema) => {
+  const handleSubmit = (formData: AddNewLateArrivalSchema) => {
     setIsLoading(true);
-
-    const fd = new FormData();
-    fd.append('file', formData.file);
-    fd.append('name', formData.name);
 
     if (!employeeId) {
       toast.error('No se pudo obtener el id del empleado');
       return;
     }
 
-    addFile({
+    addLateArrival({
       employeeId,
-      body: fd,
+      body: formData,
     });
   };
 
@@ -87,32 +84,30 @@ const AddNewDocumentModal = () => {
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
       <Modal
         submitButton
-        className="overflow-x-hidden"
-        id="addNewDocument"
+        className="overflow-x-hidden p-1 pt-0"
+        id="addNewLateArrival"
         loading={isLoading}
-        title="Nuevo Documento"
+        title="Nueva Llegada Tarde"
       >
-        <FileInput
-          className="w-full"
+        <Alert className="mb-3">
+          <b>Atención:</b> Una vez cargada la llegada tarde, no se podrá editar
+          ni eliminar del sistema.
+        </Alert>
+        <DateInput
+          className="mb-2"
           control={control}
           disabled={isLoading}
-          inputClassName="max-w-none"
-          label="Documento"
-          name="file"
-          setValue={setValue}
+          label="Fecha de llegada tarde"
+          name="date"
         />
-        <TextInput
-          className="w-full mt-3"
+        <HourInput
           control={control}
           disabled={isLoading}
-          helperText={`No incluya la extensión del archivo, espacios ni caracteres
-          especiales. Se aconseja utilizar "_" para separar cada palabra. No
-          incluya caracteres especiales (ñ, @, tildes, etc.).`}
-          label="Nombre"
-          name="name"
+          label="Horario de llegada"
+          name="hour"
         />
       </Modal>
     </form>
   );
 };
-export default AddNewDocumentModal;
+export default AddNewLateArrivalModal;

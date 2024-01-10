@@ -112,12 +112,6 @@ export const getEmployeeAbsencesAdapter = (
   }));
 };
 
-export const getEmployeeAbsenceAdapter = (data: API_GetAbsences): Absence => ({
-  id: data.id,
-  date: data.date,
-  reason: data.reason,
-});
-
 export const getEmployeeVacationsAdapter = (
   data: API_GetVacations[]
 ): Vacation[] => {
@@ -127,14 +121,6 @@ export const getEmployeeVacationsAdapter = (
     endDate: element.endDate,
   }));
 };
-
-export const getEmployeeVacationAdapter = (
-  data: API_GetVacations
-): Vacation => ({
-  id: data.id,
-  startDate: data.startDate,
-  endDate: data.endDate,
-});
 
 export const getEmployeeLicensesAdapter = (
   data: API_GetLicenses[]
@@ -149,16 +135,6 @@ export const getEmployeeLicensesAdapter = (
     },
   }));
 };
-
-export const getEmployeeLicenseAdapter = (data: API_GetLicenses): License => ({
-  id: data.id,
-  startDate: data.startDate,
-  endDate: data.endDate,
-  type: {
-    id: data.type.id,
-    description: data.type.description,
-  },
-});
 
 export const getEmployeeLicencesTypesAdapter = (
   data: API_GetLicensesTypes[]
@@ -178,14 +154,6 @@ export const getEmployeeFormalWarningsAdapter = (
     reason: element.reason,
   }));
 };
-
-export const getEmployeeFormalWarningAdapter = (
-  data: API_GetFormalWarnings
-): FormalWarning => ({
-  id: data.id,
-  date: data.date,
-  reason: data.reason,
-});
 
 export const getEmployeeTrainingsAdapter = (
   data: API_GetTrainings[]
@@ -208,18 +176,6 @@ export const getEmployeeTrainingTypesAdapter = (
   description: data.description,
 });
 
-export const getEmployeeTrainingAdapter = (
-  data: API_GetTrainings
-): Training => ({
-  id: data.id,
-  date: data.date,
-  reason: data.reason,
-  type: {
-    id: data.type.id,
-    description: data.type.description,
-  },
-});
-
 export const getEmployeeLateArrivalsAdapter = (
   data: API_GetLateArrivals[]
 ): LateArrival[] => {
@@ -228,13 +184,6 @@ export const getEmployeeLateArrivalsAdapter = (
     date: element.date,
   }));
 };
-
-export const getEmployeeLateArrivalAdapter = (
-  data: API_GetLateArrivals
-): LateArrival => ({
-  id: data.id,
-  date: data.date,
-});
 
 export const getEmployeeExtraHoursAdapter = (
   data: API_GetExtraHours[]

@@ -2,8 +2,10 @@ import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
 
 import { mockedLateArrivals } from '../../../../mocked';
+import AddNewButton from '../NewButton/NewButton';
 import Modal from './LateArrivalsModal';
 import List from './List/LateArrivalsList';
+import NewModal from './New/AddNewLateArrivalModal';
 import Table from './Table/LateArrivalsTable';
 import { useQuery } from '@tanstack/react-query';
 
@@ -59,7 +61,10 @@ const Results = () => {
   if (isError) {
     return (
       <>
-        <h2 className="text-lg font-bold mb-3">Llegadas tarde</h2>
+        <div className="mb-3 gap-2 flex sm:items-center lg:items-center flex-col sm:flex-row md:flex-col lg:flex-row sm:justify-between md:justify-between">
+          <h2 className="text-lg font-bold">Llegadas tarde</h2>
+          <AddNewButton disabled modalName="addNewLateArrival" />
+        </div>
         <ErrorMessage refetch={handleRetry} />
       </>
     );
@@ -67,7 +72,10 @@ const Results = () => {
 
   return (
     <>
-      <h2 className="text-lg font-bold mb-3">Llegadas tarde</h2>
+      <div className="mb-3 gap-2 flex sm:items-center lg:items-center flex-col sm:flex-row md:flex-col lg:flex-row sm:justify-between md:justify-between">
+        <h2 className="text-lg font-bold">Llegadas tarde</h2>
+        <AddNewButton modalName="addNewLateArrival" />
+      </div>
       {isLoading && (
         <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-3">
           <div className="rounded-md custom-skeleton w-full sm:w-1/2 md:w-full lg:w-1/2 h-[100px]" />
@@ -78,17 +86,17 @@ const Results = () => {
       {data.data && data.data.length > 0 && (
         <>
           <section className="hidden sm:block">
-            <Table data={data.data.slice(0, 10)} />
+            <Table data={data.data.slice(0, 5)} />
           </section>
           <section className="sm:hidden">
-            <List data={data.data.slice(0, 10)} />
+            <List data={data.data.slice(0, 5)} />
           </section>
 
-          <div className="flex justify-between items-center gap-3 mt-2">
+          <div className="flex justify-between items-center gap-3 mt-2 h-[48px]">
             <p>
               Total: <b>{data.data.length} elementos</b>
             </p>
-            {data.data.length > 10 && (
+            {data.data.length > 5 && (
               <Button onClick={handleSeeMore}>Ver más</Button>
             )}
           </div>
@@ -100,6 +108,7 @@ const Results = () => {
       )}
 
       {createPortal(<Modal data={data?.data} />, document.body)}
+      {createPortal(<NewModal />, document.body)}
     </>
   );
 };

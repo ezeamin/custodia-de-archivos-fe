@@ -85,6 +85,11 @@ export interface HistoryElementProps {
   data: History;
 }
 
+export interface AddNewProps {
+  disabled?: boolean;
+  modalName: string;
+}
+
 export interface AbsenceProps {
   data: Absence[];
 }

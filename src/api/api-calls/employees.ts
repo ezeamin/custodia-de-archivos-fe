@@ -7,17 +7,12 @@ import {
   getEmployeeAdapter,
   getEmployeeDocsAdapter,
   getEmployeeExtraHoursAdapter,
-  getEmployeeFormalWarningAdapter,
   getEmployeeFormalWarningsAdapter,
-  getEmployeeLateArrivalAdapter,
   getEmployeeLateArrivalsAdapter,
-  getEmployeeLicenseAdapter,
   getEmployeeLicensesAdapter,
   getEmployeesAdapter,
-  getEmployeeTrainingAdapter,
   getEmployeeTrainingsAdapter,
   getEmployeeTrainingTypesAdapter,
-  getEmployeeVacationAdapter,
   getEmployeeVacationsAdapter,
   postUserAdapter,
 } from '../adapters/employees';
@@ -188,26 +183,6 @@ export const getEmployeeAbsencesFn = async (id: string) => {
   return data;
 };
 
-export const getEmployeeAbsenceFn = async ({
-  employeeId,
-  absenceId,
-}: {
-  employeeId: string;
-  absenceId: string;
-}) => {
-  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_ABSENCE({
-    employeeId,
-    absenceId,
-  });
-
-  const data = await fetchFn<API_GetAbsences, Absence>({
-    request,
-    adapter: getEmployeeAbsencesAdapter,
-  });
-
-  return data;
-};
-
 export const getEmployeeVacationsFn = async (id: string) => {
   const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_VACATIONS({ id });
 
@@ -219,52 +194,12 @@ export const getEmployeeVacationsFn = async (id: string) => {
   return data;
 };
 
-export const getEmployeeVacationFn = async ({
-  employeeId,
-  vacationId,
-}: {
-  employeeId: string;
-  vacationId: string;
-}) => {
-  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_VACATION({
-    employeeId,
-    vacationId,
-  });
-
-  const data = await fetchFn<API_GetVacations, Vacation>({
-    request,
-    adapter: getEmployeeVacationAdapter,
-  });
-
-  return data;
-};
-
 export const getEmployeeLicensesFn = async (id: string) => {
   const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_LICENCES({ id });
 
   const data = await fetchFn<API_GetLicenses[], License[]>({
     request,
     adapter: getEmployeeLicensesAdapter,
-  });
-
-  return data;
-};
-
-export const getEmployeeLicenseFn = async ({
-  employeeId,
-  licenseId,
-}: {
-  employeeId: string;
-  licenseId: string;
-}) => {
-  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_LICENSE({
-    employeeId,
-    licenseId,
-  });
-
-  const data = await fetchFn<API_GetLicenses, License>({
-    request,
-    adapter: getEmployeeLicenseAdapter,
   });
 
   return data;
@@ -292,52 +227,12 @@ export const getEmployeeFormalWarningsFn = async (id: string) => {
   return data;
 };
 
-export const getEmployeeFormalWarningFn = async ({
-  employeeId,
-  formalWarningId,
-}: {
-  employeeId: string;
-  formalWarningId: string;
-}) => {
-  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_FORMAL_WARNING({
-    employeeId,
-    formalWarningId,
-  });
-
-  const data = await fetchFn<API_GetFormalWarnings, FormalWarning>({
-    request,
-    adapter: getEmployeeFormalWarningAdapter,
-  });
-
-  return data;
-};
-
 export const getEmployeeTrainingsFn = async (id: string) => {
   const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_TRAININGS({ id });
 
   const data = await fetchFn<API_GetTrainings[], Training[]>({
     request,
     adapter: getEmployeeTrainingsAdapter,
-  });
-
-  return data;
-};
-
-export const getEmployeeTrainingFn = async ({
-  employeeId,
-  trainingId,
-}: {
-  employeeId: string;
-  trainingId: string;
-}) => {
-  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_TRAINING({
-    employeeId,
-    trainingId,
-  });
-
-  const data = await fetchFn<API_GetTrainings, Training>({
-    request,
-    adapter: getEmployeeTrainingAdapter,
   });
 
   return data;
@@ -365,32 +260,68 @@ export const getEmployeeLateArrivalsFn = async (id: string) => {
   return data;
 };
 
-export const getEmployeeLateArrivalFn = async ({
-  employeeId,
-  lateArrivalId,
-}: {
-  employeeId: string;
-  lateArrivalId: string;
-}) => {
-  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_LATE_ARRIVAL({
-    employeeId,
-    lateArrivalId,
-  });
-
-  const data = await fetchFn<API_GetLateArrivals, LateArrival>({
-    request,
-    adapter: getEmployeeLateArrivalAdapter,
-  });
-
-  return data;
-};
-
 export const getEmployeeExtraHoursFn = async (id: string) => {
   const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_EXTRA_HOURS({ id });
 
   const data = await fetchFn<API_GetExtraHours[], ExtraHours[]>({
     request,
     adapter: getEmployeeExtraHoursAdapter,
+  });
+
+  return data;
+};
+
+export const postEmployeeAbsenceFn = async ({
+  employeeId,
+  body,
+}: {
+  employeeId: string;
+  body: Record<string, unknown>;
+}) => {
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_ABSENCE({ employeeId });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body,
+  });
+
+  return data;
+};
+
+export const postEmployeeLateArrivalFn = async ({
+  employeeId,
+  body,
+}: {
+  employeeId: string;
+  body: Record<string, unknown>;
+}) => {
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_LATE_ARRIVAL({
+    employeeId,
+  });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body,
+  });
+
+  return data;
+};
+
+export const postEmployeeLicenseFn = async ({
+  employeeId,
+  body,
+}: {
+  employeeId: string;
+  body: Record<string, unknown>;
+}) => {
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_LICENSE({ employeeId });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body,
   });
 
   return data;
