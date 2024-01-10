@@ -1,12 +1,18 @@
+import { FaPencil } from 'react-icons/fa6';
+import { Link, useParams } from 'react-router-dom';
+
 import EmployeeDataField from './EmployeeDataField';
 import dayjs from 'dayjs';
 
+import { Icon } from '@/components/ui';
 import EmployeeStatus from '@/components/Views/Employees/V1_List/Results/EmployeeStatus';
 
 import { EmployeeInfoProps } from '@/components/interface/views';
 
 const EmployeeJobDetails = (props: EmployeeInfoProps) => {
   const { data } = props;
+
+  const { id: employeeId } = useParams();
 
   const formattedRegistrationDate = dayjs(data.registrationDate).format(
     'DD/MM/YYYY'
@@ -39,6 +45,10 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
           label="Fecha de egreso"
           value={formattedDepartureDate}
         />
+        <Link className="btn btn-sm" to={`/employees/${employeeId}/edit/job`}>
+          <Icon iconComponent={<FaPencil size="0.75em" />} title="Editar" />
+          Modificar
+        </Link>
       </div>
     </article>
   );

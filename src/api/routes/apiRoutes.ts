@@ -148,7 +148,7 @@ export const apiRoutes = {
       method: 'GET',
       url: `/employees/${id}/extra-hours`,
     }),
-    POST_EMPLOYEE_EXTRA_HOUR: ({
+    POST_EMPLOYEE_EXTRA_HOURS: ({
       employeeId,
     }: {
       employeeId: string;

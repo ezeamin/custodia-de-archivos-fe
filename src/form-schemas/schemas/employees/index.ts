@@ -1,5 +1,6 @@
 import { AddDocumentSchema } from './addDocumentSchema';
 import { AddNewAbsenceSchema } from './addNewAbsenceSchema';
+import { AddNewExtraHoursSchema } from './addNewExtraHoursSchema';
 import { AddNewLateArrivalSchema } from './addNewLateArrivalSchema';
 import { AddNewLicenseSchema } from './addNewLicenseSchema';
 import { ChangeDocNameSchema } from './changeDocNameSchema';
@@ -14,4 +15,5 @@ export type EmployeesSchemas =
   | AddDocumentSchema
   | AddNewAbsenceSchema
   | AddNewLateArrivalSchema
-  | AddNewLicenseSchema;
+  | AddNewLicenseSchema
+  | AddNewExtraHoursSchema;

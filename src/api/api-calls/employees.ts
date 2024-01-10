@@ -326,3 +326,21 @@ export const postEmployeeLicenseFn = async ({
 
   return data;
 };
+
+export const postEmployeeExtraHoursFn = async ({
+  employeeId,
+  body,
+}: {
+  employeeId: string;
+  body: Record<string, unknown>;
+}) => {
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_EXTRA_HOURS({ employeeId });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body,
+  });
+
+  return data;
+};

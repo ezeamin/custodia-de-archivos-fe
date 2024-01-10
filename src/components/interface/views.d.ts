@@ -4,6 +4,7 @@ import {
   Absence,
   Employee,
   EmployeeDoc,
+  ExtraHours,
   History,
   LateArrival,
   License,
@@ -112,6 +113,14 @@ export interface LicensesProps {
 
 export interface LicensesElementProps {
   data: License;
+}
+
+export interface ExtraHoursProps {
+  data: ExtraHours[];
+}
+
+export interface ExtraHoursElementProps {
+  data: ExtraHours;
 }
 
 // --------------------------------------------------

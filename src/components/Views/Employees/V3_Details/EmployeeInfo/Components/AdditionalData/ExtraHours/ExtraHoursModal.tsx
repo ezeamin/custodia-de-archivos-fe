@@ -1,17 +1,17 @@
-import List from './List/LateArrivalsList';
-import Table from './Table/LateArrivalsTable';
+import List from './List/ExtraHoursList';
+import Table from './Table/ExtraHoursTable';
 
 import { Modal } from '@/components/ui';
 
-import { LateArrivalsProps } from '@/components/interface/views';
+import { ExtraHoursProps } from '@/components/interface/views';
 
-const LateArrivalsModal = (props: LateArrivalsProps) => {
+const ExtraHoursModal = (props: ExtraHoursProps) => {
   const { data } = props;
 
   if (!data) return null;
 
   return (
-    <Modal id="lateArrivals" title="Llegadas Tarde">
+    <Modal id="extraHours" title="Horas Extra">
       <section className="hidden sm:block">
         <Table data={data} />
       </section>
@@ -21,4 +21,4 @@ const LateArrivalsModal = (props: LateArrivalsProps) => {
     </Modal>
   );
 };
-export default LateArrivalsModal;
+export default ExtraHoursModal;

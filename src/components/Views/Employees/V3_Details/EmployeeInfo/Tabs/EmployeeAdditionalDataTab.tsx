@@ -1,5 +1,5 @@
 import Absenses from '../Components/AdditionalData/Absences/Results';
-// import ExtraHours from '../Components/AdditionalData/ExtraHours/Results';
+import ExtraHours from '../Components/AdditionalData/ExtraHours/Results';
 import FormalWarnings from '../Components/AdditionalData/FormalWarnings/Results';
 import LateArrivals from '../Components/AdditionalData/LateArrivals/Results';
 import Licences from '../Components/AdditionalData/Licenses/Results';
@@ -13,7 +13,7 @@ const EmployeeAdditionalDataTab = () => {
       <div className="divider" />
       <LateArrivals />
       <div className="divider" />
-      {/* <ExtraHours /> */}
+      <ExtraHours />
       <div className="divider" />
       <Licences />
       <div className="divider" />

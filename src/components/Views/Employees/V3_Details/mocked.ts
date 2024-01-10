@@ -3,6 +3,7 @@ import { generateRandomId } from '@/utilities/utils';
 import {
   Absence,
   Employee,
+  ExtraHours,
   FormalWarning,
   LateArrival,
   License,
@@ -235,7 +236,7 @@ export const mockedLicenses: { data: License[] } = generateMockedLicenses(6);
 
 // Function to generate random type descriptions in Spanish for punishment capacitations
 const generateRandomTypeDescriptionTrainings = (): string => {
-  const typeDescriptions = [
+  const trainingTypeDescriptions = [
     'Capacitación de género',
     'Capacitación sobre diversidad e inclusión',
     'Capacitación contra el acoso laboral',
@@ -248,7 +249,9 @@ const generateRandomTypeDescriptionTrainings = (): string => {
     'Capacitación sobre ambiente laboral saludable',
   ];
 
-  return typeDescriptions[Math.floor(Math.random() * typeDescriptions.length)];
+  return trainingTypeDescriptions[
+    Math.floor(Math.random() * trainingTypeDescriptions.length)
+  ];
 };
 
 // Function to generate mocked trainings
@@ -366,3 +369,29 @@ const generateMockedLicensesTypes = () => {
 
 export const mockedLicensesTypes: { data: LicenseType[] } =
   generateMockedLicensesTypes();
+
+// Function to generate mocked extra hours
+const generateMockedExtraHours = (count: number): { data: ExtraHours[] } => {
+  const extraHours: ExtraHours[] = [];
+
+  for (let i = 0; i < count; i += 1) {
+    const id = generateRandomId();
+    const date = new Date(
+      new Date().getTime() +
+        Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000
+    ).toISOString(); // Random date within the next 30 days
+    const hours = Math.floor(Math.random() * 10) + 1; // Random hours between 1 and 10
+
+    extraHours.push({
+      id,
+      date,
+      hours,
+    });
+  }
+
+  return { data: extraHours };
+};
+
+// Generate 10 mocked extra hours
+export const mockedExtraHours: { data: ExtraHours[] } =
+  generateMockedExtraHours(10);
