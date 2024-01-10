@@ -28,7 +28,7 @@ const EmployeeDocumentsTab = () => {
   // API
   // -------------------------------------------------
 
-  const { /* data, isError, */ refetch } = useQuery({
+  const { /* data, isLoading, isError, */ refetch } = useQuery({
     queryKey: [`employeeDocs_${employeeId}`],
     queryFn: () => getEmployeeDocsFn(employeeId!),
   });

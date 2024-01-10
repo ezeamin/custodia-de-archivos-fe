@@ -79,11 +79,11 @@ const Results = () => {
 
   if (data?.data) {
     return (
-      <section className="mt-5 overflow-hidden flex flex-col-reverse md:flex-row gap-3">
-        <article className="md:w-[50%] lg:w-[30%] xl:w-[20%]">
+      <section className="mt-5 overflow-hidden flex flex-col-reverse lg:flex-row gap-3">
+        <article className="md:w-[100%] lg:w-[30%] xl:w-[20%]">
           {showJobDetails && <EmployeeJobDetails data={data.data} />}
         </article>
-        <article className="md:w-[50%] lg:w-[70%] xl:w-[80%]">
+        <article className="md:w-[100%] lg:w-[70%] xl:w-[80%]">
           <EmployeeTabs />
         </article>
       </section>

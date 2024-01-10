@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 
 import { mockedHistory } from '../../mocked';
+import HistoryList from '../Components/History/List/HistoryList';
+import HistoryTable from '../Components/History/Table/HistoryTable';
 import { useQuery } from '@tanstack/react-query';
 
 import { getEmployeeHistoryFn } from '@/api/api-calls/employees';
@@ -8,7 +10,7 @@ import { getEmployeeHistoryFn } from '@/api/api-calls/employees';
 import { Alert } from '@/components/ui';
 
 const data = mockedHistory;
-// const isLoading = false;
+const isLoading = false;
 const isError = false;
 
 const EmployeeHistoryTab = () => {
@@ -19,13 +21,13 @@ const EmployeeHistoryTab = () => {
   const params = useParams();
   const { id: employeeId } = params;
 
-  console.log(data);
+  // TODO: "field" should be changed to show a label on the backend
 
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
-  const { /* data, isError, */ refetch } = useQuery({
+  const { /* data, isLoading, isError, */ refetch } = useQuery({
     queryKey: [`employeeDocs_${employeeId}`],
     queryFn: () => getEmployeeHistoryFn(employeeId!),
   });
@@ -59,8 +61,21 @@ const EmployeeHistoryTab = () => {
 
   return (
     <>
-      <h2 className="text-lg font-bold mb-3">Documentos</h2>
+      <h2 className="text-lg font-bold mb-3">Historial de cambios</h2>
 
+      {isLoading && (
+        <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-3">
+          <div className="rounded-md custom-skeleton w-full sm:w-1/2 md:w-full lg:w-1/2 h-[100px]" />
+          <div className="rounded-md custom-skeleton w-full sm:w-1/2 md:w-full lg:w-1/2 h-[100px]" />
+        </div>
+      )}
+
+      <section className="hidden sm:block md:hidden lg:block">
+        <HistoryTable data={data.data} />
+      </section>
+      <section className="sm:hidden md:block lg:hidden">
+        <HistoryList data={data.data} />
+      </section>
       {/* <Grid container gap={3}>
         {data.data.map((doc) => (
           <Grid item key={doc.id} md={12} sm={6} xl={6} xs={12}>

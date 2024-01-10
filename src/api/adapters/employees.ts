@@ -69,5 +69,9 @@ export const getEmployeeHistoryAdapter = (
     newValue: element.newValue,
     field: element.field,
     date: element.date,
+    user: {
+      id: element.user.id,
+      description: element.user.description,
+    },
   }));
 };

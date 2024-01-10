@@ -1,10 +1,6 @@
-import { usePortrait } from '@/hooks';
-
 import Title from '@/components/Common/Title';
 
 const HomeView = () => {
-  const isPortrait = usePortrait();
-
   return (
     <>
       <Title title="Bienvenido" />
@@ -12,11 +8,11 @@ const HomeView = () => {
         <p className="max-w-[500px] animate-in-bottom a-delay-200">
           Bienvenido al <b>SAP (Sistema de Administración de Personal)</b> de
           Custodia de Archivos Noroeste SRL. Para comenzar, seleccione una
-          opción del
-          {isPortrait
-            ? ' menu ubicado en la parte superior del sitio'
-            : ' panel lateral'}
-          .
+          opción del{' '}
+          <span className="md:hidden">
+            menu ubicado en la parte superior del sitio
+          </span>
+          <span className="hidden md:inline">panel lateral</span>.
         </p>
       </section>
     </>

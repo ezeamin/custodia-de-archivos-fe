@@ -56,6 +56,10 @@ export interface API_GetHistory {
   newValue: string;
   field: string;
   date: string;
+  user: {
+    id: string;
+    description: string;
+  };
 }
 
 // ----------------------------------------------------------------------

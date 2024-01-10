@@ -65,6 +65,10 @@ export const mockedHistory = {
       newValue: 'Senior Software Engineer',
       field: 'position',
       date: '2020-01-01T00:00:00.000Z',
+      user: {
+        id: generateRandomId(),
+        description: 'John Doe',
+      },
     },
     {
       id: generateRandomId(),
@@ -72,6 +76,10 @@ export const mockedHistory = {
       newValue: 'Tech Lead',
       field: 'position',
       date: '2021-03-15T12:30:00.000Z',
+      user: {
+        id: generateRandomId(),
+        description: 'John Doe',
+      },
     },
     {
       id: generateRandomId(),
@@ -79,6 +87,10 @@ export const mockedHistory = {
       newValue: 'suspended',
       field: 'status',
       date: '2022-05-20T09:45:00.000Z',
+      user: {
+        id: generateRandomId(),
+        description: 'John Doe',
+      },
     },
     {
       id: generateRandomId(),
@@ -86,6 +98,10 @@ export const mockedHistory = {
       newValue: 'Jonathan',
       field: 'firstname',
       date: '2023-08-10T18:20:00.000Z',
+      user: {
+        id: generateRandomId(),
+        description: 'John Doe',
+      },
     },
     {
       id: generateRandomId(),
@@ -93,6 +109,10 @@ export const mockedHistory = {
       newValue: '456 Oak Ave',
       field: 'address',
       date: '2024-02-28T14:10:00.000Z',
+      user: {
+        id: generateRandomId(),
+        description: 'John Doe',
+      },
     },
   ],
 };

@@ -3,6 +3,7 @@ import { ModalStore } from '@/stores/useModal';
 import {
   Employee,
   EmployeeDoc,
+  History,
   MinimalEmployee,
 } from '@/api/interface/employees';
 import {
@@ -62,6 +63,14 @@ export interface ChangeDocModalData extends ModalStore {
       name: string;
     };
   };
+}
+
+export interface HistoryDataProps {
+  data: History[];
+}
+
+export interface HistoryElementProps {
+  data: History;
 }
 
 // --------------------------------------------------
