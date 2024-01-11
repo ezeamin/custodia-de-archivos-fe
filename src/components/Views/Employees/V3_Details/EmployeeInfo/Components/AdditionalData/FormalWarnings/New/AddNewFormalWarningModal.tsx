@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { postEmployeeAbsenceFn } from '@/api/api-calls/employees';
+import { postEmployeeFormalWarningFn } from '@/api/api-calls/employees';
 
 import { useZodForm } from '@/hooks';
 import { useModal } from '@/stores/useModal';
@@ -12,11 +12,11 @@ import { useModal } from '@/stores/useModal';
 import { Alert, DateInput, Modal, TextAreaInput } from '@/components/ui';
 
 import {
-  AddNewAbsenceSchema,
-  addNewAbsenceSchema,
-} from '@/form-schemas/schemas/employees/addNewAbsenceSchema';
+  AddNewFormalWarningSchema,
+  addNewFormalWarningSchema,
+} from '@/form-schemas/schemas/employees/addNewFormalWarningSchema';
 
-const AddNewAbsenceModal = () => {
+const AddNewFormalWarningModal = () => {
   // -------------------------------------------------
   // STATE & FORM
   // -------------------------------------------------
@@ -25,7 +25,7 @@ const AddNewAbsenceModal = () => {
   const { id: employeeId } = params;
 
   const { closeModal } = useModal();
-  const { control, onSubmitMiddleware } = useZodForm(addNewAbsenceSchema);
+  const { control, onSubmitMiddleware } = useZodForm(addNewFormalWarningSchema);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,21 +35,21 @@ const AddNewAbsenceModal = () => {
 
   const queryClient = useQueryClient();
 
-  const { mutate: addAbsence } = useMutation({
-    mutationFn: postEmployeeAbsenceFn,
+  const { mutate: addFormalWarning } = useMutation({
+    mutationFn: postEmployeeFormalWarningFn,
     onError: () => {
       setIsLoading(false);
       closeModal();
       toast.error(
-        'Ocurrió un error guardando la inasistencia. Intente nuevamente más tarde'
+        'Ocurrió un error guardando el llamado de atención. Intente nuevamente más tarde'
       );
     },
     onSuccess: () => {
       setIsLoading(false);
       closeModal();
-      toast.success(`La inasistencia fue registrada correctamente`);
+      toast.success(`El llamado de atención fue registrado correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeAbsences_${employeeId}`],
+        queryKey: [`employeeFormalWarnings_${employeeId}`],
       });
     },
   });
@@ -58,7 +58,7 @@ const AddNewAbsenceModal = () => {
   // HANDLERS
   // -------------------------------------------------
 
-  const handleSubmit = (formData: AddNewAbsenceSchema) => {
+  const handleSubmit = (formData: AddNewFormalWarningSchema) => {
     setIsLoading(true);
 
     if (!employeeId) {
@@ -66,7 +66,7 @@ const AddNewAbsenceModal = () => {
       return;
     }
 
-    addAbsence({
+    addFormalWarning({
       employeeId,
       ...formData,
     });
@@ -81,18 +81,18 @@ const AddNewAbsenceModal = () => {
       <Modal
         submitButton
         className="overflow-x-hidden p-1 pt-0"
-        id="addNewAbsence"
+        id="addNewFormalWarning"
         loading={isLoading}
-        title="Nueva Inasistencia"
+        title="Nuevo Llamado de Atención"
       >
         <Alert className="mb-3">
-          <b>Atención:</b> Una vez cargada la inasistencia, no se podrá editar
-          ni eliminar del sistema.
+          <b>Atención:</b> Una vez cargado el llamado de atención, no se podrá
+          editar ni eliminar del sistema.
         </Alert>
         <DateInput
           control={control}
           disabled={isLoading}
-          label="Fecha de inasistencia *"
+          label="Fecha del suceso *"
           name="date"
         />
         <TextAreaInput
@@ -101,10 +101,10 @@ const AddNewAbsenceModal = () => {
           disabled={isLoading}
           label="Motivo *"
           name="reason"
-          placeholder="No se encontraba bien ..."
+          placeholder="El empleado fue encontrado..."
         />
       </Modal>
     </form>
   );
 };
-export default AddNewAbsenceModal;
+export default AddNewFormalWarningModal;

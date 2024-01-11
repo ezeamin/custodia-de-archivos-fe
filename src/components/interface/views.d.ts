@@ -5,6 +5,7 @@ import {
   Employee,
   EmployeeDoc,
   ExtraHours,
+  FormalWarning,
   History,
   LateArrival,
   License,
@@ -96,11 +97,11 @@ export interface ObservationsMessageProps {
   id: string;
 }
 
-export interface AbsenceProps {
+export interface AbsencesProps {
   data: Absence[];
 }
 
-export interface AbsenceElementProps {
+export interface AbsencesElementProps {
   data: Absence;
 }
 
@@ -134,6 +135,14 @@ export interface VacationsProps {
 
 export interface VacationsElementProps {
   data: Vacation;
+}
+
+export interface FormalWarningsProps {
+  data: FormalWarning[];
+}
+
+export interface FormalWarningsElementProps {
+  data: FormalWarning;
 }
 
 // --------------------------------------------------

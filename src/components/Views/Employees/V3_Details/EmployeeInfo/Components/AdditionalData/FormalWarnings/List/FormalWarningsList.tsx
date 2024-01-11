@@ -1,10 +1,10 @@
-import ListItem from './AbsencesListItem';
+import ListItem from './FormalWarningsListItem';
 
 import { Grid } from '@/components/ui';
 
-import { AbsencesProps } from '@/components/interface/views';
+import { FormalWarningsProps } from '@/components/interface/views';
 
-const AbsencesList = (props: AbsencesProps) => {
+const FormalWarningsList = (props: FormalWarningsProps) => {
   const { data } = props;
 
   return (
@@ -17,4 +17,4 @@ const AbsencesList = (props: AbsencesProps) => {
     </Grid>
   );
 };
-export default AbsencesList;
+export default FormalWarningsList;

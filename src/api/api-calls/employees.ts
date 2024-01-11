@@ -334,3 +334,17 @@ export const postEmployeeVacationFn = async (body: Record<string, unknown>) => {
 
   return data;
 };
+
+export const postEmployeeFormalWarningFn = async (
+  body: Record<string, unknown>
+) => {
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_FORMAL_WARNING();
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body,
+  });
+
+  return data;
+};

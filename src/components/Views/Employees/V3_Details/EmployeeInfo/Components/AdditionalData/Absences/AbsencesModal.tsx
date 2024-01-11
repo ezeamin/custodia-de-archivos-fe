@@ -3,9 +3,9 @@ import AbsencesTable from './Table/AbsencesTable';
 
 import { Modal } from '@/components/ui';
 
-import { AbsenceProps } from '@/components/interface/views';
+import { AbsencesProps } from '@/components/interface/views';
 
-const AbsencesModal = (props: AbsenceProps) => {
+const AbsencesModal = (props: AbsencesProps) => {
   const { data } = props;
 
   if (!data) return null;

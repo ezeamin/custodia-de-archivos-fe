@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 
-import { AbsencesElementProps } from '@/components/interface/views';
+import { FormalWarningsElementProps } from '@/components/interface/views';
 
-const AbsencesListItem = (props: AbsencesElementProps) => {
+const FormalWarningsListItem = (props: FormalWarningsElementProps) => {
   const { data } = props;
 
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY');
@@ -20,4 +20,4 @@ const AbsencesListItem = (props: AbsencesElementProps) => {
     </article>
   );
 };
-export default AbsencesListItem;
+export default FormalWarningsListItem;

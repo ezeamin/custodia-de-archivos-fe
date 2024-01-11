@@ -1,6 +1,7 @@
 import { AddDocumentSchema } from './addDocumentSchema';
 import { AddNewAbsenceSchema } from './addNewAbsenceSchema';
 import { AddNewExtraHoursSchema } from './addNewExtraHoursSchema';
+import { AddNewFormalWarningSchema } from './addNewFormalWarningSchema';
 import { AddNewLateArrivalSchema } from './addNewLateArrivalSchema';
 import { AddNewLicenseSchema } from './addNewLicenseSchema';
 import { AddNewVacationSchema } from './addNewVacationSchema';
@@ -18,4 +19,5 @@ export type EmployeesSchemas =
   | AddNewLateArrivalSchema
   | AddNewLicenseSchema
   | AddNewExtraHoursSchema
-  | AddNewVacationSchema;
+  | AddNewVacationSchema
+  | AddNewFormalWarningSchema;

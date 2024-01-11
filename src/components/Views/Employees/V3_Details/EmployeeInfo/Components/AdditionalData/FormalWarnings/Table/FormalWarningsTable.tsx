@@ -1,10 +1,10 @@
-import TableRow from './AbsencesTableRow';
+import TableRow from './FormalWarningsTableRow';
 
 import { Table } from '@/components/ui';
 
-import { AbsencesProps } from '@/components/interface/views';
+import { FormalWarningsProps } from '@/components/interface/views';
 
-const AbsencesTable = (props: AbsencesProps) => {
+const FormalWarningsTable = (props: FormalWarningsProps) => {
   const { data } = props;
 
   return (
@@ -21,4 +21,4 @@ const AbsencesTable = (props: AbsencesProps) => {
     </Table>
   );
 };
-export default AbsencesTable;
+export default FormalWarningsTable;
