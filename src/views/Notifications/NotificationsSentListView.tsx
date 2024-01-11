@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Title from '@/components/Common/Title';
 import { Icon } from '@/components/ui';
-import Results from '@/components/Views/Notifications/V5_Sent/Results';
+import Results from '@/components/Views/Notifications/V4_Sent/Results';
 
 import { paths } from '@/constants/routes/paths';
 

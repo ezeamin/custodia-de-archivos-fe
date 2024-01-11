@@ -15,12 +15,14 @@ export const paths = {
     MAIN: '/notifications',
     CREATE: '/notifications/create',
     HISTORY: '/notifications/history',
-    ADMIN_TYPES: '/notifications/admin-types',
     DETAILS: '/notifications/:id',
     SENT: '/notifications/sent',
   },
-  USERS: {
-    MAIN: '/users',
+  TYPES_LIST: {
+    MAIN: '/types-list',
+    NOTIFICATIONS: '/types-list/notification-types',
+    LICENSES: '/types-list/license-types',
+    TRAININGS: '/types-list/training-types',
   },
   SETTINGS: {
     MAIN: '/settings',

@@ -10,6 +10,7 @@ import {
   LateArrival,
   License,
   MinimalEmployee,
+  Training,
   Vacation,
 } from '@/api/interface/employees';
 import {
@@ -143,6 +144,14 @@ export interface FormalWarningsProps {
 
 export interface FormalWarningsElementProps {
   data: FormalWarning;
+}
+
+export interface TrainingsProps {
+  data: Training[];
+}
+
+export interface TrainingsElementProps {
+  data: Training;
 }
 
 // --------------------------------------------------

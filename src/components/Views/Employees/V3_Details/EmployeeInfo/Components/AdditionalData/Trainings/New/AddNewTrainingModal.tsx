@@ -5,8 +5,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import {
-  getEmployeeLicensesTypesFn,
-  postEmployeeLicenseFn,
+  getEmployeeTrainingsTypesFn,
+  postEmployeeTrainingFn,
 } from '@/api/api-calls/employees';
 
 import { useLoading, useZodForm } from '@/hooks';
@@ -18,21 +18,22 @@ import {
   DateInput,
   Modal,
   TextAreaInput,
+  TextInput,
 } from '@/components/ui';
-import { mockedLicensesTypes } from '@/components/Views/Employees/V3_Details/mocked';
+import { mockedTrainingsTypes } from '@/components/Views/Employees/V3_Details/mocked';
 
 import { paths } from '@/constants/routes/paths';
 
 import {
-  AddNewLicenseSchema,
-  addNewLicenseSchema,
-} from '@/form-schemas/schemas/employees/addNewLicenseSchema';
+  AddNewTrainingSchema,
+  addNewTrainingSchema,
+} from '@/form-schemas/schemas/employees/addNewTrainingSchema';
 
-const dataLicensesTypes = mockedLicensesTypes;
-const isLoadingLicensesTypes = false;
-const isErrorLicensesTypes = false;
+const dataTrainingsTypes = mockedTrainingsTypes;
+const isLoadingTrainingsTypes = false;
+const isErrorTrainingsTypes = false;
 
-const AddNewLicenseModal = () => {
+const AddNewTrainingModal = () => {
   // -------------------------------------------------
   // STATE & FORM
   // -------------------------------------------------
@@ -42,7 +43,7 @@ const AddNewLicenseModal = () => {
 
   const { closeModal } = useModal();
   const { control, onSubmitMiddleware, reset } =
-    useZodForm(addNewLicenseSchema);
+    useZodForm(addNewTrainingSchema);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -53,41 +54,41 @@ const AddNewLicenseModal = () => {
   const queryClient = useQueryClient();
 
   const {
-    /* data: licensesTypes,
-    isLoading: isLoadingLicensesTypes,
-    isError: isErrorLicensesTypes, */
-    status: statusLicensesTypes,
+    /* data: trainingsTypes,
+    isLoading: isLoadingTrainingsTypes,
+    isError: isErrorTrainingsTypes, */
+    status: statusTrainingsTypes,
   } = useQuery({
-    queryKey: ['employeeLicensesTypes'],
-    queryFn: getEmployeeLicensesTypesFn,
+    queryKey: ['employeeTrainingsTypes'],
+    queryFn: getEmployeeTrainingsTypesFn,
   });
 
-  const { mutate: addLicense } = useMutation({
-    mutationFn: postEmployeeLicenseFn,
+  const { mutate: addTraining } = useMutation({
+    mutationFn: postEmployeeTrainingFn,
     onError: () => {
       setIsLoading(false);
-      reset();
       closeModal();
+      reset();
       toast.error(
-        'Ocurrió un error guardando la licencia. Intente nuevamente más tarde'
+        'Ocurrió un error guardando la capacitación. Intente nuevamente más tarde'
       );
     },
     onSuccess: () => {
       setIsLoading(false);
-      reset();
       closeModal();
-      toast.success(`La licencia fue registrada correctamente`);
+      reset();
+      toast.success(`La capacitación fue registrada correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeLicenses_${employeeId}`],
+        queryKey: [`employeeTrainings_${employeeId}`],
       });
     },
   });
 
-  useLoading(isLoadingLicensesTypes, statusLicensesTypes);
+  useLoading(isLoadingTrainingsTypes, statusTrainingsTypes);
 
-  if (isErrorLicensesTypes) {
+  if (isErrorTrainingsTypes) {
     toast.error(
-      'Ocurrió un error al obtener los tipos de licencias. Intente nuevamente más tarde'
+      'Ocurrió un error al obtener los tipos de capacitaciones. Intente nuevamente más tarde'
     );
     reset();
     closeModal();
@@ -97,7 +98,7 @@ const AddNewLicenseModal = () => {
   // HANDLERS
   // -------------------------------------------------
 
-  const handleSubmit = (formData: AddNewLicenseSchema) => {
+  const handleSubmit = (formData: AddNewTrainingSchema) => {
     setIsLoading(true);
 
     if (!employeeId) {
@@ -105,7 +106,7 @@ const AddNewLicenseModal = () => {
       return;
     }
 
-    addLicense({
+    addTraining({
       employeeId,
       ...formData,
     });
@@ -120,54 +121,57 @@ const AddNewLicenseModal = () => {
       <Modal
         submitButton
         className="overflow-x-hidden p-1 pt-0"
-        id="addNewLicense"
+        id="addNewTraining"
         loading={isLoading}
-        title="Nueva Licencia"
+        title="Nueva Capacitación"
       >
+        <Alert className="mb-2">
+          <b>Atención:</b> Una vez cargada la capacitación, no se podrá editar
+          ni eliminar del sistema.
+        </Alert>
         <Alert className="mb-3">
-          ¿No encuentra el tipo de licencia que busca? Deberá agregarla desde
-          Tipos de listado &gt; Tipos de licencias
+          ¿No encuentra el tipo de capacitación que busca? Deberá agregarla
+          desde Tipos de listado &gt; Tipos de capacitaciones
           <div className="flex">
-            <Link className="btn mt-2" to={paths.TYPES_LIST.LICENSES}>
+            <Link className="btn mt-2" to={paths.TYPES_LIST.TRAININGS}>
               IR A LA PÁGINA
             </Link>
           </div>
         </Alert>
+        <DateInput
+          className="mb-2"
+          control={control}
+          disabled={isLoading}
+          label="Fecha de capacitación *"
+          name="date"
+        />
         <ComboBoxInput
           className="mb-2 w-full"
           control={control}
           disabled={isLoading}
-          label="Tipo de licencia *"
+          label="Tipo de capacitación *"
           name="type"
-          options={dataLicensesTypes.data}
-          placeholder="Elija un tipo de licencia de la lista"
+          options={dataTrainingsTypes.data}
+          placeholder="Elija un tipo de capacitación de la lista"
         />
-        <DateInput
-          className="mb-2 w-full"
+        <TextInput
+          className="w-full"
           control={control}
           disabled={isLoading}
-          label="Inicio de licencia *"
-          name="fromDate"
-          placeholder="Seleccione fecha de inicio"
-        />
-        <DateInput
-          className="mb-2 w-full"
-          control={control}
-          disabled={isLoading}
-          label="Fin de licencia *"
-          name="toDate"
-          placeholder="Seleccione fecha de fin"
+          label="Razón *"
+          name="reason"
+          placeholder="El empleado había recibido 3 llamados de atención..."
         />
         <TextAreaInput
-          className="w-full"
+          className="w-full mt-2"
           control={control}
           disabled={isLoading}
           label="Observaciones"
           name="observations"
-          placeholder="Esta licencia se pidio porque..."
+          placeholder="En la capacitación se mostró..."
         />
       </Modal>
     </form>
   );
 };
-export default AddNewLicenseModal;
+export default AddNewTrainingModal;

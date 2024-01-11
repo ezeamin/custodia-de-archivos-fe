@@ -348,3 +348,15 @@ export const postEmployeeFormalWarningFn = async (
 
   return data;
 };
+
+export const postEmployeeTrainingFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_TRAINING();
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body,
+  });
+
+  return data;
+};

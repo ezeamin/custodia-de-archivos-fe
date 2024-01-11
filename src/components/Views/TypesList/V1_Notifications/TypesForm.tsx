@@ -108,7 +108,7 @@ const TypesForm = () => {
 
   if (isErrorEditedData) {
     toast.error('Ocurrió un error al obtener la información');
-    navigate(paths.NOTIFICATIONS.ADMIN_TYPES);
+    navigate(paths.TYPES_LIST.NOTIFICATIONS);
   }
 
   // -----------------------------------------------------
@@ -128,7 +128,7 @@ const TypesForm = () => {
   };
 
   const handleCancelEdit = () => {
-    navigate(paths.NOTIFICATIONS.ADMIN_TYPES);
+    navigate(paths.TYPES_LIST.NOTIFICATIONS);
   };
 
   // -----------------------------------------------------

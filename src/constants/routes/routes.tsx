@@ -1,5 +1,10 @@
 import { AiFillHome } from 'react-icons/ai';
-import { IoNotifications, IoPeople, IoSettingsSharp } from 'react-icons/io5';
+import {
+  IoList,
+  IoNotifications,
+  IoPeople,
+  IoSettingsSharp,
+} from 'react-icons/io5';
 
 import { paths } from './paths';
 
@@ -16,7 +21,7 @@ import NotificationsSentListView from '@/views/Notifications/NotificationsSentLi
 import NotificationsTypesView from '@/views/Notifications/NotificationsTypesView';
 import NotificationsView from '@/views/Notifications/NotificationsView';
 import SettingsView from '@/views/Settings/SettingsView';
-import UsersView from '@/views/Users/UsersView';
+import UsersView from '@/views/TypesList/TypesListView';
 
 import { flattenRoutes } from '@/utilities/utils';
 
@@ -138,16 +143,6 @@ export const routes: Route[] = [
       },
       {
         id: 4003,
-        title: 'Administrar tipos',
-        description: 'Administrar tipos',
-        path: paths.NOTIFICATIONS.ADMIN_TYPES,
-        subpaths: [],
-        privateRoute: true,
-        element: <NotificationsTypesView />,
-        allowedRoles: ['ADMIN'],
-      },
-      {
-        id: 4004,
         title: 'Detalle Notificación',
         description: 'Detalle Notificación',
         path: paths.NOTIFICATIONS.DETAILS,
@@ -157,7 +152,7 @@ export const routes: Route[] = [
         allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
       },
       {
-        id: 4005,
+        id: 4004,
         title: 'Enviadas',
         description: 'Notificaciones enviadas',
         path: paths.NOTIFICATIONS.SENT,
@@ -167,7 +162,7 @@ export const routes: Route[] = [
         allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
       },
       {
-        id: 4006,
+        id: 4005,
         title: 'Detalle Notificación',
         description: 'Detalle Notificación',
         path: paths.NOTIFICATIONS.DETAILS,
@@ -183,14 +178,25 @@ export const routes: Route[] = [
   },
   {
     id: 5000,
-    title: 'Usuarios',
-    icon: <IoPeople />,
-    description: 'Listado de usuarios',
-    path: paths.USERS.MAIN,
-    subpaths: [],
+    title: 'Tipos',
+    icon: <IoList />,
+    description: 'Listado de tipos',
+    path: paths.TYPES_LIST.MAIN,
+    subpaths: [
+      {
+        id: 5001,
+        title: 'Tipos de notificaciones',
+        description: 'Tipos de notificaciones',
+        path: paths.TYPES_LIST.NOTIFICATIONS,
+        subpaths: [],
+        privateRoute: true,
+        element: <NotificationsTypesView />,
+        allowedRoles: ['ADMIN'],
+      },
+    ],
     privateRoute: true,
     element: <UsersView />,
-    allowedRoles: ['ADMIN', 'READ_ONLY'],
+    allowedRoles: ['ADMIN'],
   },
   {
     id: 6000,

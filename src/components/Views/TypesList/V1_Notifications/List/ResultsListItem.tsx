@@ -125,7 +125,7 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
             <Grid item sm={6} xs={12}>
               <Link
                 className="btn btn-outline btn-primary w-full hover:text-white"
-                to={`${paths.NOTIFICATIONS.ADMIN_TYPES}?edit=true&id=${notificationType.id}`}
+                to={`${paths.TYPES_LIST.NOTIFICATIONS}?edit=true&id=${notificationType.id}`}
               >
                 EDITAR
               </Link>

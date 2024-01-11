@@ -9,6 +9,7 @@ import {
   License,
   LicenseType,
   Training,
+  TrainingType,
   Vacation,
 } from '@/api/interface/employees';
 
@@ -196,6 +197,19 @@ const typeDescriptions = [
   'Licencia remunerada',
 ];
 
+const trainingTypeDescriptions = [
+  'Capacitación de género',
+  'Capacitación sobre diversidad e inclusión',
+  'Capacitación contra el acoso laboral',
+  'Capacitación ética en el trabajo',
+  'Capacitación sobre prevención de conflictos',
+  'Capacitación sobre normativas internas',
+  'Capacitación de seguridad en el trabajo',
+  'Capacitación de responsabilidad social corporativa',
+  'Capacitación sobre igualdad salarial',
+  'Capacitación sobre ambiente laboral saludable',
+];
+
 const generateRandomTypeDescription = (): string => {
   return typeDescriptions[Math.floor(Math.random() * typeDescriptions.length)];
 };
@@ -238,19 +252,6 @@ export const mockedLicenses: { data: License[] } = generateMockedLicenses(6);
 
 // Function to generate random type descriptions in Spanish for punishment capacitations
 const generateRandomTypeDescriptionTrainings = (): string => {
-  const trainingTypeDescriptions = [
-    'Capacitación de género',
-    'Capacitación sobre diversidad e inclusión',
-    'Capacitación contra el acoso laboral',
-    'Capacitación ética en el trabajo',
-    'Capacitación sobre prevención de conflictos',
-    'Capacitación sobre normativas internas',
-    'Capacitación de seguridad en el trabajo',
-    'Capacitación de responsabilidad social corporativa',
-    'Capacitación sobre igualdad salarial',
-    'Capacitación sobre ambiente laboral saludable',
-  ];
-
   return trainingTypeDescriptions[
     Math.floor(Math.random() * trainingTypeDescriptions.length)
   ];
@@ -398,3 +399,15 @@ const generateMockedExtraHours = (count: number): { data: ExtraHours[] } => {
 // Generate 10 mocked extra hours
 export const mockedExtraHours: { data: ExtraHours[] } =
   generateMockedExtraHours(10);
+
+const generateMockedTrainingsTypes = () => {
+  const newArr = trainingTypeDescriptions.map((training) => ({
+    id: generateRandomId(),
+    description: training,
+  }));
+
+  return { data: newArr };
+};
+
+export const mockedTrainingsTypes: { data: TrainingType[] } =
+  generateMockedTrainingsTypes();
