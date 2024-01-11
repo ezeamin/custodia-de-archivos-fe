@@ -5,10 +5,10 @@ import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 
 import { usePortraitMenu } from '@/stores/usePortraitMenu';
+import { useSession } from '@/stores/useSession';
 
 import { Button, Icon } from '@/components/ui';
 
-import { paths } from '@/constants/routes/paths';
 import { cn } from '@/utilities';
 
 import { type LogoutButtonProps } from '../interface';
@@ -16,8 +16,8 @@ import { type LogoutButtonProps } from '../interface';
 const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
   const { className } = props;
 
-  const navigate = useNavigate();
   const { closeMenu } = usePortraitMenu();
+  const { logout } = useSession();
 
   const handleLogout = (): void => {
     closeMenu();
@@ -34,7 +34,7 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
       .then((action) => {
         if (action.isConfirmed) {
           sessionStorage.removeItem('refresh_token'); //! TODO: Check if it saves here or in cookies
-          navigate(paths.AUTH.LOGIN);
+          logout();
         }
       })
       .catch((err) => {

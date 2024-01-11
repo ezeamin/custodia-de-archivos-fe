@@ -33,7 +33,7 @@ export const useSession = create<SessionStore>((set) => ({
   user: testUser,
   isLoggedIn: true, // TODO: Change this to false
   accessToken: null,
-  logout: () => set({ user: null, isLoggedIn: false }),
+  logout: () => set({ user: null, isLoggedIn: false, accessToken: null }),
   login: (accessToken) => {
     const data = decodePayload(accessToken);
 
