@@ -6,8 +6,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 
-import { deleteNotificationTypeFn } from '@/api/api-calls/notifications';
-
 import { useLoading } from '@/hooks';
 import { useModal } from '@/stores/useModal';
 
@@ -15,6 +13,7 @@ import { Button, Grid, Icon } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
 
+import { deleteNotificationTypeFn } from '@/api/api-calls/typesList';
 import { NotificationsTypeResultsListItemProps } from '@/components/interface/views';
 
 const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {

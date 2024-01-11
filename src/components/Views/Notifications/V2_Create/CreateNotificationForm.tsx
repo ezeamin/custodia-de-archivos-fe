@@ -209,6 +209,14 @@ const CreateNotificationForm = () => {
     ? notificationTypes.data?.find((t) => t.id === selectedNotificationType.id)
         ?.description
     : '';
+  const notificationStartHour = notificationTypes?.data
+    ? notificationTypes.data?.find((t) => t.id === selectedNotificationType.id)
+        ?.startHour
+    : '';
+  const notificationEndHour = notificationTypes?.data
+    ? notificationTypes.data?.find((t) => t.id === selectedNotificationType.id)
+        ?.endHour
+    : '';
 
   return (
     <form
@@ -223,8 +231,14 @@ const CreateNotificationForm = () => {
             disabled={isLoading}
             label="Tipo de notificación"
             name="type"
-            options={mockedTypeOptions.data}
-            // options={notificationTypes.data}
+            options={mockedTypeOptions.data.map((type) => ({
+              id: type.id,
+              description: type.title,
+            }))}
+            /* options={notificationTypes.data.map((type) => ({
+              id: type.id,
+              description: type.title,
+            }))} */
             placeholder="Seleccione un tipo"
           />
         </Grid>
@@ -243,7 +257,13 @@ const CreateNotificationForm = () => {
         </Grid>
         {!!notificationDescription && (
           <Grid item xs={12}>
-            <Alert className="mt-2">{notificationDescription}</Alert>
+            <Alert className="mt-2">
+              <p>{notificationDescription}.</p>
+              <p className="mt-1">
+                Se puede enviar desde las {notificationStartHour} hasta las{' '}
+                {notificationEndHour}.
+              </p>
+            </Alert>
           </Grid>
         )}
         <Grid item xs={12}>

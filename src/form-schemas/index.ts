@@ -2,6 +2,8 @@ import { EmployeesSchemas } from './schemas/employees';
 import { LoginSchemas } from './schemas/login';
 import { NotificationSchemas } from './schemas/notifications';
 
+import { TypesListSchemas } from './schemas/typesList';
+
 /**
  * This folder should include all validations schemas across the project.
  * Each validation schema should be a zod object.
@@ -14,4 +16,8 @@ import { NotificationSchemas } from './schemas/notifications';
  */
 
 // Use | to join all validation schemas types.
-export type FormSchemas = EmployeesSchemas | LoginSchemas | NotificationSchemas;
+export type FormSchemas =
+  | EmployeesSchemas
+  | LoginSchemas
+  | NotificationSchemas
+  | TypesListSchemas;

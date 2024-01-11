@@ -139,7 +139,10 @@ const AddNewLicenseModal = () => {
           disabled={isLoading}
           label="Tipo de licencia *"
           name="type"
-          options={dataLicensesTypes.data}
+          options={dataLicensesTypes.data.map((type) => ({
+            id: type.id,
+            description: type.description,
+          }))}
           placeholder="Elija un tipo de licencia de la lista"
         />
         <DateInput

@@ -57,3 +57,56 @@ export const openFile = (url: string, name: string) => {
   a.click();
   document.body.removeChild(a);
 };
+
+export const cleanUpDataToSend = (
+  data: Record<string, unknown> | FormData
+): Record<string, unknown> | FormData => {
+  // Check if body is FormData Type
+  if (data instanceof FormData) {
+    // do the same but for formData type
+
+    // remove id field, if present
+    const id = data.get('id');
+    if (id) {
+      data.delete('id');
+    }
+
+    // if there are any object of type {id: string, description: string} in the data, remove the field and create a new one with the same name + "Id", with only the id
+    const entries = data.entries();
+    const newData = new FormData();
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of entries) {
+      newData.append(key, value);
+      if (
+        typeof value === 'object' &&
+        value !== null &&
+        'id' in value &&
+        typeof value.id === 'string'
+      ) {
+        newData.append(`${key}Id`, value.id);
+        newData.delete(key);
+      }
+    }
+
+    return newData;
+  }
+
+  // remove id field, if present
+  const { id, ...rest } = data;
+
+  // if there are any object of type {id: string, description: string} in the data, remove the field and create a new one with the same name + "Id", with only the id
+  const newData = Object.entries(rest).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [key]: value,
+      ...(typeof value === 'object' && value !== null && 'id' in value
+        ? {
+            [`${key}Id`]: value.id,
+          }
+        : {}),
+    }),
+    {}
+  );
+
+  return newData;
+};

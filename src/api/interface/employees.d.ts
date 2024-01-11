@@ -96,6 +96,7 @@ export interface API_GetLicenses {
 
 export interface API_GetLicensesTypes {
   id: string;
+  title: string;
   description: string;
 }
 

@@ -1,0 +1,53 @@
+import ResultsList from './List/ResultsList';
+import { mockedTypesList } from './mocked';
+import { useQuery } from '@tanstack/react-query';
+
+import { getEmployeeLicensesTypesFn } from '@/api/api-calls/employees';
+
+import { useLoading } from '@/hooks';
+
+import ErrorMessage from '@/components/Error/ErrorMessage';
+
+const data = mockedTypesList;
+const isLoading = false;
+const isError = false;
+
+const TypesList = () => {
+  // -------------------------------------------------
+  // API
+  // -------------------------------------------------
+
+  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+    queryKey: ['employeeLicensesTypes'],
+    queryFn: getEmployeeLicensesTypesFn,
+  });
+
+  useLoading(isLoading, status);
+
+  // -------------------------------------------------
+  // HANDLERS
+  // -------------------------------------------------
+
+  const handleRetry = () => {
+    refetch();
+  };
+
+  // -------------------------------------------------
+  // RENDER
+  // -------------------------------------------------
+
+  if (isError) {
+    return <ErrorMessage refetch={handleRetry} />;
+  }
+
+  if (data?.data) {
+    return (
+      <section className="mt-4 animate-in-bottom a-delay-600 overflow-hidden">
+        <ResultsList data={data.data} />
+      </section>
+    );
+  }
+
+  return null;
+};
+export default TypesList;

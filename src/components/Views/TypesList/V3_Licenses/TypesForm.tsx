@@ -1,37 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { userRoles } from './mocked';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import {
-  getNotificationTypeFn,
-  postNotificationTypeFn,
-  putNotificationTypeFn,
-} from '@/api/api-calls/notifications';
-import { getRolesOptionsFn } from '@/api/api-calls/params';
+import { getEmployeeLicenseTypeFn } from '@/api/api-calls/employees';
 
 import { useLoading, useZodForm } from '@/hooks';
 
-import {
-  Button,
-  Grid,
-  HourInput,
-  MultipleComboBoxInput,
-  TextInput,
-} from '@/components/ui';
+import { Button, Grid, TextAreaInput, TextInput } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
 
 import {
-  TypeSchema,
-  typeSchema,
-} from '@/form-schemas/schemas/notifications/typeSchema';
+  postEmployeeLicenseTypeFn,
+  putEmployeeLicenseTypeFn,
+} from '@/api/api-calls/typesList';
+import {
+  LicenseTypeSchema,
+  licenseTypeSchema,
+} from '@/form-schemas/schemas/typesList/licensesTypeSchema';
 
 const TypesForm = () => {
   const { control, onSubmitMiddleware, areAllFieldsFilled, setValue, reset } =
-    useZodForm(typeSchema);
+    useZodForm(licenseTypeSchema);
 
   const [isLoading, setIsLoading] = useState(false);
   const { search } = useLocation(); // ?edit=true&id=*
@@ -53,23 +45,16 @@ const TypesForm = () => {
     isSuccess: isSuccessEditedData,
     status: statusEditedData,
   } = useQuery({
-    queryKey: ['notificationTypes', isEditing && idBeingEdited],
-    queryFn: () => getNotificationTypeFn(idBeingEdited ?? ''),
+    queryKey: [
+      `employeeLicenseType_${idBeingEdited}`,
+      isEditing && idBeingEdited,
+    ],
+    queryFn: () => getEmployeeLicenseTypeFn(idBeingEdited ?? ''),
     enabled: !!(isEditing && idBeingEdited),
   });
 
-  const {
-    // data: rolesOptions,
-    isLoading: isLoadingRoles,
-    isError: isErrorRoles,
-    status: statusRoles,
-  } = useQuery({
-    queryKey: ['rolesOptions'],
-    queryFn: getRolesOptionsFn,
-  });
-
   const { mutate: createType } = useMutation({
-    mutationFn: postNotificationTypeFn,
+    mutationFn: postEmployeeLicenseTypeFn,
     onError: (error) => {
       setIsLoading(false);
       toast.error(error.message);
@@ -77,13 +62,13 @@ const TypesForm = () => {
     onSuccess: () => {
       setIsLoading(false);
       reset();
-      toast.success('Tipo de Notificación creada con éxito');
-      queryClient.invalidateQueries({ queryKey: ['notificationTypes'] });
+      toast.success('Tipo de Licencia creada con éxito');
+      queryClient.invalidateQueries({ queryKey: ['employeeLicensesTypes'] });
     },
   });
 
   const { mutate: editType } = useMutation({
-    mutationFn: putNotificationTypeFn,
+    mutationFn: putEmployeeLicenseTypeFn,
     onError: (error) => {
       setIsLoading(false);
       toast.error(error.message);
@@ -91,31 +76,23 @@ const TypesForm = () => {
     onSuccess: () => {
       setIsLoading(false);
       reset(); // Clear form values
-      toast.success('Tipo de Notificación modificada con éxito');
-      queryClient.invalidateQueries({ queryKey: ['notificationTypes'] });
+      toast.success('Tipo de Licencia modificada con éxito');
+      queryClient.invalidateQueries({ queryKey: ['employeeLicensesTypes'] });
     },
   });
 
-  useLoading(isLoadingRoles, statusRoles);
   useLoading(isLoadingEditedData, statusEditedData);
-
-  if (isErrorRoles) {
-    toast.error(
-      'Ocurrió un error al obtener la información necesaria para cargar el formulario'
-    );
-    navigate(paths.NOTIFICATIONS.MAIN);
-  }
 
   if (isErrorEditedData) {
     toast.error('Ocurrió un error al obtener la información');
-    navigate(paths.TYPES_LIST.NOTIFICATIONS);
+    navigate(paths.TYPES_LIST.LICENSES);
   }
 
   // -----------------------------------------------------
   // HANDLERS
   // -----------------------------------------------------
 
-  const handleSubmit = (data: TypeSchema) => {
+  const handleSubmit = (data: LicenseTypeSchema) => {
     setIsLoading(true);
 
     console.log(data);
@@ -128,7 +105,7 @@ const TypesForm = () => {
   };
 
   const handleCancelEdit = () => {
-    navigate(paths.TYPES_LIST.NOTIFICATIONS);
+    navigate(paths.TYPES_LIST.LICENSES);
   };
 
   // -----------------------------------------------------
@@ -140,9 +117,6 @@ const TypesForm = () => {
     if (isEditing && isSuccessEditedData && dataBeingEdited?.data) {
       setValue('title', dataBeingEdited?.data.title);
       setValue('description', dataBeingEdited?.data.description);
-      setValue('startHour', dataBeingEdited?.data.startHour);
-      setValue('endHour', dataBeingEdited?.data.endHour);
-      setValue('allowedRoles', dataBeingEdited?.data.allowedRoles);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccessEditedData, isEditing, setValue]);
@@ -157,56 +131,24 @@ const TypesForm = () => {
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
       <Grid container gap={2}>
-        <Grid item lg={4} xs={12}>
-          <TextInput<TypeSchema>
+        <Grid item xs={12}>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
-            label="Título"
+            label="Nombre"
             name="title"
-            placeholder="Nueva documentación"
+            placeholder="Licencia por maternidad"
           />
         </Grid>
-        <Grid item lg={8} xs={12}>
-          <TextInput<TypeSchema>
+        <Grid item xs={12}>
+          <TextAreaInput
             className="w-full"
             control={control}
             disabled={isLoading}
             label="Descripción"
             name="description"
-            placeholder="Este tipo de notificación es para..."
-          />
-        </Grid>
-        <Grid item lg={4} sm={6} xs={12}>
-          <HourInput<TypeSchema>
-            className="w-full"
-            control={control}
-            disabled={isLoading}
-            label="Hora de inicio"
-            name="startHour"
-            placeholder="08:00"
-          />
-        </Grid>
-        <Grid item lg={4} sm={6} xs={12}>
-          <HourInput<TypeSchema>
-            className="w-full"
-            control={control}
-            disabled={isLoading}
-            label="Hora de fin"
-            name="endHour"
-            placeholder="15:00"
-          />
-        </Grid>
-        <Grid item lg={4} sm={6} xs={12}>
-          <MultipleComboBoxInput<TypeSchema>
-            className="w-full"
-            control={control}
-            disabled={isLoading}
-            label="Roles habilitados"
-            name="allowedRoles"
-            options={userRoles}
-            // options={rolesOptions?.data}
-            placeholder="Elige uno o más roles"
+            placeholder="Este tipo de licencia es para..."
           />
         </Grid>
       </Grid>

@@ -1,6 +1,8 @@
 import { fetchFn } from '../fetchFn';
 import { apiRoutes } from '../routes/apiRoutes';
 
+import { cleanUpDataToSend } from '@/utilities/utils';
+
 import {
   getNotificationAdapter,
   getNotificationsAdapter,
@@ -81,10 +83,12 @@ export const putReadNotificationFn = async (id: string) => {
 export const postNotificationFn = async (body: FormData) => {
   const request = apiRoutes.NOTIFICATIONS.POST_NOTIFICATION();
 
+  const dataToSend = cleanUpDataToSend(body);
+
   const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
     request,
     adapter: (APIData) => APIData,
-    body,
+    body: dataToSend,
   });
 
   return data;
@@ -121,52 +125,6 @@ export const getNotificationTypeFn = async (id: string) => {
   const data = await fetchFn<API_GetNotificationsTypes, NotificationType>({
     request,
     adapter: getNotificationsTypesAdapter,
-  });
-
-  return data;
-};
-
-export const postNotificationTypeFn = async (body: Record<string, unknown>) => {
-  const request = apiRoutes.NOTIFICATIONS.POST_NOTIFICATION_TYPE();
-
-  const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
-    request,
-    adapter: (APIData) => APIData,
-    body,
-  });
-
-  return data;
-};
-
-export const putNotificationTypeFn = async (body: Record<string, unknown>) => {
-  if (!body.id || typeof body.id !== 'string') {
-    throw new Error('Missing or invalid id');
-  }
-
-  const request = apiRoutes.NOTIFICATIONS.PUT_NOTIFICATION_TYPE({
-    id: body.id,
-  });
-
-  const dataToBeSent = {
-    ...body,
-    id: undefined,
-  };
-
-  const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
-    request,
-    adapter: (APIData) => APIData,
-    body: dataToBeSent,
-  });
-
-  return data;
-};
-
-export const deleteNotificationTypeFn = async (id: string) => {
-  const request = apiRoutes.NOTIFICATIONS.DELETE_NOTIFICATION_TYPE({ id });
-
-  const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
-    request,
-    adapter: (APIData) => APIData,
   });
 
   return data;

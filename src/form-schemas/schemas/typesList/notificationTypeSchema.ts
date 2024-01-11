@@ -8,7 +8,7 @@ import {
   textRules,
 } from '@/form-schemas/rules/rules';
 
-export const typeSchema = z
+export const notificationTypeSchema = z
   .object({
     title: nameRules(true),
     description: textRules(true),
@@ -18,4 +18,4 @@ export const typeSchema = z
   })
   .refine(fromHourBeforeToHour, fromHourBeforeToHour.msg);
 
-export type TypeSchema = z.infer<typeof typeSchema>;
+export type NotificationTypeSchema = z.infer<typeof notificationTypeSchema>;

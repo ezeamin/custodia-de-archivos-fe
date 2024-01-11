@@ -365,7 +365,8 @@ export const mockedFormalWarnings: { data: FormalWarning[] } =
 const generateMockedLicensesTypes = () => {
   const newArr = typeDescriptions.map((license) => ({
     id: generateRandomId(),
-    description: license,
+    title: license,
+    description: 'Descripción de prueba',
   }));
 
   return { data: newArr };

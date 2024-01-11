@@ -9,6 +9,7 @@ import {
   History,
   LateArrival,
   License,
+  LicenseType,
   MinimalEmployee,
   Training,
   Vacation,
@@ -169,15 +170,6 @@ export interface NotificationsResultsListItemProps {
   hasBeenRead: boolean;
 }
 
-export interface NotificationsTypeResultsListProps {
-  data: NotificationType[];
-}
-
-export interface NotificationsTypeResultsListItemProps {
-  notificationType: NotificationType;
-  index: number;
-}
-
 export interface NotificationInfoProps {
   data: Notification;
   showReadAlert: boolean;
@@ -190,4 +182,34 @@ export interface NotificationInfoContentProps {
 
 export interface NotificationFileItemProps {
   file: NotificationFile;
+}
+
+// --------------------------------------------------
+// TYPES LIST
+// --------------------------------------------------
+
+export interface RoutingCardProps {
+  route: {
+    id: number;
+    path: string;
+    name: string;
+  };
+  index: number;
+}
+
+export interface NotificationsTypeResultsListProps {
+  data: NotificationType[];
+}
+
+export interface NotificationsTypeResultsListItemProps {
+  notificationType: NotificationType;
+  index: number;
+}
+export interface LicensesTypesResultsListProps {
+  data: LicenseType[];
+}
+
+export interface LicensesTypesResultsListItemProps {
+  licenseType: LicenseType;
+  index: number;
 }

@@ -80,9 +80,25 @@ export const apiRoutes = {
       method: 'GET',
       url: `/employees/licences/types`,
     }),
+    GET_EMPLOYEE_LICENSE_TYPE: ({ id }: { id: string }): ApiRoute => ({
+      method: 'GET',
+      url: `/employees/${id}/licences/types`,
+    }),
     POST_EMPLOYEE_LICENSE: (): ApiRoute => ({
       method: 'POST',
       url: `/employees/licences`,
+    }),
+    POST_EMPLOYEE_LICENSE_TYPE: (): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/licences/types`,
+    }),
+    PUT_EMPLOYEE_LICENSE_TYPE: ({ id }: { id: string }): ApiRoute => ({
+      method: 'PUT',
+      url: `/employees/licences/types/${id}`,
+    }),
+    DELETE_EMPLOYEE_LICENSE_TYPE: ({ id }: { id: string }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/licences/types/${id}`,
     }),
     GET_EMPLOYEE_VACATIONS: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',

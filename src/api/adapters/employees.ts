@@ -136,14 +136,23 @@ export const getEmployeeLicensesAdapter = (
   }));
 };
 
-export const getEmployeeLicencesTypesAdapter = (
+export const getEmployeeLicensesTypesAdapter = (
   data: API_GetLicensesTypes[]
 ): LicenseType[] => {
   return data.map((element) => ({
     id: element.id,
+    title: element.title,
     description: element.description,
   }));
 };
+
+export const getEmployeeLicenseTypeAdapter = (
+  data: API_GetLicensesTypes
+): LicenseType => ({
+  id: data.id,
+  title: data.title,
+  description: data.description,
+});
 
 export const getEmployeeFormalWarningsAdapter = (
   data: API_GetFormalWarnings[]

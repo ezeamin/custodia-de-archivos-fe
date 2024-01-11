@@ -1,22 +1,52 @@
 import { generateRandomId } from '@/utilities/utils';
 
-export const typeOptions = {
+import { NotificationType } from '@/api/interface/notifications';
+
+export const typeOptions: { data: NotificationType[] } = {
   data: [
     {
       id: generateRandomId(),
-      description: 'Administrativa',
+      title: 'Administrativa',
+      description: 'Descripcion de prueba',
+      startHour: '08:00',
+      endHour: '16:00',
+      allowedRoles: [
+        { id: generateRandomId(), description: 'ADMIN' },
+        { id: generateRandomId(), description: 'EMPLOYEE' },
+      ],
     },
     {
       id: generateRandomId(),
-      description: 'Mantenimiento',
+      title: 'Mantenimiento',
+      description: 'Descripcion de prueba',
+      startHour: '08:00',
+      endHour: '16:00',
+      allowedRoles: [
+        { id: generateRandomId(), description: 'ADMIN' },
+        { id: generateRandomId(), description: 'EMPLOYEE' },
+      ],
     },
     {
       id: generateRandomId(),
-      description: 'Nueva documentación',
+      title: 'Nueva documentación',
+      description: 'Descripcion de prueba',
+      startHour: '08:00',
+      endHour: '16:00',
+      allowedRoles: [
+        { id: generateRandomId(), description: 'ADMIN' },
+        { id: generateRandomId(), description: 'EMPLOYEE' },
+      ],
     },
     {
       id: generateRandomId(),
-      description: 'Otro',
+      title: 'Otro',
+      description: 'Descripcion de prueba',
+      startHour: '08:00',
+      endHour: '16:00',
+      allowedRoles: [
+        { id: generateRandomId(), description: 'ADMIN' },
+        { id: generateRandomId(), description: 'EMPLOYEE' },
+      ],
     },
   ],
 };

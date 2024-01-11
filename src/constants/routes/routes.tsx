@@ -18,10 +18,12 @@ import CreateNotificationView from '@/views/Notifications/CreateNotificationView
 import NotificationDetailView from '@/views/Notifications/NotificationDetailView';
 import NotificationsHistoryView from '@/views/Notifications/NotificationsHistoryView';
 import NotificationsSentListView from '@/views/Notifications/NotificationsSentListView';
-import NotificationsTypesView from '@/views/Notifications/NotificationsTypesView';
 import NotificationsView from '@/views/Notifications/NotificationsView';
 import SettingsView from '@/views/Settings/SettingsView';
-import UsersView from '@/views/TypesList/TypesListView';
+import LicensesTypesView from '@/views/TypesList/LicensesTypesView';
+import NotificationsTypesView from '@/views/TypesList/NotificationsTypesView';
+import TrainingsTypesView from '@/views/TypesList/TrainingsTypesView';
+import TypesListView from '@/views/TypesList/TypesListView';
 
 import { flattenRoutes } from '@/utilities/utils';
 
@@ -193,9 +195,29 @@ export const routes: Route[] = [
         element: <NotificationsTypesView />,
         allowedRoles: ['ADMIN'],
       },
+      {
+        id: 5002,
+        title: 'Tipos de licencias',
+        description: 'Tipos de licencias',
+        path: paths.TYPES_LIST.LICENSES,
+        subpaths: [],
+        privateRoute: true,
+        element: <LicensesTypesView />,
+        allowedRoles: ['ADMIN'],
+      },
+      {
+        id: 5003,
+        title: 'Tipos de capacitaciones',
+        description: 'Tipos de capacitaciones',
+        path: paths.TYPES_LIST.TRAININGS,
+        subpaths: [],
+        privateRoute: true,
+        element: <TrainingsTypesView />,
+        allowedRoles: ['ADMIN'],
+      },
     ],
     privateRoute: true,
-    element: <UsersView />,
+    element: <TypesListView />,
     allowedRoles: ['ADMIN'],
   },
   {
