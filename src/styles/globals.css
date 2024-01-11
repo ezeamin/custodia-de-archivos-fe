@@ -63,6 +63,15 @@ body {
   border-bottom-right-radius: 10px;
 }
 
+.login__img {
+  border-radius: 1rem;
+  margin: 1rem;
+  height: calc(100vh - 2rem);
+  width: calc(100vw - 50% - 2rem);
+  object-fit: cover;
+  box-shadow: 0 0 10rem rgba(0, 0, 0, 0.1);
+}
+
 /* UTILITY CLASSES ------------------------------------- */
 
 .table-top-right-rounded {

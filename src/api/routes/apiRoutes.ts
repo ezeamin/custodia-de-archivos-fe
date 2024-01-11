@@ -15,6 +15,19 @@ export const apiRoutes = {
       url: '/params/areas',
     }),
   },
+  AUTH: {
+    POST_LOGIN: (): ApiRoute => ({
+      method: 'POST',
+      url: '/auth/login',
+    }),
+    GET_REFRESH_TOKEN: (): ApiRoute => ({
+      method: 'GET',
+      url: '/auth/refresh-token',
+      headers: {
+        credentials: 'include',
+      },
+    }),
+  },
   EMPLOYEES: {
     GET_EMPLOYEES: ({ params }: { params: string }): ApiRoute => ({
       method: 'GET',

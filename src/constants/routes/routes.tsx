@@ -8,7 +8,9 @@ import {
 
 import { paths } from './paths';
 
-import AuthView from '@/views/Auth/AuthView';
+import LoginView from '@/views/Auth/LoginView';
+import RecoverPasswordView from '@/views/Auth/RecoverPasswordView';
+import ResetPasswordView from '@/views/Auth/ResetPasswordView';
 import CreateEmployeeView from '@/views/Employees/CreateEmployeeView';
 import EditEmployeeView from '@/views/Employees/EditEmployeeView';
 import EmployeeDetailsView from '@/views/Employees/EmployeeDetailsView';
@@ -36,7 +38,7 @@ export const routes: Route[] = [
     description: 'Login',
     path: paths.AUTH.LOGIN,
     hidden: true,
-    element: <AuthView />,
+    element: <LoginView />,
     privateRoute: false,
     subpaths: [
       {
@@ -46,7 +48,7 @@ export const routes: Route[] = [
         path: paths.AUTH.RECOVER_PASS,
         subpaths: [],
         privateRoute: false,
-        element: <AuthView />,
+        element: <RecoverPasswordView />,
         allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
       },
       {
@@ -56,7 +58,7 @@ export const routes: Route[] = [
         path: paths.AUTH.RESET_PASS,
         subpaths: [],
         privateRoute: true,
-        element: <AuthView />,
+        element: <ResetPasswordView />,
         allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
       },
     ],

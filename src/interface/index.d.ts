@@ -8,8 +8,7 @@ export interface BasicList {
 }
 
 export interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: UserRole;
+  id: string | null;
+  name: string | null;
+  role: UserRole | null;
 }

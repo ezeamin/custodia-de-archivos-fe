@@ -16,7 +16,7 @@ const PrivateRoute = (props: PrivateRouteProps) => {
   const location = useLocation();
 
   // Logged in but doesn't have rights to be in route
-  if (isLoggedIn && user && !allowedRoles.includes(user.role)) {
+  if (isLoggedIn && user && user.role && !allowedRoles.includes(user.role)) {
     toast.warning('No tiene permisos para acceder a esta ruta');
     return <Navigate to={paths.HOME} />;
   }
