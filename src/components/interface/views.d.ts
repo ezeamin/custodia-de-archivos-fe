@@ -1,9 +1,17 @@
 import { ModalStore } from '@/stores/useModal';
 
 import {
+  Absence,
   Employee,
   EmployeeDoc,
+  ExtraHours,
+  FormalWarning,
+  History,
+  LateArrival,
+  License,
   MinimalEmployee,
+  Training,
+  Vacation,
 } from '@/api/interface/employees';
 import {
   Notification,
@@ -62,6 +70,88 @@ export interface ChangeDocModalData extends ModalStore {
       name: string;
     };
   };
+}
+
+export interface NewUserModalData extends ModalStore {
+  data: {
+    data: {
+      username: string;
+      password: string;
+    };
+  };
+}
+
+export interface HistoryDataProps {
+  data: History[];
+}
+
+export interface HistoryElementProps {
+  data: History;
+}
+
+export interface AddNewProps {
+  disabled?: boolean;
+  modalName: string;
+}
+
+export interface ObservationsMessageProps {
+  id: string;
+}
+
+export interface AbsencesProps {
+  data: Absence[];
+}
+
+export interface AbsencesElementProps {
+  data: Absence;
+}
+
+export interface LateArrivalsProps {
+  data: LateArrival[];
+}
+
+export interface LateArrivalsElementProps {
+  data: LateArrival;
+}
+
+export interface LicensesProps {
+  data: License[];
+}
+
+export interface LicensesElementProps {
+  data: License;
+}
+
+export interface ExtraHoursProps {
+  data: ExtraHours[];
+}
+
+export interface ExtraHoursElementProps {
+  data: ExtraHours;
+}
+
+export interface VacationsProps {
+  data: Vacation[];
+}
+
+export interface VacationsElementProps {
+  data: Vacation;
+}
+
+export interface FormalWarningsProps {
+  data: FormalWarning[];
+}
+
+export interface FormalWarningsElementProps {
+  data: FormalWarning;
+}
+
+export interface TrainingsProps {
+  data: Training[];
+}
+
+export interface TrainingsElementProps {
+  data: Training;
 }
 
 // --------------------------------------------------

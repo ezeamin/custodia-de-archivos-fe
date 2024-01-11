@@ -1,8 +1,8 @@
 import Title from '@/components/Common/Title';
 import { Alert } from '@/components/ui';
-import DescriptionModal from '@/components/Views/Notifications/V4_Admin_Types/Modal/DescriptionModal';
-import TypesForm from '@/components/Views/Notifications/V4_Admin_Types/TypesForm';
-import TypesList from '@/components/Views/Notifications/V4_Admin_Types/TypesList';
+import DescriptionModal from '@/components/Views/TypesList/V1_Notifications/Modal/DescriptionModal';
+import TypesForm from '@/components/Views/TypesList/V1_Notifications/TypesForm';
+import TypesList from '@/components/Views/TypesList/V1_Notifications/TypesList';
 
 const NotificationsTypesView = () => {
   return (

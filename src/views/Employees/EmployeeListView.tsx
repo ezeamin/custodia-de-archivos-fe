@@ -21,7 +21,7 @@ const EmployeeListView = () => {
       </section>
       <Results />
 
-      <Modal title="Filtrar resultados">
+      <Modal id="employeeSearchFilter" title="Filtrar resultados">
         <FilterModalForm />
       </Modal>
     </>

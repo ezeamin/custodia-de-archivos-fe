@@ -1,11 +1,18 @@
-import EmployeeStatus from '../../V1_List/Results/EmployeeStatus';
+import { FaPencil } from 'react-icons/fa6';
+import { Link, useParams } from 'react-router-dom';
+
 import EmployeeDataField from './EmployeeDataField';
 import dayjs from 'dayjs';
+
+import { Icon } from '@/components/ui';
+import EmployeeStatus from '@/components/Views/Employees/V1_List/Results/EmployeeStatus';
 
 import { EmployeeInfoProps } from '@/components/interface/views';
 
 const EmployeeJobDetails = (props: EmployeeInfoProps) => {
   const { data } = props;
+
+  const { id: employeeId } = useParams();
 
   const formattedRegistrationDate = dayjs(data.registrationDate).format(
     'DD/MM/YYYY'
@@ -15,13 +22,13 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
     : 'N/A';
 
   return (
-    <article className="card content-card flex sm:!flex-row md:!flex-col gap-3 animate-in-right">
+    <article className="card content-card flex sm:!flex-row lg:!flex-col gap-3 animate-in-right">
       <img
         alt={data.lastname}
-        className="rounded-md object-cover sm:w-1/4 md:w-auto"
+        className="rounded-md object-cover sm:w-1/2 lg:w-auto"
         src={data.imgSrc}
       />
-      <div className="flex flex-col gap-3 sm:w-3/4 md:w-auto">
+      <div className="flex flex-col gap-3 sm:w-1/2 lg:w-auto">
         <h2 className="text-xl font-bold text-center">{`${data.lastname}, ${data.firstname}`}</h2>
         <EmployeeDataField
           label="Estado"
@@ -38,6 +45,10 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
           label="Fecha de egreso"
           value={formattedDepartureDate}
         />
+        <Link className="btn btn-sm" to={`/employees/${employeeId}/edit/job`}>
+          <Icon iconComponent={<FaPencil size="0.75em" />} title="Editar" />
+          Modificar
+        </Link>
       </div>
     </article>
   );

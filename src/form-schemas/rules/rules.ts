@@ -1,4 +1,4 @@
-import dayjs, { type Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { z } from 'zod';
 
 // ----------------------------------------------------
@@ -62,12 +62,17 @@ export const typeRules = <T extends boolean = false>(
   required: T,
   typeName = ''
 ) => {
-  const rule = z.object({
-    id: z.string().uuid({
-      message: `Debe ingresar un ID válido para el ${typeName}`,
-    }),
-    description: z.string(),
-  });
+  const rule = z.object(
+    {
+      id: z.string().uuid({
+        message: `Debe ingresar un ID válido para el ${typeName}`,
+      }),
+      description: z.string(),
+    },
+    {
+      invalid_type_error: `Debe ingresar un ${typeName} válido`,
+    }
+  );
 
   return optionalWrapper(required, rule);
 };
@@ -302,6 +307,35 @@ export const idRules = <T extends boolean = false>(required: T) => {
   return optionalWrapper(required, rule);
 };
 
+export const fileNameRules = <T extends boolean = false>(required: T) => {
+  const rule = z
+    .string()
+    .trim()
+    .max(35, {
+      message: 'El Nombre debe tener menos de 35 caracteres',
+    })
+    .regex(/^[a-zA-Z0-9]*$/, {
+      message:
+        'El Nombre no puede contener espacios, caracteres especiales ni puntos',
+    })
+    .refine(
+      // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
+      (data) => {
+        if (required) {
+          return data.length > 0;
+        }
+
+        return !data || data.length >= 2;
+      },
+      {
+        message: 'El Nombre debe tener al menos 2 caracteres',
+      }
+    )
+    .default('');
+
+  return optionalWrapper(required, rule);
+};
+
 // ----------------------------------------------------
 // COMMON REFINES
 // ----------------------------------------------------
@@ -317,12 +351,13 @@ notEmptyForm.msg = () => ({
 
 // If fromDate and toDate have values, fromDate must be before or equal to toDate
 export const fromDateBeforeToDate = (data: {
-  fromDate: Dayjs | null;
-  toDate: Dayjs | null;
+  fromDate: Date | string | null;
+  toDate: Date | string | null;
 }) => {
   if (!data.fromDate || !data.toDate) return true;
-  if (data.fromDate.isSame(data.toDate)) return true;
-  return data.fromDate.isBefore(data.toDate);
+  const fromDate = dayjs(data.fromDate);
+  const toDate = dayjs(data.toDate);
+  return fromDate.isBefore(toDate) || fromDate.isSame(toDate, 'day');
 };
 
 fromDateBeforeToDate.msg = () => ({
@@ -332,8 +367,8 @@ fromDateBeforeToDate.msg = () => ({
 // If fromDate has value, toDate must have value too
 export const fromDateAndToDate = (
   data: {
-    fromDate: Dayjs | null;
-    toDate: Dayjs | null;
+    fromDate: Date | string | null;
+    toDate: Date | string | null;
   },
   field: 'toDate' | 'fromDate'
 ) => {
@@ -361,4 +396,28 @@ export const fromHourBeforeToHour = (data: {
 
 fromHourBeforeToHour.msg = () => ({
   message: 'La hora de inicio debe ser menor a la hora de fin',
+});
+
+export const dateBeforeOrToday = (data: {
+  date: Date | string | undefined;
+}) => {
+  if (!data.date) return true;
+  const date = dayjs(data.date);
+  return date.isBefore(dayjs()) || date.isSame(dayjs(), 'day');
+};
+
+dateBeforeOrToday.msg = () => ({
+  message: 'La fecha debe ser anterior o igual a la fecha actual',
+});
+
+export const fromDateAfterOrToday = (data: {
+  fromDate: Date | string | undefined;
+}) => {
+  if (!data.fromDate) return true;
+  const fromDate = dayjs(data.fromDate);
+  return fromDate.isAfter(dayjs()) || fromDate.isSame(dayjs(), 'day');
+};
+
+fromDateAfterOrToday.msg = () => ({
+  message: 'La fecha desde debe ser futura o igual a la fecha actual',
 });

@@ -26,14 +26,14 @@ const NavigationMenu = () => {
       </div>
       <Link
         className="btn dark:border-gray-500 hover:dark:border-gray-400"
-        to={paths.NOTIFICATIONS.ADMIN_TYPES}
+        to={paths.TYPES_LIST.NOTIFICATIONS}
       >
         Administrar tipos
         <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
       </Link>
       <Link
         className="btn dark:border-gray-500 hover:dark:border-gray-400"
-        to={paths.NOTIFICATIONS.ADMIN_TYPES}
+        to={paths.TYPES_LIST.NOTIFICATIONS}
       >
         Administrar horarios
         <Icon iconComponent={<MdArrowOutward />} title="Navegar" />

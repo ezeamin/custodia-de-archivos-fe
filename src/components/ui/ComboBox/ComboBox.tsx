@@ -113,7 +113,7 @@ const ComboBox = <T extends FieldValues>(
                 } ${error ? 'border-error' : ''}`,
                 inputClassName
               )}
-              displayValue={(option: BasicList) => option.description}
+              displayValue={(option: BasicList) => option?.description}
               id={name}
               placeholder={placeholder || 'Seleccione una opción...'}
               onChange={(event) => {
@@ -126,7 +126,7 @@ const ComboBox = <T extends FieldValues>(
                 ariaHidden
                 unstyled
                 aria-label="Borrar selección"
-                className="absolute inset-y-0 right-0 flex items-center px-3 h-auto bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 hover:dark:bg-slate-800 border border-gray-300 border-l-0 dark:border-gray-600"
+                className="absolute inset-y-[1px] right-[1px] flex items-center px-3 h-auto bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 hover:dark:bg-slate-800"
                 type="button"
                 onClick={handleClearSelection}
               >
@@ -135,7 +135,7 @@ const ComboBox = <T extends FieldValues>(
             ) : (
               <Combobox.Button
                 aria-label="Expandir/comprimir opciones"
-                className="absolute inset-y-0 right-0 flex items-center p-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 hover:dark:bg-slate-800 border border-gray-300 border-l-0 dark:border-gray-600"
+                className="absolute inset-y-[1px] right-[1px] flex items-center p-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 hover:dark:bg-slate-800"
               >
                 <Icon
                   iconComponent={<MdExpandMore />}

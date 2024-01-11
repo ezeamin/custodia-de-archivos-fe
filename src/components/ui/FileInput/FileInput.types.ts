@@ -8,4 +8,5 @@ export interface FileInputProps<T extends FormSchemas>
   className?: string;
   disabled?: boolean;
   hideLabel?: boolean;
+  inputClassName?: string;
 }
