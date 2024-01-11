@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import { FiLogOut } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
 
+import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 
+import { postLogoutFn } from '@/api/api-calls/auth';
+
+import { useLoading } from '@/hooks';
 import { usePortraitMenu } from '@/stores/usePortraitMenu';
 import { useSession } from '@/stores/useSession';
 
@@ -19,6 +23,21 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
   const { closeMenu } = usePortraitMenu();
   const { logout } = useSession();
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { mutate: postLogout, status } = useMutation({
+    mutationFn: postLogoutFn,
+    onError: () => {
+      setIsLoading(false);
+    },
+    onSuccess: () => {
+      setIsLoading(false);
+      logout();
+    },
+  });
+
+  useLoading(isLoading, status);
+
   const handleLogout = (): void => {
     closeMenu();
     Swal.fire({
@@ -33,8 +52,8 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
     })
       .then((action) => {
         if (action.isConfirmed) {
-          sessionStorage.removeItem('refresh_token'); //! TODO: Check if it saves here or in cookies
-          logout();
+          setIsLoading(true);
+          postLogout();
         }
       })
       .catch((err) => {

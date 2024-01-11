@@ -87,9 +87,8 @@ const CreateNotificationForm = () => {
 
   const { mutate: createNotification } = useMutation({
     mutationFn: postNotificationFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: () => {
       setIsLoading(false);

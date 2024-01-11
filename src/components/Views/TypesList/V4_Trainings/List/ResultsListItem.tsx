@@ -31,9 +31,8 @@ const ResultsListItem = (props: TrainingTypesResultsListItemProps) => {
 
   const { mutate: removeType, status } = useMutation({
     mutationFn: deleteEmployeeTrainingTypeFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: () => {
       setIsLoading(false);

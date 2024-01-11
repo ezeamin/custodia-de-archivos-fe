@@ -34,9 +34,8 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
 
   const { mutate: removeType, status } = useMutation({
     mutationFn: deleteNotificationTypeFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: () => {
       setIsLoading(false);

@@ -19,13 +19,17 @@ export const apiRoutes = {
     POST_LOGIN: (): ApiRoute => ({
       method: 'POST',
       url: '/auth/login',
+      credentials: 'include',
     }),
     GET_REFRESH_TOKEN: (): ApiRoute => ({
       method: 'GET',
       url: '/auth/refresh-token',
-      headers: {
-        credentials: 'include',
-      },
+      credentials: 'include',
+    }),
+    POST_LOGOUT: (): ApiRoute => ({
+      method: 'POST',
+      url: '/auth/logout',
+      credentials: 'include',
     }),
   },
   EMPLOYEES: {

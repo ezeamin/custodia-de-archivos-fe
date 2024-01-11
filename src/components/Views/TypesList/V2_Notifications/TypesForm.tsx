@@ -70,9 +70,8 @@ const TypesForm = () => {
 
   const { mutate: createType } = useMutation({
     mutationFn: postNotificationTypeFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: () => {
       setIsLoading(false);
@@ -84,9 +83,8 @@ const TypesForm = () => {
 
   const { mutate: editType } = useMutation({
     mutationFn: putNotificationTypeFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: () => {
       setIsLoading(false);

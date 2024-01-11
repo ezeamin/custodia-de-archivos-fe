@@ -31,9 +31,8 @@ const ResultsListItem = (props: LicensesTypesResultsListItemProps) => {
 
   const { mutate: removeType, status } = useMutation({
     mutationFn: deleteEmployeeLicenseTypeFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: () => {
       setIsLoading(false);

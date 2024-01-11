@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
@@ -7,7 +7,8 @@ import { getRefreshTokenFn } from '@/api/api-calls/auth';
 
 import { useSession } from '@/stores/useSession';
 
-// import LoadingPage from '@/components/Loading/LoadingPage';
+import LoadingPage from '@/components/Loading/LoadingPage';
+
 import { router } from '@/utilities/router';
 
 // Useful for reset password view
@@ -15,39 +16,41 @@ const tokenInUrl = new URLSearchParams(window.location.search).get('token');
 
 const TryToLoginView = () => {
   const { isLoggedIn, login } = useSession();
+  const [shouldShowRouter, setShouldShowRouter] = useState(false);
 
-  const { data /* , isLoading */ } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['login'],
     queryFn: getRefreshTokenFn,
     enabled: !isLoggedIn && !tokenInUrl,
+    retry: false,
   });
 
   useEffect(() => {
     if (tokenInUrl && !isLoggedIn) {
       login(tokenInUrl);
+      setShouldShowRouter(true);
     }
     if (data?.data?.token && !isLoggedIn) {
       login(data.data.token);
+      setShouldShowRouter(true);
     }
-  }, [data, login, isLoggedIn]);
+    if (error) {
+      setShouldShowRouter(true);
+    }
+  }, [data, login, isLoggedIn, error]);
 
-  //   if (isError) {
-  //     return <ErrorPage />;
-  //   }
+  if (!isLoggedIn && isLoading) {
+    return (
+      <section className="w-screen h-[100dvh] flex flex-col justify-center items-center">
+        <LoadingPage />
+      </section>
+    );
+  }
 
-  //   if (isSuccess && data.data && !('token' in data.data)) {
-  //     return <Navigate to={paths.AUTH.LOGIN} />;
-  //   }
+  if (shouldShowRouter) {
+    return <RouterProvider router={router} />;
+  }
 
-  //   ! Only uncomment this block of code
-  //   if (!isLoggedIn && isLoading) {
-  //     return (
-  //       <section className="w-screen h-[100dvh] flex flex-col justify-center items-center">
-  //         <LoadingPage />
-  //       </section>
-  //     );
-  //   }
-
-  return <RouterProvider router={router} />;
+  return null;
 };
 export default TryToLoginView;

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -10,8 +9,6 @@ import { useZodForm } from '@/hooks';
 import { useSession } from '@/stores/useSession';
 
 import { Button, PasswordInput, TextInput } from '@/components/ui';
-
-import { paths } from '@/constants/routes/paths';
 
 import {
   LoginSchema,
@@ -25,7 +22,6 @@ const LoginForm = () => {
 
   const { control, onSubmitMiddleware } = useZodForm(loginSchema);
   const { login } = useSession();
-  const navigate = useNavigate();
 
   // -------------------------------------------------
   // API
@@ -35,9 +31,8 @@ const LoginForm = () => {
 
   const { mutate: postLogin } = useMutation({
     mutationFn: postLoginFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: (data) => {
       setIsLoading(false);
@@ -45,10 +40,6 @@ const LoginForm = () => {
 
       // Store in session
       if (data.data) login(data.data.token);
-
-      window.setTimeout(() => {
-        navigate(paths.HOME);
-      }, 1000);
     },
   });
 

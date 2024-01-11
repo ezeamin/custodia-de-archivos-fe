@@ -31,7 +31,7 @@ export const fetchFn = async <T, V = T>({
   const optionObj =
     request.method === 'POST'
       ? {
-          method: request.method,
+          ...request,
           headers: {
             'Content-Type': isFormData
               ? 'multipart/form-data'
@@ -43,7 +43,7 @@ export const fetchFn = async <T, V = T>({
         }
       : // GET
         {
-          method: request.method,
+          ...request,
           headers: {
             ...(useToken ? { Authorization: `Bearer ${token}` } : {}),
             ...(request.headers || {}),
@@ -54,7 +54,8 @@ export const fetchFn = async <T, V = T>({
   const data = (await res.json()) as API_GlobalResponse<V>;
 
   if (!res.ok) {
-    toast.error(data.message || 'Ocurrió un error al leer la información.');
+    if (res.status !== 401)
+      toast.error(data.message || 'Ocurrió un error al leer la información.');
     throw new Error();
   }
 

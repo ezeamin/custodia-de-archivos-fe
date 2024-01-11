@@ -3,6 +3,7 @@ import { apiRoutes } from '../routes/apiRoutes';
 
 import { postLoginAdapter } from '../adapters/auth';
 
+import { API_EmptyResponse } from '../interface';
 import { API_PostLogin, PostLogin } from '../interface/auth';
 
 export const postLoginFn = async (body: {
@@ -26,6 +27,18 @@ export const getRefreshTokenFn = async () => {
   const data = await fetchFn<API_PostLogin, PostLogin>({
     request,
     adapter: postLoginAdapter,
+  });
+
+  return data;
+};
+
+export const postLogoutFn = async () => {
+  const request = apiRoutes.AUTH.POST_LOGOUT();
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    useToken: true,
   });
 
   return data;

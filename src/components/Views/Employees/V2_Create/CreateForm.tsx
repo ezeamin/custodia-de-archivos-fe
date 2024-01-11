@@ -73,9 +73,8 @@ const CreateForm = () => {
 
   const { mutate: createEmployee } = useMutation({
     mutationFn: postEmployeeFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: () => {
       setIsLoading(false);

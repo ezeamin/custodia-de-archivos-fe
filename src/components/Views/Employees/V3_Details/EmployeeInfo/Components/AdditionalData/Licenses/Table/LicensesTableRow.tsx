@@ -42,9 +42,8 @@ const LicensesTableRow = (props: LicensesElementProps) => {
 
   const { mutate: removeLicense, status } = useMutation({
     mutationFn: deleteEmployeeLicenseFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: () => {
       setIsLoading(false);

@@ -55,9 +55,8 @@ const TypesForm = () => {
 
   const { mutate: createType } = useMutation({
     mutationFn: postEmployeeTrainingTypeFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: () => {
       setIsLoading(false);
@@ -69,9 +68,8 @@ const TypesForm = () => {
 
   const { mutate: editType } = useMutation({
     mutationFn: putEmployeeTrainingTypeFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: () => {
       setIsLoading(false);

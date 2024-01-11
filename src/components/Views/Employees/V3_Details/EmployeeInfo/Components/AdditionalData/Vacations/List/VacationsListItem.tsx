@@ -41,9 +41,8 @@ const VacationsListItem = (props: VacationsElementProps) => {
 
   const { mutate: removeVacation, status } = useMutation({
     mutationFn: deleteEmployeeVacationsFn,
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(error.message);
     },
     onSuccess: () => {
       setIsLoading(false);
