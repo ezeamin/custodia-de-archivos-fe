@@ -14,7 +14,7 @@ const TrainingsTable = (props: TrainingsProps) => {
           <th>Fecha</th>
           <th>Tipo</th>
           <th>Razón</th>
-          <th align="right">Observaciones</th>
+          <th align="center">Observaciones</th>
         </tr>
       </thead>
       <tbody>

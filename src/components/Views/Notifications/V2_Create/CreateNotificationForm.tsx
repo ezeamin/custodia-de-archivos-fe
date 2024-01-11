@@ -206,15 +206,15 @@ const CreateNotificationForm = () => {
   // -------------------------------------------------
 
   const notificationDescription = notificationTypes?.data
-    ? notificationTypes.data?.find((t) => t.id === selectedNotificationType.id)
+    ? notificationTypes.data?.find((t) => t.id === selectedNotificationType?.id)
         ?.description
     : '';
   const notificationStartHour = notificationTypes?.data
-    ? notificationTypes.data?.find((t) => t.id === selectedNotificationType.id)
+    ? notificationTypes.data?.find((t) => t.id === selectedNotificationType?.id)
         ?.startHour
     : '';
   const notificationEndHour = notificationTypes?.data
-    ? notificationTypes.data?.find((t) => t.id === selectedNotificationType.id)
+    ? notificationTypes.data?.find((t) => t.id === selectedNotificationType?.id)
         ?.endHour
     : '';
 

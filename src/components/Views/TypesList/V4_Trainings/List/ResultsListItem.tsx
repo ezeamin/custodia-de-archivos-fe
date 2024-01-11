@@ -11,11 +11,11 @@ import { Button, Grid } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
 
-import { deleteEmployeeLicenseTypeFn } from '@/api/api-calls/typesList';
-import { LicensesTypesResultsListItemProps } from '@/components/interface/views';
+import { deleteEmployeeTrainingTypeFn } from '@/api/api-calls/typesList';
+import { TrainingTypesResultsListItemProps } from '@/components/interface/views';
 
-const ResultsListItem = (props: LicensesTypesResultsListItemProps) => {
-  const { licenseType, index } = props;
+const ResultsListItem = (props: TrainingTypesResultsListItemProps) => {
+  const { trainingType, index } = props;
 
   // -----------------------------------------------------
   // STATE & STORES
@@ -30,7 +30,7 @@ const ResultsListItem = (props: LicensesTypesResultsListItemProps) => {
   const queryClient = useQueryClient();
 
   const { mutate: removeType, status } = useMutation({
-    mutationFn: deleteEmployeeLicenseTypeFn,
+    mutationFn: deleteEmployeeTrainingTypeFn,
     onError: (error) => {
       setIsLoading(false);
       toast.error(error.message);
@@ -38,7 +38,7 @@ const ResultsListItem = (props: LicensesTypesResultsListItemProps) => {
     onSuccess: () => {
       setIsLoading(false);
       toast.success('Tipo de Licencia eliminada con éxito');
-      queryClient.invalidateQueries({ queryKey: ['employeeLicensesTypes'] });
+      queryClient.invalidateQueries({ queryKey: ['employeeTrainingsTypes'] });
     },
   });
 
@@ -51,7 +51,7 @@ const ResultsListItem = (props: LicensesTypesResultsListItemProps) => {
   const handleDelete = () => {
     Swal.fire({
       title: '¿Estás seguro?',
-      html: `<p>Eliminarás el tipo <b>"${licenseType.title}"</b>. Esta acción no se puede revertir. Esto NO eliminará las licencias ya creadas con este tipo.</p>`,
+      html: `<p>Eliminarás el tipo <b>"${trainingType.title}"</b>. Esta acción no se puede revertir. Esto NO eliminará las capacitaciones ya creadas con este tipo.</p>`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -61,7 +61,7 @@ const ResultsListItem = (props: LicensesTypesResultsListItemProps) => {
     }).then((result) => {
       if (result.isConfirmed) {
         setIsLoading(true);
-        removeType(licenseType.id);
+        removeType(trainingType.id);
       }
     });
   };
@@ -73,8 +73,8 @@ const ResultsListItem = (props: LicensesTypesResultsListItemProps) => {
     >
       <div className="card-body flex flex-col justify-between p-0">
         <div>
-          <h2 className="card-title mb-3">{licenseType.title}</h2>
-          <p>{licenseType.description}</p>
+          <h2 className="card-title mb-3">{trainingType.title}</h2>
+          <p>{trainingType.description}</p>
         </div>
         <footer>
           <div className="divider my-0" />
@@ -82,7 +82,7 @@ const ResultsListItem = (props: LicensesTypesResultsListItemProps) => {
             <Grid item sm={6} xs={12}>
               <Link
                 className="btn btn-outline btn-primary w-full hover:text-white"
-                to={`${paths.TYPES_LIST.LICENSES}?edit=true&id=${licenseType.id}`}
+                to={`${paths.TYPES_LIST.TRAININGS}?edit=true&id=${trainingType.id}`}
               >
                 EDITAR
               </Link>

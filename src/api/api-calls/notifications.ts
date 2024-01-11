@@ -10,7 +10,7 @@ import {
   getNotificationsTypesAdapter,
 } from '../adapters/notifications';
 
-import { API_EmptyResponse, EmptyResponse } from '../interface';
+import { API_EmptyResponse } from '../interface';
 import {
   API_GetNotifications,
   API_GetNotificationsReceivers,
@@ -72,7 +72,7 @@ export const putReadNotificationFn = async (id: string) => {
     id,
   });
 
-  const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
+  const data = await fetchFn<API_EmptyResponse>({
     request,
     adapter: (APIData) => APIData,
   });
@@ -85,7 +85,7 @@ export const postNotificationFn = async (body: FormData) => {
 
   const dataToSend = cleanUpDataToSend(body);
 
-  const data = await fetchFn<API_EmptyResponse[], EmptyResponse[]>({
+  const data = await fetchFn<API_EmptyResponse>({
     request,
     adapter: (APIData) => APIData,
     body: dataToSend,

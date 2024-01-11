@@ -3,6 +3,7 @@ import { IoMdClose } from 'react-icons/io';
 
 import { toast } from 'sonner';
 
+import { useModal } from '@/stores/useModal';
 import { useObservation } from '@/stores/useObservation';
 
 import { IconButton } from '@/components/ui';
@@ -12,15 +13,16 @@ import { ObservationsMessageProps } from '@/components/interface/views';
 const ObservationsMessage = (props: ObservationsMessageProps) => {
   const { id: propId } = props;
   const { id, message, clearObservationData } = useObservation();
+  const { opened } = useModal();
 
   const handleClose = () => {
     clearObservationData();
   };
 
   useEffect(() => {
-    if (message && id === propId)
+    if (message && id === propId && !opened)
       toast.info('La observación se mostró encima de la tabla actual');
-  }, [message, id, propId]);
+  }, [message, id, propId, opened]);
 
   if (!id || !message || id !== propId) return null;
 

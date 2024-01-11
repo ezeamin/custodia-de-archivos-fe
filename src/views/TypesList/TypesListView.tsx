@@ -1,6 +1,6 @@
+import RoutingCard from '@/components/Common/RoutingCard';
 import Title from '@/components/Common/Title';
 import { Grid } from '@/components/ui';
-import RoutingCard from '@/components/Views/TypesList/V1_Main/RoutingCard';
 
 import { paths } from '@/constants/routes/paths';
 

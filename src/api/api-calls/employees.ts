@@ -272,6 +272,17 @@ export const getEmployeeTrainingsTypesFn = async () => {
   return data;
 };
 
+export const getEmployeeTrainingTypeFn = async (id: string) => {
+  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_TRAINING_TYPE({ id });
+
+  const data = await fetchFn<API_GetTrainingsTypes, TrainingType>({
+    request,
+    adapter: getEmployeeTrainingTypesAdapter,
+  });
+
+  return data;
+};
+
 export const getEmployeeLateArrivalsFn = async (id: string) => {
   const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_LATE_ARRIVALS({ id });
 
@@ -338,6 +349,26 @@ export const postEmployeeLicenseFn = async (body: Record<string, unknown>) => {
   return data;
 };
 
+export const deleteEmployeeLicenseFn = async ({
+  employeeId,
+  licenseId,
+}: {
+  employeeId: string;
+  licenseId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.DELETE_EMPLOYEE_LICENSE({
+    employeeId,
+    licenseId,
+  });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
 export const postEmployeeExtraHoursFn = async (
   body: Record<string, unknown>
 ) => {
@@ -363,6 +394,26 @@ export const postEmployeeVacationFn = async (body: Record<string, unknown>) => {
     request,
     adapter: (APIData) => APIData,
     body: dataToSend,
+  });
+
+  return data;
+};
+
+export const deleteEmployeeVacationsFn = async ({
+  employeeId,
+  vacationsId,
+}: {
+  employeeId: string;
+  vacationsId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.DELETE_EMPLOYEE_VACATIONS({
+    employeeId,
+    vacationsId,
+  });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
   });
 
   return data;

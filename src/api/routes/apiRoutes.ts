@@ -82,11 +82,21 @@ export const apiRoutes = {
     }),
     GET_EMPLOYEE_LICENSE_TYPE: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
-      url: `/employees/${id}/licences/types`,
+      url: `/employees/licences/types/${id}`,
     }),
     POST_EMPLOYEE_LICENSE: (): ApiRoute => ({
       method: 'POST',
       url: `/employees/licences`,
+    }),
+    DELETE_EMPLOYEE_LICENSE: ({
+      employeeId,
+      licenseId,
+    }: {
+      employeeId: string;
+      licenseId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/licences/${licenseId}`,
     }),
     POST_EMPLOYEE_LICENSE_TYPE: (): ApiRoute => ({
       method: 'POST',
@@ -108,6 +118,16 @@ export const apiRoutes = {
       method: 'POST',
       url: `/employees/vacations`,
     }),
+    DELETE_EMPLOYEE_VACATIONS: ({
+      employeeId,
+      vacationsId,
+    }: {
+      employeeId: string;
+      vacationsId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/vacations/${vacationsId}`,
+    }),
     GET_EMPLOYEE_FORMAL_WARNINGS: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/formal-warnings`,
@@ -123,6 +143,22 @@ export const apiRoutes = {
     GET_EMPLOYEE_TRAININGS_TYPES: (): ApiRoute => ({
       method: 'GET',
       url: `/employees/trainings/types`,
+    }),
+    GET_EMPLOYEE_TRAINING_TYPE: ({ id }: { id: string }): ApiRoute => ({
+      method: 'GET',
+      url: `/employees/trainings/types/${id}`,
+    }),
+    POST_EMPLOYEE_TRAINING_TYPE: (): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/trainings/types`,
+    }),
+    PUT_EMPLOYEE_TRAINING_TYPE: ({ id }: { id: string }): ApiRoute => ({
+      method: 'PUT',
+      url: `/employees/trainings/types/${id}`,
+    }),
+    DELETE_EMPLOYEE_TRAINING_TYPE: ({ id }: { id: string }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/trainings/types/${id}`,
     }),
     POST_EMPLOYEE_TRAINING: (): ApiRoute => ({
       method: 'POST',

@@ -35,12 +35,16 @@ const ExtraHoursListItem = (props: ExtraHoursElementProps) => {
           <p className="text-center -mt-1">Sin observaciones</p>
         )}
         {data.observations && data.observations !== message && (
-          <Button className="-mt-1" onClick={handleClickObservations}>
+          <Button className="-mt-1 w-full" onClick={handleClickObservations}>
             Ver observaciones
           </Button>
         )}
         {data.observations && data.observations === message && (
-          <Button disabled className="-mt-1" onClick={handleClickObservations}>
+          <Button
+            disabled
+            className="-mt-1 w-full"
+            onClick={handleClickObservations}
+          >
             Observaciones visibles
           </Button>
         )}

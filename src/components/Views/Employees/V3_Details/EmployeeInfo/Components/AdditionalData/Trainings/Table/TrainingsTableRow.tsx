@@ -26,7 +26,7 @@ const TrainingsTableRow = (props: TrainingsElementProps) => {
       <td>{formattedDate}</td>
       <td>{data.type.description}</td>
       <td>{data.reason}</td>
-      <td align="right">
+      <td align="center">
         {data.observations ? (
           <IconButton
             iconComponent={<FaEye />}

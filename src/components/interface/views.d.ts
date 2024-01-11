@@ -12,6 +12,7 @@ import {
   LicenseType,
   MinimalEmployee,
   Training,
+  TrainingType,
   Vacation,
 } from '@/api/interface/employees';
 import {
@@ -211,5 +212,14 @@ export interface LicensesTypesResultsListProps {
 
 export interface LicensesTypesResultsListItemProps {
   licenseType: LicenseType;
+  index: number;
+}
+
+export interface TrainingTypesResultsListProps {
+  data: TrainingType[];
+}
+
+export interface TrainingTypesResultsListItemProps {
+  trainingType: TrainingType;
   index: number;
 }

@@ -26,7 +26,7 @@ const LateArrivalsTableRow = (props: LateArrivalsElementProps) => {
     <tr>
       <td className="w-[20%]">{formattedDate}</td>
       <td className="w-[80%]">{formattedTime}</td>
-      <td align="right">
+      <td align="center">
         {data.observations ? (
           <IconButton
             iconComponent={<FaEye />}

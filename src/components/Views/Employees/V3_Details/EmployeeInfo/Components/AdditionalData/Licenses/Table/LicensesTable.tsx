@@ -14,8 +14,9 @@ const LicensesTable = (props: LicensesProps) => {
           <th>Motivo</th>
           <th>Fecha de inicio</th>
           <th>Fecha de fin</th>
-          <th align="right">Cantidad de días</th>
-          <th align="right">Observaciones</th>
+          <th>Cantidad de días</th>
+          <th align="center">Observaciones</th>
+          <th align="center">Acciones</th>
         </tr>
       </thead>
       <tbody>

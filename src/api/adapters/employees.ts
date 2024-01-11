@@ -179,9 +179,20 @@ export const getEmployeeTrainingsAdapter = (
 };
 
 export const getEmployeeTrainingTypesAdapter = (
+  data: API_GetTrainingsTypes[]
+): TrainingType[] => {
+  return data.map((element) => ({
+    id: element.id,
+    title: element.title,
+    description: element.description,
+  }));
+};
+
+export const getEmployeeTrainingTypeAdapter = (
   data: API_GetTrainingsTypes
 ): TrainingType => ({
   id: data.id,
+  title: data.title,
   description: data.description,
 });
 

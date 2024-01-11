@@ -13,7 +13,7 @@ const LateArrivalsTable = (props: LateArrivalsProps) => {
         <tr>
           <th>Fecha</th>
           <th>Hora de llegada</th>
-          <th align="right">Observaciones</th>
+          <th align="center">Observaciones</th>
         </tr>
       </thead>
       <tbody>

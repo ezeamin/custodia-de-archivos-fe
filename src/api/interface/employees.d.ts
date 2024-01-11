@@ -119,6 +119,7 @@ export interface API_GetTrainings {
 
 export interface API_GetTrainingsTypes {
   id: string;
+  title: string;
   description: string;
 }
 

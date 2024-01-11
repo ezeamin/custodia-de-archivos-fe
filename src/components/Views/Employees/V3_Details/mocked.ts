@@ -404,7 +404,8 @@ export const mockedExtraHours: { data: ExtraHours[] } =
 const generateMockedTrainingsTypes = () => {
   const newArr = trainingTypeDescriptions.map((training) => ({
     id: generateRandomId(),
-    description: training,
+    title: training,
+    description: 'Descripción de prueba',
   }));
 
   return { data: newArr };

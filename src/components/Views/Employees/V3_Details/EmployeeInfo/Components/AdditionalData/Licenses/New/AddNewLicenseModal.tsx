@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MdArrowOutward } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -16,6 +17,7 @@ import {
   Alert,
   ComboBoxInput,
   DateInput,
+  Icon,
   Modal,
   TextAreaInput,
 } from '@/components/ui';
@@ -28,7 +30,7 @@ import {
   addNewLicenseSchema,
 } from '@/form-schemas/schemas/employees/addNewLicenseSchema';
 
-const dataLicensesTypes = mockedLicensesTypes;
+const licensesTypes = mockedLicensesTypes;
 const isLoadingLicensesTypes = false;
 const isErrorLicensesTypes = false;
 
@@ -41,10 +43,12 @@ const AddNewLicenseModal = () => {
   const { id: employeeId } = params;
 
   const { closeModal } = useModal();
-  const { control, onSubmitMiddleware, reset } =
+  const { control, onSubmitMiddleware, reset, watch } =
     useZodForm(addNewLicenseSchema);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const selectedLicenseType = watch('type');
 
   // -------------------------------------------------
   // API
@@ -115,6 +119,11 @@ const AddNewLicenseModal = () => {
   // RENDER
   // -------------------------------------------------
 
+  const licenseDescription = licensesTypes?.data
+    ? licensesTypes.data?.find((t) => t.id === selectedLicenseType?.id)
+        ?.description
+    : '';
+
   return (
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
       <Modal
@@ -129,6 +138,7 @@ const AddNewLicenseModal = () => {
           Tipos de listado &gt; Tipos de licencias
           <div className="flex">
             <Link className="btn mt-2" to={paths.TYPES_LIST.LICENSES}>
+              <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
               IR A LA PÁGINA
             </Link>
           </div>
@@ -139,12 +149,15 @@ const AddNewLicenseModal = () => {
           disabled={isLoading}
           label="Tipo de licencia *"
           name="type"
-          options={dataLicensesTypes.data.map((type) => ({
+          options={licensesTypes.data.map((type) => ({
             id: type.id,
             description: type.description,
           }))}
           placeholder="Elija un tipo de licencia de la lista"
         />
+        {!!licenseDescription && (
+          <Alert className="my-2">{licenseDescription}</Alert>
+        )}
         <DateInput
           className="mb-2 w-full"
           control={control}

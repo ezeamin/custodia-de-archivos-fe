@@ -1,9 +1,7 @@
 import Title from '@/components/Common/Title';
 import { Alert } from '@/components/ui';
-
-// import DescriptionModal from '@/components/Views/TypesList/V4_Trainings/Modal/DescriptionModal';
-// import TypesForm from '@/components/Views/TypesList/V4_Trainings/TypesForm';
-// import TypesList from '@/components/Views/TypesList/V4_Trainings/TypesList';
+import TypesForm from '@/components/Views/TypesList/V4_Trainings/TypesForm';
+import TypesList from '@/components/Views/TypesList/V4_Trainings/TypesList';
 
 const TrainingsTypesView = () => {
   return (
@@ -13,10 +11,8 @@ const TrainingsTypesView = () => {
         Crea un nuevo tipo de capacitación. El título y la descripción serán
         visibles al crear una capacitación de este tipo.
       </Alert>
-      {/* <TypesForm />
+      <TypesForm />
       <TypesList />
-
-      <DescriptionModal /> */}
     </>
   );
 };

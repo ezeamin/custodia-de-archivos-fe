@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MdArrowOutward } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -16,6 +17,7 @@ import {
   Alert,
   ComboBoxInput,
   DateInput,
+  Icon,
   Modal,
   TextAreaInput,
   TextInput,
@@ -29,7 +31,7 @@ import {
   addNewTrainingSchema,
 } from '@/form-schemas/schemas/employees/addNewTrainingSchema';
 
-const dataTrainingsTypes = mockedTrainingsTypes;
+const trainingsTypes = mockedTrainingsTypes;
 const isLoadingTrainingsTypes = false;
 const isErrorTrainingsTypes = false;
 
@@ -42,10 +44,12 @@ const AddNewTrainingModal = () => {
   const { id: employeeId } = params;
 
   const { closeModal } = useModal();
-  const { control, onSubmitMiddleware, reset } =
+  const { control, onSubmitMiddleware, reset, watch } =
     useZodForm(addNewTrainingSchema);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const selectedTrainingType = watch('type');
 
   // -------------------------------------------------
   // API
@@ -116,6 +120,11 @@ const AddNewTrainingModal = () => {
   // RENDER
   // -------------------------------------------------
 
+  const trainingDescription = trainingsTypes?.data
+    ? trainingsTypes.data?.find((t) => t.id === selectedTrainingType?.id)
+        ?.description
+    : '';
+
   return (
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
       <Modal
@@ -134,6 +143,7 @@ const AddNewTrainingModal = () => {
           desde Tipos de listado &gt; Tipos de capacitaciones
           <div className="flex">
             <Link className="btn mt-2" to={paths.TYPES_LIST.TRAININGS}>
+              <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
               IR A LA PÁGINA
             </Link>
           </div>
@@ -151,9 +161,15 @@ const AddNewTrainingModal = () => {
           disabled={isLoading}
           label="Tipo de capacitación *"
           name="type"
-          options={dataTrainingsTypes.data}
+          options={trainingsTypes.data.map((type) => ({
+            id: type.id,
+            description: type.title,
+          }))}
           placeholder="Elija un tipo de capacitación de la lista"
         />
+        {!!trainingDescription && (
+          <Alert className="my-2">{trainingDescription}</Alert>
+        )}
         <TextInput
           className="w-full"
           control={control}
