@@ -1,3 +1,4 @@
+import ObservationsMessage from '../Observations/ObservationsMessage';
 import List from './List/ExtraHoursList';
 import Table from './Table/ExtraHoursTable';
 
@@ -11,7 +12,12 @@ const ExtraHoursModal = (props: ExtraHoursProps) => {
   if (!data) return null;
 
   return (
-    <Modal id="extraHours" title="Horas Extra">
+    <Modal
+      className="pr-1"
+      footerChildren={<ObservationsMessage id="extraHours" />}
+      id="extraHours"
+      title="Horas Extra"
+    >
       <section className="hidden sm:block">
         <Table data={data} />
       </section>

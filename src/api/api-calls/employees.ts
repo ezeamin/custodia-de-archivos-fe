@@ -271,14 +271,8 @@ export const getEmployeeExtraHoursFn = async (id: string) => {
   return data;
 };
 
-export const postEmployeeAbsenceFn = async ({
-  employeeId,
-  body,
-}: {
-  employeeId: string;
-  body: Record<string, unknown>;
-}) => {
-  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_ABSENCE({ employeeId });
+export const postEmployeeAbsenceFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_ABSENCE();
 
   const data = await fetchFn<API_EmptyResponse>({
     request,
@@ -289,16 +283,10 @@ export const postEmployeeAbsenceFn = async ({
   return data;
 };
 
-export const postEmployeeLateArrivalFn = async ({
-  employeeId,
-  body,
-}: {
-  employeeId: string;
-  body: Record<string, unknown>;
-}) => {
-  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_LATE_ARRIVAL({
-    employeeId,
-  });
+export const postEmployeeLateArrivalFn = async (
+  body: Record<string, unknown>
+) => {
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_LATE_ARRIVAL();
 
   const data = await fetchFn<API_EmptyResponse>({
     request,
@@ -309,14 +297,8 @@ export const postEmployeeLateArrivalFn = async ({
   return data;
 };
 
-export const postEmployeeLicenseFn = async ({
-  employeeId,
-  body,
-}: {
-  employeeId: string;
-  body: Record<string, unknown>;
-}) => {
-  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_LICENSE({ employeeId });
+export const postEmployeeLicenseFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_LICENSE();
 
   const data = await fetchFn<API_EmptyResponse>({
     request,
@@ -327,14 +309,22 @@ export const postEmployeeLicenseFn = async ({
   return data;
 };
 
-export const postEmployeeExtraHoursFn = async ({
-  employeeId,
-  body,
-}: {
-  employeeId: string;
-  body: Record<string, unknown>;
-}) => {
-  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_EXTRA_HOURS({ employeeId });
+export const postEmployeeExtraHoursFn = async (
+  body: Record<string, unknown>
+) => {
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_EXTRA_HOURS();
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body,
+  });
+
+  return data;
+};
+
+export const postEmployeeVacationFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_VACATION();
 
   const data = await fetchFn<API_EmptyResponse>({
     request,

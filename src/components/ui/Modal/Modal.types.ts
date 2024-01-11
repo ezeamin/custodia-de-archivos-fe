@@ -3,6 +3,7 @@ export type ModalProps = {
   title: string;
   children: React.ReactNode;
   className?: string;
+  footerChildren?: React.ReactNode;
 } & (
   | {
       submitButton: true;

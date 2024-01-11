@@ -1,16 +1,20 @@
 import ListItem from './ExtraHoursListItem';
 
+import { Grid } from '@/components/ui';
+
 import { ExtraHoursProps } from '@/components/interface/views';
 
 const ExtraHoursList = (props: ExtraHoursProps) => {
   const { data } = props;
 
   return (
-    <section className="flex flex-col gap-3">
+    <Grid container gap={3}>
       {data.map((element) => (
-        <ListItem data={element} key={element.id} />
+        <Grid item key={element.id} lg={6} xs={12}>
+          <ListItem data={element} />
+        </Grid>
       ))}
-    </section>
+    </Grid>
   );
 };
 export default ExtraHoursList;

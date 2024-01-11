@@ -9,7 +9,13 @@ import { postEmployeeExtraHoursFn } from '@/api/api-calls/employees';
 import { useZodForm } from '@/hooks';
 import { useModal } from '@/stores/useModal';
 
-import { Alert, DateInput, Modal, TextInput } from '@/components/ui';
+import {
+  Alert,
+  DateInput,
+  Modal,
+  TextAreaInput,
+  TextInput,
+} from '@/components/ui';
 
 import {
   AddNewExtraHoursSchema,
@@ -72,7 +78,7 @@ const AddNewExtraHoursModal = () => {
 
     addExtraHours({
       employeeId,
-      body: formData,
+      ...formData,
     });
   };
 
@@ -97,16 +103,24 @@ const AddNewExtraHoursModal = () => {
           className="mb-2"
           control={control}
           disabled={isLoading}
-          label="Fecha"
+          label="Fecha *"
           name="date"
         />
         <TextInput
           className="w-full"
           control={control}
           disabled={isLoading}
-          label="Cantidad de horas extra"
+          label="Cantidad de horas extra *"
           name="hours"
           type="number"
+        />
+        <TextAreaInput
+          className="w-full"
+          control={control}
+          disabled={isLoading}
+          label="Observaciones"
+          name="observations"
+          placeholder="Durante estas horas extra..."
         />
       </Modal>
     </form>

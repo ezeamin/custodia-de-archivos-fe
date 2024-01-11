@@ -9,6 +9,7 @@ import {
   LateArrival,
   License,
   MinimalEmployee,
+  Vacation,
 } from '@/api/interface/employees';
 import {
   Notification,
@@ -91,6 +92,10 @@ export interface AddNewProps {
   modalName: string;
 }
 
+export interface ObservationsMessageProps {
+  id: string;
+}
+
 export interface AbsenceProps {
   data: Absence[];
 }
@@ -121,6 +126,14 @@ export interface ExtraHoursProps {
 
 export interface ExtraHoursElementProps {
   data: ExtraHours;
+}
+
+export interface VacationsProps {
+  data: Vacation[];
+}
+
+export interface VacationsElementProps {
+  data: Vacation;
 }
 
 // --------------------------------------------------

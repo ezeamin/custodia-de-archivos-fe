@@ -1,6 +1,10 @@
 import { z } from 'zod';
 
-import { dateBeforeOrToday, dateRules } from '@/form-schemas/rules/rules';
+import {
+  dateBeforeOrToday,
+  dateRules,
+  textRules,
+} from '@/form-schemas/rules/rules';
 
 export const addNewExtraHoursSchema = z
   .object({
@@ -13,6 +17,7 @@ export const addNewExtraHoursSchema = z
       .int({
         message: 'Debe ingresar un número entero positivo',
       }),
+    observations: textRules(false),
   })
   .refine(dateBeforeOrToday, dateBeforeOrToday.msg);
 

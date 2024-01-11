@@ -11,7 +11,7 @@ const AbsencesModal = (props: AbsenceProps) => {
   if (!data) return null;
 
   return (
-    <Modal id="absences" title="Inasistencias">
+    <Modal className="pr-1" id="absences" title="Inasistencias">
       <section className="hidden sm:block">
         <AbsencesTable data={data} />
       </section>

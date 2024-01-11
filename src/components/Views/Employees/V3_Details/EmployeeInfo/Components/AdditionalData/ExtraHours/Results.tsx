@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { mockedExtraHours } from '../../../../mocked';
 import AddNewButton from '../NewButton/NewButton';
+import ObservationsMessage from '../Observations/ObservationsMessage';
 import Modal from './ExtraHoursModal';
 import List from './List/ExtraHoursList';
 import NewModal from './New/AddNewExtraHoursModal';
@@ -85,6 +86,7 @@ const Results = () => {
 
       {data.data && data.data.length > 0 && (
         <>
+          <ObservationsMessage id="extraHours" />
           <section className="hidden sm:block">
             <Table data={data.data.slice(0, 5)} />
           </section>

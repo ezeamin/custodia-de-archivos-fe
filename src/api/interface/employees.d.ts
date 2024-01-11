@@ -80,6 +80,7 @@ export interface API_GetVacations {
   id: string;
   startDate: string;
   endDate: string;
+  observations?: string;
 }
 
 export interface API_GetLicenses {
@@ -90,6 +91,7 @@ export interface API_GetLicenses {
     id: string;
     description: string;
   };
+  observations?: string;
 }
 
 export interface API_GetLicensesTypes {
@@ -111,6 +113,7 @@ export interface API_GetTrainings {
     id: string;
     description: string;
   };
+  observations?: string;
 }
 
 export interface API_GetTrainingsTypes {
@@ -121,12 +124,14 @@ export interface API_GetTrainingsTypes {
 export interface API_GetLateArrivals {
   id: string;
   date: string;
+  observations?: string;
 }
 
 export interface API_GetExtraHours {
   id: string;
   date: string;
   hours: number;
+  observations?: string;
 }
 
 // ----------------------------------------------------------------------

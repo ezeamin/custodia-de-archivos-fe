@@ -68,7 +68,7 @@ const AddNewAbsenceModal = () => {
 
     addAbsence({
       employeeId,
-      body: formData,
+      ...formData,
     });
   };
 
@@ -92,14 +92,14 @@ const AddNewAbsenceModal = () => {
         <DateInput
           control={control}
           disabled={isLoading}
-          label="Fecha de inasistencia"
+          label="Fecha de inasistencia *"
           name="date"
         />
         <TextInput
           className="w-full mt-3"
           control={control}
           disabled={isLoading}
-          label="Motivo"
+          label="Motivo *"
           name="reason"
           placeholder="No se encontraba bien ..."
         />

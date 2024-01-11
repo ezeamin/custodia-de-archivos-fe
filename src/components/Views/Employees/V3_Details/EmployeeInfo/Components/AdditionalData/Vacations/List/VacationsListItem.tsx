@@ -4,30 +4,36 @@ import { useObservation } from '@/stores/useObservation';
 
 import { Button } from '@/components/ui';
 
-import { LateArrivalsElementProps } from '@/components/interface/views';
+import { VacationsElementProps } from '@/components/interface/views';
 
-const LateArrivalsListItem = (props: LateArrivalsElementProps) => {
+const VacationsListItem = (props: VacationsElementProps) => {
   const { data } = props;
 
   const { message, setObservationData } = useObservation();
 
-  const formattedDate = dayjs(data.date).format('DD/MM/YYYY');
-  const formattedTime = dayjs(data.date).format('HH:mm:ss');
+  const startDate = dayjs(data.startDate);
+  const endDate = dayjs(data.endDate);
+
+  // calculate working days between two dates
+  const days = endDate.diff(startDate, 'day') + 1;
 
   const handleClickObservations = () => {
     if (!data.observations) return;
 
-    setObservationData({ id: 'lateArrivals', message: data.observations });
+    setObservationData({ id: 'vacations', message: data.observations });
   };
 
   return (
     <article className="card content-card flex flex-col justify-between h-full">
       <ul>
         <li>
-          Fecha: <b>{formattedDate}</b>
+          Fecha de inicio: <b>{startDate.format('DD/MM/YYYY')}</b>
         </li>
         <li>
-          Hora de llegada: <b>{formattedTime}</b>
+          Fecha de fin: <b>{endDate.format('DD/MM/YYYY')}</b>
+        </li>
+        <li>
+          Dias totales: <b>{days}</b>
         </li>
       </ul>
       <footer>
@@ -49,4 +55,4 @@ const LateArrivalsListItem = (props: LateArrivalsElementProps) => {
     </article>
   );
 };
-export default LateArrivalsListItem;
+export default VacationsListItem;

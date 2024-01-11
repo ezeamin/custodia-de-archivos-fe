@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { mockedLicenses } from '../../../../mocked';
 import AddNewButton from '../NewButton/NewButton';
+import ObservationsMessage from '../Observations/ObservationsMessage';
 import Modal from './LicensesModal';
 import List from './List/LicensesList';
 import NewModal from './New/AddNewLicenseModal';
@@ -89,10 +90,11 @@ const Results = () => {
             La diferencia de días incluye fines de semana y feriados. No se hace
             distinción de días hábiles y no hábiles.
           </Alert>
-          <section className="hidden sm:block">
+          <ObservationsMessage id="licenses" />
+          <section className="hidden sm:block md:hidden xl:block">
             <Table data={data.data.slice(0, 5)} />
           </section>
-          <section className="sm:hidden">
+          <section className="sm:hidden md:block xl:hidden">
             <List data={data.data.slice(0, 5)} />
           </section>
 

@@ -1,12 +1,12 @@
 import ObservationsMessage from '../Observations/ObservationsMessage';
-import List from './List/LicensesList';
-import Table from './Table/LicensesTable';
+import List from './List/VacationsList';
+import Table from './Table/VacationsTable';
 
 import { Alert, Modal } from '@/components/ui';
 
-import { LicensesProps } from '@/components/interface/views';
+import { VacationsProps } from '@/components/interface/views';
 
-const LicensesModal = (props: LicensesProps) => {
+const VacationsModal = (props: VacationsProps) => {
   const { data } = props;
 
   if (!data) return null;
@@ -14,9 +14,9 @@ const LicensesModal = (props: LicensesProps) => {
   return (
     <Modal
       className="overflow-x-hidden pr-1"
-      footerChildren={<ObservationsMessage id="licenses" />}
-      id="licenses"
-      title="Licencias"
+      footerChildren={<ObservationsMessage id="vacations" />}
+      id="vacations"
+      title="Llegadas Tarde"
     >
       <Alert className="mb-3">
         La diferencia de días incluye fines de semana y feriados. No se hace
@@ -31,4 +31,4 @@ const LicensesModal = (props: LicensesProps) => {
     </Modal>
   );
 };
-export default LicensesModal;
+export default VacationsModal;

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { mockedLateArrivals } from '../../../../mocked';
 import AddNewButton from '../NewButton/NewButton';
+import ObservationsMessage from '../Observations/ObservationsMessage';
 import Modal from './LateArrivalsModal';
 import List from './List/LateArrivalsList';
 import NewModal from './New/AddNewLateArrivalModal';
@@ -85,6 +86,7 @@ const Results = () => {
 
       {data.data && data.data.length > 0 && (
         <>
+          <ObservationsMessage id="lateArrivals" />
           <section className="hidden sm:block">
             <Table data={data.data.slice(0, 5)} />
           </section>

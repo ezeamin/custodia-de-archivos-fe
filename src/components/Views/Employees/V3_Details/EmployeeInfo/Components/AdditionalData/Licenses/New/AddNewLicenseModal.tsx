@@ -105,7 +105,7 @@ const AddNewLicenseModal = () => {
 
     addLicense({
       employeeId,
-      body: formData,
+      ...formData,
     });
   };
 

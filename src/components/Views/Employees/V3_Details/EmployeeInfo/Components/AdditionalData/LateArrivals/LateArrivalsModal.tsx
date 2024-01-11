@@ -1,3 +1,4 @@
+import ObservationsMessage from '../Observations/ObservationsMessage';
 import List from './List/LateArrivalsList';
 import Table from './Table/LateArrivalsTable';
 
@@ -11,7 +12,12 @@ const LateArrivalsModal = (props: LateArrivalsProps) => {
   if (!data) return null;
 
   return (
-    <Modal id="lateArrivals" title="Llegadas Tarde">
+    <Modal
+      className="pr-1"
+      footerChildren={<ObservationsMessage id="lateArrivals" />}
+      id="lateArrivals"
+      title="Llegadas Tarde"
+    >
       <section className="hidden sm:block">
         <Table data={data} />
       </section>

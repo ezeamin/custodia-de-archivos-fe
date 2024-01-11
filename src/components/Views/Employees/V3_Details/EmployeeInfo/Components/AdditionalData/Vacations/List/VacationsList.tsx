@@ -1,10 +1,10 @@
-import ListItem from './LicensesListItem';
+import ListItem from './VacationsListItem';
 
 import { Grid } from '@/components/ui';
 
-import { LicensesProps } from '@/components/interface/views';
+import { VacationsProps } from '@/components/interface/views';
 
-const LicensesList = (props: LicensesProps) => {
+const VacationsList = (props: VacationsProps) => {
   const { data } = props;
 
   return (
@@ -17,4 +17,4 @@ const LicensesList = (props: LicensesProps) => {
     </Grid>
   );
 };
-export default LicensesList;
+export default VacationsList;

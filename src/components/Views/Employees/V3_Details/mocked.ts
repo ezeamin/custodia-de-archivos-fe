@@ -216,6 +216,7 @@ const generateMockedLicenses = (count: number): { data: License[] } => {
     ).toISOString(); // Random end date within the next 30 days
     const typeId = generateRandomId();
     const typeDescription = generateRandomTypeDescription();
+    const observations = `Observaciones de la licencia número ${i + 1}`;
 
     licenses.push({
       id,
@@ -225,6 +226,7 @@ const generateMockedLicenses = (count: number): { data: License[] } => {
         id: typeId,
         description: typeDescription,
       },
+      observations,
     });
   }
 
@@ -321,6 +323,7 @@ const generateMockedLateArrivals = (count: number): { data: LateArrival[] } => {
     lateArrivals.push({
       id,
       date,
+      observations: `Observaciones de la llegada tarde número ${i + 1}`,
     });
   }
 

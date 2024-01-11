@@ -6,9 +6,9 @@ import { useObservation } from '@/stores/useObservation';
 
 import { IconButton } from '@/components/ui';
 
-import { LicensesElementProps } from '@/components/interface/views';
+import { VacationsElementProps } from '@/components/interface/views';
 
-const LicensesTableRow = (props: LicensesElementProps) => {
+const VacationsTableRow = (props: VacationsElementProps) => {
   const { data } = props;
 
   const { setObservationData } = useObservation();
@@ -22,12 +22,11 @@ const LicensesTableRow = (props: LicensesElementProps) => {
   const handleClickObservations = () => {
     if (!data.observations) return;
 
-    setObservationData({ id: 'licenses', message: data.observations });
+    setObservationData({ id: 'vacations', message: data.observations });
   };
 
   return (
     <tr>
-      <td>{data.type.description}</td>
       <td>{startDate.format('DD/MM/YYYY')}</td>
       <td>{endDate.format('DD/MM/YYYY')}</td>
       <td align="right">{days}</td>
@@ -44,4 +43,4 @@ const LicensesTableRow = (props: LicensesElementProps) => {
     </tr>
   );
 };
-export default LicensesTableRow;
+export default VacationsTableRow;

@@ -4,25 +4,19 @@ import { useParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { postEmployeeLateArrivalFn } from '@/api/api-calls/employees';
+import { postEmployeeVacationFn } from '@/api/api-calls/employees';
 
 import { useZodForm } from '@/hooks';
 import { useModal } from '@/stores/useModal';
 
-import {
-  Alert,
-  DateInput,
-  HourInput,
-  Modal,
-  TextAreaInput,
-} from '@/components/ui';
+import { DateInput, Modal, TextAreaInput } from '@/components/ui';
 
 import {
-  AddNewLateArrivalSchema,
-  addNewLateArrivalSchema,
-} from '@/form-schemas/schemas/employees/addNewLateArrivalSchema';
+  AddNewVacationSchema,
+  addNewVacationSchema,
+} from '@/form-schemas/schemas/employees/addNewVacationSchema';
 
-const AddNewLateArrivalModal = () => {
+const AddNewVacationModal = () => {
   // -------------------------------------------------
   // STATE & FORM
   // -------------------------------------------------
@@ -31,9 +25,8 @@ const AddNewLateArrivalModal = () => {
   const { id: employeeId } = params;
 
   const { closeModal } = useModal();
-  const { control, onSubmitMiddleware, reset } = useZodForm(
-    addNewLateArrivalSchema
-  );
+  const { control, onSubmitMiddleware, reset } =
+    useZodForm(addNewVacationSchema);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,23 +36,23 @@ const AddNewLateArrivalModal = () => {
 
   const queryClient = useQueryClient();
 
-  const { mutate: addLateArrival } = useMutation({
-    mutationFn: postEmployeeLateArrivalFn,
+  const { mutate: addVacation } = useMutation({
+    mutationFn: postEmployeeVacationFn,
     onError: () => {
       setIsLoading(false);
       closeModal();
       reset();
       toast.error(
-        'Ocurrió un error guardando la llegada tarde. Intente nuevamente más tarde'
+        'Ocurrió un error guardando las vacaciones. Intente nuevamente más tarde'
       );
     },
     onSuccess: () => {
       setIsLoading(false);
       closeModal();
       reset();
-      toast.success(`La llegada tarde fue registrada correctamente`);
+      toast.success(`Las vacaciones fueron registradas correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeLateArrivals_${employeeId}`],
+        queryKey: [`employeeVacations_${employeeId}`],
       });
     },
   });
@@ -68,7 +61,7 @@ const AddNewLateArrivalModal = () => {
   // HANDLERS
   // -------------------------------------------------
 
-  const handleSubmit = (formData: AddNewLateArrivalSchema) => {
+  const handleSubmit = (formData: AddNewVacationSchema) => {
     setIsLoading(true);
 
     if (!employeeId) {
@@ -76,7 +69,7 @@ const AddNewLateArrivalModal = () => {
       return;
     }
 
-    addLateArrival({
+    addVacation({
       employeeId,
       ...formData,
     });
@@ -91,26 +84,25 @@ const AddNewLateArrivalModal = () => {
       <Modal
         submitButton
         className="overflow-x-hidden p-1 pt-0"
-        id="addNewLateArrival"
+        id="addNewVacation"
         loading={isLoading}
-        title="Nueva Llegada Tarde"
+        title="Nuevas Vacaciones"
       >
-        <Alert className="mb-3">
-          <b>Atención:</b> Una vez cargada la llegada tarde, no se podrá editar
-          ni eliminar del sistema.
-        </Alert>
         <DateInput
-          className="mb-2"
+          className="mb-2 w-full"
           control={control}
           disabled={isLoading}
-          label="Fecha de llegada tarde *"
-          name="date"
+          label="Inicio de licencia *"
+          name="fromDate"
+          placeholder="Seleccione fecha de inicio"
         />
-        <HourInput
+        <DateInput
+          className="mb-2 w-full"
           control={control}
           disabled={isLoading}
-          label="Horario de llegada *"
-          name="hour"
+          label="Fin de licencia *"
+          name="toDate"
+          placeholder="Seleccione fecha de fin"
         />
         <TextAreaInput
           className="w-full"
@@ -118,10 +110,10 @@ const AddNewLateArrivalModal = () => {
           disabled={isLoading}
           label="Observaciones"
           name="observations"
-          placeholder="El empleado llegó 2 hs tarde porque..."
+          placeholder="Esta licencia se pidio porque..."
         />
       </Modal>
     </form>
   );
 };
-export default AddNewLateArrivalModal;
+export default AddNewVacationModal;
