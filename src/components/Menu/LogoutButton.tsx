@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 
 import { postLogoutFn } from '@/api/api-calls/auth';
 
-import { useLoading } from '@/hooks';
 import { usePortraitMenu } from '@/stores/usePortraitMenu';
 import { useSession } from '@/stores/useSession';
 
@@ -25,18 +24,23 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { mutate: postLogout, status } = useMutation({
+  const queryClient = useQueryClient();
+
+  const { mutate: postLogout } = useMutation({
     mutationFn: postLogoutFn,
     onError: () => {
       setIsLoading(false);
     },
     onSuccess: () => {
       setIsLoading(false);
+      queryClient.clear();
       logout();
     },
   });
 
-  useLoading(isLoading, status);
+  if (isLoading) {
+    toast.loading('Cerrando sesión...');
+  }
 
   const handleLogout = (): void => {
     closeMenu();

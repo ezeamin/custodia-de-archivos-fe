@@ -50,18 +50,23 @@ export const fetchFn = async <T, V = T>({
           },
         };
 
-  const res = await fetch(fullPath, optionObj);
-  const data = (await res.json()) as API_GlobalResponse<V>;
+  try {
+    const res = await fetch(fullPath, optionObj);
+    const data = (await res.json()) as API_GlobalResponse<V>;
 
-  if (!res.ok) {
-    if (res.status !== 401)
-      toast.error(data.message || 'Ocurrió un error al leer la información.');
+    if (!res.ok) {
+      if (res.status !== 401)
+        toast.error(data.message || 'Ocurrió un error al leer la información.');
+      throw new Error();
+    }
+
+    if (data.data) {
+      data.data = adapter(data.data as T);
+    }
+
+    return data;
+  } catch (error) {
+    toast.error('Ocurrió un error en la solicitud');
     throw new Error();
   }
-
-  if (data.data) {
-    data.data = adapter(data.data as T);
-  }
-
-  return data;
 };

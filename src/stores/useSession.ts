@@ -14,7 +14,7 @@ interface SessionStore {
 
 export const useSession = create<SessionStore>((set) => ({
   user: null,
-  isLoggedIn: false, // TODO: Change this to false
+  isLoggedIn: false,
   accessToken: null,
   logout: () => set({ user: null, isLoggedIn: false, accessToken: null }),
   login: (accessToken) => {
