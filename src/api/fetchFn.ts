@@ -16,7 +16,6 @@ export const fetchFn = async <T, V = T>({
   request,
   adapter,
   body,
-  useToken,
 }: FetchFnProps): Promise<API_GlobalResponse<V>> => {
   const fullPath = `${baseUrl}${request.url}`;
 
@@ -24,7 +23,7 @@ export const fetchFn = async <T, V = T>({
 
   const token = useSession.getState().accessToken;
 
-  if (!token && useToken) {
+  if (!token && request.useToken) {
     toast.error('No se ha iniciado sesión. Esta petición no puede realizarse');
     throw new Error();
   }
@@ -37,7 +36,7 @@ export const fetchFn = async <T, V = T>({
             'Content-Type': isFormData
               ? 'multipart/form-data'
               : 'application/json',
-            ...(useToken ? { Authorization: `Bearer ${token}` } : {}),
+            ...(request.useToken ? { Authorization: `Bearer ${token}` } : {}),
             ...(request.headers || {}),
           },
           body: isFormData ? body : JSON.stringify(body),
@@ -46,7 +45,7 @@ export const fetchFn = async <T, V = T>({
         {
           ...request,
           headers: {
-            ...(useToken ? { Authorization: `Bearer ${token}` } : {}),
+            ...(request.useToken ? { Authorization: `Bearer ${token}` } : {}),
             ...(request.headers || {}),
           },
         };

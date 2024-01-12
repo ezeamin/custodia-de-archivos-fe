@@ -43,7 +43,6 @@ export const postLogoutFn = async () => {
   const data = await fetchFn<API_EmptyResponse>({
     request,
     adapter: (APIData) => APIData,
-    useToken: true,
   });
 
   return data;
