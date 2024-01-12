@@ -15,7 +15,7 @@
 }
 
 .modules-padding {
-  @apply px-7 md:px-10 mb-14 py-5 md:mb-0 md:pt-10;
+  @apply px-7 md:px-10 mb-14 py-5 md:mb-0 md:pt-10 overflow-x-hidden;
 }
 
 .content-card {

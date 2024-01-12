@@ -1,3 +1,5 @@
+import packageJson from '../../../package.json';
+
 import RoutingCard from '@/components/Common/RoutingCard';
 import Title from '@/components/Common/Title';
 import { Alert, Grid } from '@/components/ui';
@@ -56,6 +58,8 @@ const isThereAnyDisabledRoute = () => {
   );
 };
 
+const appVersion = packageJson.version;
+
 const SettingsView = () => {
   return (
     <>
@@ -96,6 +100,9 @@ const SettingsView = () => {
           </Grid>
         ))}
       </Grid>
+      <p className="absolute bottom-2 right-2 animate-in-top">
+        Versión: {appVersion}
+      </p>
     </>
   );
 };

@@ -30,7 +30,7 @@ const EmployeeTabs = () => {
   }
 
   return (
-    <section>
+    <>
       <article className="tabs tabs-boxed flex flex-col sm:flex-row md:flex-col lg:flex-row justify-center items-center xl:grid xl:justify-normal animate-in-bottom a-delay-500 dark:border dark:border-gray-600 bg-white dark:bg-slate-800 rounded-xl shadow p-2">
         <div className="flex flex-col w-full xl:hidden">
           <Link
@@ -112,7 +112,7 @@ const EmployeeTabs = () => {
       <article className="card content-card mt-3 animate-in-bottom a-delay-800">
         {renderedComp}
       </article>
-    </section>
+    </>
   );
 };
 export default EmployeeTabs;
