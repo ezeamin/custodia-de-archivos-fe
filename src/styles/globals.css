@@ -12,6 +12,14 @@
 
   --header-background: #325d85;
   --button-text-color: #ffffff;
+
+  --scrollbar-background: #686868;
+  --scrollbar-hover-background: #797979;
+  --scrollbar-track-background: #1d1d1d;
+
+  --scrollbar-modal-background: #4d4d4d;
+  --scrollbar-modal-hover-background: #797979;
+  --scrollbar-modal-track-background: #1d1d1d;
 }
 
 [data-theme='light'] {
@@ -23,13 +31,21 @@
 
   --header-background: white;
   --button-text-color: #000000;
+  
+  --scrollbar-background: #797979;
+  --scrollbar-hover-background: #444444;
+  --scrollbar-track-background: #f7f7f7;
+
+  --scrollbar-modal-background: #b3b3b3;
+  --scrollbar-modal-hover-background: #919191;
+  --scrollbar-modal-track-background: #f7f7f7;
 }
 
 /* GENERAL ------------------------------------------------ */
 
 html {
   scroll-behavior: smooth;
-  oandv-x: hidden;
+  overflow-x: hidden;
   background: var(--background) !important;
 }
 
@@ -70,6 +86,45 @@ body {
   width: calc(100vw - 50% - 2rem);
   object-fit: cover;
   box-shadow: 0 0 10rem rgba(0, 0, 0, 0.1);
+}
+
+/* SCROLLBAR ------------------------------------- */
+
+::-webkit-scrollbar {
+  height: 5px;
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-background);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-background);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-hover-background);
+}
+
+.modal {
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-modal-track-background);
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-modal-background);
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-modal-hover-background);
+  }
 }
 
 /* UTILITY CLASSES ------------------------------------- */

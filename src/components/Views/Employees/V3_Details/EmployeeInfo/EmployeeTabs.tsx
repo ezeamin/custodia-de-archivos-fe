@@ -31,7 +31,7 @@ const EmployeeTabs = () => {
 
   return (
     <>
-      <article className="tabs tabs-boxed flex flex-col sm:flex-row md:flex-col lg:flex-row justify-center items-center xl:grid xl:justify-normal animate-in-bottom a-delay-500 dark:border dark:border-gray-600 bg-white dark:bg-slate-800 rounded-xl shadow p-2">
+      <article className="shadow tabs tabs-boxed flex flex-col sm:flex-row md:flex-col lg:flex-row justify-center items-center xl:grid xl:justify-normal animate-in-bottom a-delay-500 dark:border dark:border-gray-600 bg-white dark:bg-slate-800 rounded-xl p-2">
         <div className="flex flex-col w-full xl:hidden">
           <Link
             className={`tab w-full xl:w-auto ${
