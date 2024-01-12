@@ -19,7 +19,7 @@ const TryToLoginView = () => {
   const [shouldShowRouter, setShouldShowRouter] = useState(false);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['login'],
+    queryKey: ['login', !isLoggedIn && !tokenInUrl],
     queryFn: getRefreshTokenFn,
     enabled: !isLoggedIn && !tokenInUrl,
     retry: false,

@@ -23,7 +23,6 @@ export const apiRoutes = {
       method: 'POST',
       url: '/auth/login',
       credentials: 'include',
-      useToken: true,
     }),
     GET_REFRESH_TOKEN: (): ApiRoute => ({
       method: 'GET',
@@ -33,6 +32,7 @@ export const apiRoutes = {
     POST_LOGOUT: (): ApiRoute => ({
       method: 'POST',
       url: '/auth/logout',
+      credentials: 'include',
       useToken: true,
     }),
     POST_RECOVER_PASS: (): ApiRoute => ({

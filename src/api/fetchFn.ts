@@ -1,4 +1,5 @@
 import { refreshTokenFetch } from './refreshToken';
+import { apiRoutes } from './routes/apiRoutes';
 import { toast } from 'sonner';
 
 import { useSession } from '@/stores/useSession';
@@ -62,7 +63,8 @@ export const fetchFn = async <T, V = T>({
   }
 
   if (!res.ok) {
-    if (res.status !== 401)
+    // Avoid showing error message when trying to refresh token
+    if (!(request.url === apiRoutes.AUTH.GET_REFRESH_TOKEN().url))
       toast.error(data.message || 'Ocurrió un error al leer la información.');
     throw new Error();
   }
