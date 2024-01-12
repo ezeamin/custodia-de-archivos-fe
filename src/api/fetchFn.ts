@@ -1,3 +1,4 @@
+import { refreshTokenFetch } from './refreshToken';
 import { toast } from 'sonner';
 
 import { useSession } from '@/stores/useSession';
@@ -54,7 +55,7 @@ export const fetchFn = async <T, V = T>({
   let data;
 
   try {
-    res = await fetch(fullPath, optionObj);
+    res = await refreshTokenFetch(fullPath, optionObj);
     data = (await res.json()) as API_GlobalResponse<V>;
   } catch (error) {
     toast.error('Ocurrió un error en la solicitud');

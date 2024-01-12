@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -16,31 +15,27 @@ import { cn } from '@/utilities';
 
 import { type LogoutButtonProps } from '../interface';
 
+let loadingToastId: string | number = '';
+
 const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
   const { className } = props;
 
   const { closeMenu } = usePortraitMenu();
   const { logout } = useSession();
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const queryClient = useQueryClient();
 
   const { mutate: postLogout } = useMutation({
     mutationFn: postLogoutFn,
     onError: () => {
-      setIsLoading(false);
+      toast.dismiss(loadingToastId);
     },
     onSuccess: () => {
-      setIsLoading(false);
+      toast.dismiss(loadingToastId);
       queryClient.clear();
       logout();
     },
   });
-
-  if (isLoading) {
-    toast.loading('Cerrando sesión...');
-  }
 
   const handleLogout = (): void => {
     closeMenu();
@@ -56,7 +51,7 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
     })
       .then((action) => {
         if (action.isConfirmed) {
-          setIsLoading(true);
+          loadingToastId = toast.loading('Cerrando sesión...');
           postLogout();
         }
       })
@@ -67,7 +62,6 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
       });
   };
 
-  // Renderizo
   return (
     <Button
       className={cn(
