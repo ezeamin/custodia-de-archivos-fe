@@ -4,7 +4,7 @@ const LoginView = () => {
   return (
     <>
       <h2 className="text-3xl animate-in-left a-delay-300">Bienvenido</h2>
-      <div className="divider mt-0 mb-1" />
+      <div className="divider mt-0 mb-1 animate-in-right a-delay-300" />
       <LoginForm />
     </>
   );

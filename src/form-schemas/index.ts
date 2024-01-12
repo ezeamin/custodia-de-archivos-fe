@@ -1,5 +1,5 @@
+import { LoginSchemas } from './schemas/auth';
 import { EmployeesSchemas } from './schemas/employees';
-import { LoginSchemas } from './schemas/login';
 import { NotificationSchemas } from './schemas/notifications';
 
 import { TypesListSchemas } from './schemas/typesList';

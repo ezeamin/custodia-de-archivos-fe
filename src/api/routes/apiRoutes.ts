@@ -31,6 +31,11 @@ export const apiRoutes = {
       url: '/auth/logout',
       credentials: 'include',
     }),
+    POST_RECOVER_PASS: (): ApiRoute => ({
+      method: 'POST',
+      url: '/auth/recover-password',
+      credentials: 'include',
+    }),
   },
   EMPLOYEES: {
     GET_EMPLOYEES: ({ params }: { params: string }): ApiRoute => ({

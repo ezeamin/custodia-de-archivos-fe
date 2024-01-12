@@ -1,10 +1,15 @@
 import { fetchFn } from '../fetchFn';
 import { apiRoutes } from '../routes/apiRoutes';
 
-import { postLoginAdapter } from '../adapters/auth';
+import { postLoginAdapter, postRecoverPasswordAdapter } from '../adapters/auth';
 
 import { API_EmptyResponse } from '../interface';
-import { API_PostLogin, PostLogin } from '../interface/auth';
+import {
+  API_PostLogin,
+  API_PostRecoverPassword,
+  Login,
+  RecoverPassword,
+} from '../interface/auth';
 
 export const postLoginFn = async (body: {
   username: string;
@@ -12,7 +17,7 @@ export const postLoginFn = async (body: {
 }) => {
   const request = apiRoutes.AUTH.POST_LOGIN();
 
-  const data = await fetchFn<API_PostLogin, PostLogin>({
+  const data = await fetchFn<API_PostLogin, Login>({
     request,
     adapter: postLoginAdapter,
     body,
@@ -24,7 +29,7 @@ export const postLoginFn = async (body: {
 export const getRefreshTokenFn = async () => {
   const request = apiRoutes.AUTH.GET_REFRESH_TOKEN();
 
-  const data = await fetchFn<API_PostLogin, PostLogin>({
+  const data = await fetchFn<API_PostLogin, Login>({
     request,
     adapter: postLoginAdapter,
   });
@@ -39,6 +44,18 @@ export const postLogoutFn = async () => {
     request,
     adapter: (APIData) => APIData,
     useToken: true,
+  });
+
+  return data;
+};
+
+export const postRecoverPasswordFn = async (body: { username: string }) => {
+  const request = apiRoutes.AUTH.POST_RECOVER_PASS();
+
+  const data = await fetchFn<API_PostRecoverPassword, RecoverPassword>({
+    request,
+    adapter: postRecoverPasswordAdapter,
+    body,
   });
 
   return data;

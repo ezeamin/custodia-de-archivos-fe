@@ -1,5 +1,16 @@
-import { API_PostLogin, PostLogin } from '../interface/auth';
+import {
+  API_PostLogin,
+  API_PostRecoverPassword,
+  Login,
+  RecoverPassword,
+} from '../interface/auth';
 
-export const postLoginAdapter = (data: API_PostLogin): PostLogin => ({
+export const postLoginAdapter = (data: API_PostLogin): Login => ({
   token: data.token,
+});
+
+export const postRecoverPasswordAdapter = (
+  data: API_PostRecoverPassword
+): RecoverPassword => ({
+  email: data.email,
 });

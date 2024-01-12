@@ -39,12 +39,12 @@ const PasswordInput = <T extends FormSchemas>(
         name={name}
         render={({ field, fieldState: { error } }) => (
           <div
-            className={`relative input input-bordered overflow-hidden ps-0 bg-gray-100 dark:bg-slate-700 mt-1 ${
+            className={`relative input input-bordered overflow-hidden px-0 bg-gray-100 dark:bg-slate-700 mt-1 ${
               error ? 'border-error' : ''
             }`}
           >
             <input
-              className="w-[93%] input border-0 px-0 ps-4 h-full bg-gray-100 dark:bg-slate-700"
+              className="w-[calc(100%_-_40px)] input border-0 px-0 ps-4 h-full bg-gray-100 dark:bg-slate-700"
               disabled={rest.disabled}
               id={name as string}
               placeholder={rest.placeholder ?? 'Ingrese un valor'}

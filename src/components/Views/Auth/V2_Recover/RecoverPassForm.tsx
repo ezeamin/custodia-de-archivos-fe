@@ -1,31 +1,34 @@
 import { useState } from 'react';
-import { MdLogin } from 'react-icons/md';
+import { IoMdSend } from 'react-icons/io';
+import { IoArrowBackOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { postLoginFn } from '@/api/api-calls/auth';
+import { postRecoverPasswordFn } from '@/api/api-calls/auth';
 
 import { useZodForm } from '@/hooks';
-import { useSession } from '@/stores/useSession';
 
-import { Button, Icon, PasswordInput, TextInput } from '@/components/ui';
+import { Alert, Button, Icon, TextInput } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
 
 import {
-  LoginSchema,
-  loginSchema,
-} from '@/form-schemas/schemas/auth/loginSchema';
+  RecoverPasswordSchema,
+  recoverPasswordSchema,
+} from '@/form-schemas/schemas/auth/recoverPasswordSchema';
 
-const LoginForm = () => {
+const RecoverPassForm = () => {
   // -------------------------------------------------
   // STATE & FORMS
   // -------------------------------------------------
 
-  const { control, onSubmitMiddleware } = useZodForm(loginSchema);
-  const { login } = useSession();
+  const { control, onSubmitMiddleware, watch } = useZodForm(
+    recoverPasswordSchema
+  );
+
+  const username = watch('username');
 
   // -------------------------------------------------
   // API
@@ -33,17 +36,18 @@ const LoginForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { mutate: postLogin } = useMutation({
-    mutationFn: postLoginFn,
+  const {
+    data: responseData,
+    mutate: postRecoverPassword,
+    isSuccess,
+  } = useMutation({
+    mutationFn: postRecoverPasswordFn,
     onError: () => {
       setIsLoading(false);
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       setIsLoading(false);
-      toast.success('Bienvenido!');
-
-      // Store in session
-      if (data.data) login(data.data.token);
+      toast.success('Email enviado!');
     },
   });
 
@@ -51,9 +55,9 @@ const LoginForm = () => {
   // HANDLERS
   // -------------------------------------------------
 
-  const handleSubmit = (data: LoginSchema) => {
+  const handleSubmit = (data: RecoverPasswordSchema) => {
     setIsLoading(true);
-    postLogin(data);
+    postRecoverPassword(data);
   };
 
   // -------------------------------------------------
@@ -62,6 +66,12 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
+      {responseData?.data?.email && (
+        <Alert className="mb-3 mt-2">
+          Se ha enviado un mail al correo electrónico asociado a {username}:
+          {responseData.data.email}
+        </Alert>
+      )}
       <TextInput
         className="w-full animate-in-left a-delay-400"
         control={control}
@@ -70,32 +80,25 @@ const LoginForm = () => {
         name="username"
         placeholder="DNI"
       />
-      <PasswordInput
-        className="w-full mt-2 animate-in-right a-delay-500"
-        control={control}
-        label="Contraseña"
-        name="password"
-        placeholder="Ingrese una contraseña"
-      />
-      <div className="my-1 animate-in-left a-delay-600">
-        <Link className="underline" to={paths.AUTH.RECOVER_PASS}>
-          ¿Olvidó su contraseña?
-        </Link>
-      </div>
       <Button
         unbordered
         className="w-full mt-3 hover:bg-gray-800 dark:hover:bg-gray-400"
         colorDark="dark:bg-gray-300"
         colorLight="bg-gray-900"
+        disabled={isSuccess}
         loading={isLoading}
         textColorDark="dark:text-gray-900"
         textColorLight="text-white"
         type="submit"
       >
-        <Icon iconComponent={<MdLogin />} title="Enviar" />
-        INGRESAR
+        <Icon iconComponent={<IoMdSend />} title="Enviar" />
+        ENVIAR MAIL
       </Button>
+      <Link className="btn mt-2 w-full" to={paths.AUTH.LOGIN}>
+        <Icon iconComponent={<IoArrowBackOutline />} title="Volver" />
+        VOLVER
+      </Link>
     </form>
   );
 };
-export default LoginForm;
+export default RecoverPassForm;
