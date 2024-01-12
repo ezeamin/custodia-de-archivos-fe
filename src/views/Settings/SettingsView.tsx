@@ -62,7 +62,7 @@ const appVersion = packageJson.version;
 
 const SettingsView = () => {
   return (
-    <>
+    <section className="overflow-hidden pr-0.5 pb-0.5">
       <Title title="Ajustes" />
       {isThereAnyDisabledRoute() && (
         <Alert className="mb-5 animate-in-right" type="warning">
@@ -70,40 +70,42 @@ const SettingsView = () => {
           disponibles.
         </Alert>
       )}
-      <h3 className="font-bold text-xl mb-2 animate-in-bottom a-delay-100">
-        General
-      </h3>
-      <Grid container gap={3}>
-        {routes.GENERAL.map((route, index) => (
-          <Grid item key={route.id} sm={6} xl={4} xs={12}>
-            <RoutingCard index={index} route={route} />
-          </Grid>
-        ))}
-      </Grid>
-      <h3 className="font-bold text-xl mb-2 mt-6 animate-in-bottom a-delay-500">
-        Usuarios Administradores
-      </h3>
-      <Grid container gap={3}>
-        {routes.ADMIN.map((route, index) => (
-          <Grid item key={route.id} sm={6} xl={4} xs={12}>
-            <RoutingCard index={index + 3} route={route} />
-          </Grid>
-        ))}
-      </Grid>
-      <h3 className="font-bold text-xl mb-2 mt-6 animate-in-bottom a-delay-800">
-        Usuarios Solo Lectura
-      </h3>
-      <Grid container gap={3}>
-        {routes.READ_ONLY.map((route, index) => (
-          <Grid item key={route.id} sm={6} xl={4} xs={12}>
-            <RoutingCard index={index + 6} route={route} />
-          </Grid>
-        ))}
-      </Grid>
-      <p className="absolute bottom-2 right-2 animate-in-top">
+      <article className="relative z-10">
+        <h3 className="font-bold text-xl mb-2 animate-in-bottom a-delay-100">
+          General
+        </h3>
+        <Grid container gap={3}>
+          {routes.GENERAL.map((route, index) => (
+            <Grid item key={route.id} sm={6} xl={4} xs={12}>
+              <RoutingCard index={index} route={route} />
+            </Grid>
+          ))}
+        </Grid>
+        <h3 className="font-bold text-xl mb-2 mt-6 animate-in-bottom a-delay-500">
+          Usuarios Administradores
+        </h3>
+        <Grid container gap={3}>
+          {routes.ADMIN.map((route, index) => (
+            <Grid item key={route.id} sm={6} xl={4} xs={12}>
+              <RoutingCard index={index + 3} route={route} />
+            </Grid>
+          ))}
+        </Grid>
+        <h3 className="font-bold text-xl mb-2 mt-6 animate-in-bottom a-delay-800">
+          Usuarios Solo Lectura
+        </h3>
+        <Grid container gap={3}>
+          {routes.READ_ONLY.map((route, index) => (
+            <Grid item key={route.id} sm={6} xl={4} xs={12}>
+              <RoutingCard index={index + 6} route={route} />
+            </Grid>
+          ))}
+        </Grid>
+      </article>
+      <p className="mt-5 text-center md:mt-0 md:fixed md:bottom-2 md:right-2 animate-in-top">
         Versión: {appVersion}
       </p>
-    </>
+    </section>
   );
 };
 export default SettingsView;

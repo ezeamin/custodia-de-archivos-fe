@@ -125,7 +125,7 @@ const Results = () => {
             </div>
           </Alert>
         )}
-        <section className="mt-5 overflow-hidden flex flex-col-reverse lg:flex-row gap-3">
+        <section className="mt-5 flex flex-col-reverse lg:flex-row gap-3">
           <article className="md:w-[100%] lg:w-[30%] xl:w-[20%]">
             {showJobDetails && <EmployeeJobDetails data={data.data} />}
           </article>

@@ -22,7 +22,7 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
     : 'N/A';
 
   return (
-    <article className="card content-card flex sm:!flex-row lg:!flex-col gap-3 animate-in-right">
+    <article className="card content-card !sticky top-5 flex sm:!flex-row lg:!flex-col gap-3 animate-in-right">
       <img
         alt={data.lastname}
         className="rounded-md object-cover sm:w-1/2 lg:w-auto"

@@ -29,7 +29,7 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  oandv-x: hidden;
   background: var(--background) !important;
 }
 
