@@ -28,8 +28,8 @@ const TypesListView = () => {
       <Title title="Tipos de Listado" />
       <Grid container gap={3}>
         {routes.map((route, index) => (
-          <Grid item key={route.id} md={6} xs={12}>
-            <RoutingCard index={index} route={route} />
+          <Grid item key={route.id} sm={6} xl={4} xs={12}>
+            <RoutingCard showType index={index} route={route} />
           </Grid>
         ))}
       </Grid>

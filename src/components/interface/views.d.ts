@@ -194,8 +194,10 @@ export interface RoutingCardProps {
     id: number;
     path: string;
     name: string;
+    disabled?: boolean;
   };
   index: number;
+  showType?: boolean;
 }
 
 export interface NotificationsTypeResultsListProps {

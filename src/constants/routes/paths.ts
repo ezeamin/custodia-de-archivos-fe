@@ -26,5 +26,11 @@ export const paths = {
   },
   SETTINGS: {
     MAIN: '/settings',
+    CHANGE_PASSWORD: '/settings/change-password',
+    LOGIN_LOGS: '/settings/login-logs',
+    MAKE_ADMIN: '/settings/make-admin',
+    REMOVE_ADMIN: '/settings/remove-admin',
+    MAKE_READ_ONLY: '/settings/make-read-only',
+    REMOVE_READ_ONLY: '/settings/remove-read-only',
   },
 };

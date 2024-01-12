@@ -21,6 +21,12 @@ import NotificationDetailView from '@/views/Notifications/NotificationDetailView
 import NotificationsHistoryView from '@/views/Notifications/NotificationsHistoryView';
 import NotificationsSentListView from '@/views/Notifications/NotificationsSentListView';
 import NotificationsView from '@/views/Notifications/NotificationsView';
+import ChangePasswordView from '@/views/Settings/ChangePasswordView';
+import CreateAdminView from '@/views/Settings/CreateAdminView';
+import CreateReadOnlyView from '@/views/Settings/CreateReadOnlyView';
+import LoginLogsView from '@/views/Settings/LoginLogsView';
+import RemoveAdminView from '@/views/Settings/RemoveAdminView';
+import RemoveReadOnlyView from '@/views/Settings/RemoveReadOnlyView';
 import SettingsView from '@/views/Settings/SettingsView';
 import LicensesTypesView from '@/views/TypesList/LicensesTypesView';
 import NotificationsTypesView from '@/views/TypesList/NotificationsTypesView';
@@ -228,7 +234,68 @@ export const routes: Route[] = [
     icon: <IoSettingsSharp />,
     description: 'Ajustes',
     path: paths.SETTINGS.MAIN,
-    subpaths: [],
+    subpaths: [
+      {
+        id: 6001,
+        title: 'Cambiar contraseña',
+        description: 'Cambiar contraseña',
+        path: paths.SETTINGS.CHANGE_PASSWORD,
+        subpaths: [],
+        privateRoute: true,
+        element: <ChangePasswordView />,
+        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+      },
+      {
+        id: 6002,
+        title: 'Registros de inicio de sesión',
+        description: 'Registros de inicio de sesión',
+        path: paths.SETTINGS.LOGIN_LOGS,
+        subpaths: [],
+        privateRoute: true,
+        element: <LoginLogsView />,
+        allowedRoles: ['ADMIN'],
+      },
+      {
+        id: 6003,
+        title: 'Hacer administrador',
+        description: 'Hacer administrador',
+        path: paths.SETTINGS.MAKE_ADMIN,
+        subpaths: [],
+        privateRoute: true,
+        element: <CreateAdminView />,
+        allowedRoles: ['ADMIN'],
+      },
+      {
+        id: 6004,
+        title: 'Quitar permisos de administrador',
+        description: 'Quitar permisos de administrador',
+        path: paths.SETTINGS.REMOVE_ADMIN,
+        subpaths: [],
+        privateRoute: true,
+        element: <RemoveAdminView />,
+        allowedRoles: ['ADMIN'],
+      },
+      {
+        id: 6005,
+        title: 'Crear usuario de solo lectura',
+        description: 'Crear usuario de solo lectura',
+        path: paths.SETTINGS.MAKE_READ_ONLY,
+        subpaths: [],
+        privateRoute: true,
+        element: <CreateReadOnlyView />,
+        allowedRoles: ['ADMIN'],
+      },
+      {
+        id: 6006,
+        title: 'Eliminar usuario de solo lectura',
+        description: 'Eliminar usuario de solo lectura',
+        path: paths.SETTINGS.REMOVE_READ_ONLY,
+        subpaths: [],
+        privateRoute: true,
+        element: <RemoveReadOnlyView />,
+        allowedRoles: ['ADMIN'],
+      },
+    ],
     privateRoute: true,
     element: <SettingsView />,
     allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
