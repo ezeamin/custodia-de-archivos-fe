@@ -23,7 +23,7 @@ const EmployeePersonalTab = () => {
     queryFn: () => getEmployeeFn(employeeId!),
   });
 
-  console.log(error); // Remove this line
+  console.log(error); // TODO: Remove this line and the error variable
 
   const formattedDni = data?.data?.dni.replace(
     /(\d{2})(\d{3})(\d{3})/,
@@ -41,7 +41,11 @@ const EmployeePersonalTab = () => {
       <article>
         <div className="flex mb-2 justify-between items-center">
           <h2 className="text-lg font-bold">Información personal</h2>
-          <Link to={`/employees/${employeeId}/edit/personal`}>
+          <Link
+            className="tooltip tooltip-left"
+            data-tip="Editar"
+            to={`/employees/${employeeId}/edit/personal`}
+          >
             <Icon iconComponent={<FaPencil size="1em" />} title="Editar" />
           </Link>
         </div>
@@ -79,7 +83,11 @@ const EmployeePersonalTab = () => {
       <article>
         <div className="flex mb-2 justify-between items-center">
           <h2 className="text-lg font-bold">Contacto</h2>
-          <Link to={`/employees/${employeeId}/edit/contact`}>
+          <Link
+            className="tooltip tooltip-left"
+            data-tip="Editar"
+            to={`/employees/${employeeId}/edit/contact`}
+          >
             <Icon iconComponent={<FaPencil size="1em" />} title="Editar" />
           </Link>
         </div>

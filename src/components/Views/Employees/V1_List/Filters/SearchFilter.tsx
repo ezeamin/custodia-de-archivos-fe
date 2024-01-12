@@ -27,6 +27,7 @@ const SearchFilter = () => {
   return (
     <>
       <Button
+        disabled
         className="p-3 input-bordered hover:border-gray-500 w-full md:hidden"
         startIcon={<MdFilterAlt />}
         type="button"
@@ -53,6 +54,7 @@ const SearchFilter = () => {
           <Icon iconComponent={<IoSearch />} size="23px" title="buscar" />
         </Button>
         <Button
+          disabled
           className="p-3 input-bordered hover:border-gray-500"
           startIcon={<MdFilterAlt />}
           type="button"

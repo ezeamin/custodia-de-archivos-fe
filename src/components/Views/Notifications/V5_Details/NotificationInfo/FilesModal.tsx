@@ -9,7 +9,7 @@ const FilesModal = (props: NotificationInfoContentProps) => {
 
   return (
     <Modal id="filesModal" title="Archivos adjuntos">
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 overflow-x-hidden">
         {data.files?.map((file) => <FileItem file={file} key={file.id} />)}
       </div>
     </Modal>

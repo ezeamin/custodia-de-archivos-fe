@@ -8,7 +8,7 @@ const NotificationHeader = (props: NotificationInfoContentProps) => {
   const { data } = props;
 
   return (
-    <section className="mt-5 card content-card">
+    <section className="mt-5 card content-card animate-in-bottom">
       <article className="flex flex-col md:flex-row justify-between items-center gap-3">
         <div className="flex self-start md:self-auto md:flex-col lg:flex-row gap-3">
           <img

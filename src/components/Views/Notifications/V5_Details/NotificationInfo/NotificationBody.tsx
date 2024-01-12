@@ -23,7 +23,7 @@ const NotificationBody = (props: NotificationInfoContentProps) => {
   };
 
   return (
-    <section className="card content-card mt-3">
+    <section className="card content-card mt-3 animate-in-bottom a-delay-300">
       <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row justify-between">
         <h2 className="text-xl font-bold">{data.type.description}</h2>
         <p className="text-lg">{formattedDate}</p>
