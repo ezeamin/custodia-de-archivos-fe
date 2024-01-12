@@ -23,6 +23,7 @@ const TryToLoginView = () => {
     queryFn: getRefreshTokenFn,
     enabled: !isLoggedIn && !tokenInUrl,
     retry: false,
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
