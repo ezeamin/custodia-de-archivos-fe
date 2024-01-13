@@ -11,7 +11,7 @@ const ResultsListItem = (props: NotificationsResultsListItemProps) => {
 
   return (
     <article
-      className="content-card animate-in-bottom indicator w-full h-full"
+      className="content-card animate-in-bottom indicator h-full w-full"
       style={{ animationDelay: `${index * 200}ms` }}
     >
       <div className="card-body flex flex-col justify-between p-0">
@@ -28,7 +28,7 @@ const ResultsListItem = (props: NotificationsResultsListItemProps) => {
             className={`btn w-full ${
               !hasBeenRead
                 ? 'btn-primary text-white'
-                : 'text-black border border-gray-300 hover:border-gray-400 dark:text-white dark:bg-gray-600 dark:border-gray-500'
+                : 'border border-gray-300 text-black hover:border-gray-400 dark:border-gray-500 dark:bg-gray-600 dark:text-white'
             } `}
             to={`/notifications/${notification.id}`}
           >
@@ -37,7 +37,7 @@ const ResultsListItem = (props: NotificationsResultsListItemProps) => {
         </footer>
       </div>
       {!hasBeenRead && (
-        <span className="indicator-item badge badge-error animate-pulse top-5 right-5" />
+        <span className="badge indicator-item badge-error right-5 top-5 animate-pulse" />
       )}
     </article>
   );

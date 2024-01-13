@@ -3,7 +3,7 @@ import Grid from './Grid';
 const GridExample = (): JSX.Element => {
   return (
     <>
-      <Grid container className="bg-violet-400 col-span-12">
+      <Grid container className="col-span-12 bg-violet-400">
         <Grid
           item
           className="bg-cyan-200 sm:bg-cyan-300 md:bg-cyan-400 lg:bg-cyan-500"

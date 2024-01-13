@@ -8,7 +8,7 @@ const NotificationsTypesView = () => {
   return (
     <>
       <Title title="Tipos de Notificaciones" />
-      <Alert closable className="mb-3 animate-in-bottom a-delay-200">
+      <Alert closable className="animate-in-bottom a-delay-200 mb-3">
         Crea un nuevo tipo de notificación. El título y la descripción serán
         visibles al crear una notificacion de este tipo. Además, una
         notificación de este tipo solo podrá ser emitida en el rango horario que

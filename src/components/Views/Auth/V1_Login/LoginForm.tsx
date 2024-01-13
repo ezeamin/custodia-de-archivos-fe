@@ -63,7 +63,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
       <TextInput
-        className="w-full animate-in-left a-delay-400"
+        className="animate-in-left a-delay-400 w-full"
         control={control}
         label="Nombre de usuario"
         maxLength={8}
@@ -71,20 +71,20 @@ const LoginForm = () => {
         placeholder="DNI"
       />
       <PasswordInput
-        className="w-full mt-2 animate-in-right a-delay-500"
+        className="animate-in-right a-delay-500 mt-2 w-full"
         control={control}
         label="Contraseña"
         name="password"
         placeholder="Ingrese una contraseña"
       />
-      <div className="my-1 animate-in-left a-delay-600">
+      <div className="animate-in-left a-delay-600 my-1">
         <Link className="underline" to={paths.AUTH.RECOVER_PASS}>
           ¿Olvidó su contraseña?
         </Link>
       </div>
       <Button
         unbordered
-        className="w-full mt-3 hover:bg-gray-800 dark:hover:bg-gray-400"
+        className="mt-3 w-full hover:bg-gray-800 dark:hover:bg-gray-400"
         colorDark="dark:bg-gray-300"
         colorLight="bg-gray-900"
         loading={isLoading}

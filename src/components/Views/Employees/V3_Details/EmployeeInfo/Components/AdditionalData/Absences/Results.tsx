@@ -61,7 +61,7 @@ const Results = () => {
   if (isError) {
     return (
       <>
-        <div className="mb-3 gap-2 flex sm:items-center lg:items-center flex-col sm:flex-row md:flex-col lg:flex-row sm:justify-between md:justify-between">
+        <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between md:flex-col md:justify-between lg:flex-row lg:items-center">
           <h2 className="text-lg font-bold">Inasistencias</h2>
           <AddNewButton disabled modalName="addNewAbsence" />
         </div>
@@ -72,14 +72,14 @@ const Results = () => {
 
   return (
     <>
-      <div className="mb-3 gap-2 flex sm:items-center lg:items-center flex-col sm:flex-row md:flex-col lg:flex-row sm:justify-between md:justify-between">
+      <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between md:flex-col md:justify-between lg:flex-row lg:items-center">
         <h2 className="text-lg font-bold">Inasistencias</h2>
         <AddNewButton modalName="addNewAbsence" />
       </div>
       {isLoading && (
-        <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-3">
-          <div className="rounded-md custom-skeleton w-full sm:w-1/2 md:w-full lg:w-1/2 h-[100px]" />
-          <div className="rounded-md custom-skeleton w-full sm:w-1/2 md:w-full lg:w-1/2 h-[100px]" />
+        <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
+          <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
+          <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
         </div>
       )}
 
@@ -92,7 +92,7 @@ const Results = () => {
             <List data={data.data.slice(0, 5)} />
           </section>
 
-          <div className="flex justify-between items-center gap-3 mt-2 h-[48px]">
+          <div className="mt-2 flex h-[48px] items-center justify-between gap-3">
             <p>
               Total: <b>{data.data.length} elementos</b>
             </p>
@@ -104,7 +104,7 @@ const Results = () => {
       )}
 
       {data.data && data.data.length === 0 && (
-        <p className="text-center my-3">No hay inasistencias registradas</p>
+        <p className="my-3 text-center">No hay inasistencias registradas</p>
       )}
 
       {createPortal(<Modal data={data?.data} />, document.body)}

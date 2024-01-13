@@ -132,15 +132,15 @@ const CreateForm = () => {
 
   return (
     <form
-      className="card content-card animate-in-bottom a-delay-200"
+      className="content-card animate-in-bottom a-delay-200 card"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
-      <div className="flex gap-3 mb-3 items-end">
-        <div className="w-32 h-32 rounded-md bg-gray-400 overflow-hidden">
+      <div className="mb-3 flex items-end gap-3">
+        <div className="h-32 w-32 overflow-hidden rounded-md bg-gray-400">
           {uploadedImage && (
             <img
               alt="Uploaded"
-              className="w-full h-full object-cover"
+              className="h-full w-full object-cover"
               height={128}
               src={URL.createObjectURL(uploadedImage)}
               width={128}

@@ -106,7 +106,7 @@ const LicensesTableRow = (props: LicensesElementProps) => {
       </td>
       <td align="center">
         <IconButton
-          className="text-red-500 tooltip tooltip-left"
+          className="tooltip tooltip-left text-red-500"
           iconComponent={<FaTrash />}
           label="Eliminar"
           onClick={handleClickDelete}

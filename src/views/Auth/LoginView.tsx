@@ -3,8 +3,8 @@ import LoginForm from '@/components/Views/Auth/V1_Login/LoginForm';
 const LoginView = () => {
   return (
     <>
-      <h2 className="text-3xl animate-in-left a-delay-300">Bienvenido</h2>
-      <div className="divider mt-0 mb-1 animate-in-right a-delay-300" />
+      <h2 className="animate-in-left a-delay-300 text-3xl">Bienvenido</h2>
+      <div className="animate-in-right a-delay-300 divider mb-1 mt-0" />
       <LoginForm />
     </>
   );

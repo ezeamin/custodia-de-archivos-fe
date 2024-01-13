@@ -73,7 +73,7 @@ const RecoverPassForm = () => {
         </Alert>
       )}
       <TextInput
-        className="w-full animate-in-left a-delay-400"
+        className="animate-in-left a-delay-400 w-full"
         control={control}
         label="Nombre de usuario"
         maxLength={8}
@@ -82,7 +82,7 @@ const RecoverPassForm = () => {
       />
       <Button
         unbordered
-        className="w-full mt-3 hover:bg-gray-800 dark:hover:bg-gray-400"
+        className="mt-3 w-full hover:bg-gray-800 dark:hover:bg-gray-400"
         colorDark="dark:bg-gray-300"
         colorLight="bg-gray-900"
         disabled={isSuccess}

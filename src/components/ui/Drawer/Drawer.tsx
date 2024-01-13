@@ -33,12 +33,12 @@ const Drawer = (props: DrawerPropsType): JSX.Element => {
         <button type="button">{triggerText}</button>
       </VaulDrawer.Trigger>
       <VaulDrawer.Portal>
-        <VaulDrawer.Overlay className="bg-black/40 fixed inset-0" />
-        <VaulDrawer.Content className="bg-zinc-300 bottom-0 dark:bg-zinc-700 fixed flex flex-col left-0 max-h-[100%] mt-24 right-0 rounded-t-[10px] z-50">
-          <div className="flex-1 mb-3 overflow-auto rounded-t-[10px]">
+        <VaulDrawer.Overlay className="fixed inset-0 bg-black/40" />
+        <VaulDrawer.Content className="fixed bottom-0 left-0 right-0 z-50 mt-24 flex max-h-[100%] flex-col rounded-t-[10px] bg-zinc-300 dark:bg-zinc-700">
+          <div className="mb-3 flex-1 overflow-auto rounded-t-[10px]">
             <Grid
               container
-              className="border-2 border-transparent border-b-gray-200 mb-4"
+              className="mb-4 border-2 border-transparent border-b-gray-200"
             >
               <Grid item sm={11} xs={10}>
                 <VaulDrawer.Title className="text-xl">{title}</VaulDrawer.Title>

@@ -64,16 +64,16 @@ const Chip = (props: ChipPropsType): JSX.Element => {
       ${!visible ? 'hidden' : ''}
       chip-animated
       bordered
-      px-1
+      tooltip
       rounded-full
-      tooltip`,
+      px-1`,
         className
       )}
     >
       {children}
       {deletable ? (
         <button
-          className="chip-animated bg-slate-600 dark:bg-slate-700 hover:bg-slate-500 rounded-full"
+          className="chip-animated rounded-full bg-slate-600 hover:bg-slate-500 dark:bg-slate-700"
           style={{ marginLeft: '5px', marginTop: '5px' }}
           type="button"
           onClick={handleDelete}

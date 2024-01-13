@@ -8,7 +8,7 @@ const AbsencesListItem = (props: AbsencesElementProps) => {
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY');
 
   return (
-    <article className="card content-card">
+    <article className="content-card card">
       <ul>
         <li>
           Fecha: <b>{formattedDate}</b>

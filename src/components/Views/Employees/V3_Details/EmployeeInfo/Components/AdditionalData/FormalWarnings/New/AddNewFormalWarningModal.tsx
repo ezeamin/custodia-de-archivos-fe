@@ -96,7 +96,7 @@ const AddNewFormalWarningModal = () => {
           name="date"
         />
         <TextAreaInput
-          className="w-full mt-3"
+          className="mt-3 w-full"
           control={control}
           disabled={isLoading}
           label="Motivo *"

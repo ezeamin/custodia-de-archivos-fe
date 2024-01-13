@@ -114,8 +114,8 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
   return (
     <div className="flow-root w-full">
       <IconButton
-        className={`float-left *:text-black dark:*:text-white tooltip-right ${
-          !(page === 0) ? 'dark:hover:bg-slate-500 hover:bg-gray-200' : ''
+        className={`tooltip-right float-left *:text-black dark:*:text-white ${
+          !(page === 0) ? 'hover:bg-gray-200 dark:hover:bg-slate-500' : ''
         } m-2`}
         colorDark="dark:bg-slate-700"
         colorLight="bg-white"
@@ -126,7 +126,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
       />
       <IconButton
         className={`float-left *:text-black dark:*:text-white ${
-          !(page === 0) ? 'dark:hover:bg-slate-500 hover:bg-gray-200' : ''
+          !(page === 0) ? 'hover:bg-gray-200 dark:hover:bg-slate-500' : ''
         } m-2`}
         colorDark="dark:bg-slate-700"
         colorLight="bg-white"
@@ -136,9 +136,9 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
         onClick={handleBackButtonClick}
       />
       <IconButton
-        className={`float-right *:text-black dark:*:text-white tooltip-left ${
+        className={`tooltip-left float-right *:text-black dark:*:text-white ${
           !(page === availablePages - 1)
-            ? 'dark:hover:bg-slate-500 hover:bg-gray-200'
+            ? 'hover:bg-gray-200 dark:hover:bg-slate-500'
             : ''
         } m-2`}
         colorDark="dark:bg-slate-700"
@@ -151,7 +151,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
       <IconButton
         className={`float-right *:text-black dark:*:text-white ${
           !(page === availablePages - 1)
-            ? 'dark:hover:bg-slate-500 hover:bg-gray-200'
+            ? 'hover:bg-gray-200 dark:hover:bg-slate-500'
             : ''
         } m-2`}
         colorDark="dark:bg-slate-700"

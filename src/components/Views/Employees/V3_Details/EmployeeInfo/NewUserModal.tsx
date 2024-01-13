@@ -19,7 +19,7 @@ const NewUserModal = () => {
         continuación será temporal. El empleado deberá cambiarla cuando se
         loguee por primera vez
       </p>
-      <h2 className="mt-3 mb-2">
+      <h2 className="mb-2 mt-3">
         Usuario: <b>{data?.data?.username}</b>
       </h2>
       <h2>

@@ -23,12 +23,12 @@ const NotificationBody = (props: NotificationInfoContentProps) => {
   };
 
   return (
-    <section className="card content-card mt-3 animate-in-bottom a-delay-300">
-      <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row justify-between">
+    <section className="content-card animate-in-bottom a-delay-300 card mt-3">
+      <div className="flex flex-col justify-between sm:flex-row md:flex-col lg:flex-row">
         <h2 className="text-xl font-bold">{data.type.description}</h2>
         <p className="text-lg">{formattedDate}</p>
       </div>
-      <div className="rounded-md p-4 bg-gray-200 dark:bg-gray-700 border dark:border-gray-500 mt-3">
+      <div className="mt-3 rounded-md border bg-gray-200 p-4 dark:border-gray-500 dark:bg-gray-700">
         <p>{data.message}</p>
       </div>
       <Grid container className="mt-3" gap={2}>
@@ -47,7 +47,7 @@ const NotificationBody = (props: NotificationInfoContentProps) => {
         )}
         <Grid item sm={data?.files?.length ? 6 : 12} xs={12}>
           <Link
-            className="btn btn-primary text-white w-full"
+            className="btn btn-primary w-full text-white"
             to={`${paths.NOTIFICATIONS.CREATE}?type=response&receiverId=${data.receiver.id}`}
           >
             RESPONDER

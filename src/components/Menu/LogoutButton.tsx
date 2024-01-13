@@ -65,7 +65,7 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
   return (
     <Button
       className={cn(
-        'hover:bg-red-500 hover:dark:bg-red-700 flex items-center py-2 text-center border-0 flex-nowrap',
+        'flex flex-nowrap items-center border-0 py-2 text-center hover:bg-red-500 hover:dark:bg-red-700',
         className
       )}
       colorDark="dark:bg-red-800"
@@ -79,7 +79,7 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
         title="Cerrar Sesión"
       />
 
-      <p className="inline-block ml-2">Cerrar Sesión</p>
+      <p className="ml-2 inline-block">Cerrar Sesión</p>
     </Button>
   );
 };

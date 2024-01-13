@@ -27,11 +27,11 @@ const LoadingBackdrop = (): JSX.Element => {
 
   return (
     <div
-      className={`w-screen h-screen ${
+      className={`h-screen w-screen ${
         isLoading ? 'block' : 'hidden'
-      } fixed top-0 left-0 bg-black bg-opacity-60 z-[15000] flex justify-center items-center`}
+      } fixed left-0 top-0 z-[15000] flex items-center justify-center bg-black bg-opacity-60`}
     >
-      <div className="flex flex-col justify-center items-center md:ml-[272px]">
+      <div className="flex flex-col items-center justify-center md:ml-[272px]">
         <Spinner />
         <p
           className="text-center text-white"

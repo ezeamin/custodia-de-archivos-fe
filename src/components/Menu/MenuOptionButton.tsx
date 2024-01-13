@@ -19,7 +19,7 @@ const MenuOptionButton = (props: MenuOptionButtonProps): JSX.Element => {
       <Button
         lowerCase
         unstyled
-        className="duration-500 flex gap-x-4 items-center h-10 mb-4 px-4 rounded-lg shadow dark:text-white"
+        className="mb-4 flex h-10 items-center gap-x-4 rounded-lg px-4 shadow duration-500 dark:text-white"
         colorDark="dark:bg-slate-600"
         colorLight="bg-sky-100"
         onClick={handlePrevious}
@@ -33,7 +33,7 @@ const MenuOptionButton = (props: MenuOptionButtonProps): JSX.Element => {
       <Button
         lowerCase
         unstyled
-        className="duration-500 flex gap-x-4 items-center h-10 mb-4 px-4 rounded-lg shadow dark:text-white"
+        className="mb-4 flex h-10 items-center gap-x-4 rounded-lg px-4 shadow duration-500 dark:text-white"
         colorDark="dark:bg-slate-600"
         colorLight="bg-sky-100"
         onClick={option.action}
@@ -44,7 +44,7 @@ const MenuOptionButton = (props: MenuOptionButtonProps): JSX.Element => {
 
   return (
     <Link
-      className="bg-sky-100 dark:bg-slate-600 duration-500 flex gap-x-4 items-center h-10 mb-5 px-4 rounded-lg shadow dark:text-white"
+      className="mb-5 flex h-10 items-center gap-x-4 rounded-lg bg-sky-100 px-4 shadow duration-500 dark:bg-slate-600 dark:text-white"
       to={option.path}
     >
       {option.description}

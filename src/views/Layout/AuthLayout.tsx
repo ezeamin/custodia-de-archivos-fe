@@ -7,22 +7,22 @@ import ThemeTogglerButton from '@/components/Menu/ThemeTogglerButton';
 const AuthLayout = () => {
   return (
     <section className="flex md:flex-row">
-      <main className="w-full px-10 md:px-12 lg:px-30 xl:px-40 h-[90vh] flex flex-col justify-center">
+      <main className="lg:px-30 flex h-[90vh] w-full flex-col justify-center px-10 md:px-12 xl:px-40">
         <section>
-          <article className="flex flex-col items-center text-center mb-10 md:mb-20">
+          <article className="mb-10 flex flex-col items-center text-center md:mb-20">
             <img
               alt="Custodia de archivos"
-              className="rounded-md mb-3 animate-in-bottom"
+              className="animate-in-bottom mb-3 rounded-md"
               src={logoImg}
               width={150}
             />
-            <h1 className="text-2xl font-bold animate-in-bottom a-delay-100">
+            <h1 className="animate-in-bottom a-delay-100 text-2xl font-bold">
               Portal de Empleados
             </h1>
           </article>
           <Outlet />
-          <div className="fixed top-[1rem] left-[1rem]">
-            <ThemeTogglerButton className="bg-transparent dark:bg-transparent hover:bg-gray-400/50 shadow-none btn-ghost md:tooltip-right" />
+          <div className="fixed left-[1rem] top-[1rem]">
+            <ThemeTogglerButton className="btn-ghost bg-transparent shadow-none md:tooltip-right hover:bg-gray-400/50 dark:bg-transparent" />
           </div>
         </section>
       </main>

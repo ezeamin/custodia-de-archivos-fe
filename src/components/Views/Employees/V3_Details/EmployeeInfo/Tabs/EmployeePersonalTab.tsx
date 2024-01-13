@@ -39,7 +39,7 @@ const EmployeePersonalTab = () => {
   return (
     <>
       <article>
-        <div className="flex mb-2 justify-between items-center">
+        <div className="mb-2 flex items-center justify-between">
           <h2 className="text-lg font-bold">Información personal</h2>
           <Link
             className="tooltip tooltip-left"
@@ -81,7 +81,7 @@ const EmployeePersonalTab = () => {
       </article>
       <div className="divider" />
       <article>
-        <div className="flex mb-2 justify-between items-center">
+        <div className="mb-2 flex items-center justify-between">
           <h2 className="text-lg font-bold">Contacto</h2>
           <Link
             className="tooltip tooltip-left"

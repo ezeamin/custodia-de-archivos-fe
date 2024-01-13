@@ -96,14 +96,14 @@ const DocumentItem = (props: DocumentItemProps) => {
   // Loading
   if (!doc) {
     return (
-      <article className="flex gap-2 items-center justify-between lg:items-start lg:justify-normal border border-gray-400 p-3 lg:p-0 rounded-md lg:border-none">
-        <div className="w-20 h-20 pl-3 lg:pl-0 rounded-md custom-skeleton" />
-        <div className="flex flex-col justify-between gap-3 w-1/2">
-          <span className="text-sm hidden lg:block custom-skeleton h-[20px] rounded-md w-1/2" />
-          <div className="flex flex-col lg:flex-row gap-2 w-full">
-            <span className="custom-skeleton w-full lg:w-[61px] h-[48px] rounded-md" />
-            <span className="custom-skeleton w-full lg:w-[122px] h-[48px] rounded-md" />
-            <span className="custom-skeleton w-full lg:w-[100px] h-[48px] rounded-md" />
+      <article className="flex items-center justify-between gap-2 rounded-md border border-gray-400 p-3 lg:items-start lg:justify-normal lg:border-none lg:p-0">
+        <div className="custom-skeleton h-20 w-20 rounded-md pl-3 lg:pl-0" />
+        <div className="flex w-1/2 flex-col justify-between gap-3">
+          <span className="custom-skeleton hidden h-[20px] w-1/2 rounded-md text-sm lg:block" />
+          <div className="flex w-full flex-col gap-2 lg:flex-row">
+            <span className="custom-skeleton h-[48px] w-full rounded-md lg:w-[61px]" />
+            <span className="custom-skeleton h-[48px] w-full rounded-md lg:w-[122px]" />
+            <span className="custom-skeleton h-[48px] w-full rounded-md lg:w-[100px]" />
           </div>
         </div>
       </article>
@@ -117,19 +117,19 @@ const DocumentItem = (props: DocumentItemProps) => {
       : doc.name;
 
   return (
-    <article className="flex gap-2 items-center justify-between lg:items-start lg:justify-normal border border-gray-400 p-3 lg:p-0 rounded-md lg:border-none">
-      <div className="w-20 h-20 pl-3 lg:pl-0 rounded-md lg:border lg:border-gray-400 flex flex-col items-center justify-center gap-2">
+    <article className="flex items-center justify-between gap-2 rounded-md border border-gray-400 p-3 lg:items-start lg:justify-normal lg:border-none lg:p-0">
+      <div className="flex h-20 w-20 flex-col items-center justify-center gap-2 rounded-md pl-3 lg:border lg:border-gray-400 lg:pl-0">
         <Icon
-          className="w-8 h-8"
+          className="h-8 w-8"
           iconComponent={<IoDocumentAttach />}
           title="documento"
         />
         <span className="text-sm font-bold">{extension}</span>
-        <span className="text-sm text-center lg:hidden">{shortenedName}</span>
+        <span className="text-center text-sm lg:hidden">{shortenedName}</span>
       </div>
       <div className="flex flex-col justify-between gap-3">
-        <span className="text-sm hidden lg:block">{shortenedName}</span>
-        <div className="flex flex-col lg:flex-row gap-2">
+        <span className="hidden text-sm lg:block">{shortenedName}</span>
+        <div className="flex flex-col gap-2 lg:flex-row">
           <Button
             className="border border-gray-400 hover:border-gray-500 dark:hover:border-gray-300"
             onClick={handleOpen}

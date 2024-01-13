@@ -15,7 +15,7 @@ const EmployeeListView = () => {
         href={paths.EMPLOYEES.CREATE}
         title="Listado de Empleados"
       />
-      <section className="flex justify-between items-center">
+      <section className="flex items-center justify-between">
         <SearchFilter />
         <Legend />
       </section>

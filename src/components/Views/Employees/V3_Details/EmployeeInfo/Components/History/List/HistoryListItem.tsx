@@ -8,7 +8,7 @@ const HistoryListItem = (props: HistoryElementProps) => {
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY - HH:mm:ss');
 
   return (
-    <article className="card content-card">
+    <article className="content-card card">
       <ul>
         <li>
           Fecha: <b>{formattedDate}</b>

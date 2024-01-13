@@ -6,7 +6,7 @@ const ErrorMessage = (props: ErrorMessageProps) => {
   const { refetch } = props;
 
   return (
-    <Alert className="mt-3 animate-in-right a-delay-500" type="error">
+    <Alert className="animate-in-right a-delay-500 mt-3" type="error">
       <p>
         Ocurrió un error leyendo la información. Por favor, intente nuevamente
         en unos instantes o reintente utilizando el botón debajo de este

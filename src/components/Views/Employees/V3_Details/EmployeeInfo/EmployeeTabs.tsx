@@ -31,8 +31,8 @@ const EmployeeTabs = () => {
 
   return (
     <>
-      <article className="shadow tabs tabs-boxed flex flex-col sm:flex-row md:flex-col lg:flex-row justify-center items-center xl:grid xl:justify-normal animate-in-bottom a-delay-500 dark:border dark:border-gray-600 bg-white dark:bg-slate-800 rounded-xl p-2">
-        <div className="flex flex-col w-full xl:hidden">
+      <article className="animate-in-bottom a-delay-500 tabs-boxed tabs flex flex-col items-center justify-center rounded-xl bg-white p-2 shadow sm:flex-row md:flex-col lg:flex-row xl:grid xl:justify-normal dark:border dark:border-gray-600 dark:bg-slate-800">
+        <div className="flex w-full flex-col xl:hidden">
           <Link
             className={`tab w-full xl:w-auto ${
               currentTab === 'personal' ? 'tab-active' : ''
@@ -52,7 +52,7 @@ const EmployeeTabs = () => {
             Documentos
           </Link>
         </div>
-        <div className="flex flex-col w-full xl:hidden">
+        <div className="flex w-full flex-col xl:hidden">
           <Link
             className={`tab w-full xl:w-auto ${
               currentTab === 'history' ? 'tab-active' : ''
@@ -109,7 +109,7 @@ const EmployeeTabs = () => {
           Información adicional
         </Link>
       </article>
-      <article className="card content-card mt-3 animate-in-bottom a-delay-800">
+      <article className="content-card animate-in-bottom a-delay-800 card mt-3">
         {renderedComp}
       </article>
     </>

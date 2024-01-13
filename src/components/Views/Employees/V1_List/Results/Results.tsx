@@ -41,7 +41,7 @@ const Results = () => {
   if (isError) {
     return (
       <>
-        <h2 className="text-lg font-bold mb-3">Historial de cambios</h2>
+        <h2 className="mb-3 text-lg font-bold">Historial de cambios</h2>
         <ErrorMessage refetch={handleRetry} />
       </>
     );

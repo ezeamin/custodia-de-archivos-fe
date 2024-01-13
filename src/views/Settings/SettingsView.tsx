@@ -62,16 +62,16 @@ const appVersion = packageJson.version;
 
 const SettingsView = () => {
   return (
-    <section className="overflow-hidden pr-0.5 pb-0.5">
+    <section className="overflow-hidden pb-0.5 pr-0.5">
       <Title title="Ajustes" />
       {isThereAnyDisabledRoute() && (
-        <Alert className="mb-5 animate-in-right" type="warning">
+        <Alert className="animate-in-right mb-5" type="warning">
           ¡Lo sentimos! Algunas de nuestras funcionalidades no están aún
           disponibles.
         </Alert>
       )}
       <article className="relative z-10">
-        <h3 className="font-bold text-xl mb-2 animate-in-bottom a-delay-100">
+        <h3 className="animate-in-bottom a-delay-100 mb-2 text-xl font-bold">
           General
         </h3>
         <Grid container gap={3}>
@@ -81,7 +81,7 @@ const SettingsView = () => {
             </Grid>
           ))}
         </Grid>
-        <h3 className="font-bold text-xl mb-2 mt-6 animate-in-bottom a-delay-500">
+        <h3 className="animate-in-bottom a-delay-500 mb-2 mt-6 text-xl font-bold">
           Usuarios Administradores
         </h3>
         <Grid container gap={3}>
@@ -91,7 +91,7 @@ const SettingsView = () => {
             </Grid>
           ))}
         </Grid>
-        <h3 className="font-bold text-xl mb-2 mt-6 animate-in-bottom a-delay-800">
+        <h3 className="animate-in-bottom a-delay-800 mb-2 mt-6 text-xl font-bold">
           Usuarios Solo Lectura
         </h3>
         <Grid container gap={3}>
@@ -102,7 +102,7 @@ const SettingsView = () => {
           ))}
         </Grid>
       </article>
-      <p className="mt-5 text-center md:mt-0 md:fixed md:bottom-2 md:right-2 animate-in-top">
+      <p className="animate-in-top mt-5 text-center md:fixed md:bottom-2 md:right-2 md:mt-0">
         Versión: {appVersion}
       </p>
     </section>

@@ -12,7 +12,7 @@ const NotificationsHistoryView = () => {
     <>
       <Title title="Historial de Notificaciones" />
       <Link
-        className="btn dark:border-gray-500 hover:dark:border-gray-400 w-full sm:w-auto"
+        className="btn w-full sm:w-auto dark:border-gray-500 hover:dark:border-gray-400"
         to={paths.NOTIFICATIONS.MAIN}
       >
         <Icon iconComponent={<IoArrowBackOutline />} title="Volver" />

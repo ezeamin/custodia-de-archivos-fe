@@ -7,7 +7,7 @@ const LogoCustodia = (): JSX.Element => {
     <Link to="/">
       <img
         alt="Poder Judicial de Tucumán"
-        className="bg-white border-none cursor-pointer mt-4 p-1 rounded-md"
+        className="mt-4 cursor-pointer rounded-md border-none bg-white p-1"
         height={50}
         src={icon}
         width={50}

@@ -26,11 +26,11 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <div className="bg-white dark:bg-blue-950 h-screen relative hidden md:block z-50 pl-4 pr-4 w-[17rem] animate-in-left landscape-menu">
+      <div className="animate-in-left landscape-menu relative z-50 hidden h-screen w-[17rem] bg-white pl-4 pr-4 md:block dark:bg-blue-950">
         {/* PJT Logo */}
         <div className="mb-5 mt-3">
           <LogoCustodia />
-          <h2 className="text-xl dark:text-white mt-3">
+          <h2 className="mt-3 text-xl dark:text-white">
             Hola, <span className="font-bold">{user?.name}</span>
           </h2>
         </div>
@@ -45,12 +45,12 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
         {/* Logout Button */}
         <div className="absolute inset-x-4 bottom-0">
           <hr className="my-2 w-full" />
-          <div className="flex gap-2 mb-5">
+          <div className="mb-5 flex gap-2">
             <LogoutButton className="h-10 flex-1" />
             <ThemeTogglerButton />
             <Button
               unbordered
-              className="w-12 h-12 p-0 theme-controller hover:bg-slate-300 dark:hover:bg-slate-700 tooltip tooltip-top flex justify-center"
+              className="theme-controller tooltip tooltip-top flex h-12 w-12 justify-center p-0 hover:bg-slate-300 dark:hover:bg-slate-700"
               colorDark="dark:bg-slate-600"
               colorLight="bg-slate-200"
               data-tip="Volver"
@@ -66,7 +66,7 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
         </div>
       </div>
       {/* Content */}
-      <div className="flex-1 overflow-auto relative" id="content">
+      <div className="relative flex-1 overflow-auto" id="content">
         {children}
       </div>
     </div>

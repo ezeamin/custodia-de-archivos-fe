@@ -33,7 +33,7 @@ const TextAreaInput = <T extends FormSchemas>(
         name={name}
         render={({ field, fieldState: { error } }) => (
           <textarea
-            className={`textarea textarea-bordered bg-gray-100 dark:bg-slate-700 w-full mt-1 ${
+            className={`textarea textarea-bordered mt-1 w-full bg-gray-100 dark:bg-slate-700 ${
               error ? 'border-error' : ''
             }`}
             disabled={rest.disabled}
@@ -51,7 +51,7 @@ const TextAreaInput = <T extends FormSchemas>(
         )}
       />
       {helperText && (
-        <p className="text-sm text-gray-400 dark:text-gray-400 mt-1">
+        <p className="mt-1 text-sm text-gray-400 dark:text-gray-400">
           {helperText}
         </p>
       )}

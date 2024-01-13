@@ -26,12 +26,12 @@ const Title = (props: TitleProps) => {
           typeof rest?.className === 'string' ? rest?.className : undefined
         }
       >
-        <div className="flex gap-2 justify-between">
+        <div className="flex justify-between gap-2">
           <h1 className="text-4xl font-bold">{title}</h1>
           {showButton && (
             <Link
               className={cn(
-                'hidden sm:inline-flex btn btn-primary text-white border-none',
+                'btn btn-primary hidden border-none text-white sm:inline-flex',
                 buttonClassName
               )}
               to={href}
@@ -44,7 +44,7 @@ const Title = (props: TitleProps) => {
         {showButton && (
           <Link
             className={cn(
-              'sm:hidden btn btn-primary text-white border-none w-full mb-3',
+              'btn btn-primary mb-3 w-full border-none text-white sm:hidden',
               buttonClassName
             )}
             to={href}
@@ -62,12 +62,12 @@ const Title = (props: TitleProps) => {
         typeof rest?.className === 'string' ? rest?.className : undefined
       }
     >
-      <div className="flex gap-2 justify-between">
+      <div className="flex justify-between gap-2">
         <h1 className="text-4xl font-bold">{title}</h1>
         {showButton && (
           <Button
             unbordered
-            className={cn('hidden sm:inline-flex text-white', buttonClassName)}
+            className={cn('hidden text-white sm:inline-flex', buttonClassName)}
             colorLight="btn-primary"
             onClick={onClick}
           >
@@ -79,7 +79,7 @@ const Title = (props: TitleProps) => {
       {showButton && (
         <Button
           unbordered
-          className={cn('sm:hidden text-white', buttonClassName)}
+          className={cn('text-white sm:hidden', buttonClassName)}
           colorLight="btn-primary"
           onClick={onClick}
         >

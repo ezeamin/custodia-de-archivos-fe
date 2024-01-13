@@ -75,7 +75,7 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
 
   return (
     <article
-      className="content-card animate-in-bottom indicator w-full h-full"
+      className="content-card animate-in-bottom indicator h-full w-full"
       style={{ animationDelay: `${index * 200}ms` }}
     >
       <div className="card-body flex flex-col justify-between p-0">
@@ -83,7 +83,7 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
           <h2 className="card-title mb-3">{notificationType.title}</h2>
           <div className="flex flex-col justify-between gap-2">
             <div className="flex flex-col gap-1">
-              <div className="flex justify-start items-center gap-3">
+              <div className="flex items-center justify-start gap-3">
                 <span className="text-sm text-gray-500 dark:text-gray-400">
                   Tiempo:
                 </span>
@@ -100,7 +100,7 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
               <div className="flex gap-1">
                 {notificationType.allowedRoles.map((role) => (
                   <span
-                    className="text-xs text-gray-500 bg-gray-200 dark:bg-gray-600 dark:text-gray-400 px-2 py-1 rounded-md"
+                    className="rounded-md bg-gray-200 px-2 py-1 text-xs text-gray-500 dark:bg-gray-600 dark:text-gray-400"
                     key={role.id}
                   >
                     {role.description}

@@ -59,12 +59,12 @@ const EmployeeHistoryTab = () => {
 
   return (
     <>
-      <h2 className="text-lg font-bold mb-3">Historial de cambios</h2>
+      <h2 className="mb-3 text-lg font-bold">Historial de cambios</h2>
 
       {isLoading && (
-        <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-3">
-          <div className="rounded-md custom-skeleton w-full sm:w-1/2 md:w-full lg:w-1/2 h-[100px]" />
-          <div className="rounded-md custom-skeleton w-full sm:w-1/2 md:w-full lg:w-1/2 h-[100px]" />
+        <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
+          <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
+          <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
         </div>
       )}
 
@@ -80,7 +80,7 @@ const EmployeeHistoryTab = () => {
       )}
 
       {data.data && data.data.length === 0 && (
-        <p className="text-center my-3">No hay cambios registrados</p>
+        <p className="my-3 text-center">No hay cambios registrados</p>
       )}
     </>
   );

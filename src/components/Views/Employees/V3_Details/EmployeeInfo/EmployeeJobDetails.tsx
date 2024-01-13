@@ -22,14 +22,14 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
     : 'N/A';
 
   return (
-    <article className="card content-card !sticky top-5 flex sm:!flex-row lg:!flex-col gap-3 animate-in-right">
+    <article className="content-card animate-in-right card !sticky top-5 flex gap-3 sm:!flex-row lg:!flex-col">
       <img
         alt={data.lastname}
         className="rounded-md object-cover sm:w-1/2 lg:w-auto"
         src={data.imgSrc}
       />
       <div className="flex flex-col gap-3 sm:w-1/2 lg:w-auto">
-        <h2 className="text-xl font-bold text-center">{`${data.lastname}, ${data.firstname}`}</h2>
+        <h2 className="text-center text-xl font-bold">{`${data.lastname}, ${data.firstname}`}</h2>
         <EmployeeDataField
           label="Estado"
           value={<EmployeeStatus noBadge status={data.status} />}

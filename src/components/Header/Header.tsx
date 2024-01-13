@@ -57,16 +57,16 @@ const Header = (): JSX.Element | null => {
   // ---------------------------------------------------------------------
 
   return (
-    <div className="md:hidden sticky top-0 w-full z-40 ">
+    <div className="sticky top-0 z-40 w-full md:hidden ">
       <header
-        className={`py-5 ps-7 pe-5 flex justify-between transition-colors ${
+        className={`flex justify-between py-5 pe-5 ps-7 transition-colors ${
           isScrolling ? 'header-scrolling' : ''
         }`}
       >
         <Link to="/">
           <img
             alt="Poder Judicial de Tucumán"
-            className="w-12 h-12 rounded-md"
+            className="h-12 w-12 rounded-md"
             height={100}
             src={icon}
             width={100}

@@ -57,7 +57,7 @@ const EmployeeDocumentsTab = () => {
 
   return (
     <>
-      <div className="mb-3 gap-2 flex sm:items-center lg:items-center flex-col sm:flex-row md:flex-col lg:flex-row sm:justify-between md:justify-between">
+      <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between md:flex-col md:justify-between lg:flex-row lg:items-center">
         <h2 className="text-lg font-bold">Documentos</h2>
         <AddNewDocument />
       </div>

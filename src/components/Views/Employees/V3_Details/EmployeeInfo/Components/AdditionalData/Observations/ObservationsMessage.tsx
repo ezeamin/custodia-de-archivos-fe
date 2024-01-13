@@ -28,7 +28,7 @@ const ObservationsMessage = (props: ObservationsMessageProps) => {
 
   return (
     <section
-      className="w-full border border-gray-300 dark:border-gray-600 p-3 mb-3 rounded-md flex items-center justify-between"
+      className="mb-3 flex w-full items-center justify-between rounded-md border border-gray-300 p-3 dark:border-gray-600"
       id={id}
     >
       <p className="w-[90%]">

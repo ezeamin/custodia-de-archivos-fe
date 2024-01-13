@@ -64,9 +64,9 @@ const IconButton = (props: IconButtonPropsType): JSX.Element => {
       ${disabledState ? 'cursor-not-allowed' : 'cursor-pointer'}
       animated
       ${!unbordered ? 'bordered' : ''}
-      p-2
+      tooltip
       rounded-full
-      tooltip`,
+      p-2`,
         className
       )}
       data-tip={label || null}

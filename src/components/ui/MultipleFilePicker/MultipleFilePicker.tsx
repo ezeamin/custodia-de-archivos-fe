@@ -102,7 +102,7 @@ const MultipleFilePicker = (props: MultipleFilePickerProps) => {
   return (
     <section className={cn('my-3', className)}>
       <article
-        className="relative h-full flex flex-col"
+        className="relative flex h-full flex-col"
         onDragEnter={handleDragEnter}
         // onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
@@ -110,13 +110,13 @@ const MultipleFilePicker = (props: MultipleFilePickerProps) => {
       >
         {/* <!-- overlay --> */}
         <div
-          className="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md"
+          className="pointer-events-none absolute left-0 top-0 z-50 flex h-full w-full flex-col items-center justify-center rounded-md"
           id="overlay"
           ref={overlayRef}
         >
           <i>
             <svg
-              className="fill-current w-12 h-12 mb-3 text-blue-700"
+              className="mb-3 h-12 w-12 fill-current text-blue-700"
               height="24"
               viewBox="0 0 24 24"
               width="24"
@@ -129,9 +129,9 @@ const MultipleFilePicker = (props: MultipleFilePickerProps) => {
         </div>
 
         {/* <!-- main content --> */}
-        <section className="overflow-hidden w-full h-full flex flex-col">
-          <header className="border-dashed rounded-md border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
-            <p className="px-2 mb-3 font-semibold text-gray-900 flex flex-wrap justify-center dark:text-gray-400">
+        <section className="flex h-full w-full flex-col overflow-hidden">
+          <header className="flex flex-col items-center justify-center rounded-md border-2 border-dashed border-gray-400 py-12">
+            <p className="mb-3 flex flex-wrap justify-center px-2 font-semibold text-gray-900 dark:text-gray-400">
               <span>Arrastre y suelte sus archivos&nbsp;</span>
               <span>para subir ó</span>
             </p>
@@ -157,7 +157,7 @@ const MultipleFilePicker = (props: MultipleFilePickerProps) => {
 
           <ul className="flex flex-col gap-3">
             <li
-              className="h-full w-full text-center flex flex-col items-center justify-center"
+              className="flex h-full w-full flex-col items-center justify-center text-center"
               ref={emptyRef}
             >
               <img
@@ -165,20 +165,20 @@ const MultipleFilePicker = (props: MultipleFilePickerProps) => {
                 className="mx-auto w-32"
                 src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png"
               />
-              <span className="text-small text-gray-500 mt-2">
+              <span className="text-small mt-2 text-gray-500">
                 No hay archivos seleccionados
               </span>
             </li>
             {files.map((file) => (
-              <li className="flex gap-2 items-center" key={file.name}>
-                <div className="flex-2 relative h-20 w-20 min-w-20 rounded-md overflow-hidden border-2 border-gray-200 dark:border-gray-400 m-1 flex justify-center items-center">
+              <li className="flex items-center gap-2" key={file.name}>
+                <div className="flex-2 relative m-1 flex h-20 w-20 min-w-20 items-center justify-center overflow-hidden rounded-md border-2 border-gray-200 dark:border-gray-400">
                   <Icon
                     iconComponent={<IoDocumentAttach size="2em" />}
                     title="Archivo"
                   />
                   <Button
                     unstyled
-                    className="rounded-full w-4 h-4 bg-red-500 border-none absolute top-1 right-1 flex items-center justify-center tooltip tooltip-right"
+                    className="tooltip tooltip-right absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full border-none bg-red-500"
                     data-tip="Borrar"
                     onClick={() => handleRemove(file.name)}
                   >

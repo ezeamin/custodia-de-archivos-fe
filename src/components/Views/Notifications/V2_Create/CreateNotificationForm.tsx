@@ -219,7 +219,7 @@ const CreateNotificationForm = () => {
 
   return (
     <form
-      className="card content-card animate-in-bottom a-delay-200"
+      className="content-card animate-in-bottom a-delay-200 card"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
       <Grid container gap={2}>
@@ -281,7 +281,7 @@ const CreateNotificationForm = () => {
           <span className="">Enviar documentos</span>
           <input
             checked={showFileSection}
-            className="toggle [--tglbg:white] dark:[--tglbg:#2d3740] border-gray-400 checked:toggle-primary dark:checked:!bg-white"
+            className="toggle border-gray-400 [--tglbg:white] checked:toggle-primary dark:[--tglbg:#2d3740] dark:checked:!bg-white"
             id="toggle"
             type="checkbox"
             onChange={handleShowFileSection}

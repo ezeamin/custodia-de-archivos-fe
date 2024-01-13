@@ -125,7 +125,7 @@ const TypesForm = () => {
 
   return (
     <form
-      className="card content-card animate-in-bottom a-delay-400"
+      className="content-card animate-in-bottom a-delay-400 card"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
       <Grid container gap={2}>

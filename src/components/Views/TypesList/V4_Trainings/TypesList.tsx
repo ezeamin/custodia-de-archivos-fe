@@ -42,7 +42,7 @@ const TypesList = () => {
 
   if (data?.data) {
     return (
-      <section className="mt-4 animate-in-bottom a-delay-600 overflow-hidden">
+      <section className="animate-in-bottom a-delay-600 mt-4 overflow-hidden">
         <ResultsList data={data.data} />
       </section>
     );

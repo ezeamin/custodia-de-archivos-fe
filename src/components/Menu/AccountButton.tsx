@@ -1,7 +1,7 @@
 const AccountButton = (): JSX.Element => {
   return (
     <button
-      className="bg-sky-100 dark:bg-neutral duration-500 text-center px-4 rounded shadow dark:text-white"
+      className="rounded bg-sky-100 px-4 text-center shadow duration-500 dark:bg-neutral dark:text-white"
       type="button"
       onClick={() => {}}
     >

@@ -64,9 +64,9 @@ const Alert = (props: AlertPropsType): JSX.Element => {
         ${type === 'warning' ? 'bg-orange-200 dark:bg-yellow-800' : ''}
         ${type === 'loading' ? 'bg-gray-100 dark:bg-gray-800' : ''}
         ${!open ? 'hidden' : ''}
-        px-2 md:pr-3 
+        rounded-xl px-2 
         py-3
-        rounded-xl
+        md:pr-3
         dark:text-white`,
         className
       )}
@@ -116,7 +116,7 @@ const Alert = (props: AlertPropsType): JSX.Element => {
         <Grid
           item
           alignItems="start"
-          className="m-0 py-0 hidden sm:flex"
+          className="m-0 hidden py-0 sm:flex"
           justifyContent="end"
           xs={1}
         >

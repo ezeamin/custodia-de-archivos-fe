@@ -7,7 +7,7 @@ const LicensesTypesView = () => {
   return (
     <>
       <Title title="Tipos de Licencias" />
-      <Alert closable className="mb-3 animate-in-bottom a-delay-200">
+      <Alert closable className="animate-in-bottom a-delay-200 mb-3">
         Crea un nuevo tipo de licencia. El título y la descripción serán
         visibles al crear una licencia de este tipo.
       </Alert>

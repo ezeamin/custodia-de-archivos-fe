@@ -33,7 +33,7 @@ const HourPicker = forwardRef(
     return (
       <input
         className={cn(
-          `input input-bordered bg-gray-100 dark:bg-slate-700 w-full ${
+          `input input-bordered w-full bg-gray-100 dark:bg-slate-700 ${
             error && 'border-error'
           }`,
           className

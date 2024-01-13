@@ -20,7 +20,7 @@ const TrainingsListItem = (props: TrainingsElementProps) => {
   };
 
   return (
-    <article className="card content-card flex flex-col justify-between h-full">
+    <article className="content-card card flex h-full flex-col justify-between">
       <ul>
         <li>
           Fecha: <b>{formattedDate}</b>
@@ -35,7 +35,7 @@ const TrainingsListItem = (props: TrainingsElementProps) => {
       <footer>
         <div className="divider" />
         {!data.observations && (
-          <p className="text-center -mt-1">Sin observaciones</p>
+          <p className="-mt-1 text-center">Sin observaciones</p>
         )}
         {data.observations && data.observations !== message && (
           <Button className="-mt-1 w-full" onClick={handleClickObservations}>

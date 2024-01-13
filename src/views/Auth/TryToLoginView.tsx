@@ -42,7 +42,7 @@ const TryToLoginView = () => {
 
   if (!isLoggedIn && isLoading) {
     return (
-      <section className="w-screen h-[100dvh] flex flex-col justify-center items-center">
+      <section className="flex h-[100dvh] w-screen flex-col items-center justify-center">
         <LoadingPage />
       </section>
     );

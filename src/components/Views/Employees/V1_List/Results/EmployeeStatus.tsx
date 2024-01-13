@@ -40,7 +40,7 @@ const EmployeeStatus = (props: EmployeeStatusProps) => {
   if (noBadge) {
     return (
       <div className="flex">
-        <span className={`${color} w-3 h-3 rounded-full inline-block mr-2`} />
+        <span className={`${color} mr-2 inline-block h-3 w-3 rounded-full`} />
         <p>{text}</p>
       </div>
     );
@@ -49,7 +49,7 @@ const EmployeeStatus = (props: EmployeeStatusProps) => {
   if (isPortrait || expanded) {
     return (
       <span className={cn(`badge badge-outline ${portraitColors}`, className)}>
-        <span className={`${color} w-3 h-3 rounded-full inline-block mr-2`} />
+        <span className={`${color} mr-2 inline-block h-3 w-3 rounded-full`} />
         <p>{text}</p>
       </span>
     );
@@ -57,7 +57,7 @@ const EmployeeStatus = (props: EmployeeStatusProps) => {
 
   return (
     <span
-      className={cn(`${color} w-3 h-3 rounded-full inline-block`, className)}
+      className={cn(`${color} inline-block h-3 w-3 rounded-full`, className)}
     />
   );
 };

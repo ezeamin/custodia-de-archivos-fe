@@ -5,7 +5,7 @@ const HomeView = () => {
     <>
       <Title title="Bienvenido" />
       <section className="vertically-centered">
-        <p className="max-w-[500px] animate-in-bottom a-delay-200">
+        <p className="animate-in-bottom a-delay-200 max-w-[500px]">
           Bienvenido al <b>SAP (Sistema de Administración de Personal)</b> de
           Custodia de Archivos Noroeste SRL. Para comenzar, seleccione una
           opción del{' '}

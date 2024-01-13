@@ -179,7 +179,7 @@ const AddNewTrainingModal = () => {
           placeholder="El empleado había recibido 3 llamados de atención..."
         />
         <TextAreaInput
-          className="w-full mt-2"
+          className="mt-2 w-full"
           control={control}
           disabled={isLoading}
           label="Observaciones"

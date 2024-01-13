@@ -48,7 +48,7 @@ const DateInput = <T extends FormSchemas>(
         )}
       />
       {helperText && (
-        <p className="text-sm text-gray-400 dark:text-gray-400 mt-1">
+        <p className="mt-1 text-sm text-gray-400 dark:text-gray-400">
           {helperText}
         </p>
       )}

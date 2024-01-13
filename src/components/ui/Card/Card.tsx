@@ -26,12 +26,12 @@ const Card = (props: CardPropsType): JSX.Element => {
       className={cn(
         removeLineBreaks`
           ${!img ? 'p-4' : ''}
-          ${outlined ? 'border-2 border-gray-400 border-solid' : ''}
+          ${outlined ? 'border-2 border-solid border-gray-400' : ''}
+          w-full 
           overflow-hidden 
-          rounded 
-          shadow-lg
+          rounded
           text-justify
-          w-full`,
+          shadow-lg`,
         className
       )}
     >

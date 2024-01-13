@@ -24,7 +24,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
   }, [disabled]);
 
   return (
-    <div className="w-full flex gap-2">
+    <div className="flex w-full gap-2">
       <input
         aria-label={ariaLabel}
         checked={isChecked}

@@ -11,10 +11,10 @@ const RoutingCard = (props: RoutingCardProps) => {
   if (route.disabled) {
     return (
       <div
-        className="cursor-not-allowed !bg-gray-200 dark:!bg-gray-600 animate-in-bottom card content-card h-full !flex-row items-center gap-2 justify-between"
+        className="animate-in-bottom content-card card h-full cursor-not-allowed !flex-row items-center justify-between gap-2 !bg-gray-200 dark:!bg-gray-600"
         style={{ animationDelay: `${index * 100 + 100}ms` }}
       >
-        <div className="flex flex-row items-center gap-3 max-w-[60%]">
+        <div className="flex max-w-[60%] flex-row items-center gap-3">
           <Icon iconComponent={<MdOutlineCancel />} title="No Navegar" />
           {showType ? (
             <p className="truncate">
@@ -24,14 +24,14 @@ const RoutingCard = (props: RoutingCardProps) => {
             <p className="truncate">{route.name}</p>
           )}
         </div>
-        <p className="text-end font-bold w-1/2">No disponible</p>
+        <p className="w-1/2 text-end font-bold">No disponible</p>
       </div>
     );
   }
 
   return (
     <Link
-      className="animate-in-bottom card content-card !flex-row items-center gap-3 hover:bg-gray-100 hover:dark:bg-gray-900 transition-colors h-full"
+      className="animate-in-bottom content-card card h-full !flex-row items-center gap-3 transition-colors hover:bg-gray-100 hover:dark:bg-gray-900"
       style={{ animationDelay: `${index * 100 + 100}ms` }}
       to={route.path}
     >

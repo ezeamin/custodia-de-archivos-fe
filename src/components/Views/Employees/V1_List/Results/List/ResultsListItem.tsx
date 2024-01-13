@@ -13,7 +13,7 @@ const ResultsListItem = (props: EmployeesResultsListItemProps) => {
       style={{ animationDelay: `${index * 200}ms` }}
     >
       <div className="card-body p-0">
-        <div className="flex flex-col sm:flex-row sm:justify-between gap-2 sm:items-center">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="card-title">
             {employee.lastname}, {employee.firstname}
           </h2>
@@ -38,7 +38,7 @@ const ResultsListItem = (props: EmployeesResultsListItemProps) => {
           <div>
             <img
               alt={`${employee.lastname}, ${employee.firstname}`}
-              className="min-w-[70px] w-[70px] sm:w-[100px] object-cover rounded-md"
+              className="w-[70px] min-w-[70px] rounded-md object-cover sm:w-[100px]"
               height={70}
               src={employee.imgSrc}
               width={70}
@@ -48,7 +48,7 @@ const ResultsListItem = (props: EmployeesResultsListItemProps) => {
         <div className="divider my-0" />
         <div className="card-actions">
           <Link
-            className="btn w-full btn-primary text-white"
+            className="btn btn-primary w-full text-white"
             to={`/employees/${employee.id}/personal`}
           >
             VER MÁS

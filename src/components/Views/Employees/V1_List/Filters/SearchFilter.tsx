@@ -28,7 +28,7 @@ const SearchFilter = () => {
     <>
       <Button
         disabled
-        className="p-3 input-bordered hover:border-gray-500 w-full md:hidden"
+        className="input-bordered w-full p-3 hover:border-gray-500 md:hidden"
         startIcon={<MdFilterAlt />}
         type="button"
         onClick={handleModal}
@@ -36,7 +36,7 @@ const SearchFilter = () => {
         Filtros
       </Button>
       <form
-        className="hidden md:flex gap-2 items-end w-full"
+        className="hidden w-full items-end gap-2 md:flex"
         onSubmit={onSubmitMiddleware(handleSubmit)}
       >
         <TextInput
@@ -48,14 +48,14 @@ const SearchFilter = () => {
           placeholder="Buscar por nombre o apellido"
         />
         <Button
-          className="p-3 input-bordered hover:border-gray-500"
+          className="input-bordered p-3 hover:border-gray-500"
           type="submit"
         >
           <Icon iconComponent={<IoSearch />} size="23px" title="buscar" />
         </Button>
         <Button
           disabled
-          className="p-3 input-bordered hover:border-gray-500"
+          className="input-bordered p-3 hover:border-gray-500"
           startIcon={<MdFilterAlt />}
           type="button"
           onClick={handleModal}

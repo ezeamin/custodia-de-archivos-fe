@@ -20,7 +20,7 @@ const RadioButton = (props: RadioButtonProps): JSX.Element => {
   const [checked, setChecked] = useState(defaultChecked);
 
   return (
-    <div className="w-full flex gap-2">
+    <div className="flex w-full gap-2">
       <input
         aria-label={ariaLabel}
         checked={checked}

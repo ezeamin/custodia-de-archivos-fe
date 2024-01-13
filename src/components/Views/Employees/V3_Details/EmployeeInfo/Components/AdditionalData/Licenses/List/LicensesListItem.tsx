@@ -88,7 +88,7 @@ const LicensesListItem = (props: LicensesElementProps) => {
   // -------------------------------------------------
 
   return (
-    <article className="card content-card flex flex-col justify-between h-full">
+    <article className="content-card card flex h-full flex-col justify-between">
       <ul>
         <li>
           Tipo: <b>{data.type.description}</b>
@@ -106,7 +106,7 @@ const LicensesListItem = (props: LicensesElementProps) => {
       <footer>
         <div className="divider" />
         {!data.observations && (
-          <p className="text-center -mt-1">Sin observaciones</p>
+          <p className="-mt-1 text-center">Sin observaciones</p>
         )}
         {data.observations && data.observations !== message && (
           <Button className="-mt-1 w-full" onClick={handleClickObservations}>
@@ -124,7 +124,7 @@ const LicensesListItem = (props: LicensesElementProps) => {
         )}
         <Button
           outlineButton
-          className="w-full btn-error mt-2"
+          className="btn-error mt-2 w-full"
           onClick={handleClickDelete}
         >
           Eliminar

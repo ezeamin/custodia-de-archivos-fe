@@ -49,7 +49,7 @@ const FileInput = <T extends FormSchemas>(
           {label}
         </label>
       )}
-      <div className="flex flex-col md:flex-row gap-2 mt-1">
+      <div className="mt-1 flex flex-col gap-2 md:flex-row">
         <InputController
           control={control}
           defaultValue={null}
@@ -57,7 +57,7 @@ const FileInput = <T extends FormSchemas>(
           render={({ field, fieldState: { error } }) => (
             <input
               className={cn(
-                `file-input file-input-sm md:file-input-md file-input-ghost focus:bg-gray-200 dark:focus:bg-gray-800 border border-gray-300 dark:border-gray-500 w-full max-w-xs ${
+                `file-input file-input-ghost file-input-sm w-full max-w-xs border border-gray-300 md:file-input-md focus:bg-gray-200 dark:border-gray-500 dark:focus:bg-gray-800 ${
                   error ? 'border-error' : ''
                 }`,
                 inputClassName
@@ -73,7 +73,7 @@ const FileInput = <T extends FormSchemas>(
           )}
         />
         <Button
-          className="border border-gray-300 md:tooltip md:tooltip-bottom btn-sm md:btn-md inline-block"
+          className="btn-sm inline-block border border-gray-300 md:btn-md md:tooltip md:tooltip-bottom"
           data-tip="Borrar archivo"
           disabled={!hasLoadedFile}
           onClick={handleRemove}

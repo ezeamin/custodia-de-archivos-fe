@@ -91,7 +91,7 @@ const Results = () => {
 
   if (isError) {
     return (
-      <Alert className="mt-3 animate-in-right a-delay-500" type="error">
+      <Alert className="animate-in-right a-delay-500 mt-3" type="error">
         <p>
           Ocurrió un error leyendo la información. Por favor, intente nuevamente
           en unos instantes o reintente utilizando el botón debajo de este
@@ -125,7 +125,7 @@ const Results = () => {
             </div>
           </Alert>
         )}
-        <section className="mt-5 flex flex-col-reverse lg:flex-row gap-3 pb-6">
+        <section className="mt-5 flex flex-col-reverse gap-3 pb-6 lg:flex-row">
           <article className="md:w-[100%] lg:w-[30%] xl:w-[20%]">
             {showJobDetails && <EmployeeJobDetails data={data.data} />}
           </article>

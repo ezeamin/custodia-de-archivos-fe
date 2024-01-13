@@ -17,10 +17,10 @@ const LoadingPage = (): JSX.Element => {
   }, []);
 
   return (
-    <div className="loading-page w-full flex flex-col justify-center items-center">
+    <div className="loading-page flex w-full flex-col items-center justify-center">
       <Spinner useTheme />
       <p
-        className="text-center text-dark"
+        className="text-dark text-center"
         style={{
           transition: 'all 1s',
           marginTop: '-5rem',

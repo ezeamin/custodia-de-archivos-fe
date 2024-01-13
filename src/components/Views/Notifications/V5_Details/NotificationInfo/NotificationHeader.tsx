@@ -8,12 +8,12 @@ const NotificationHeader = (props: NotificationInfoContentProps) => {
   const { data } = props;
 
   return (
-    <section className="mt-5 card content-card animate-in-bottom">
-      <article className="flex flex-col md:flex-row justify-between items-center gap-3">
-        <div className="flex self-start md:self-auto md:flex-col lg:flex-row gap-3">
+    <section className="content-card animate-in-bottom card mt-5">
+      <article className="flex flex-col items-center justify-between gap-3 md:flex-row">
+        <div className="flex gap-3 self-start md:flex-col md:self-auto lg:flex-row">
           <img
             alt={data.issuer.lastname}
-            className="rounded-md w-14 h-14 sm:w-20 sm:h-20 lg:w-32 lg:h-32 object-cover"
+            className="h-14 w-14 rounded-md object-cover sm:h-20 sm:w-20 lg:h-32 lg:w-32"
             height={128}
             src={data.issuer.imgSrc}
             width={128}
@@ -33,14 +33,14 @@ const NotificationHeader = (props: NotificationInfoContentProps) => {
           iconComponent={<FaArrowDownLong size="1.75em" />}
           title="Envia a"
         />
-        <div className="flex flex-row self-end md:flex-col-reverse items-end lg:flex-row md:self-auto gap-3">
+        <div className="flex flex-row items-end gap-3 self-end md:flex-col-reverse md:self-auto lg:flex-row">
           <div className="text-end">
             <h3 className="text-lg font-bold">{`${data.receiver.lastname}, ${data.receiver.firstname}`}</h3>
             <p className="text-sm">{data.receiver.email}</p>
           </div>
           <img
             alt={data.receiver.lastname}
-            className="rounded-md w-14 h-14 sm:w-20 sm:h-20 lg:w-32 lg:h-32 object-cover"
+            className="h-14 w-14 rounded-md object-cover sm:h-20 sm:w-20 lg:h-32 lg:w-32"
             height={128}
             src={data.receiver.imgSrc}
             width={128}

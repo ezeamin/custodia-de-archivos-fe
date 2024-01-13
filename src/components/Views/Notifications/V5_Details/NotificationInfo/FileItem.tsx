@@ -20,7 +20,7 @@ const FileItem = (props: NotificationFileItemProps) => {
           iconComponent={<IoDocumentAttach size="1.5em" />}
           title="Archivo"
         />
-        <p className="max-w-[10ch] md:max-w-none truncate">{file.name}</p>
+        <p className="max-w-[10ch] truncate md:max-w-none">{file.name}</p>
       </div>
       <Button
         className="text-white"

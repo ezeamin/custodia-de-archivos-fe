@@ -102,7 +102,7 @@ const AddNewDocumentModal = () => {
           setValue={setValue}
         />
         <TextInput
-          className="w-full mt-3"
+          className="mt-3 w-full"
           control={control}
           disabled={isLoading}
           helperText={`No incluya la extensión del archivo, espacios ni caracteres

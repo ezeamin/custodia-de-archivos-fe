@@ -15,7 +15,7 @@ const ResultsTableRow = (props: EmployeesResultsTableRowProps) => {
       <td className="px-0">
         <img
           alt={`${employee.lastname}, ${employee.firstname}`}
-          className="object-cover rounded-md min-w-[50px]"
+          className="min-w-[50px] rounded-md object-cover"
           height={80}
           src={employee.imgSrc}
           width={80}
@@ -23,16 +23,16 @@ const ResultsTableRow = (props: EmployeesResultsTableRowProps) => {
       </td>
       <td>
         <p className="font-bold lg:font-normal">{`${employee.lastname}, ${employee.firstname}`}</p>
-        <p className="lg:hidden text-xs">Edad: {employee.age} años</p>
-        <p className="lg:hidden text-xs">
+        <p className="text-xs lg:hidden">Edad: {employee.age} años</p>
+        <p className="text-xs lg:hidden">
           Antiguedad: {employee.antiquity} años
         </p>
       </td>
-      <td className="text-center hidden lg:table-cell">{employee.age}</td>
-      <td className="text-center hidden lg:table-cell">{employee.antiquity}</td>
+      <td className="hidden text-center lg:table-cell">{employee.age}</td>
+      <td className="hidden text-center lg:table-cell">{employee.antiquity}</td>
       <td>
         <p>{employee.position}</p>
-        <p className="xl:hidden text-xs">{employee.area.description}</p>
+        <p className="text-xs xl:hidden">{employee.area.description}</p>
       </td>
       <td className="hidden xl:table-cell">{employee.area.description}</td>
       <td className="text-end">

@@ -67,7 +67,7 @@ const ResultsListItem = (props: LicensesTypesResultsListItemProps) => {
 
   return (
     <article
-      className="content-card animate-in-bottom indicator w-full h-full"
+      className="content-card animate-in-bottom indicator h-full w-full"
       style={{ animationDelay: `${index * 200}ms` }}
     >
       <div className="card-body flex flex-col justify-between p-0">
