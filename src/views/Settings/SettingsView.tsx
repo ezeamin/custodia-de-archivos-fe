@@ -12,7 +12,6 @@ const routes = {
       id: 1,
       path: paths.SETTINGS.CHANGE_PASSWORD,
       name: 'Cambiar contraseña de este perfil',
-      disabled: true,
     },
     {
       id: 2,
