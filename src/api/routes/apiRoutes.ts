@@ -47,7 +47,7 @@ export const apiRoutes = {
   USERS: {
     POST_USER: (): ApiRoute => ({
       method: 'POST',
-      url: `/employees/users`,
+      url: `/users`,
       useToken: true,
     }),
   },

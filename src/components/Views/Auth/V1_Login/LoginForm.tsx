@@ -85,7 +85,7 @@ const LoginForm = () => {
       <Button
         unbordered
         className="mt-3 w-full hover:bg-gray-800 dark:hover:bg-gray-400"
-        colorDark="dark:bg-gray-300"
+        colorDark="dark:bg-gray-200"
         colorLight="bg-gray-900"
         loading={isLoading}
         textColorDark="dark:text-gray-900"
