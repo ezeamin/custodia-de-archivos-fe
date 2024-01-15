@@ -18,7 +18,6 @@ import {
   getEmployeeTrainingsAdapter,
   getEmployeeTrainingTypesAdapter,
   getEmployeeVacationsAdapter,
-  postUserAdapter,
 } from '../adapters/employees';
 
 import { API_EmptyResponse } from '../interface';
@@ -37,7 +36,6 @@ import {
   API_GetTrainings,
   API_GetTrainingsTypes,
   API_GetVacations,
-  API_PostUser,
   Employee,
   EmployeeDoc,
   ExtraHours,
@@ -51,7 +49,6 @@ import {
   TrainingType,
   Vacation,
 } from '../interface/employees';
-import { User } from '@/interface';
 
 export const getEmployeesFn = async () => {
   const { search } = window.location;
@@ -172,18 +169,6 @@ export const deleteFileFn = async ({
   return data;
 };
 
-export const postUserFn = async (employeeId: string) => {
-  const request = apiRoutes.EMPLOYEES.POST_USER();
-
-  const data = await fetchFn<API_PostUser, User>({
-    request,
-    adapter: postUserAdapter,
-    body: { employeeId },
-  });
-
-  return data;
-};
-
 export const getEmployeeAbsencesFn = async (id: string) => {
   const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_ABSENCES({ id });
 
@@ -207,7 +192,7 @@ export const getEmployeeVacationsFn = async (id: string) => {
 };
 
 export const getEmployeeLicensesFn = async (id: string) => {
-  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_LICENCES({ id });
+  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_LICENSES({ id });
 
   const data = await fetchFn<API_GetLicenses[], License[]>({
     request,
@@ -218,7 +203,7 @@ export const getEmployeeLicensesFn = async (id: string) => {
 };
 
 export const getEmployeeLicensesTypesFn = async () => {
-  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_LICENCES_TYPES();
+  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_LICENSES_TYPES();
 
   const data = await fetchFn<API_GetLicensesTypes[], LicenseType[]>({
     request,

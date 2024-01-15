@@ -8,7 +8,8 @@ import { mockedEmployee } from './mocked';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { getEmployeeFn, postUserFn } from '@/api/api-calls/employees';
+import { getEmployeeFn } from '@/api/api-calls/employees';
+import { postUserFn } from '@/api/api-calls/users';
 
 import { useLoading, usePortrait } from '@/hooks';
 import { useModal } from '@/stores/useModal';

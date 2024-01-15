@@ -60,7 +60,7 @@ export const postRecoverPasswordFn = async (body: { username: string }) => {
   return data;
 };
 
-export const postResetPasswordFn = async (body: {
+export const putResetPasswordFn = async (body: {
   password: string;
   repeatPassword: string;
   token: string;
@@ -68,7 +68,7 @@ export const postResetPasswordFn = async (body: {
   const { token, ...bodyWithoutToken } = body;
 
   const request = {
-    ...apiRoutes.AUTH.POST_RESET_PASS(),
+    ...apiRoutes.AUTH.PUT_RESET_PASS(),
     headers: { Authorization: `Bearer ${token}` },
   };
 

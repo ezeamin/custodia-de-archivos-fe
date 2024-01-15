@@ -64,12 +64,6 @@ export interface API_GetHistory {
     description: string;
   };
 }
-
-export interface API_PostUser {
-  username: string;
-  password: string;
-}
-
 export interface API_GetAbsences {
   id: string;
   date: string;
@@ -144,7 +138,6 @@ export interface MinimalEmployee extends API_GetEmployees {}
 export interface Employee extends API_GetEmployee {}
 export interface EmployeeDoc extends API_GetEmployeeDocs {}
 export interface History extends API_GetHistory {}
-export interface User extends API_PostUser {}
 export interface Absence extends API_GetAbsences {}
 export interface Vacation extends API_GetVacations {}
 export interface License extends API_GetLicenses {}

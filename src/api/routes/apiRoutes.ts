@@ -39,9 +39,16 @@ export const apiRoutes = {
       method: 'POST',
       url: '/auth/recover-password',
     }),
-    POST_RESET_PASS: (): ApiRoute => ({
-      method: 'POST',
+    PUT_RESET_PASS: (): ApiRoute => ({
+      method: 'PUT',
       url: '/auth/reset-password',
+    }),
+  },
+  USERS: {
+    POST_USER: (): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/users`,
+      useToken: true,
     }),
   },
   EMPLOYEES: {
@@ -97,11 +104,6 @@ export const apiRoutes = {
       url: `/employees/${id}/history`,
       useToken: true,
     }),
-    POST_USER: (): ApiRoute => ({
-      method: 'POST',
-      url: `/employees/users`,
-      useToken: true,
-    }),
     GET_EMPLOYEE_ABSENCES: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/absences`,
@@ -112,24 +114,24 @@ export const apiRoutes = {
       url: `/employees/absences`,
       useToken: true,
     }),
-    GET_EMPLOYEE_LICENCES: ({ id }: { id: string }): ApiRoute => ({
+    GET_EMPLOYEE_LICENSES: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
-      url: `/employees/${id}/licences`,
+      url: `/employees/${id}/licenses`,
       useToken: true,
     }),
-    GET_EMPLOYEE_LICENCES_TYPES: (): ApiRoute => ({
+    GET_EMPLOYEE_LICENSES_TYPES: (): ApiRoute => ({
       method: 'GET',
-      url: `/employees/licences/types`,
+      url: `/employees/licenses/types`,
       useToken: true,
     }),
     GET_EMPLOYEE_LICENSE_TYPE: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
-      url: `/employees/licences/types/${id}`,
+      url: `/employees/licenses/types/${id}`,
       useToken: true,
     }),
     POST_EMPLOYEE_LICENSE: (): ApiRoute => ({
       method: 'POST',
-      url: `/employees/licences`,
+      url: `/employees/licenses`,
       useToken: true,
     }),
     DELETE_EMPLOYEE_LICENSE: ({
@@ -140,22 +142,22 @@ export const apiRoutes = {
       licenseId: string;
     }): ApiRoute => ({
       method: 'DELETE',
-      url: `/employees/${employeeId}/licences/${licenseId}`,
+      url: `/employees/${employeeId}/licenses/${licenseId}`,
       useToken: true,
     }),
     POST_EMPLOYEE_LICENSE_TYPE: (): ApiRoute => ({
       method: 'POST',
-      url: `/employees/licences/types`,
+      url: `/employees/licenses/types`,
       useToken: true,
     }),
     PUT_EMPLOYEE_LICENSE_TYPE: ({ id }: { id: string }): ApiRoute => ({
       method: 'PUT',
-      url: `/employees/licences/types/${id}`,
+      url: `/employees/licenses/types/${id}`,
       useToken: true,
     }),
     DELETE_EMPLOYEE_LICENSE_TYPE: ({ id }: { id: string }): ApiRoute => ({
       method: 'DELETE',
-      url: `/employees/licences/types/${id}`,
+      url: `/employees/licenses/types/${id}`,
       useToken: true,
     }),
     GET_EMPLOYEE_VACATIONS: ({ id }: { id: string }): ApiRoute => ({
@@ -267,11 +269,6 @@ export const apiRoutes = {
       useToken: true,
     }),
     GET_NOTIFICATION_RECEIVERS: (): ApiRoute => ({
-      method: 'GET',
-      url: '/notifications/receivers',
-      useToken: true,
-    }),
-    GET_NOTIFICATION_ROLES: (): ApiRoute => ({
       method: 'GET',
       url: '/notifications/receivers',
       useToken: true,

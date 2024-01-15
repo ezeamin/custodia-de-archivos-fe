@@ -5,7 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { postResetPasswordFn } from '@/api/api-calls/auth';
+import { putResetPasswordFn } from '@/api/api-calls/auth';
 
 import { useZodForm } from '@/hooks';
 
@@ -34,7 +34,7 @@ const ResetPassForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { mutate: postResetPassword, isSuccess } = useMutation({
-    mutationFn: postResetPasswordFn,
+    mutationFn: putResetPasswordFn,
     onError: () => {
       setIsLoading(false);
     },

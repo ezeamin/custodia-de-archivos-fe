@@ -7,7 +7,7 @@ export const postResetPasswordFn = async (body: {
   password: string;
   repeatPassword: string;
 }) => {
-  const request = apiRoutes.AUTH.POST_RESET_PASS();
+  const request = apiRoutes.AUTH.PUT_RESET_PASS();
 
   const data = await fetchFn<API_EmptyResponse>({
     request,

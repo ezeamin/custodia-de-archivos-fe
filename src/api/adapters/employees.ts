@@ -13,7 +13,6 @@ import {
   API_GetTrainings,
   API_GetTrainingsTypes,
   API_GetVacations,
-  API_PostUser,
   Employee,
   EmployeeDoc,
   ExtraHours,
@@ -25,7 +24,6 @@ import {
   MinimalEmployee,
   Training,
   TrainingType,
-  User,
   Vacation,
 } from '@/api/interface/employees';
 
@@ -96,11 +94,6 @@ export const getEmployeeHistoryAdapter = (
     },
   }));
 };
-
-export const postUserAdapter = (data: API_PostUser): User => ({
-  username: data.username,
-  password: data.password,
-});
 
 export const getEmployeeAbsencesAdapter = (
   data: API_GetAbsences[]
