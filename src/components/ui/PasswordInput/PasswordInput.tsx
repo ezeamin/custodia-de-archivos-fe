@@ -17,6 +17,7 @@ const PasswordInput = <T extends FormSchemas>(
     className = '',
     control,
     helperText = '',
+    hideLabel = false,
     name,
     label,
     ...rest
@@ -30,9 +31,11 @@ const PasswordInput = <T extends FormSchemas>(
 
   return (
     <fieldset className={cn('form-control w-72', className)}>
-      <label className="text-lg" htmlFor={name as string}>
-        {label}
-      </label>
+      {!hideLabel && (
+        <label className="text-lg" htmlFor={name as string}>
+          {label}
+        </label>
+      )}
       <InputController
         control={control}
         defaultValue=""
@@ -78,7 +81,7 @@ const PasswordInput = <T extends FormSchemas>(
           </div>
         )}
       />
-      {helperText && (
+      {!!helperText && (
         <p className="mt-1 text-sm text-gray-400 dark:text-gray-400">
           {helperText}
         </p>

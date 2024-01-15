@@ -14,6 +14,7 @@ const ComboBoxInput = <T extends FormSchemas>(
     className = '',
     control,
     helperText = '',
+    hideLabel = false,
     inputClassName = '',
     name,
     label,
@@ -24,9 +25,11 @@ const ComboBoxInput = <T extends FormSchemas>(
 
   return (
     <fieldset className={cn('form-control w-72', className)}>
-      <label className="text-lg" htmlFor={name as string}>
-        {label}
-      </label>
+      {!hideLabel && (
+        <label className="text-lg" htmlFor={name as string}>
+          {label}
+        </label>
+      )}
       <InputController
         control={control}
         defaultValue=""
@@ -46,7 +49,7 @@ const ComboBoxInput = <T extends FormSchemas>(
           />
         )}
       />
-      {helperText && (
+      {!!helperText && (
         <p className="mt-1 text-sm text-gray-400 dark:text-gray-400">
           {helperText}
         </p>

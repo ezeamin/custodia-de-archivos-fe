@@ -9,6 +9,7 @@ export interface ComboBoxInputProps<T extends FormSchemas>
   label: string;
   className?: string;
   helperText?: string;
+  hideLabel?: boolean;
   inputClassName?: string;
   options: BasicList[];
   placeholder?: string;

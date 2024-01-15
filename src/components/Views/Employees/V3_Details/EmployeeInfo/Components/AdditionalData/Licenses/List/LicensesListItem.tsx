@@ -88,7 +88,7 @@ const LicensesListItem = (props: LicensesElementProps) => {
   // -------------------------------------------------
 
   return (
-    <article className="content-card card flex h-full flex-col justify-between">
+    <article className="content-card flex h-full flex-col justify-between">
       <ul>
         <li>
           Tipo: <b>{data.type.description}</b>

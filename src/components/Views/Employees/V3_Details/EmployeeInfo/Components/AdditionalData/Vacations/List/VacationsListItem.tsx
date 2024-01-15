@@ -92,7 +92,7 @@ const VacationsListItem = (props: VacationsElementProps) => {
   // -------------------------------------------------
 
   return (
-    <article className="content-card card flex h-full flex-col justify-between">
+    <article className="content-card flex h-full flex-col justify-between">
       <ul>
         <li>
           Fecha de inicio: <b>{startDate.format('DD/MM/YYYY')}</b>

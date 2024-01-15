@@ -11,7 +11,7 @@ const RoutingCard = (props: RoutingCardProps) => {
   if (route.disabled) {
     return (
       <div
-        className="animate-in-bottom content-card card h-full cursor-not-allowed !flex-row items-center justify-between gap-2 !bg-gray-200 dark:!bg-gray-600"
+        className="animate-in-bottom content-card h-full cursor-not-allowed !flex-row items-center justify-between gap-2 !bg-gray-200 dark:!bg-gray-600"
         style={{ animationDelay: `${index * 100 + 100}ms` }}
       >
         <div className="flex max-w-[60%] flex-row items-center gap-3">
@@ -31,7 +31,7 @@ const RoutingCard = (props: RoutingCardProps) => {
 
   return (
     <Link
-      className="animate-in-bottom content-card card h-full !flex-row items-center gap-3 transition-colors hover:bg-gray-100 hover:dark:bg-gray-900"
+      className="animate-in-bottom content-card h-full !flex-row items-center gap-3 transition-colors hover:bg-gray-100 hover:dark:bg-gray-900"
       style={{ animationDelay: `${index * 100 + 100}ms` }}
       to={route.path}
     >

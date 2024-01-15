@@ -7,5 +7,6 @@ export interface InputProps<T extends FormSchemas>
     Omit<React.InputHTMLAttributes<HTMLInputElement>, 'required' | 'name'> {
   label: string;
   helperText?: string;
+  hideLabel?: boolean;
   className?: string;
 }

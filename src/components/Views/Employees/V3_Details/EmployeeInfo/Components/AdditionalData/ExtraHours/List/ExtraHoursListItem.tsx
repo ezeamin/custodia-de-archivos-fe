@@ -20,7 +20,7 @@ const ExtraHoursListItem = (props: ExtraHoursElementProps) => {
   };
 
   return (
-    <article className="content-card card flex h-full flex-col justify-between">
+    <article className="content-card flex h-full flex-col justify-between">
       <ul>
         <li>
           Fecha: <b>{formattedDate}</b>

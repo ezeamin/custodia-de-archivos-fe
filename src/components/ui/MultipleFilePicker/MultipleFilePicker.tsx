@@ -12,7 +12,7 @@ import { MultipleFilePickerProps } from './MultipleFilePicker.types';
 
 const hasFiles = ({
   dataTransfer: { types = [] },
-}: React.DragEvent<HTMLDivElement>) => types.indexOf('Files') > -1;
+}: React.DragEvent<HTMLDivElement>) => types.includes('Files');
 
 const MultipleFilePicker = (props: MultipleFilePickerProps) => {
   const {

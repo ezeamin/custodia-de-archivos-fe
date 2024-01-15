@@ -47,7 +47,7 @@ const MultipleComboBoxInput = <T extends FormSchemas>(
           />
         )}
       />
-      {helperText && (
+      {!!helperText && (
         <p className="mt-1 text-sm text-gray-400 dark:text-gray-400">
           {helperText}
         </p>

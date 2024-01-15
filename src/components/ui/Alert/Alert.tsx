@@ -25,7 +25,7 @@ import type { AlertPropsType } from './Alert.types';
  * @param closable - Render the close icon
  * @param hideIcon - Hide the SVG icon
  * @param title - Alert's title
- * @param type - Alert typeto switch the color and icon
+ * @param type - Alert type to switch the color and icon
  * @returns JSX.Element A custom combo box element.
  */
 
@@ -66,13 +66,13 @@ const Alert = (props: AlertPropsType): JSX.Element => {
         ${!open ? 'hidden' : ''}
         rounded-xl px-2 
         py-3
-        md:pr-3
-        dark:text-white`,
+        dark:text-white
+        md:pr-3`,
         className
       )}
       gap={0}
     >
-      {!hideIcon ? (
+      {!hideIcon && (
         <Grid
           item
           className="flex md:mr-1"
@@ -80,39 +80,37 @@ const Alert = (props: AlertPropsType): JSX.Element => {
           sm={1}
           xs={2}
         >
-          {type === 'error' ? (
+          {type === 'error' && (
             <Icon
               iconComponent={<MdOutlineHighlightOff />}
               size="1.5em"
               title="Error"
             />
-          ) : null}
-          {type === 'info' ? (
+          )}
+          {type === 'info' && (
             <Icon iconComponent={<MdInfoOutline />} size="1.5em" title="Info" />
-          ) : null}
-          {type === 'success' ? (
+          )}
+          {type === 'success' && (
             <Icon
               iconComponent={<MdCheckCircleOutline />}
               size="1.5em"
               title="Success"
             />
-          ) : null}
-          {type === 'warning' ? (
+          )}
+          {type === 'warning' && (
             <Icon
               iconComponent={<MdOutlineErrorOutline />}
               size="1.5em"
               title="Warning"
             />
-          ) : null}
-          {type === 'loading' ? (
-            <span className="loading loading-spinner" />
-          ) : null}
+          )}
+          {type === 'loading' && <span className="loading loading-spinner" />}
         </Grid>
-      ) : null}
+      )}
       <Grid item xs={textWidth()}>
         {children}
       </Grid>
-      {closable ? (
+      {closable && (
         <Grid
           item
           alignItems="start"
@@ -128,7 +126,7 @@ const Alert = (props: AlertPropsType): JSX.Element => {
             onClick={handleClose}
           />
         </Grid>
-      ) : null}
+      )}
     </Grid>
   );
 };

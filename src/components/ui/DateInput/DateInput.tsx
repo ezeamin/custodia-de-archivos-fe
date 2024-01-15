@@ -15,6 +15,7 @@ const DateInput = <T extends FormSchemas>(
   const {
     control,
     helperText = '',
+    hideLabel = false,
     name,
     label,
     className = '',
@@ -23,9 +24,11 @@ const DateInput = <T extends FormSchemas>(
 
   return (
     <fieldset className={cn('form-control ', className)}>
-      <label className="text-lg" htmlFor={name as string}>
-        {label}
-      </label>
+      {!hideLabel && (
+        <label className="text-lg" htmlFor={name as string}>
+          {label}
+        </label>
+      )}
       <InputController
         control={control}
         defaultValue=""
@@ -47,7 +50,7 @@ const DateInput = <T extends FormSchemas>(
           />
         )}
       />
-      {helperText && (
+      {!!helperText && (
         <p className="mt-1 text-sm text-gray-400 dark:text-gray-400">
           {helperText}
         </p>

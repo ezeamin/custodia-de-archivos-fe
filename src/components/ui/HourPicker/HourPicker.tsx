@@ -40,7 +40,7 @@ const HourPicker = forwardRef(
         )}
         disabled={disabled}
         name={name}
-        placeholder={placeholder || 'Seleccione la Fecha'}
+        placeholder={placeholder || 'Seleccione la Hora'}
         ref={inputRef}
         type="time"
         onChange={onChange}
