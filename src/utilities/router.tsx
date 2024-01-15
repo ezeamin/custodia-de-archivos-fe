@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import Error404 from '@/components/Error/Error404';
 import ErrorPage from '@/components/Error/ErrorPage';
 import AuthLayout from '@/views/Layout/AuthLayout';
 import Layout from '@/views/Layout/Layout';
@@ -32,6 +33,15 @@ const authRoutes = flattedRoutes
     ),
     path: route.path,
   }));
+
+internRoutes.push({
+  element: <Error404 />,
+  path: '*',
+});
+authRoutes.push({
+  element: <Error404 />,
+  path: '*',
+});
 
 export const router = createBrowserRouter([
   {
