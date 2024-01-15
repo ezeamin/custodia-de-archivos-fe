@@ -119,6 +119,12 @@ const CreateForm = () => {
         ? data.startDate
         : data.startDate.toISOString()
     );
+    fd.append(
+      'birthdate',
+      typeof data.birthdate === 'string'
+        ? data.birthdate
+        : data.birthdate.toISOString()
+    );
     fd.append('position', data.position);
     fd.append('areaId', data.area.id);
     fd.append('imgFile', data.imgFile);
@@ -183,19 +189,19 @@ const CreateForm = () => {
             className="w-full"
             control={control}
             disabled={isLoading}
-            label="Email"
-            name="email"
-            placeholder="juanperez@gmail.com"
+            label="DNI"
+            name="dni"
+            placeholder="15235647"
           />
         </Grid>
-        <Grid item lg={4} sm={6} xs={12}>
+        <Grid item lg={8} sm={6} xs={12}>
           <TextInput<CreateSchema>
             className="w-full"
             control={control}
             disabled={isLoading}
-            label="DNI"
-            name="dni"
-            placeholder="15235647"
+            label="Email"
+            name="email"
+            placeholder="juanperez@gmail.com"
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
@@ -225,12 +231,22 @@ const CreateForm = () => {
             className="w-full"
             control={control}
             disabled={isLoading}
+            label="Fecha de nacimiento"
+            name="birthdate"
+            placeholder="01/01/2024"
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xs={12}>
+          <DateInput<CreateSchema>
+            className="w-full"
+            control={control}
+            disabled={isLoading}
             label="Fecha de alta"
             name="startDate"
             placeholder="01/01/2024"
           />
         </Grid>
-        <Grid item lg={4} sm={6} xs={12}>
+        <Grid item lg={8} sm={6} xs={12}>
           <TextInput<CreateSchema>
             className="w-full"
             control={control}

@@ -14,6 +14,7 @@ import { postUserFn } from '@/api/api-calls/users';
 import { useLoading, usePortrait } from '@/hooks';
 import { useModal } from '@/stores/useModal';
 
+import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Button } from '@/components/ui';
 
 import { uuidRegex } from '@/constants/regex/regex';
@@ -91,18 +92,7 @@ const Results = () => {
   // -------------------------------------------------
 
   if (isError) {
-    return (
-      <Alert className="animate-in-right a-delay-500 mt-3" type="error">
-        <p>
-          Ocurrió un error leyendo la información. Por favor, intente nuevamente
-          en unos instantes o reintente utilizando el botón debajo de este
-          mensaje.
-        </p>
-        <button className="btn mt-2" type="button" onClick={handleRetry}>
-          Reintentar
-        </button>
-      </Alert>
-    );
+    return <ErrorMessage refetch={handleRetry} />;
   }
 
   const showJobDetails =
