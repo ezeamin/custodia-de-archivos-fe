@@ -18,8 +18,14 @@ export const useSession = create<SessionStore>((set) => ({
   accessToken: null,
   logout: () => set({ user: null, isLoggedIn: false, accessToken: null }),
   login: (accessToken) => {
-    const data = decodePayload(accessToken);
+    try {
+      const data = decodePayload(accessToken);
 
-    set({ accessToken, isLoggedIn: true, user: data.user });
+      set({ accessToken, isLoggedIn: true, user: data.user });
+    } catch (e) {
+      console.error(e);
+      // eslint-disable-next-line no-alert -- toast API is not available
+      alert('Hubo un error al iniciar sesión, por favor intente de nuevo.');
+    }
   },
 }));

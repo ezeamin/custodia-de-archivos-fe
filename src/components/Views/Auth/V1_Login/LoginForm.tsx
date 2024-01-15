@@ -40,7 +40,7 @@ const LoginForm = () => {
     },
     onSuccess: (data) => {
       setIsLoading(false);
-      toast.success('Bienvenido!');
+      toast.success('Inicio de sesión exitoso');
 
       // Store in session
       if (data.data) login(data.data.token);

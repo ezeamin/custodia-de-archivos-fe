@@ -336,6 +336,24 @@ export const fileNameRules = <T extends boolean = false>(required: T) => {
   return optionalWrapper(required, rule);
 };
 
+export const passwordRules = <T extends boolean = false>(required: T) => {
+  const rule = z
+    .string()
+    .min(6, {
+      message: 'La contraseña debe tener al menos 6 caracteres',
+    })
+    .max(25, {
+      message: 'La contraseña debe tener como máximo 25 caracteres',
+    })
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
+      message:
+        'La contraseña debe tener al menos una mayúscula, una minúscula y un número',
+    })
+    .default('');
+
+  return optionalWrapper(required, rule);
+};
+
 // ----------------------------------------------------
 // COMMON REFINES
 // ----------------------------------------------------

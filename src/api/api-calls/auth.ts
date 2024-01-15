@@ -59,3 +59,24 @@ export const postRecoverPasswordFn = async (body: { username: string }) => {
 
   return data;
 };
+
+export const postResetPasswordFn = async (body: {
+  password: string;
+  repeatPassword: string;
+  token: string;
+}) => {
+  const { token, ...bodyWithoutToken } = body;
+
+  const request = {
+    ...apiRoutes.AUTH.POST_RESET_PASS(),
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body: bodyWithoutToken,
+  });
+
+  return data;
+};

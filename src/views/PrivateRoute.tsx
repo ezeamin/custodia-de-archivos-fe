@@ -25,7 +25,7 @@ const PrivateRoute = (props: PrivateRouteProps) => {
   if (privateRoute && !isLoggedIn) {
     const redirectUrl = location.pathname + location.search;
     const loginUrl =
-      location.pathname !== '/' // Avoid /auth?redirectTo=/
+      location.pathname !== '/' && !location.pathname.includes('auth') // Avoid /auth?redirectTo=/ & /auth?redirectTo=/auth
         ? `${paths.AUTH.LOGIN}?redirectTo=${redirectUrl}`
         : paths.AUTH.LOGIN;
 

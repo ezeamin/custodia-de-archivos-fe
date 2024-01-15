@@ -9,10 +9,12 @@ import { useSession } from '@/stores/useSession';
 
 import LoadingPage from '@/components/Loading/LoadingPage';
 
+import { JWTRegex } from '@/constants/regex/regex';
 import { router } from '@/utilities/router';
 
 // Useful for reset password view
 const tokenInUrl = new URLSearchParams(window.location.search).get('token');
+const isTokenInUrlValid = tokenInUrl ? JWTRegex.test(tokenInUrl) : false;
 
 const TryToLoginView = () => {
   const { isLoggedIn, login } = useSession();
@@ -21,13 +23,13 @@ const TryToLoginView = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['login', !isLoggedIn && !tokenInUrl],
     queryFn: getRefreshTokenFn,
-    enabled: !isLoggedIn && !tokenInUrl,
+    enabled: !isLoggedIn && !tokenInUrl && !isTokenInUrlValid,
     retry: false,
     refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
-    if (tokenInUrl && !isLoggedIn) {
+    if (tokenInUrl && isTokenInUrlValid && !isLoggedIn) {
       login(tokenInUrl);
       setShouldShowRouter(true);
     }
@@ -35,7 +37,7 @@ const TryToLoginView = () => {
       login(data.data.token);
       setShouldShowRouter(true);
     }
-    if (error) {
+    if (error || !isTokenInUrlValid) {
       setShouldShowRouter(true);
     }
   }, [data, login, isLoggedIn, error]);

@@ -7,7 +7,7 @@ import ThemeTogglerButton from '@/components/Menu/ThemeTogglerButton';
 const AuthLayout = () => {
   return (
     <section className="flex md:flex-row">
-      <main className="lg:px-30 flex h-[90vh] w-full flex-col justify-center px-10 md:px-12 xl:px-40">
+      <main className="lg:px-30 flex h-[90vh] w-full flex-col justify-center px-10 md:px-12 xl:px-48">
         <section>
           <article className="mb-10 flex flex-col items-center text-center md:mb-20">
             <img
