@@ -1,65 +1,31 @@
-// TODO: Recreate this page
+import { AiOutlineReload } from 'react-icons/ai';
+
+import { Icon } from '../ui';
 
 const ErrorPage = (): JSX.Element => {
   return (
-    <div>Error!</div>
-    // <div>
-    //   <Stack
-    //     justifyContent="center"
-    //     alignItems="center"
-    //     sx={{ minHeight: '100vh' }}
-    //   >
-    //     <img
-    //       src="/img/logos/logo-144.png"
-    //       alt="Logo Poder Judicial de Tucumán"
-    //       width="100px"
-    //       height="100px"
-    //     />
-    //     <Typography
-    //       variant="h4"
-    //       component="h1"
-    //       textAlign="center"
-    //       sx={{ mt: 1 }}
-    //     >
-    //       Ha ocurrido un error
-    //     </Typography>
-    //     <hr
-    //       style={{
-    //         width: '100%',
-    //         marginTop: '0.5rem',
-    //         marginBottom: '0.75rem',
-    //       }}
-    //     />
-    //     <Typography variant="h5" component="h2" textAlign="center">
-    //       Lamentamos lo ocurrido. Este error fue registrado en nuestros sistemas
-    //       y será evaluado lo antes posible.
-    //     </Typography>
-    //     <Typography
-    //       variant="h6"
-    //       component="h2"
-    //       textAlign="center"
-    //       fontWeight="400"
-    //       sx={{ mt: 2 }}
-    //     >
-    //       <span>
-    //         Por favor, recargue la página con el boton superior izquierdo{' '}
-    //         <ReplayRounded sx={{ ml: 0.5, mb: -0.5 }} />.
-    //       </span>
-    //     </Typography>
-    //   </Stack>
-    //   <Box
-    //     sx={{
-    //       position: 'absolute',
-    //       bottom: 10,
-    //       left: '50%',
-    //       transform: 'translateX(-50%)',
-    //       textAlign: 'center',
-    //       whiteSpace: 'nowrap',
-    //     }}
-    //   >
-    //     Dirección de Sistemas - PJT
-    //   </Box>
-    // </div>
+    <div>
+      <div className="flex min-h-[95vh] flex-col items-center justify-center px-4">
+        <img
+          alt="Logo Custodia de Archivos"
+          className="mb-4 rounded-md object-contain"
+          height="100px"
+          src="/img/logo.png"
+          width="100px"
+        />
+        <h1 className="text-3xl font-bold">Ha ocurrido un error</h1>
+        <div className="divider mx-auto w-3/4" />
+        <p className="text-center">
+          Lamentamos lo ocurrido. Este no es un error esperado, y agradeceríamos
+          nos informe del mismo.
+        </p>
+        <p className="mt-3 flex flex-col items-center gap-2 text-center md:flex-row">
+          Para continuar, por favor recargue la página con el boton superior
+          izquierdo:
+          <Icon iconComponent={<AiOutlineReload />} title="Recargar" />{' '}
+        </p>
+      </div>
+    </div>
   );
 };
 

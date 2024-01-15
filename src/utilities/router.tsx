@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import ErrorPage from '@/components/Error/ErrorPage';
 import AuthLayout from '@/views/Layout/AuthLayout';
 import Layout from '@/views/Layout/Layout';
 import PrivateRoute from '@/views/PrivateRoute';
@@ -37,10 +38,12 @@ export const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     children: internRoutes,
+    errorElement: <ErrorPage />,
   },
   {
     path: '/auth',
     element: <AuthLayout />,
     children: authRoutes,
+    errorElement: <ErrorPage />,
   },
 ]);
