@@ -9,6 +9,7 @@ export interface DatePickerProps {
   onChange: (selectedDate: Date | string) => void;
   options?: OptionsDatePickerProps;
   placeholder?: string;
+  value: Date | string;
 }
 
 export type OptionsDatePickerProps = Options & {

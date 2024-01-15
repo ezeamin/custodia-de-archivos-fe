@@ -8,6 +8,7 @@ import { AddNewTrainingSchema } from './addNewTrainingSchema';
 import { AddNewVacationSchema } from './addNewVacationSchema';
 import { ChangeDocNameSchema } from './changeDocNameSchema';
 import { CreateSchema } from './createSchema';
+import { EditPersonalInfoSchema } from './editPersonalInfoSchema';
 import { SearchSchema } from './searchSchema';
 
 // Join other Employees schemas with "|"
@@ -22,4 +23,5 @@ export type EmployeesSchemas =
   | AddNewExtraHoursSchema
   | AddNewVacationSchema
   | AddNewFormalWarningSchema
-  | AddNewTrainingSchema;
+  | AddNewTrainingSchema
+  | EditPersonalInfoSchema;

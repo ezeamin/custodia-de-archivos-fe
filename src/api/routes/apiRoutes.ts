@@ -72,6 +72,11 @@ export const apiRoutes = {
       url: '/employees',
       useToken: true,
     }),
+    EDIT_EMPLOYEE: ({ id }: { id: string }): ApiRoute => ({
+      method: 'PUT',
+      url: `/employees/${id}`,
+      useToken: true,
+    }),
     POST_FILE: ({ employeeId }: { employeeId: string }): ApiRoute => ({
       method: 'POST',
       url: `/employees/${employeeId}/docs`,

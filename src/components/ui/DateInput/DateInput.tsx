@@ -35,7 +35,7 @@ const DateInput = <T extends FormSchemas>(
         // ^ This doesn't work here because DateTimePicker works differently than other inputs
         name={name}
         render={({
-          field: { onChange, name: inputName },
+          field: { onChange, name: inputName, value },
           fieldState: { error },
         }) => (
           <DatePicker
@@ -43,6 +43,9 @@ const DateInput = <T extends FormSchemas>(
             disabled={rest.disabled}
             error={Boolean(error)}
             name={inputName}
+            // TODO: Check this! Throws error when building project
+            // @ts-expect-error - value type is broken
+            value={value}
             // TODO: Check this! Throws error when building project
             // @ts-expect-error - onChange takes the value in the DateTimePicker component, but not here. Works this way
             onChange={onChange}

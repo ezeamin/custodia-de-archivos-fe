@@ -433,3 +433,17 @@ export const postEmployeeTrainingFn = async (body: Record<string, unknown>) => {
 
   return data;
 };
+
+export const editEmployeeFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.EMPLOYEES.EDIT_EMPLOYEE({ id: body.id as string });
+
+  const dataToSend = cleanUpDataToSend(body);
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    body: dataToSend,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};

@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
+import { Instance } from 'flatpickr/dist/types/instance';
 
 import { cn } from '@/utilities';
 
@@ -18,6 +19,8 @@ const optionsDefaultValues: OptionsDatePickerProps = {
   mode: 'single',
   noCalendar: false,
 };
+
+let fp: Instance | null = null;
 
 /**
  * Component for selecting dates and time s with customizable options.
@@ -57,13 +60,14 @@ const DatePicker = (props: DatePickerProps): JSX.Element => {
     disabled = false,
     options,
     placeholder,
+    value,
   } = props;
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (inputRef.current) {
-      const fp = flatpickr(inputRef.current, {
+      fp = flatpickr(inputRef.current, {
         ...optionsDefaultValues,
         ...options,
         onChange: (selectedDates) => {
@@ -77,12 +81,18 @@ const DatePicker = (props: DatePickerProps): JSX.Element => {
       });
 
       return () => {
-        fp.destroy();
+        if (fp) fp.destroy();
       };
     }
 
     return () => {};
   }, [onChange, options]);
+
+  useEffect(() => {
+    if (inputRef.current && value !== inputRef.current.value) {
+      fp?.setDate(value);
+    }
+  }, [value]);
 
   return (
     <input

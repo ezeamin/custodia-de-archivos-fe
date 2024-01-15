@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  areaOptions as mockedAreaOptions,
-  genderOptions as mockedGenderOptions,
-} from './mocked';
+import { areaOptions, genderOptions } from './mocked';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -221,7 +218,7 @@ const CreateForm = () => {
             disabled={isLoading}
             label="Género"
             name="gender"
-            options={mockedGenderOptions.data}
+            options={genderOptions.data}
             // options={genderOptions?.data}
             placeholder="Seleccione un género"
           />
@@ -263,7 +260,7 @@ const CreateForm = () => {
             disabled={isLoading}
             label="Área"
             name="area"
-            options={mockedAreaOptions.data}
+            options={areaOptions.data}
             // options={areaOptions?.data}
             placeholder="Seleccione un area"
           />
