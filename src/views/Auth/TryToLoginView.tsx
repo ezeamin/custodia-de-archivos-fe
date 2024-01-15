@@ -9,35 +9,26 @@ import { useSession } from '@/stores/useSession';
 
 import LoadingPage from '@/components/Loading/LoadingPage';
 
-import { JWTRegex } from '@/constants/regex/regex';
 import { router } from '@/utilities/router';
-
-// Useful for reset password view
-const tokenInUrl = new URLSearchParams(window.location.search).get('token');
-const isTokenInUrlValid = tokenInUrl ? JWTRegex.test(tokenInUrl) : false;
 
 const TryToLoginView = () => {
   const { isLoggedIn, login } = useSession();
   const [shouldShowRouter, setShouldShowRouter] = useState(false);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['login', !isLoggedIn && !tokenInUrl],
+    queryKey: ['login', !isLoggedIn],
     queryFn: getRefreshTokenFn,
-    enabled: !isLoggedIn && !tokenInUrl && !isTokenInUrlValid,
+    enabled: !isLoggedIn,
     retry: false,
     refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
-    if (tokenInUrl && isTokenInUrlValid && !isLoggedIn) {
-      login(tokenInUrl);
-      setShouldShowRouter(true);
-    }
     if (data?.data?.token && !isLoggedIn) {
       login(data.data.token);
       setShouldShowRouter(true);
     }
-    if (error || !isTokenInUrlValid) {
+    if (error) {
       setShouldShowRouter(true);
     }
   }, [data, login, isLoggedIn, error]);

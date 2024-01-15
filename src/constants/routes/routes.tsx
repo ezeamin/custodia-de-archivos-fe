@@ -63,7 +63,7 @@ export const routes: Route[] = [
         description: 'Cambiar contraseña',
         path: paths.AUTH.RESET_PASS,
         subpaths: [],
-        privateRoute: true,
+        privateRoute: false,
         element: <ResetPasswordView />,
         allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
       },
