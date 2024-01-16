@@ -31,7 +31,7 @@ const EmployeeTabs = () => {
 
   return (
     <>
-      <article className="animate-in-bottom a-delay-500 tabs-boxed tabs flex flex-col items-center justify-center rounded-xl bg-white p-2 shadow dark:border dark:border-gray-600 dark:bg-slate-800 sm:flex-row md:flex-col lg:flex-row xl:grid xl:justify-normal">
+      <article className="animate-in-bottom a-delay-500 tabs-boxed tabs flex flex-col items-center justify-center gap-1 rounded-xl bg-white p-2 shadow dark:border dark:border-gray-600 dark:bg-slate-800 sm:flex-row md:flex-col lg:flex-row xl:grid xl:justify-normal">
         <div className="flex w-full flex-col xl:hidden">
           <Link
             className={`tab w-full xl:w-auto ${
@@ -73,7 +73,7 @@ const EmployeeTabs = () => {
           </Link>
         </div>
         <Link
-          className={`tab hidden xl:block ${
+          className={`tab hidden items-center transition-colors hover:bg-gray-200 dark:hover:bg-gray-700 xl:flex ${
             currentTab === 'personal' ? 'tab-active' : ''
           }`}
           role="tab"
@@ -82,7 +82,7 @@ const EmployeeTabs = () => {
           Información personal
         </Link>
         <Link
-          className={`tab hidden xl:block ${
+          className={`tab hidden items-center transition-colors hover:bg-gray-200 dark:hover:bg-gray-700 xl:flex ${
             currentTab === 'documents' ? 'tab-active' : ''
           }`}
           role="tab"
@@ -91,7 +91,7 @@ const EmployeeTabs = () => {
           Documentos
         </Link>
         <Link
-          className={`tab hidden xl:block ${
+          className={`tab hidden items-center transition-colors hover:bg-gray-200 dark:hover:bg-gray-700 xl:flex ${
             currentTab === 'history' ? 'tab-active' : ''
           }`}
           role="tab"
@@ -100,7 +100,7 @@ const EmployeeTabs = () => {
           Historial de cambios
         </Link>
         <Link
-          className={`tab hidden xl:block ${
+          className={`tab hidden items-center transition-colors hover:bg-gray-200 dark:hover:bg-gray-700 xl:flex ${
             currentTab === 'additional-data' ? 'tab-active' : ''
           }`}
           role="tab"
