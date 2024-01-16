@@ -12,7 +12,7 @@ const NotificationsSentListView = () => {
     <>
       <Title title="Notificaciones Enviadas" />
       <Link
-        className="btn w-full dark:border-gray-500 hover:dark:border-gray-400 sm:w-auto"
+        className="btn w-full sm:w-auto dark:border-gray-500 hover:dark:border-gray-400"
         to={paths.NOTIFICATIONS.MAIN}
       >
         <Icon iconComponent={<IoArrowBackOutline />} title="Volver" />

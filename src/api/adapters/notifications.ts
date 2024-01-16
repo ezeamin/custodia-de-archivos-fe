@@ -64,6 +64,17 @@ export const getNotificationsTypesAdapter = (
   }));
 };
 
+export const getNotificationTypeAdapter = (
+  data: API_GetNotificationsTypes
+): NotificationType => ({
+  id: data.id,
+  title: data.title,
+  description: data.description,
+  startHour: data.startHour,
+  endHour: data.endHour,
+  allowedRoles: data.allowedRoles,
+});
+
 export const getNotificationsReceiversAdapter = (
   data: API_GetNotificationsReceivers[]
 ): NotificationReceiver[] => {

@@ -67,7 +67,7 @@ const GlobalEmployeeResults = () => {
         break;
     }
 
-    return <section className="mt-5 overflow-hidden">{renderedComp}</section>;
+    return <section className="mt-5">{renderedComp}</section>;
   }
 
   return null;

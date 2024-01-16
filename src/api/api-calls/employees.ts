@@ -1,4 +1,5 @@
 import { fetchFn } from '../fetchFn';
+import { apiExternalRoutes } from '../routes/apiExternalRoutes';
 
 import { apiRoutes } from '@/api/routes/apiRoutes';
 
@@ -10,14 +11,18 @@ import {
   getEmployeeDocsAdapter,
   getEmployeeExtraHoursAdapter,
   getEmployeeFormalWarningsAdapter,
+  getEmployeeHistoryAdapter,
   getEmployeeLateArrivalsAdapter,
   getEmployeeLicensesAdapter,
   getEmployeeLicensesTypesAdapter,
   getEmployeeLicenseTypeAdapter,
   getEmployeesAdapter,
   getEmployeeTrainingsAdapter,
+  getEmployeeTrainingTypeAdapter,
   getEmployeeTrainingTypesAdapter,
   getEmployeeVacationsAdapter,
+  getLocalitiesAdapter,
+  getStatesAdapter,
 } from '../adapters/employees';
 
 import { API_EmptyResponse } from '../interface';
@@ -33,6 +38,8 @@ import {
   API_GetLateArrivals,
   API_GetLicenses,
   API_GetLicensesTypes,
+  API_GetLocalities,
+  API_GetStates,
   API_GetTrainings,
   API_GetTrainingsTypes,
   API_GetVacations,
@@ -44,7 +51,9 @@ import {
   LateArrival,
   License,
   LicenseType,
+  Locality,
   MinimalEmployee,
+  State,
   Training,
   TrainingType,
   Vacation,
@@ -90,7 +99,7 @@ export const getEmployeeHistoryFn = async (id: string) => {
 
   const data = await fetchFn<API_GetHistory[], History[]>({
     request,
-    adapter: getEmployeeHistoryFn,
+    adapter: getEmployeeHistoryAdapter,
   });
 
   return data;
@@ -262,7 +271,7 @@ export const getEmployeeTrainingTypeFn = async (id: string) => {
 
   const data = await fetchFn<API_GetTrainingsTypes, TrainingType>({
     request,
-    adapter: getEmployeeTrainingTypesAdapter,
+    adapter: getEmployeeTrainingTypeAdapter,
   });
 
   return data;
@@ -443,6 +452,28 @@ export const editEmployeeFn = async (body: Record<string, unknown>) => {
     request,
     body: dataToSend,
     adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const getStatesFn = async () => {
+  const request = apiExternalRoutes.LOCATION.GET_STATES();
+
+  const data = await fetchFn<API_GetStates, State[]>({
+    request,
+    adapter: getStatesAdapter,
+  });
+
+  return data;
+};
+
+export const getLocalitiesFn = async (stateNumber: string) => {
+  const request = apiExternalRoutes.LOCATION.GET_LOCALITIES({ stateNumber });
+
+  const data = await fetchFn<API_GetLocalities, Locality[]>({
+    request,
+    adapter: getLocalitiesAdapter,
   });
 
   return data;

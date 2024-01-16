@@ -53,7 +53,7 @@ const TypesForm = () => {
     isSuccess: isSuccessEditedData,
     status: statusEditedData,
   } = useQuery({
-    queryKey: ['notificationTypes', isEditing && idBeingEdited],
+    queryKey: [`notificationType_${idBeingEdited}`, isEditing && idBeingEdited],
     queryFn: () => getNotificationTypeFn(idBeingEdited ?? ''),
     enabled: !!(isEditing && idBeingEdited),
   });

@@ -25,7 +25,7 @@ const ThemeTogglerButton = (props: ThemeTogglerButtonProps): JSX.Element => {
     <Button
       unbordered
       className={cn(
-        'theme-controller h-12 w-12 justify-center p-0 font-light md:tooltip md:tooltip-top hover:bg-sky-200 dark:hover:bg-slate-700 md:flex',
+        'theme-controller h-12 w-12 justify-center p-0 font-light md:tooltip md:tooltip-top hover:bg-sky-200 md:flex dark:hover:bg-slate-700',
         className
       )}
       colorDark="dark:bg-slate-600"

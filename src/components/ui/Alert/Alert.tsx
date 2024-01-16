@@ -66,8 +66,8 @@ const Alert = (props: AlertPropsType): JSX.Element => {
         ${!open ? 'hidden' : ''}
         rounded-xl px-2 
         py-3
-        dark:text-white
-        md:pr-3`,
+        md:pr-3
+        dark:text-white`,
         className
       )}
       gap={0}

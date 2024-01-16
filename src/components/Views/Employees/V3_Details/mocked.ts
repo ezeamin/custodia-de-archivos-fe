@@ -36,10 +36,16 @@ export const mockedEmployee: { data: Employee } = {
     area: { id: generateRandomId(), description: 'Engineering' },
     address: {
       street: 'Main Street',
-      number: 123,
-      apt: 1,
-      city: 'New York',
-      state: 'New York',
+      streetNumber: 123,
+      apt: '1A',
+      locality: {
+        id: '900133',
+        description: 'Yerba Buena',
+      },
+      state: {
+        id: '90',
+        description: 'Tucumán',
+      },
       country: 'United States',
     },
     fileNumber: 101,

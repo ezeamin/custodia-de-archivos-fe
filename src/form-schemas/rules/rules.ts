@@ -64,10 +64,8 @@ export const typeRules = <T extends boolean = false>(
 ) => {
   const rule = z.object(
     {
-      id: z.string().uuid({
-        message: `Debe ingresar un ID válido para el ${typeName}`,
-      }),
-      description: z.string(),
+      id: z.string().trim().min(1),
+      description: z.string().trim().min(1),
     },
     {
       invalid_type_error: `Debe ingresar un ${typeName} válido`,
@@ -90,10 +88,10 @@ export const cuilRules = <T extends boolean = false>(required: T) => {
       // Min length is 11 when it does have content (cannot use .min() because it's initially empty)
       (data) => {
         if (required) {
-          return data.length > 0;
+          return data.length >= 11;
         }
 
-        return !data || data.length >= 11;
+        return true;
       },
       {
         message: 'El CUIL debe tener 11 caracteres',
@@ -114,10 +112,10 @@ export const lastnameRules = <T extends boolean = false>(required: T) => {
       // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
       (data) => {
         if (required) {
-          return data.length > 0;
+          return data.length >= 3;
         }
 
-        return !data || data.length >= 3;
+        return true;
       },
       {
         message: 'El Apellido debe tener al menos 3 caracteres',
@@ -138,10 +136,10 @@ export const nameRules = <T extends boolean = false>(required: T) => {
       // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
       (data) => {
         if (required) {
-          return data.length > 0;
+          return data.length >= 3;
         }
 
-        return !data || data.length >= 3;
+        return true;
       },
       {
         message: 'El Nombre debe tener al menos 3 caracteres',
@@ -152,24 +150,27 @@ export const nameRules = <T extends boolean = false>(required: T) => {
   return optionalWrapper(required, rule);
 };
 
-export const textRules = <T extends boolean = false>(required: T) => {
+export const textRules = <T extends boolean = false>(
+  required: T,
+  fieldName = 'Texto'
+) => {
   const rule = z
     .string()
     .trim()
     .max(1000, {
-      message: 'El Texto debe tener como máximo 1000 caracteres',
+      message: `El ${fieldName} debe tener como máximo 1000 caracteres`,
     })
     .refine(
       // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
       (data) => {
         if (required) {
-          return data.length > 0;
+          return data.length >= 3;
         }
 
-        return !data || data.length >= 3;
+        return true;
       },
       {
-        message: 'El Texto debe tener al menos 3 caracteres',
+        message: `El ${fieldName} debe tener al menos 3 caracteres`,
       }
     )
     .default('');
@@ -187,10 +188,10 @@ export const usernameRules = <T extends boolean = false>(required: T) => {
       // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
       (data) => {
         if (required) {
-          return data.length > 0;
+          return data.length >= 3;
         }
 
-        return !data || data.length >= 3;
+        return true;
       },
       {
         message: 'El Usuario debe tener al menos 3 caracteres',
@@ -220,10 +221,10 @@ export const emailRules = <T extends boolean = false>(required: T) => {
       // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
       (data) => {
         if (required) {
-          return data.length > 0;
+          return data.length >= 3;
         }
 
-        return !data || data.length >= 3;
+        return true;
       },
       {
         message: 'El Email debe tener al menos 3 caracteres',
@@ -247,10 +248,10 @@ export const dniRules = <T extends boolean = false>(required: T) => {
       // Min length is 7 when it does have content (cannot use .min() because it's initially empty and optional)
       (data) => {
         if (required) {
-          return data.length > 0;
+          return data.length >= 7;
         }
 
-        return !data || data.length >= 7;
+        return true;
       },
       {
         message: 'El DNI debe tener 7 u 8 caracteres',
@@ -271,10 +272,10 @@ export const positionRules = <T extends boolean = false>(required: T) => {
       // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
       (data) => {
         if (required) {
-          return data.length > 0;
+          return data.length >= 3;
         }
 
-        return !data || data.length >= 3;
+        return true;
       },
       {
         message: 'El Puesto debe tener al menos 3 caracteres',
@@ -319,13 +320,13 @@ export const fileNameRules = <T extends boolean = false>(required: T) => {
         'El Nombre no puede contener espacios, caracteres especiales ni puntos',
     })
     .refine(
-      // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
+      // Min length is 2 when it does have content (cannot use .min() because it's initially empty)
       (data) => {
         if (required) {
-          return data.length > 0;
+          return data.length >= 2;
         }
 
-        return !data || data.length >= 2;
+        return true;
       },
       {
         message: 'El Nombre debe tener al menos 2 caracteres',
@@ -350,6 +351,25 @@ export const passwordRules = <T extends boolean = false>(required: T) => {
         'La contraseña debe tener al menos una mayúscula, una minúscula y un número',
     })
     .default('');
+
+  return optionalWrapper(required, rule);
+};
+
+export const phoneRules = <T extends boolean = false>(required: T) => {
+  const rule = z.coerce
+    .number({
+      invalid_type_error: `Debe ingresar un Número de Teléfono válido`,
+    })
+    .int({
+      message: 'Debe ingresar un número entero en Número de Teléfono',
+    })
+    .positive({
+      message: 'Debe ingresar un número positivo en Número de Teléfono',
+    })
+    .max(9999999999999, {
+      message: 'El número de teléfono debe tener como mucho 13 dígitos',
+    })
+    .default(0);
 
   return optionalWrapper(required, rule);
 };
