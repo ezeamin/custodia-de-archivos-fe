@@ -1,4 +1,4 @@
-import Title from '@/components/Common/Title';
+import Title from '@/components/Common/Title'
 
 const HomeView = () => {
   return (
