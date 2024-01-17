@@ -49,7 +49,6 @@ export const mockedEmployee: { data: Employee } = {
         id: '90',
         description: 'TUCUMÁN',
       },
-      country: 'ARGENTINA',
     },
     fileNumber: 101,
     status: { id: generateRandomId(), description: 'active' },

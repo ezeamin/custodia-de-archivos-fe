@@ -10,7 +10,6 @@ export interface API_Address {
   apt: string | null;
   state: BasicList;
   locality: BasicList;
-  country: string;
 }
 
 export interface API_GetEmployees {
