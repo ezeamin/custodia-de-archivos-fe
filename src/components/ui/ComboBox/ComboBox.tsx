@@ -111,7 +111,7 @@ const ComboBox = <T extends FieldValues>(
         <div className={`relative mt-1 ${sizing?.width ?? ''}`}>
           <div
             aria-label="Combo Box"
-            className="relative grid w-full cursor-default overflow-hidden rounded-lg bg-gray-100 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm dark:bg-slate-700"
+            className="relative grid w-full cursor-default overflow-hidden rounded-lg bg-gray-100 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 dark:bg-slate-700 sm:text-sm"
           >
             <Combobox.Input
               aria-label="Ingrese su selección"
