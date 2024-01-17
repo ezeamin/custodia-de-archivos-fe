@@ -33,7 +33,11 @@ const EmployeePersonalTab = () => {
     ? dayjs(data.data.birthdate).format('DD/MM/YYYY')
     : '';
   const formattedAddress = data?.data?.address
-    ? `${data?.data?.address.street} ${data?.data?.address.number}, ${data?.data?.address.city}, ${data?.data?.address.state}`
+    ? `${data?.data?.address.street.description} ${data?.data?.address
+        .streetNumber}${
+        data?.data?.address.apt ? ` - Dpto. ${data?.data?.address.apt}` : ''
+      }, ${data?.data?.address.locality.description}, ${data?.data?.address
+        .state.description}`
     : '';
 
   return (
@@ -101,7 +105,7 @@ const EmployeePersonalTab = () => {
           <Grid item className="hidden md:block" lg={6} xs={12}>
             <EmployeeDataField
               label="Ciudad"
-              value={data?.data?.address.city}
+              value={data?.data?.address.locality.description}
             />
           </Grid>
           <Grid item className="mb-1" xs={12}>

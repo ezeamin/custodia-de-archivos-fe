@@ -1,14 +1,15 @@
+import { BasicList } from '@/interface';
+
 // ----------------------------------------------------------------------
 // API
 // ----------------------------------------------------------------------
 
 export interface API_Address {
-  street: string;
-  number: number;
-  apt: number | null;
-  city: string;
-  state: string;
-  country: string;
+  street: BasicList;
+  streetNumber: number;
+  apt: string | null;
+  state: BasicList;
+  locality: BasicList;
 }
 
 export interface API_GetEmployees {
@@ -130,6 +131,27 @@ export interface API_GetExtraHours {
   observations?: string;
 }
 
+export interface API_GetStates {
+  provincias: {
+    id: string;
+    nombre: string;
+  }[];
+}
+
+export interface API_GetLocalities {
+  departamentos: {
+    id: string;
+    nombre: string;
+  }[];
+}
+
+export interface API_GetStreets {
+  calles: {
+    id: string;
+    nombre: string;
+  }[];
+}
+
 // ----------------------------------------------------------------------
 // ADAPTERS
 // ----------------------------------------------------------------------
@@ -147,3 +169,6 @@ export interface Training extends API_GetTrainings {}
 export interface TrainingType extends API_GetTrainingsTypes {}
 export interface LateArrival extends API_GetLateArrivals {}
 export interface ExtraHours extends API_GetExtraHours {}
+export interface State extends BasicList {}
+export interface Locality extends BasicList {}
+export interface Street extends BasicList {}

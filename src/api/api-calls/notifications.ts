@@ -8,6 +8,7 @@ import {
   getNotificationsAdapter,
   getNotificationsReceiversAdapter,
   getNotificationsTypesAdapter,
+  getNotificationTypeAdapter,
 } from '../adapters/notifications';
 
 import { API_EmptyResponse } from '../interface';
@@ -124,7 +125,7 @@ export const getNotificationTypeFn = async (id: string) => {
 
   const data = await fetchFn<API_GetNotificationsTypes, NotificationType>({
     request,
-    adapter: getNotificationsTypesAdapter,
+    adapter: getNotificationTypeAdapter,
   });
 
   return data;

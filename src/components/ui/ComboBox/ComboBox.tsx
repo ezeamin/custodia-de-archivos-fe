@@ -51,31 +51,44 @@ const ComboBox = <T extends FieldValues>(
 
   const [isOptionSelected, setIsOptionSelected] = useState(false); // Track if an option is selected
   const [query, setQuery] = useState('');
-  const [selectedOption, setSelectedOption] = useState<string | null>('');
+  const [selectedOption, setSelectedOption] = useState<BasicList | null>(null);
 
   const filteredOption =
     query === ''
       ? options
-      : options.filter(({ description }) => {
-          return description.toLowerCase().includes(query.toLowerCase());
-        });
+      : options.filter(({ description }) =>
+          description.toLowerCase().includes(query.toLowerCase())
+        );
 
   const positionedColor = positionedColorOption
     ? `${positionedColorOption.bgColor} ${positionedColorOption.textColor}`
     : 'bg-sky-600 text-white';
 
   const handleClearSelection = (): void => {
-    setSelectedOption('');
+    setSelectedOption(null);
     setIsOptionSelected(false);
-    controller.onChange('');
+    controller.onChange(null);
   };
 
-  const handleSelect = (selected: string | null): void => {
+  const handleSelect = (selected: BasicList | null): void => {
     setSelectedOption(selected);
     if (selected !== null) {
       setIsOptionSelected(true);
+    } else {
+      setIsOptionSelected(false);
     }
     controller.onChange(selected);
+  };
+
+  const checkQueryAndUpdate = (): void => {
+    if (query !== '') {
+      const selected = options.find(({ description }) =>
+        description.toLowerCase().includes(query.toLowerCase())
+      );
+      if (selected) {
+        handleSelect(selected);
+      }
+    }
   };
 
   useEffect(() => {
@@ -90,7 +103,7 @@ const ComboBox = <T extends FieldValues>(
       <Combobox
         aria-describedby="error-message"
         aria-label="Seleccione una opción"
-        disabled={disabled}
+        disabled={disabled || options.length === 0}
         ref={controller.ref}
         value={selectedOption}
         onChange={handleSelect}
@@ -98,7 +111,7 @@ const ComboBox = <T extends FieldValues>(
         <div className={`relative mt-1 ${sizing?.width ?? ''}`}>
           <div
             aria-label="Combo Box"
-            className="relative grid w-full cursor-default overflow-hidden rounded-lg bg-gray-100 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 dark:bg-slate-700 sm:text-sm"
+            className="relative grid w-full cursor-default overflow-hidden rounded-lg bg-gray-100 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm dark:bg-slate-700"
           >
             <Combobox.Input
               aria-label="Ingrese su selección"
@@ -111,6 +124,7 @@ const ComboBox = <T extends FieldValues>(
               displayValue={(option: BasicList) => option?.description}
               id={name}
               placeholder={placeholder || 'Seleccione una opción...'}
+              onBlur={checkQueryAndUpdate}
               onChange={(event) => {
                 setQuery(event.target.value);
               }}
@@ -121,7 +135,7 @@ const ComboBox = <T extends FieldValues>(
                 ariaHidden
                 unstyled
                 aria-label="Borrar selección"
-                className="absolute inset-y-[1px] right-[1px] flex h-auto items-center bg-gray-100 px-3 hover:bg-gray-200 disabled:text-gray-400 disabled:hover:bg-transparent dark:bg-slate-700 hover:dark:bg-slate-800 disabled:dark:bg-gray-900"
+                className="absolute inset-y-[1px] right-[1px] flex h-auto items-center bg-gray-100 px-3 hover:bg-gray-200 disabled:bg-transparent disabled:text-gray-400 disabled:hover:bg-transparent dark:bg-slate-700 hover:dark:bg-slate-800 disabled:dark:bg-gray-900"
                 disabled={disabled}
                 type="button"
                 onClick={handleClearSelection}
@@ -131,7 +145,7 @@ const ComboBox = <T extends FieldValues>(
             ) : (
               <Combobox.Button
                 aria-label="Expandir/comprimir opciones"
-                className="absolute inset-y-[1px] right-[1px] flex items-center bg-gray-100 p-3 hover:bg-gray-200 dark:bg-slate-700 hover:dark:bg-slate-800"
+                className="absolute inset-y-[1px] right-[1px] flex items-center bg-gray-100 p-3 hover:bg-gray-200 disabled:bg-transparent dark:bg-slate-700 hover:dark:bg-slate-800 dark:disabled:bg-transparent"
               >
                 <Icon
                   iconComponent={<MdExpandMore />}

@@ -22,7 +22,16 @@ export const createSchema = z
     birthdate: dateRules(true),
     position: positionRules(true),
     area: typeRules(true, 'área'),
-    fileNumber: z.coerce.number().int().positive(),
+    fileNumber: z.coerce
+      .number({
+        invalid_type_error: `Debe ingresar un Nro de Legajo válido`,
+      })
+      .int({
+        message: 'Debe ingresar un número entero en Nro de Legajo',
+      })
+      .positive({
+        message: 'Debe ingresar un número positivo en Nro de Legajo',
+      }),
     imgFile: z.instanceof(File, {
       message: 'El archivo es requerido',
     }),

@@ -18,8 +18,6 @@ import {
 } from '@/components/ui';
 import { genderOptions } from '@/components/Views/Employees/V2_Create/mocked';
 
-import { paths } from '@/constants/routes/paths';
-
 import {
   EditPersonalInfoSchema,
   editPersonalInfoSchema,
@@ -65,7 +63,7 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
       reset();
       toast.success('Información personal editada con éxito');
       window.setTimeout(() => {
-        navigate(paths.EMPLOYEES.MAIN);
+        navigate(`/employees/${employeeOriginalData.id}`);
       }, 1000);
     },
   });
@@ -76,7 +74,7 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
     toast.error(
       'Error al cargar datos necesarios para editar el empleado. Reintente más tarde'
     );
-    navigate(paths.EMPLOYEES.MAIN);
+    navigate(`/employees/${employeeOriginalData.id}`);
   }
 
   // -------------------------------------------------

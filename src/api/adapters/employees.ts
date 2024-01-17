@@ -10,6 +10,9 @@ import {
   API_GetLateArrivals,
   API_GetLicenses,
   API_GetLicensesTypes,
+  API_GetLocalities,
+  API_GetStates,
+  API_GetStreets,
   API_GetTrainings,
   API_GetTrainingsTypes,
   API_GetVacations,
@@ -21,7 +24,10 @@ import {
   LateArrival,
   License,
   LicenseType,
+  Locality,
   MinimalEmployee,
+  State,
+  Street,
   Training,
   TrainingType,
   Vacation,
@@ -206,4 +212,45 @@ export const getEmployeeExtraHoursAdapter = (
     date: element.date,
     hours: element.hours,
   }));
+};
+
+export const getStatesAdapter = (data: API_GetStates): State[] => {
+  return data.provincias
+    .map((element) => ({
+      id: element.id,
+      description: element.nombre.toUpperCase(),
+    }))
+    .sort((a, b) => a.description.localeCompare(b.description));
+};
+
+export const getLocalitiesAdapter = (data: API_GetLocalities): Locality[] => {
+  return (
+    data.departamentos
+      .map((element) => ({
+        id: element.id,
+        description: element.nombre.toUpperCase(),
+      }))
+      .sort((a, b) => a.description.localeCompare(b.description))
+      // filter duplicate descriptions
+      .filter(
+        (element, index, self) =>
+          index === self.findIndex((t) => t.description === element.description)
+      )
+  );
+};
+
+export const getStreetsAdapter = (data: API_GetStreets): Street[] => {
+  return (
+    data.calles
+      .map((element) => ({
+        id: element.id,
+        description: element.nombre.toUpperCase(),
+      }))
+      .sort((a, b) => a.description.localeCompare(b.description))
+      // filter duplicate descriptions
+      .filter(
+        (element, index, self) =>
+          index === self.findIndex((t) => t.description === element.description)
+      )
+  );
 };

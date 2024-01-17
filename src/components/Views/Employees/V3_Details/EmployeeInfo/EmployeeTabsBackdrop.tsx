@@ -39,7 +39,7 @@ const EmployeeTabsBackdrop = () => {
 
   return (
     <div
-      className="absolute left-0 top-0 -z-10 hidden h-[32px] w-[var(--width)] translate-x-[var(--left)] translate-y-[var(--top)] rounded-md bg-black/5 opacity-0 transition-all duration-500 dark:bg-white/5 sm:block"
+      className="absolute left-0 top-0 -z-10 hidden h-[32px] w-[var(--width)] translate-x-[var(--left)] translate-y-[var(--top)] rounded-md bg-black/5 opacity-0 transition-all duration-500 sm:block dark:bg-white/5"
       ref={menuRef}
     />
   );

@@ -17,8 +17,10 @@ export const fetchFn = async <T, V = T>({
   request,
   adapter,
   body,
-}: FetchFnProps): Promise<API_GlobalResponse<V>> => {
-  const fullPath = `${baseUrl}${request.url}`;
+}: FetchFnProps<T, V>): Promise<API_GlobalResponse<V>> => {
+  const fullPath = request.omitBaseUrl
+    ? request.url
+    : `${baseUrl}${request.url}`;
 
   const isFormData = body instanceof FormData;
 
@@ -69,8 +71,8 @@ export const fetchFn = async <T, V = T>({
     throw new Error();
   }
 
-  if (data.data) {
-    data.data = adapter(data.data as T);
+  if (data) {
+    data.data = adapter((data.data ?? data) as T);
   }
 
   return data;

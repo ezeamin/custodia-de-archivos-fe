@@ -35,12 +35,20 @@ export const mockedEmployee: { data: Employee } = {
     position: 'Software Engineer',
     area: { id: generateRandomId(), description: 'Engineering' },
     address: {
-      street: 'Main Street',
-      number: 123,
-      apt: 1,
-      city: 'New York',
-      state: 'New York',
-      country: 'United States',
+      street: {
+        id: '9011903002135',
+        description: 'PRINGLES',
+      },
+      streetNumber: 123,
+      apt: '1A',
+      locality: {
+        id: '90119',
+        description: 'YERBA BUENA',
+      },
+      state: {
+        id: '90',
+        description: 'TUCUMÁN',
+      },
     },
     fileNumber: 101,
     status: { id: generateRandomId(), description: 'active' },
