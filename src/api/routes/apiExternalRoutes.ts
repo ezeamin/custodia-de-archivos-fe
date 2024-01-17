@@ -12,5 +12,16 @@ export const apiExternalRoutes = {
       url: `https://apis.datos.gob.ar/georef/api/departamentos?provincia=${stateNumber}&campos=id,nombre&max=150`,
       omitBaseUrl: true,
     }),
+    GET_STREETS: ({
+      state,
+      locality,
+    }: {
+      state: string;
+      locality: string;
+    }): ApiRoute => ({
+      method: 'GET',
+      url: `https://apis.datos.gob.ar/georef/api/calles?provincia=${state}&departamento=${locality}&campos=id,nombre&max=2500`,
+      omitBaseUrl: true,
+    }),
   },
 };

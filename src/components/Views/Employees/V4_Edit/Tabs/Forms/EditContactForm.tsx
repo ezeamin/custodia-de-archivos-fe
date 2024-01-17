@@ -8,6 +8,7 @@ import {
   editEmployeeFn,
   getLocalitiesFn,
   getStatesFn,
+  getStreetsFn,
 } from '@/api/api-calls/employees';
 
 import { useLoading, useZodForm } from '@/hooks';
@@ -49,7 +50,9 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   // API
   // -------------------------------------------------
 
+  const [hasLoadedInfo, setHasLoadedInfo] = useState(false);
   const [localityList, setLocalityList] = useState<BasicList[]>([]);
+  const [streetList, setStreetList] = useState<BasicList[]>([]);
 
   const {
     data: stateList,
@@ -65,9 +68,23 @@ const EditContactForm = (props: EmployeeInfoProps) => {
     isLoading: localityListIsLoading,
     status: localityListStatus,
   } = useQuery({
-    queryKey: ['localities'],
-    queryFn: () => getLocalitiesFn(state.id),
+    queryKey: [`localities_${state?.id || ''}`, !!state],
+    queryFn: () => getLocalitiesFn(state?.id || ''),
     enabled: !!state,
+  });
+
+  const {
+    data: streetAPIList,
+    isLoading: streetListIsLoading,
+    status: streetListStatus,
+  } = useQuery({
+    queryKey: [`streets_${locality?.id || ''}`, !!locality],
+    queryFn: () =>
+      getStreetsFn({
+        state: state?.description || '',
+        locality: locality?.description || '',
+      }),
+    enabled: !!locality,
   });
 
   const { mutate: editEmployee } = useMutation({
@@ -87,6 +104,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
 
   useLoading(stateListIsLoading, stateListStatus);
   useLoading(localityListIsLoading, localityListStatus);
+  useLoading(streetListIsLoading, streetListStatus);
 
   // -------------------------------------------------
   // HANDLERS
@@ -108,14 +126,18 @@ const EditContactForm = (props: EmployeeInfoProps) => {
       if (employeeOriginalData.phone)
         setValue('phone', +employeeOriginalData.phone);
       if (employeeOriginalData.address)
-        setValue('street', employeeOriginalData.address.street);
-      if (employeeOriginalData.address)
         setValue('streetNumber', employeeOriginalData.address.streetNumber);
       if (employeeOriginalData.address.apt)
         setValue('apt', employeeOriginalData.address.apt);
       if (employeeOriginalData.address)
         setValue('state', employeeOriginalData.address.state);
     }
+  }, [employeeOriginalData, setValue, email, stateList]);
+
+  // Load locality from original data if it is in the list, after localityList has loaded
+  useEffect(() => {
+    if (hasLoadedInfo) return;
+
     if (state && localityList) {
       const isLocalityInList = localityList.find(
         (loc) => loc.id === employeeOriginalData.address.locality.id
@@ -123,23 +145,50 @@ const EditContactForm = (props: EmployeeInfoProps) => {
       if (isLocalityInList)
         setValue('locality', employeeOriginalData.address.locality);
     }
-  }, [employeeOriginalData, setValue, stateList, localityList, state, email]);
+  }, [employeeOriginalData, setValue, state, localityList, hasLoadedInfo]);
 
+  // Load street from original data if it is in the list, after streetList has loaded
+  useEffect(() => {
+    if (hasLoadedInfo) return;
+
+    if (locality && streetList) {
+      const isStreetInList = streetList.find(
+        (strt) => strt.id === employeeOriginalData.address.street.id
+      );
+      if (isStreetInList) {
+        setValue('street', employeeOriginalData.address.street);
+        setHasLoadedInfo(true);
+      }
+    }
+  }, [employeeOriginalData, setValue, locality, streetList, hasLoadedInfo]);
+
+  // Reset localities and streets if no state is selected
   useEffect(() => {
     if (!state) {
-      setValue('locality', {
-        id: '',
-        description: '',
-      });
+      setValue('locality', null);
+      setValue('street', null);
       setLocalityList([]);
+      setStreetList([]);
     }
   }, [state, setValue]);
 
+  // Reset streets if no locality is selected
+  useEffect(() => {
+    if (!locality) {
+      setValue('street', null);
+      setStreetList([]);
+    }
+  }, [locality, setValue]);
+
+  // Update lists when they have value
   useEffect(() => {
     if (localityAPIList) {
       setLocalityList(localityAPIList.data || []);
     }
-  }, [localityAPIList]);
+    if (streetAPIList) {
+      setStreetList(streetAPIList.data || []);
+    }
+  }, [localityAPIList, streetAPIList]);
 
   // -------------------------------------------------
   // RENDER
@@ -188,21 +237,30 @@ const EditContactForm = (props: EmployeeInfoProps) => {
           <ComboBoxInput
             className="w-full"
             control={control}
-            disabled={isLoading}
+            disabled={isLoading || !state}
             label="Localidad *"
             name="locality"
             options={localityList}
-            placeholder="Seleccione una opción"
+            placeholder={
+              state
+                ? 'Seleccione una opción'
+                : 'Seleccione primero una Provincia'
+            }
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <TextInput
+          <ComboBoxInput
             className="w-full"
             control={control}
-            disabled={isLoading}
+            disabled={isLoading || !locality}
             label="Calle *"
             name="street"
-            placeholder="San Martín"
+            options={streetList}
+            placeholder={
+              state
+                ? 'Seleccione una opción'
+                : 'Seleccione primero una Localidad'
+            }
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>

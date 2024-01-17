@@ -5,7 +5,7 @@ import { BasicList } from '@/interface';
 // ----------------------------------------------------------------------
 
 export interface API_Address {
-  street: string;
+  street: BasicList;
   streetNumber: number;
   apt: string | null;
   state: BasicList;
@@ -146,6 +146,13 @@ export interface API_GetLocalities {
   }[];
 }
 
+export interface API_GetStreets {
+  calles: {
+    id: string;
+    nombre: string;
+  }[];
+}
+
 // ----------------------------------------------------------------------
 // ADAPTERS
 // ----------------------------------------------------------------------
@@ -165,3 +172,4 @@ export interface LateArrival extends API_GetLateArrivals {}
 export interface ExtraHours extends API_GetExtraHours {}
 export interface State extends BasicList {}
 export interface Locality extends BasicList {}
+export interface Street extends BasicList {}

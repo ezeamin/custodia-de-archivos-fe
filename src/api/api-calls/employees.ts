@@ -23,6 +23,7 @@ import {
   getEmployeeVacationsAdapter,
   getLocalitiesAdapter,
   getStatesAdapter,
+  getStreetsAdapter,
 } from '../adapters/employees';
 
 import { API_EmptyResponse } from '../interface';
@@ -40,6 +41,7 @@ import {
   API_GetLicensesTypes,
   API_GetLocalities,
   API_GetStates,
+  API_GetStreets,
   API_GetTrainings,
   API_GetTrainingsTypes,
   API_GetVacations,
@@ -54,6 +56,7 @@ import {
   Locality,
   MinimalEmployee,
   State,
+  Street,
   Training,
   TrainingType,
   Vacation,
@@ -474,6 +477,26 @@ export const getLocalitiesFn = async (stateNumber: string) => {
   const data = await fetchFn<API_GetLocalities, Locality[]>({
     request,
     adapter: getLocalitiesAdapter,
+  });
+
+  return data;
+};
+
+export const getStreetsFn = async ({
+  state,
+  locality,
+}: {
+  state: string;
+  locality: string;
+}) => {
+  const request = apiExternalRoutes.LOCATION.GET_STREETS({
+    state,
+    locality,
+  });
+
+  const data = await fetchFn<API_GetStreets, Street[]>({
+    request,
+    adapter: getStreetsAdapter,
   });
 
   return data;

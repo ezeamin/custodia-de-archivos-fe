@@ -10,11 +10,11 @@ import {
 export const editContactInfoSchema = z.object({
   email: emailRules(true),
   phone: phoneRules(false),
-  street: textRules(true, 'campo Calle'),
+  street: z.union([typeRules(true, 'campo Calle'), z.null()]),
   streetNumber: z.coerce.number().int().positive(),
   apt: textRules(false, 'campo Departamento'),
-  state: typeRules(true, 'campo Provincia'),
-  locality: typeRules(true, 'campo Localidad'),
+  state: z.union([typeRules(true, 'campo Provincia'), z.null()]),
+  locality: z.union([typeRules(true, 'campo Localidad'), z.null()]),
 });
 
 export type EditContactInfoSchema = z.infer<typeof editContactInfoSchema>;
