@@ -41,7 +41,12 @@ const Modal = (props: ModalProps) => {
         </section>
         <div className="modal-action">
           {footerChildren}
-          <button className="btn" type="button" onClick={handleClose}>
+          <button
+            className="btn"
+            disabled={loading}
+            type="button"
+            onClick={handleClose}
+          >
             Cerrar
           </button>
           {submitButton && (

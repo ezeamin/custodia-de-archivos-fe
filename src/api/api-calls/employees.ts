@@ -122,6 +122,22 @@ export const postEmployeeFn = async (body: FormData) => {
   return data;
 };
 
+export const putEmployeeImageFn = async (body: FormData) => {
+  const request = apiRoutes.EMPLOYEES.EDIT_EMPLOYEE_IMAGE({
+    id: body.get('id') as string,
+  });
+
+  const dataToSend = cleanUpDataToSend(body);
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    body: dataToSend,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
 export const postFileFn = async ({
   employeeId,
   body,

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { areaOptions } from '../../../V2_Create/mocked';
 import { mockedStatus } from '../../../V3_Details/mocked';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { editEmployeeFn } from '@/api/api-calls/employees';
@@ -57,6 +57,8 @@ const EditJobForm = (props: EmployeeInfoProps) => {
   // API
   // -------------------------------------------------
 
+  const queryClient = useQueryClient();
+
   const {
     // data: statusOptions,
     isLoading: isLoadingStatus,
@@ -86,6 +88,9 @@ const EditJobForm = (props: EmployeeInfoProps) => {
       setIsLoading(false);
       reset();
       toast.success('Información laboral editada con éxito');
+      queryClient.invalidateQueries({
+        queryKey: [`employee_${employeeOriginalData.id}`],
+      });
       window.setTimeout(() => {
         navigate(`/employees/${employeeOriginalData.id}/personal`);
       }, 1000);

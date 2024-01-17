@@ -9,6 +9,7 @@ import { AddNewVacationSchema } from './addNewVacationSchema';
 import { ChangeDocNameSchema } from './changeDocNameSchema';
 import { CreateSchema } from './createSchema';
 import { EditContactInfoSchema } from './editContactInfoSchema';
+import { EditImageSchema } from './editImageSchema';
 import { EditJobInfoSchema } from './editJobInfoSchema';
 import { EditPersonalInfoSchema } from './editPersonalInfoSchema';
 import { SearchSchema } from './searchSchema';
@@ -28,4 +29,5 @@ export type EmployeesSchemas =
   | AddNewTrainingSchema
   | EditPersonalInfoSchema
   | EditContactInfoSchema
-  | EditJobInfoSchema;
+  | EditJobInfoSchema
+  | EditImageSchema;

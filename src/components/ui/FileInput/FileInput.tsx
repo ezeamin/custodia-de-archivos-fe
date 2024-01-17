@@ -75,7 +75,7 @@ const FileInput = <T extends FormSchemas>(
         <Button
           className="btn-sm inline-block border border-gray-300 md:btn-md md:tooltip md:tooltip-bottom"
           data-tip="Borrar archivo"
-          disabled={!hasLoadedFile}
+          disabled={!hasLoadedFile || disabled}
           onClick={handleRemove}
         >
           <Icon

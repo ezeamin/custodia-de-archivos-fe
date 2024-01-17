@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import {
@@ -54,6 +54,8 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   const [localityList, setLocalityList] = useState<BasicList[]>([]);
   const [streetList, setStreetList] = useState<BasicList[]>([]);
 
+  const queryClient = useQueryClient();
+
   const {
     data: stateList,
     isLoading: stateListIsLoading,
@@ -96,6 +98,9 @@ const EditContactForm = (props: EmployeeInfoProps) => {
       setIsLoading(false);
       reset();
       toast.success('Información de contacto editada con éxito');
+      queryClient.invalidateQueries({
+        queryKey: [`employee_${employeeOriginalData.id}`],
+      });
       window.setTimeout(() => {
         navigate(`/employees/${employeeOriginalData.id}/personal`);
       }, 1000);
