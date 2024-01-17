@@ -87,7 +87,7 @@ const EditJobForm = (props: EmployeeInfoProps) => {
       reset();
       toast.success('Información laboral editada con éxito');
       window.setTimeout(() => {
-        navigate(`/employees/${employeeOriginalData.id}`);
+        navigate(`/employees/${employeeOriginalData.id}/personal`);
       }, 1000);
     },
   });
