@@ -26,7 +26,7 @@ export const dateRules = <T extends boolean = false>(required: T) => {
     // Check if it's a string (empty field)
     .refine(
       (data) => {
-        return !(typeof data === 'string');
+        return typeof data === 'string' || data instanceof Date;
       },
       {
         message: `Debe ingresar una fecha valida`,

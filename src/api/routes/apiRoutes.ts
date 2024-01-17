@@ -2,6 +2,11 @@ import { ApiRoute } from '../interface/routes';
 
 export const apiRoutes = {
   PARAMS: {
+    GET_STATUS: (): ApiRoute => ({
+      method: 'GET',
+      url: '/params/status',
+      useToken: true,
+    }),
     GET_ROLES: (): ApiRoute => ({
       method: 'GET',
       url: '/params/roles',

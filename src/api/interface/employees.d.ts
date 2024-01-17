@@ -41,8 +41,8 @@ export interface API_GetEmployee extends API_GetEmployees {
     id: string;
     description: string;
   };
-  registrationDate: string;
-  departureDate: string | null;
+  startDate: string;
+  endDate: string | null;
   user: {
     id: string;
   } | null;

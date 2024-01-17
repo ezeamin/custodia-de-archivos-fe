@@ -5,16 +5,30 @@ import {
   getAreasAdapter,
   getGendersAdapter,
   getRolesAdapter,
+  getStatusAdapter,
 } from '../adapters/params';
 
 import {
   API_GetAreas,
   API_GetGenders,
   API_GetRoles,
+  API_GetStatus,
   Area,
   Gender,
   Role,
+  Status,
 } from '../interface/params';
+
+export const getStatusOptionsFn = async () => {
+  const request = apiRoutes.PARAMS.GET_STATUS();
+
+  const data = await fetchFn<API_GetStatus[], Status[]>({
+    request,
+    adapter: getStatusAdapter,
+  });
+
+  return data;
+};
 
 export const getRolesOptionsFn = async () => {
   const request = apiRoutes.PARAMS.GET_ROLES();

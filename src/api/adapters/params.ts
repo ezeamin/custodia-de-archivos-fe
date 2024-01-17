@@ -2,10 +2,19 @@ import {
   API_GetAreas,
   API_GetGenders,
   API_GetRoles,
+  API_GetStatus,
   Area,
   Gender,
   Role,
+  Status,
 } from '../interface/params';
+
+export const getStatusAdapter = (data: API_GetStatus[]): Status[] => {
+  return data.map((status) => ({
+    id: status.id,
+    description: status.description,
+  }));
+};
 
 export const getRolesAdapter = (data: API_GetRoles[]): Role[] => {
   return data.map((role) => ({

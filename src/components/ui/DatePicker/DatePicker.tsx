@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
@@ -19,8 +19,6 @@ const optionsDefaultValues: OptionsDatePickerProps = {
   mode: 'single',
   noCalendar: false,
 };
-
-let fp: Instance | null = null;
 
 /**
  * Component for selecting dates and time s with customizable options.
@@ -63,36 +61,38 @@ const DatePicker = (props: DatePickerProps): JSX.Element => {
     value,
   } = props;
 
+  const [fp, setFp] = useState<Instance | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    if (inputRef.current) {
-      fp = flatpickr(inputRef.current, {
-        ...optionsDefaultValues,
-        ...options,
-        onChange: (selectedDates) => {
-          if (selectedDates.length > 0) {
-            onChange(selectedDates[0]);
-          } else {
-            // Clear input
-            onChange('');
-          }
-        },
-      });
-
-      return () => {
-        if (fp) fp.destroy();
-      };
+    if (inputRef.current && !fp) {
+      setFp(
+        flatpickr(inputRef.current, {
+          ...optionsDefaultValues,
+          ...options,
+          onChange: (selectedDates) => {
+            if (selectedDates.length > 0) {
+              onChange(selectedDates[0]);
+            } else {
+              // Clear input
+              onChange('');
+            }
+          },
+        })
+      );
     }
 
-    return () => {};
+    return () => {
+      if (fp) fp.destroy();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- will cause infinite loop
   }, [onChange, options]);
 
   useEffect(() => {
-    if (inputRef.current && value !== inputRef.current.value) {
+    if (inputRef.current && value && value !== inputRef.current.value) {
       fp?.setDate(value);
     }
-  }, [value]);
+  }, [value, fp]);
 
   return (
     <input

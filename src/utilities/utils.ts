@@ -117,3 +117,18 @@ export const decodePayload = (token: string) => {
 
   return decodedPayload;
 };
+
+export const displayStatusLabel = (status: string) => {
+  switch (status) {
+    case 'active':
+      return 'Activo';
+    case 'inactive':
+      return 'Inactivo';
+    case 'suspended':
+      return 'Suspendido';
+    case 'deleted':
+      return 'Eliminado';
+    default:
+      return 'Sin estado';
+  }
+};

@@ -14,11 +14,9 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
 
   const { id: employeeId } = useParams();
 
-  const formattedRegistrationDate = dayjs(data.registrationDate).format(
-    'DD/MM/YYYY'
-  );
-  const formattedDepartureDate = data.departureDate
-    ? dayjs(data.departureDate).format('DD/MM/YYYY')
+  const formattedStartDate = dayjs(data.startDate).format('DD/MM/YYYY');
+  const formattedEndDate = data.endDate
+    ? dayjs(data.endDate).format('DD/MM/YYYY')
     : 'N/A';
 
   return (
@@ -36,15 +34,12 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
         />
         <EmployeeDataField label="Nro. Legajo" value={data.fileNumber} />
         <EmployeeDataField label="Area" value={data.area.description} />
-        <EmployeeDataField label="Posición" value={data.position} />
+        <EmployeeDataField label="Puesto" value={data.position} />
         <EmployeeDataField
           label="Fecha de ingreso"
-          value={formattedRegistrationDate}
+          value={formattedStartDate}
         />
-        <EmployeeDataField
-          label="Fecha de egreso"
-          value={formattedDepartureDate}
-        />
+        <EmployeeDataField label="Fecha de egreso" value={formattedEndDate} />
         <Link className="btn btn-sm" to={`/employees/${employeeId}/edit/job`}>
           <Icon iconComponent={<FaPencil size="0.75em" />} title="Editar" />
           Modificar

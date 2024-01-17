@@ -11,7 +11,16 @@ export const editContactInfoSchema = z.object({
   email: emailRules(true),
   phone: phoneRules(false),
   street: z.union([typeRules(true, 'campo Calle'), z.null()]),
-  streetNumber: z.coerce.number().int().positive(),
+  streetNumber: z.coerce
+    .number({
+      invalid_type_error: 'El campo Nro. de Calle debe ser un número',
+    })
+    .int({
+      message: 'El campo Nro. de Calle debe ser un número entero',
+    })
+    .positive({
+      message: 'El campo Nro. de Calle debe ser un número positivo',
+    }),
   apt: textRules(false, 'campo Departamento'),
   state: z.union([typeRules(true, 'campo Provincia'), z.null()]),
   locality: z.union([typeRules(true, 'campo Localidad'), z.null()]),

@@ -28,8 +28,8 @@ export const mockedEmployee: { data: Employee } = {
       id: generateRandomId(),
       description: 'Hombre pecho peludo',
     },
-    registrationDate: '2020-01-01T00:00:00.000Z',
-    departureDate: null,
+    startDate: '2020-01-01T00:00:00.000Z',
+    endDate: null,
     phone: '+5493815038570',
     email: 'johndoe@gmail.com',
     position: 'Software Engineer',
@@ -54,6 +54,28 @@ export const mockedEmployee: { data: Employee } = {
     status: { id: generateRandomId(), description: 'active' },
     user: null,
   },
+};
+
+export const mockedStatus = {
+  totalElements: 4,
+  data: [
+    {
+      id: generateRandomId(),
+      description: 'active',
+    },
+    {
+      id: generateRandomId(),
+      description: 'suspended',
+    },
+    {
+      id: generateRandomId(),
+      description: 'inactive',
+    },
+    {
+      id: generateRandomId(),
+      description: 'deleted',
+    },
+  ],
 };
 
 export const mockedDocs = {

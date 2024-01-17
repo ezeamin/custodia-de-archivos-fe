@@ -74,7 +74,7 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
     toast.error(
       'Error al cargar datos necesarios para editar el empleado. Reintente más tarde'
     );
-    navigate(`/employees/${employeeOriginalData.id}`);
+    navigate(`/employees/${employeeOriginalData.id}/personal`);
   }
 
   // -------------------------------------------------
