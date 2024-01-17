@@ -25,7 +25,6 @@ const routes = {
       id: 1,
       path: paths.SETTINGS.MAKE_ADMIN,
       name: 'Hacer administrador a otro usuario',
-      disabled: true,
     },
     {
       id: 2,

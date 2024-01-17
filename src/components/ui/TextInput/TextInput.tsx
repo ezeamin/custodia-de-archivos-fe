@@ -33,7 +33,7 @@ const TextInput = <T extends FormSchemas>(
         name={name}
         render={({ field, fieldState: { error } }) => (
           <input
-            className={`input input-bordered mt-1 w-full bg-gray-100 dark:bg-slate-700 ${
+            className={`input input-bordered ${!hideLabel ? 'mt-1' : ''} w-full bg-gray-100 dark:bg-slate-700 ${
               error ? 'border-error' : ''
             }`}
             disabled={rest.disabled}

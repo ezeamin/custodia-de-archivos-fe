@@ -16,7 +16,7 @@ const EmployeeListView = () => {
         title="Listado de Empleados"
       />
       <section className="flex items-center justify-between">
-        <SearchFilter />
+        <SearchFilter showFilters queryKey="employees" />
         <Legend />
       </section>
       <Results />

@@ -50,9 +50,19 @@ export const apiRoutes = {
     }),
   },
   USERS: {
+    GET_USERS: ({ params }: { params: string }): ApiRoute => ({
+      method: 'GET',
+      url: `/users${params}`,
+      useToken: true,
+    }),
     POST_USER: (): ApiRoute => ({
       method: 'POST',
       url: `/users`,
+      useToken: true,
+    }),
+    PUT_CREATE_ADMIN: ({ id }: { id: string }): ApiRoute => ({
+      method: 'PUT',
+      url: `/users/create-admin/${id}`,
       useToken: true,
     }),
   },

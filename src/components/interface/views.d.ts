@@ -20,10 +20,16 @@ import {
   NotificationFile,
   NotificationType,
 } from '@/api/interface/notifications';
+import { BasicUser } from '@/api/interface/users';
 
 // --------------------------------------------------
 // EMPLOYEES
 // --------------------------------------------------
+
+export interface SearchFilterProps {
+  queryKey: string;
+  showFilters?: boolean;
+}
 
 export interface EmployeesResultsTableProps {
   data: MinimalEmployee[];
@@ -224,4 +230,17 @@ export interface TrainingTypesResultsListProps {
 export interface TrainingTypesResultsListItemProps {
   trainingType: TrainingType;
   index: number;
+}
+
+// --------------------------------------------------
+// SETTINGS
+// --------------------------------------------------
+
+export interface CreateAdminResults {
+  data: BasicUser[];
+}
+
+export interface CreateAdminResultsElement {
+  user: BasicUser;
+  index?: number;
 }

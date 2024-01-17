@@ -132,3 +132,16 @@ export const displayStatusLabel = (status: string) => {
       return 'Sin estado';
   }
 };
+
+export const displayLabelRole = (role: string) => {
+  switch (role) {
+    case 'ADMIN':
+      return 'Administrador';
+    case 'USER':
+      return 'Usuario';
+    case 'READ_ONLY':
+      return 'Solo lectura';
+    default:
+      return 'Sin rol';
+  }
+};

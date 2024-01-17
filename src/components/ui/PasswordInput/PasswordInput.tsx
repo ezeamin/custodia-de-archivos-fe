@@ -42,7 +42,7 @@ const PasswordInput = <T extends FormSchemas>(
         name={name}
         render={({ field, fieldState: { error } }) => (
           <div
-            className={`input input-bordered relative mt-1 overflow-hidden bg-gray-100 px-0 dark:bg-slate-700 ${
+            className={`input input-bordered relative ${!hideLabel ? 'mt-1' : ''} overflow-hidden bg-gray-100 px-0 dark:bg-slate-700 ${
               error ? 'border-error' : ''
             }`}
           >

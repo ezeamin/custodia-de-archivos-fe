@@ -13,6 +13,7 @@ const HourInput = <T extends FormSchemas>(
 ): JSX.Element => {
   const {
     control,
+    hideLabel = false,
     helperText = '',
     name,
     label,
@@ -34,7 +35,7 @@ const HourInput = <T extends FormSchemas>(
           fieldState: { error },
         }) => (
           <HourPicker
-            className="mt-1"
+            className={!hideLabel ? 'mt-1' : undefined}
             disabled={rest.disabled}
             error={Boolean(error)}
             name={inputName}
