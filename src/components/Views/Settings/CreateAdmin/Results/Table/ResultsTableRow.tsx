@@ -18,6 +18,8 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
 
   const navigate = useNavigate();
 
+  const isUserAlreadyAdmin = user.role.description === 'ADMIN';
+
   // -------------------------------------------------
   // API
   // -------------------------------------------------
@@ -51,6 +53,8 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
   // -------------------------------------------------
 
   const handleClick = () => {
+    if (isUserAlreadyAdmin) return;
+
     Swal.fire({
       title: '¿Está seguro?',
       text: `Va a convertir a ${user.firstname} ${user.lastname} en administrador`,
@@ -94,11 +98,12 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
       <td className="text-end">
         <Button
           colorLight="btn-primary"
+          disabled={isUserAlreadyAdmin}
           loading={isLoading}
           textColorLight="text-white"
           onClick={handleClick}
         >
-          HACER ADMIN
+          {isUserAlreadyAdmin ? 'YA ES ADMIN' : 'HACER ADMIN'}
         </Button>
       </td>
     </tr>
