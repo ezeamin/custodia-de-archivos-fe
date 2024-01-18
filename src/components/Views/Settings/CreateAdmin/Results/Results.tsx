@@ -8,7 +8,7 @@ import { getUsersFn } from '@/api/api-calls/users';
 import { useLoading } from '@/hooks';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
-import { Pagination } from '@/components/ui';
+import { Alert, Pagination } from '@/components/ui';
 
 const data = mockedUserList;
 const isLoading = false;
@@ -47,6 +47,29 @@ const Results = () => {
   }
 
   if (data?.data) {
+    if (data.data.length === 0)
+      return (
+        <section className="mt-5 overflow-hidden">
+          <Alert className="mb-3" type="warning">
+            <p>
+              Atencion! No hay usuarios creados aún. Para crear un usuario, debe
+              crear primero un empleado. Puede crear uno nuevo desde
+            </p>
+            <p className="my-3 text-center font-bold">
+              &quot;Empleados&quot; &gt; &quot;Crear nuevo empleado&quot;
+            </p>
+            <p>
+              Luego, desde el detalle del empleado creado, podrá crearle un
+              usuario.
+            </p>
+            <p className="my-3 text-center font-bold">
+              &quot;Ajustes&quot; &gt; &quot;Hacer administrador a otro
+              usuario&quot;
+            </p>
+          </Alert>
+        </section>
+      );
+
     return (
       <section className="mt-5 overflow-hidden">
         <ResultsTable data={data.data} />
