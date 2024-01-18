@@ -82,7 +82,7 @@ const MultipleComboBox = <T extends FieldValues>(
         multiple
         aria-describedby="error-message"
         aria-label="Seleccione una opción"
-        disabled={disabled}
+        disabled={disabled || options.length === 0}
         ref={controller.ref}
         value={selectedOptions}
         onChange={handleSelect}

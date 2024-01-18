@@ -19,15 +19,13 @@ import { BasicList } from '@/interface';
  * @param className - Additional CSS class to apply to the component.
  * @param disabled - Specifies whether the combobox is disabled.
  * @param error - Specifies whether the combobox has an error.
- * @param iconCheckProps - Props for the check icon in the component.
- * @param iconClearProps - Props for the clear icon in the component.
- * @param iconExpandProps - Props for the expand icon in the component.
  * @param msgError - Error message to display if no options are available.
  * @param options - Array of options for the combo box.
  * @param positionedColorOption - Background and text color for positioned option.
  * @param selectedColorOption - Background color for selected option.
  * @param sizing - Dimensions for the combo box.
- +
+ * @param controller - React Hook Form controller (sends onChange fn).
+ *
  * @returns JSX.Element A custom combo box element.
  */
 
