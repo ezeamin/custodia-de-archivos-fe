@@ -59,6 +59,8 @@ const MultipleFilePicker = (props: MultipleFilePickerProps) => {
 
   const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
+    if (disabled) return;
+
     if (!hasFiles(event)) {
       return;
     }
@@ -70,6 +72,8 @@ const MultipleFilePicker = (props: MultipleFilePickerProps) => {
   //   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    if (disabled) return;
+
     if (hasFiles(event)) {
       event.preventDefault();
     }
@@ -77,27 +81,30 @@ const MultipleFilePicker = (props: MultipleFilePickerProps) => {
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
+    if (disabled) return;
+
     addFile(event.dataTransfer.files[0]);
     if (overlayRef.current) overlayRef.current.classList.remove('draggedover');
   };
 
   const handleButtonClick = () => {
+    if (disabled) return;
     if (inputRef.current) inputRef.current.click();
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (disabled) return;
     if (event.target.files && event.target.files.length > 0) {
       addFile(event.target.files[0]);
     }
   };
 
   const handleRemove = (name: string) => {
+    if (disabled) return;
     if (files.length === 1 && emptyRef.current)
       emptyRef.current.classList.remove('hidden');
     setFiles((prev) => prev.filter((file) => file.name !== name));
   };
-
-  if (disabled) return <div>Disabled bitch</div>;
 
   return (
     <section className={cn('my-3', className)}>
@@ -132,12 +139,17 @@ const MultipleFilePicker = (props: MultipleFilePickerProps) => {
         <section className="flex h-full w-full flex-col overflow-hidden">
           <header className="flex flex-col items-center justify-center rounded-md border-2 border-dashed border-gray-400 py-12">
             <p className="mb-3 flex flex-wrap justify-center px-2 font-semibold text-gray-900 dark:text-gray-400">
-              <span>Arrastre y suelte sus archivos&nbsp;</span>
-              <span>para subir ó</span>
+              <span>
+                {disabled
+                  ? 'Subida de archivos no disponible'
+                  : 'Arrastre y suelte sus '}
+              </span>
+              {!disabled && <span>&nbsp;archivos para subir ó</span>}
             </p>
             <input
               multiple
               className="hidden"
+              disabled={disabled}
               id="hidden-input"
               ref={inputRef}
               type="file"
@@ -145,9 +157,10 @@ const MultipleFilePicker = (props: MultipleFilePickerProps) => {
             />
             <Button
               className="mt-2 dark:border-gray-400 dark:hover:border-gray-300"
+              disabled={disabled}
               onClick={handleButtonClick}
             >
-              Subir un archivo
+              {disabled ? 'No habilitado' : 'Subir un archivo'}
             </Button>
           </header>
 
