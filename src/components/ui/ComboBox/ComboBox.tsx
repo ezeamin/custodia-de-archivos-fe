@@ -70,11 +70,7 @@ const ComboBox = <T extends FieldValues>(
 
   const handleSelect = (selected: BasicList | null): void => {
     setSelectedOption(selected);
-    if (selected !== null) {
-      setIsOptionSelected(true);
-    } else {
-      setIsOptionSelected(false);
-    }
+    setIsOptionSelected(selected !== null);
     controller.onChange(selected);
   };
 
