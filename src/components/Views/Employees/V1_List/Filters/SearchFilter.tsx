@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { IoSearch, IoTrash } from 'react-icons/io5';
 import { MdFilterAlt } from 'react-icons/md';
 import { useLocation } from 'react-router-dom';
@@ -20,14 +20,15 @@ import { SearchFilterProps } from '@/components/interface/views';
 const SearchFilter = (props: SearchFilterProps) => {
   const { queryKey, showFilters } = props;
 
-  const { control, onSubmitMiddleware, setValue } = useZodForm(searchSchema);
+  const { control, onSubmitMiddleware, setValue, reset, watch } =
+    useZodForm(searchSchema);
+
+  const query = watch('query');
 
   const location = useLocation();
   const { openModal } = useModal();
 
   const queryClient = useQueryClient();
-
-  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSubmit = (data: SearchSchema) => {
     const { search } = location;
@@ -51,15 +52,31 @@ const SearchFilter = (props: SearchFilterProps) => {
     openModal('employeeSearchFilter');
   };
 
-  useEffect(() => {
+  const handleClear = () => {
     const { search } = location;
+
     const params = new URLSearchParams(search);
-    const query = params.get('query');
-    if (query) {
-      setValue('query', query);
-      setHasSearched(true);
+    params.delete('query');
+
+    window.history.replaceState(
+      {},
+      '',
+      `${window.location.pathname}?${params.toString()}`
+    );
+
+    queryClient.invalidateQueries({
+      queryKey: [queryKey],
+    });
+
+    reset();
+  };
+
+  useEffect(() => {
+    const searchQuery = new URLSearchParams(location.search).get('query');
+    if (searchQuery) {
+      setValue('query', searchQuery);
     }
-  }, [location, setValue]);
+  }, [setValue, location]);
 
   return (
     <form className="w-full" onSubmit={onSubmitMiddleware(handleSubmit)}>
@@ -96,8 +113,9 @@ const SearchFilter = (props: SearchFilterProps) => {
         <Grid item xs={showFilters ? 6 : 12}>
           <Button
             className="input-bordered w-full p-3 hover:border-gray-500"
-            disabled={!hasSearched}
+            disabled={!query || query?.length === 0}
             startIcon={<IoTrash />}
+            onClick={handleClear}
           >
             Limpiar
           </Button>
@@ -131,7 +149,8 @@ const SearchFilter = (props: SearchFilterProps) => {
         )}
         <Button
           className="input-bordered p-3 hover:border-gray-500"
-          disabled={!hasSearched}
+          disabled={!query || query?.length === 0}
+          onClick={handleClear}
         >
           <Icon iconComponent={<IoTrash />} size="23px" title="Limpiar" />
         </Button>
