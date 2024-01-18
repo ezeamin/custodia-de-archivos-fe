@@ -50,21 +50,17 @@ const Results = () => {
     if (data.data.length === 0)
       return (
         <section className="mt-5 overflow-hidden">
-          <Alert className="mb-3" type="warning">
+          <Alert className="mb-3">
             <p>
               Atencion! No hay usuarios creados aún. Para crear un usuario, debe
               crear primero un empleado. Puede crear uno nuevo desde
             </p>
             <p className="my-3 text-center font-bold">
-              &quot;Empleados&quot; &gt; &quot;Crear nuevo empleado&quot;
+              &quot;Empleados&quot; &gt; &quot;CREAR NUEVO EMPLEADO&quot;
             </p>
             <p>
               Luego, desde el detalle del empleado creado, podrá crearle un
-              usuario.
-            </p>
-            <p className="my-3 text-center font-bold">
-              &quot;Ajustes&quot; &gt; &quot;Hacer administrador a otro
-              usuario&quot;
+              usuario. Posteriormente, vuelva a esta página.
             </p>
           </Alert>
         </section>

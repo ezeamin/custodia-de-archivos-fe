@@ -7,6 +7,7 @@ import { getEmployeeLicensesTypesFn } from '@/api/api-calls/employees';
 import { useLoading } from '@/hooks';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
+import { Alert } from '@/components/ui';
 
 const data = mockedTypesList;
 const isLoading = false;
@@ -41,6 +42,15 @@ const TypesList = () => {
   }
 
   if (data?.data) {
+    if (data.data.length === 0)
+      return (
+        <section className="mt-5 overflow-hidden">
+          <Alert className="mb-3">
+            <p>Aún no hay tipos de licencias creadas.</p>
+          </Alert>
+        </section>
+      );
+
     return (
       <section className="animate-in-bottom a-delay-600 mt-4 overflow-hidden">
         <ResultsList data={data.data} />

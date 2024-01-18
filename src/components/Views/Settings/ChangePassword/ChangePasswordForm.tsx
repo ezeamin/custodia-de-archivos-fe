@@ -68,6 +68,7 @@ const ChangePasswordForm = () => {
       <Grid container gap={3}>
         <Grid item lg={6} md={12} sm={6} xs={12}>
           <PasswordInput
+            autoComplete="new-password"
             className="animate-in-left a-delay-400 w-full"
             control={control}
             label="Nueva contraseña"
@@ -78,6 +79,7 @@ const ChangePasswordForm = () => {
         </Grid>
         <Grid item lg={6} md={12} sm={6} xs={12}>
           <PasswordInput
+            autoComplete="new-password"
             className="animate-in-left a-delay-400 w-full"
             control={control}
             label="Repetir nueva contraseña"

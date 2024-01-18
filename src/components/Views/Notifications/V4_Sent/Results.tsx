@@ -7,7 +7,7 @@ import { getSentNotificationsFn } from '@/api/api-calls/notifications';
 import { useLoading } from '@/hooks';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
-import { Pagination } from '@/components/ui';
+import { Alert, Pagination } from '@/components/ui';
 
 const data = {
   ...mockedData,
@@ -45,6 +45,21 @@ const Results = () => {
   }
 
   if (data?.data) {
+    if (data.data.length === 0)
+      return (
+        <section className="mt-5 overflow-hidden">
+          <Alert className="mb-3" type="info">
+            <p>
+              Aún no se envió ninguna notifiación. Puede hacerlo desde el botón
+              superior de
+            </p>
+            <p className="my-3 text-center font-bold">
+              &quot;Notificaciones&quot; &gt; &quot;CREAR NUEVO EMPLEADO&quot;
+            </p>
+          </Alert>
+        </section>
+      );
+
     return (
       <section className="mt-5 overflow-hidden">
         <ResultsList data={data.data} />

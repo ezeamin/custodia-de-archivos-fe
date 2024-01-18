@@ -8,7 +8,7 @@ import { getEmployeesFn } from '@/api/api-calls/employees';
 import { useLoading } from '@/hooks';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
-import { Pagination } from '@/components/ui';
+import { Alert, Pagination } from '@/components/ui';
 
 const data = mockedData;
 const isError = false;
@@ -48,6 +48,18 @@ const Results = () => {
   }
 
   if (data?.data) {
+    if (data.data.length === 0)
+      return (
+        <section className="mt-5 overflow-hidden">
+          <Alert className="mb-3">
+            <p>
+              Atencion! No hay empleados creados aún. Puede crear uno nuevo
+              desde el botón superior &quot;CREAR NUEVO EMPLEADO&quot;
+            </p>
+          </Alert>
+        </section>
+      );
+
     return (
       <section className="mt-5 overflow-hidden">
         <ResultsTable data={data.data} />

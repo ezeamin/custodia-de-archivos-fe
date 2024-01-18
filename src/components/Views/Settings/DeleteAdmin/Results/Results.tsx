@@ -53,7 +53,7 @@ const Results = () => {
     if (data.data.length === 0)
       return (
         <section className="mt-5 overflow-hidden">
-          <Alert className="mb-3" type="warning">
+          <Alert className="mb-3">
             <p>
               Atencion! No hay usuarios con permisos de administrador, y no se
               puede autorevocar el permiso. Puede crear uno nuevo desde
