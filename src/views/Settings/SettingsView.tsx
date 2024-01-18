@@ -30,7 +30,7 @@ const routes = {
       id: 2,
       path: paths.SETTINGS.REMOVE_ADMIN,
       name: 'Quitar permisos de administrador a otro usuario',
-      disabled: true,
+      disabled: false,
     },
   ],
   READ_ONLY: [
@@ -52,7 +52,7 @@ const routes = {
 const isThereAnyDisabledRoute = () => {
   const routesArray = Object.values(routes);
   return routesArray.some((higherOrderRoute) =>
-    higherOrderRoute.some((element) => element.disabled)
+    higherOrderRoute.some((element) => element?.disabled)
   );
 };
 

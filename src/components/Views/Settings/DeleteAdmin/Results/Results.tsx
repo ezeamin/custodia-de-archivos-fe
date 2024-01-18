@@ -10,7 +10,10 @@ import { useLoading } from '@/hooks';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Pagination } from '@/components/ui';
 
-const data = mockedUserList;
+const data = {
+  ...mockedUserList,
+  data: mockedUserList.data.filter((user) => user.role.description === 'ADMIN'),
+};
 const isLoading = false;
 const isError = false;
 
@@ -20,8 +23,8 @@ const Results = () => {
   // -------------------------------------------------
 
   const { /* data, isLoading, isError, */ refetch, status } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => getUsersFn({}),
+    queryKey: ['adminUsers'],
+    queryFn: () => getUsersFn({ admin: true }),
   });
 
   useLoading(isLoading, status);

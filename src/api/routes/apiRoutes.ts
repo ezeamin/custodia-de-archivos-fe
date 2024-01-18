@@ -65,6 +65,11 @@ export const apiRoutes = {
       url: `/users/create-admin/${id}`,
       useToken: true,
     }),
+    DELETE_ADMIN: ({ id }: { id: string }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/users/delete-admin/${id}`,
+      useToken: true,
+    }),
   },
   EMPLOYEES: {
     GET_EMPLOYEES: ({ params }: { params: string }): ApiRoute => ({

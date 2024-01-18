@@ -5,20 +5,16 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 
-import { putCreateAdminFn } from '@/api/api-calls/users';
+import { deleteAdminFn } from '@/api/api-calls/users';
 
 import { Button } from '@/components/ui';
 
-import { displayLabelRole } from '@/utilities/utils';
-
 import { CreateAdminResultsElement } from '@/components/interface/views';
 
-const ResultsTableRow = (props: CreateAdminResultsElement) => {
-  const { user } = props;
+const ResultsListItem = (props: CreateAdminResultsElement) => {
+  const { user, index } = props;
 
   const navigate = useNavigate();
-
-  const isUserAlreadyAdmin = user.role.description === 'ADMIN';
 
   // -------------------------------------------------
   // API
@@ -28,8 +24,8 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
 
   const queryClient = useQueryClient();
 
-  const { mutate: createAdmin } = useMutation({
-    mutationFn: putCreateAdminFn,
+  const { mutate: deleteAdmin } = useMutation({
+    mutationFn: deleteAdminFn,
     onError: () => {
       setIsLoading(false);
     },
@@ -56,21 +52,19 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
   // -------------------------------------------------
 
   const handleClick = () => {
-    if (isUserAlreadyAdmin) return;
-
     Swal.fire({
       title: '¿Está seguro?',
-      text: `Va a convertir a ${user.firstname} ${user.lastname} en administrador`,
+      text: `Va a quitar los permisos de ${user.firstname} ${user.lastname} para acceder a las funcionalidades de administrador`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sí, hacer administrador',
+      confirmButtonText: 'Sí, quitar permisos',
       cancelButtonText: 'Cancelar',
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
     }).then((result) => {
       if (result.isConfirmed) {
         setIsLoading(true);
-        createAdmin(user.id);
+        deleteAdmin(user.id);
       }
     });
   };
@@ -79,39 +73,47 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
   // RENDER
   // -------------------------------------------------
 
-  const role = displayLabelRole(user.role.description);
   const dni = user.username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
 
   return (
-    <tr>
-      <td>
-        <img
-          alt={`${user.lastname}, ${user.firstname}`}
-          className="min-w-[50px] rounded-md object-cover"
-          height={80}
-          src={user.imgSrc}
-          width={80}
-        />
-      </td>
-      <td>
-        <p className="font-bold lg:font-normal">{`${user.lastname}, ${user.firstname}`}</p>
-        <p className="text-xs lg:hidden">DNI: {dni}</p>
-        <p className="text-xs lg:hidden">Rol: {role}</p>
-      </td>
-      <td className="hidden lg:table-cell">{dni}</td>
-      <td className="hidden lg:table-cell">{role}</td>
-      <td className="text-end">
-        <Button
-          colorLight="btn-primary"
-          disabled={isUserAlreadyAdmin}
-          loading={isLoading}
-          textColorLight="text-white"
-          onClick={handleClick}
-        >
-          {isUserAlreadyAdmin ? 'YA ES ADMIN' : 'HACER ADMIN'}
-        </Button>
-      </td>
-    </tr>
+    <article
+      className="content-card animate-in-bottom"
+      style={{ animationDelay: `${index! * 200}ms` }}
+    >
+      <div className="card-body p-0">
+        <h2 className="card-title">
+          {user.lastname}, {user.firstname}
+        </h2>
+        <div className="flex justify-between gap-3">
+          <div>
+            <p>
+              DNI: <span className="font-bold">{dni}</span>
+            </p>
+          </div>
+          <div>
+            <img
+              alt={`${user.lastname}, ${user.firstname}`}
+              className="w-[70px] min-w-[70px] rounded-md object-cover sm:w-[100px]"
+              height={70}
+              src={user.imgSrc}
+              width={70}
+            />
+          </div>
+        </div>
+        <div className="divider my-0" />
+        <div className="card-actions">
+          <Button
+            className="w-full"
+            colorLight="btn-primary"
+            loading={isLoading}
+            textColorLight="text-white"
+            onClick={handleClick}
+          >
+            QUITAR PERMISOS
+          </Button>
+        </div>
+      </div>
+    </article>
   );
 };
-export default ResultsTableRow;
+export default ResultsListItem;

@@ -11,8 +11,13 @@ import {
   CreatedUser,
 } from '../interface/users';
 
-export const getUsersFn = async () => {
-  const { search } = window.location;
+export const getUsersFn = async ({ admin = false }: { admin?: boolean }) => {
+  let { search } = window.location;
+
+  if (admin) {
+    if (search.length === 0) search = '?admin=true';
+    else search = `${search}&admin=true`;
+  }
 
   const request = apiRoutes.USERS.GET_USERS({ params: search });
 
@@ -38,6 +43,17 @@ export const postUserFn = async (employeeId: string) => {
 
 export const putCreateAdminFn = async (userId: string) => {
   const request = apiRoutes.USERS.PUT_CREATE_ADMIN({ id: userId });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const deleteAdminFn = async (userId: string) => {
+  const request = apiRoutes.USERS.DELETE_ADMIN({ id: userId });
 
   const data = await fetchFn<API_EmptyResponse>({
     request,

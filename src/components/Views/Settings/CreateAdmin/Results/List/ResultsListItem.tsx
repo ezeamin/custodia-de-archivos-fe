@@ -40,6 +40,9 @@ const ResultsListItem = (props: CreateAdminResultsElement) => {
       queryClient.invalidateQueries({
         queryKey: ['users'],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['adminUsers'],
+      });
 
       // clear query from URLSearchParams, if it exists
       const url = new URL(window.location.href);
@@ -62,6 +65,8 @@ const ResultsListItem = (props: CreateAdminResultsElement) => {
       showCancelButton: true,
       confirmButtonText: 'Sí, hacer administrador',
       cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
     }).then((result) => {
       if (result.isConfirmed) {
         setIsLoading(true);
