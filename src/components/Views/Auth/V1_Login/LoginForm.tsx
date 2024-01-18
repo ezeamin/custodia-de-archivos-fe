@@ -63,6 +63,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
       <TextInput
+        autoComplete="username"
         className="animate-in-left a-delay-400 w-full"
         control={control}
         label="Nombre de usuario"
@@ -71,6 +72,7 @@ const LoginForm = () => {
         placeholder="DNI"
       />
       <PasswordInput
+        autoComplete="current-password"
         className="animate-in-right a-delay-500 mt-2 w-full"
         control={control}
         label="Contraseña"
