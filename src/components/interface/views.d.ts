@@ -20,7 +20,7 @@ import {
   NotificationFile,
   NotificationType,
 } from '@/api/interface/notifications';
-import { BasicUser, ReadOnlyUser } from '@/api/interface/users';
+import { BasicUser, LoginLog, ReadOnlyUser } from '@/api/interface/users';
 
 // --------------------------------------------------
 // EMPLOYEES
@@ -236,6 +236,15 @@ export interface TrainingTypesResultsListItemProps {
 // --------------------------------------------------
 // SETTINGS
 // --------------------------------------------------
+
+export interface LoginLogsResults {
+  data: LoginLog[];
+}
+
+export interface LoginLogsResultsElement {
+  log: LoginLog;
+  index?: number;
+}
 
 export interface CreateAdminResults {
   data: BasicUser[];

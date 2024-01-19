@@ -3,14 +3,20 @@ import { apiRoutes } from '../routes/apiRoutes';
 
 import { UserRole } from '@/constants/userRoles/userRoles';
 
-import { getUsersAdapter, postUserAdapter } from '../adapters/users';
+import {
+  getLoginLogsAdapter,
+  getUsersAdapter,
+  postUserAdapter,
+} from '../adapters/users';
 
 import { API_EmptyResponse } from '../interface';
 import {
+  API_GetLoginLogs,
   API_GetUsers,
   API_PostUser,
   BasicUser,
   CreatedUser,
+  LoginLog,
 } from '../interface/users';
 
 export const getUsersFn = async ({ role }: { role?: UserRole }) => {
@@ -86,6 +92,19 @@ export const deleteReadOnlyUserFn = async (userId: string) => {
   const data = await fetchFn<API_EmptyResponse>({
     request,
     adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const getLoginLogsFn = async () => {
+  const { search } = window.location;
+
+  const request = apiRoutes.USERS.GET_LOGIN_LOGS({ params: search });
+
+  const data = await fetchFn<API_GetLoginLogs[], LoginLog[]>({
+    request,
+    adapter: getLoginLogsAdapter,
   });
 
   return data;

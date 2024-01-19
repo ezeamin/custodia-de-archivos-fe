@@ -80,6 +80,11 @@ export const apiRoutes = {
       url: `/users/delete-read-only/${id}`,
       useToken: true,
     }),
+    GET_LOGIN_LOGS: ({ params }: { params: string }): ApiRoute => ({
+      method: 'GET',
+      url: `/users/login-logs${params}`,
+      useToken: true,
+    }),
   },
   EMPLOYEES: {
     GET_EMPLOYEES: ({ params }: { params: string }): ApiRoute => ({

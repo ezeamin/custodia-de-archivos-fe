@@ -19,6 +19,14 @@ export interface API_PostUser {
   password: string;
 }
 
+export interface API_GetLoginLogs {
+  id: string;
+  username: string;
+  ipAddress: string;
+  userAgent: string;
+  date: string;
+}
+
 // ----------------------------------------------------------------------
 // ADAPTERS
 // ----------------------------------------------------------------------
@@ -30,3 +38,4 @@ export interface ReadOnlyUser {
   username: string;
   role: Role;
 }
+export interface LoginLog extends API_GetLoginLogs {}
