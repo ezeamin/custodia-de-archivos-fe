@@ -271,6 +271,7 @@ const CreateForm = () => {
         colorLight="btn-primary"
         disabled={!areAllFieldsFilled}
         loading={isLoading}
+        textColorLight="text-white"
         type="submit"
       >
         Guardar

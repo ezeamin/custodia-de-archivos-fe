@@ -70,6 +70,11 @@ export const apiRoutes = {
       url: `/users/delete-admin/${id}`,
       useToken: true,
     }),
+    POST_READ_ONLY_USER: (): ApiRoute => ({
+      method: 'POST',
+      url: `/users/create-read-only`,
+      useToken: true,
+    }),
   },
   EMPLOYEES: {
     GET_EMPLOYEES: ({ params }: { params: string }): ApiRoute => ({

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { postResetPasswordFn } from '@/api/api-calls/settings';
+import { postResetPasswordFn } from '@/api/api-calls/auth';
 
 import { useZodForm } from '@/hooks';
 

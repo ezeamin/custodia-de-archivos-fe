@@ -60,6 +60,7 @@ export const postRecoverPasswordFn = async (body: { username: string }) => {
   return data;
 };
 
+// From email link
 export const putResetPasswordFn = async (body: {
   password: string;
   repeatPassword: string;
@@ -76,6 +77,22 @@ export const putResetPasswordFn = async (body: {
     request,
     adapter: (APIData) => APIData,
     body: bodyWithoutToken,
+  });
+
+  return data;
+};
+
+// From settings tab
+export const postResetPasswordFn = async (body: {
+  password: string;
+  repeatPassword: string;
+}) => {
+  const request = apiRoutes.AUTH.PUT_RESET_PASS();
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body,
   });
 
   return data;

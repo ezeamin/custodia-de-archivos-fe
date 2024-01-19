@@ -38,7 +38,7 @@ const routes = {
       id: 1,
       path: paths.SETTINGS.MAKE_READ_ONLY,
       name: 'Crear usuario de solo lectura',
-      disabled: true,
+      disabled: false,
     },
     {
       id: 2,

@@ -1,6 +1,7 @@
 import { LoginSchemas } from './schemas/auth';
 import { EmployeesSchemas } from './schemas/employees';
 import { NotificationSchemas } from './schemas/notifications';
+import { SettingsSchemas } from './schemas/settings';
 
 import { TypesListSchemas } from './schemas/typesList';
 
@@ -20,4 +21,5 @@ export type FormSchemas =
   | EmployeesSchemas
   | LoginSchemas
   | NotificationSchemas
-  | TypesListSchemas;
+  | TypesListSchemas
+  | SettingsSchemas;
