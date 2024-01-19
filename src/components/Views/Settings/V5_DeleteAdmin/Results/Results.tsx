@@ -10,9 +10,13 @@ import { useLoading } from '@/hooks';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Pagination } from '@/components/ui';
 
+import { BasicUser } from '@/api/interface/users';
+
 const data = {
   ...mockedUserList,
-  data: mockedUserList.data.filter((user) => user.role.description === 'ADMIN'),
+  data: mockedUserList.data.filter(
+    (user) => user?.role?.description === 'ADMIN'
+  ),
 };
 const isLoading = false;
 const isError = false;
@@ -24,7 +28,7 @@ const Results = () => {
 
   const { /* data, isLoading, isError, */ refetch, status } = useQuery({
     queryKey: ['adminUsers'],
-    queryFn: () => getUsersFn({ admin: true }),
+    queryFn: () => getUsersFn({ role: 'ADMIN' }),
   });
 
   useLoading(isLoading, status);
@@ -68,8 +72,8 @@ const Results = () => {
 
     return (
       <section className="mt-5 overflow-hidden">
-        <ResultsTable data={data.data} />
-        <ResultsList data={data.data} />
+        <ResultsTable data={data.data as BasicUser[]} />
+        <ResultsList data={data.data as BasicUser[]} />
 
         <Pagination totalElements={data.totalElements} />
       </section>

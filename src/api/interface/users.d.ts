@@ -1,3 +1,5 @@
+import { Role } from './params';
+
 import { BasicList } from '@/interface';
 
 // ----------------------------------------------------------------------
@@ -23,3 +25,8 @@ export interface API_PostUser {
 
 export interface BasicUser extends API_GetUsers {}
 export interface CreatedUser extends API_PostUser {}
+export interface ReadOnlyUser {
+  id: string;
+  username: string;
+  role: Role;
+}

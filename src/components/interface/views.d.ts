@@ -20,7 +20,7 @@ import {
   NotificationFile,
   NotificationType,
 } from '@/api/interface/notifications';
-import { BasicUser } from '@/api/interface/users';
+import { BasicUser, ReadOnlyUser } from '@/api/interface/users';
 
 // --------------------------------------------------
 // EMPLOYEES
@@ -29,6 +29,7 @@ import { BasicUser } from '@/api/interface/users';
 export interface SearchFilterProps {
   queryKey: string;
   showFilters?: boolean;
+  placeholder?: string;
 }
 
 export interface EmployeesResultsTableProps {
@@ -242,5 +243,14 @@ export interface CreateAdminResults {
 
 export interface CreateAdminResultsElement {
   user: BasicUser;
+  index?: number;
+}
+
+export interface DeleteReadOnlyUserResults {
+  data: ReadOnlyUser[];
+}
+
+export interface DeleteReadOnlyUserResultsElement {
+  user: ReadOnlyUser;
   index?: number;
 }

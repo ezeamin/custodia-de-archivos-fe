@@ -44,7 +44,7 @@ const routes = {
       id: 2,
       path: paths.SETTINGS.REMOVE_READ_ONLY,
       name: 'Eliminar usuario de solo lectura',
-      disabled: true,
+      disabled: false,
     },
   ],
 };

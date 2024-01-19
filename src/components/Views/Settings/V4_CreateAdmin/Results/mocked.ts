@@ -1,8 +1,11 @@
 import { generateRandomId } from '@/utilities/utils';
 
-import { BasicUser } from '@/api/interface/users';
+import { BasicUser, ReadOnlyUser } from '@/api/interface/users';
 
-export const mockedUserList: { totalElements: number; data: BasicUser[] } = {
+export const mockedUserList: {
+  totalElements: number;
+  data: (BasicUser | ReadOnlyUser)[];
+} = {
   totalElements: 3,
   data: [
     {
@@ -39,6 +42,14 @@ export const mockedUserList: { totalElements: number; data: BasicUser[] } = {
       role: {
         id: generateRandomId(),
         description: 'USER',
+      },
+    },
+    {
+      id: generateRandomId(),
+      username: '36528497',
+      role: {
+        id: generateRandomId(),
+        description: 'READ_ONLY',
       },
     },
   ],

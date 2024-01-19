@@ -75,6 +75,11 @@ export const apiRoutes = {
       url: `/users/create-read-only`,
       useToken: true,
     }),
+    DELETE_READ_ONLY_USER: ({ id }: { id: string }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/users/delete-read-only/${id}`,
+      useToken: true,
+    }),
   },
   EMPLOYEES: {
     GET_EMPLOYEES: ({ params }: { params: string }): ApiRoute => ({

@@ -1,5 +1,5 @@
+import { mockedUserList } from '../../V4_CreateAdmin/Results/mocked';
 import ResultsList from './List/ResultsList';
-import { mockedUserList } from './mocked';
 import ResultsTable from './Table/ResultsTable';
 import { useQuery } from '@tanstack/react-query';
 
@@ -10,9 +10,12 @@ import { useLoading } from '@/hooks';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Pagination } from '@/components/ui';
 
-import { BasicUser } from '@/api/interface/users';
-
-const data = mockedUserList;
+const data = {
+  ...mockedUserList,
+  data: mockedUserList.data.filter(
+    (user) => user.role.description === 'READ_ONLY'
+  ),
+};
 const isLoading = false;
 const isError = false;
 
@@ -22,8 +25,8 @@ const Results = () => {
   // -------------------------------------------------
 
   const { /* data, isLoading, isError, */ refetch, status } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => getUsersFn({}),
+    queryKey: ['readOnlyUsers'],
+    queryFn: () => getUsersFn({ role: 'READ_ONLY' }),
   });
 
   useLoading(isLoading, status);
@@ -54,15 +57,11 @@ const Results = () => {
         <section className="mt-5 overflow-hidden">
           <Alert className="mb-3">
             <p>
-              Atencion! No hay usuarios creados aún. Para crear un usuario, debe
-              crear primero un empleado. Puede crear uno nuevo desde
+              Atencion! No hay usuarios creados de solo lectura. Puede crear uno
+              nuevo desde
             </p>
             <p className="my-3 text-center font-bold">
-              &quot;Empleados&quot; &gt; &quot;CREAR NUEVO EMPLEADO&quot;
-            </p>
-            <p>
-              Luego, desde el detalle del empleado creado, podrá crearle un
-              usuario. Posteriormente, vuelva a esta página.
+              &quot;Ajustes&quot; &gt; &quot;Crear usuario de solo lectura&quot;
             </p>
           </Alert>
         </section>
@@ -70,8 +69,8 @@ const Results = () => {
 
     return (
       <section className="mt-5 overflow-hidden">
-        <ResultsTable data={data.data as BasicUser[]} />
-        <ResultsList data={data.data as BasicUser[]} />
+        <ResultsTable data={data.data} />
+        <ResultsList data={data.data} />
 
         <Pagination totalElements={data.totalElements} />
       </section>

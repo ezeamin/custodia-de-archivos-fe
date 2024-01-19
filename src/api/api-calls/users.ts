@@ -1,6 +1,8 @@
 import { fetchFn } from '../fetchFn';
 import { apiRoutes } from '../routes/apiRoutes';
 
+import { UserRole } from '@/constants/userRoles/userRoles';
+
 import { getUsersAdapter, postUserAdapter } from '../adapters/users';
 
 import { API_EmptyResponse } from '../interface';
@@ -11,12 +13,12 @@ import {
   CreatedUser,
 } from '../interface/users';
 
-export const getUsersFn = async ({ admin = false }: { admin?: boolean }) => {
+export const getUsersFn = async ({ role }: { role?: UserRole }) => {
   let { search } = window.location;
 
-  if (admin) {
-    if (search.length === 0) search = '?admin=true';
-    else search = `${search}&admin=true`;
+  if (role) {
+    const concatenationSymbol = search.length === 0 ? '?' : '&';
+    search += `${concatenationSymbol}role=${role.toLowerCase()}`;
   }
 
   const request = apiRoutes.USERS.GET_USERS({ params: search });
@@ -73,6 +75,17 @@ export const postReadOnlyUserFn = async (body: {
     request,
     adapter: (APIData) => APIData,
     body,
+  });
+
+  return data;
+};
+
+export const deleteReadOnlyUserFn = async (userId: string) => {
+  const request = apiRoutes.USERS.DELETE_READ_ONLY_USER({ id: userId });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
   });
 
   return data;

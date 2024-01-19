@@ -18,7 +18,7 @@ import {
 import { SearchFilterProps } from '@/components/interface/views';
 
 const SearchFilter = (props: SearchFilterProps) => {
-  const { queryKey, showFilters } = props;
+  const { queryKey, showFilters, placeholder } = props;
 
   const { control, onSubmitMiddleware, setValue, reset, watch } =
     useZodForm(searchSchema);
@@ -87,7 +87,7 @@ const SearchFilter = (props: SearchFilterProps) => {
           control={control}
           label="Buscar"
           name="query"
-          placeholder="Buscar por nombre o apellido"
+          placeholder={placeholder || 'Buscar por nombre o apellido'}
         />
         <Button
           className="input-bordered p-3 hover:border-gray-500 md:hidden"
@@ -128,7 +128,7 @@ const SearchFilter = (props: SearchFilterProps) => {
           control={control}
           label="Buscar"
           name="query"
-          placeholder="Buscar por nombre o apellido"
+          placeholder={placeholder || 'Buscar por nombre o apellido'}
         />
         <Button
           className="input-bordered p-3 hover:border-gray-500"
