@@ -27,7 +27,7 @@ export const refreshTokenFetch = async (
 
   // 1. Build the refresh token request
   const { url: refreshUrl, ...refreshRequest } =
-    apiRoutes.AUTH.GET_REFRESH_TOKEN();
+    apiRoutes.AUTH.POST_REFRESH_TOKEN();
 
   const fullPath = `${baseUrl}${refreshUrl}`;
 

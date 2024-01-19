@@ -29,8 +29,8 @@ export const apiRoutes = {
       url: '/auth/login',
       credentials: 'include',
     }),
-    GET_REFRESH_TOKEN: (): ApiRoute => ({
-      method: 'GET',
+    POST_REFRESH_TOKEN: (): ApiRoute => ({
+      method: 'POST',
       url: '/auth/refresh-token',
       credentials: 'include',
     }),

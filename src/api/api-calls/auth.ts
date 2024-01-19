@@ -27,7 +27,7 @@ export const postLoginFn = async (body: {
 };
 
 export const getRefreshTokenFn = async () => {
-  const request = apiRoutes.AUTH.GET_REFRESH_TOKEN();
+  const request = apiRoutes.AUTH.POST_REFRESH_TOKEN();
 
   const data = await fetchFn<API_PostLogin, Login>({
     request,

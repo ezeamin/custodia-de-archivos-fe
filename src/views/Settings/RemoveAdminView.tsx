@@ -1,6 +1,6 @@
 import Title from '@/components/Common/Title';
 import SearchFilter from '@/components/Views/Employees/V1_List/Filters/SearchFilter';
-import Results from '@/components/Views/Settings/DeleteAdmin/Results/Results';
+import Results from '@/components/Views/Settings/V5_DeleteAdmin/Results/Results';
 
 const RemoveAdminView = () => {
   return (

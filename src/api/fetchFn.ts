@@ -66,7 +66,7 @@ export const fetchFn = async <T, V = T>({
 
   if (!res.ok) {
     // Avoid showing error message when trying to refresh token
-    if (!(request.url === apiRoutes.AUTH.GET_REFRESH_TOKEN().url))
+    if (!(request.url === apiRoutes.AUTH.POST_REFRESH_TOKEN().url))
       toast.error(data.message || 'Ocurrió un error al leer la información.');
     throw new Error();
   }

@@ -1,7 +1,7 @@
 import { IoArrowBackOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Icon } from '../ui';
+import { Alert, Button, Icon } from '../ui';
 import LogoutButton from './LogoutButton';
 import MenuModuleButton from './MenuModuleButton';
 import { Drawer } from 'vaul';
@@ -11,6 +11,8 @@ import { usePortraitMenu } from '@/stores/usePortraitMenu';
 import { useSession } from '@/stores/useSession';
 
 import ThemeTogglerButton from '@/components/Menu/ThemeTogglerButton';
+
+import { userRoles } from '@/constants/userRoles/userRoles';
 
 const PortraitMenu = (): JSX.Element => {
   const { user } = useSession();
@@ -55,6 +57,11 @@ const PortraitMenu = (): JSX.Element => {
                 <h2 className="text-xl dark:text-white">
                   Hola, <span className="font-bold">{user?.name}</span>
                 </h2>
+                {user?.role === userRoles.READ_ONLY && (
+                  <Alert hideIcon className="mt-3 text-center" type="warning">
+                    Usuario de solo lectura
+                  </Alert>
+                )}
               </section>
               <div className="duration-400 mx-auto -mb-5 mt-auto max-w-sm bg-white py-4 dark:bg-zinc-700">
                 {/* Botones de los Modulos */}

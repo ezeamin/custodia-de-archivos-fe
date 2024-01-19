@@ -1,4 +1,4 @@
-import { mockedUserList } from '../../CreateAdmin/Results/mocked';
+import { mockedUserList } from '../../V4_CreateAdmin/Results/mocked';
 import ResultsList from './List/ResultsList';
 import ResultsTable from './Table/ResultsTable';
 import { useQuery } from '@tanstack/react-query';

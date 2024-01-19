@@ -1,5 +1,5 @@
 import Title from '@/components/Common/Title';
-import ChangePasswordForm from '@/components/Views/Settings/ChangePassword/ChangePasswordForm';
+import ChangePasswordForm from '@/components/Views/Settings/V2_ChangePassword/ChangePasswordForm';
 
 const ChangePasswordView = () => {
   return (
