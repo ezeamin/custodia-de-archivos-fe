@@ -129,7 +129,7 @@ const ComboBox = <T extends FieldValues>(
                 ariaHidden
                 unstyled
                 aria-label="Borrar selección"
-                className="absolute inset-y-[1px] right-[1px] flex h-auto items-center bg-gray-100 px-3 hover:bg-gray-200 disabled:bg-transparent disabled:text-gray-400 disabled:hover:bg-transparent dark:bg-slate-700 hover:dark:bg-slate-800 disabled:dark:bg-gray-900"
+                className="absolute inset-y-[1px] right-[1px] flex h-auto items-center bg-gray-100 px-3 hover:bg-gray-200 disabled:bg-transparent disabled:text-gray-400 disabled:hover:bg-transparent dark:bg-transparent hover:dark:bg-slate-800"
                 disabled={disabled}
                 type="button"
                 onClick={handleClearSelection}
@@ -139,7 +139,7 @@ const ComboBox = <T extends FieldValues>(
             ) : (
               <Combobox.Button
                 aria-label="Expandir/comprimir opciones"
-                className="absolute inset-y-[1px] right-[1px] flex items-center bg-gray-100 p-3 hover:bg-gray-200 disabled:bg-transparent dark:bg-slate-700 hover:dark:bg-slate-800 dark:disabled:bg-transparent"
+                className="absolute inset-y-[1px] right-[1px] flex items-center bg-gray-100 p-3 hover:bg-gray-200 disabled:bg-transparent dark:bg-slate-700 dark:bg-transparent hover:dark:bg-slate-800 disabled:hover:dark:bg-transparent"
               >
                 <Icon
                   iconComponent={<MdExpandMore />}

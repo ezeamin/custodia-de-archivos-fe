@@ -30,7 +30,7 @@ const MultipleComboBoxInput = <T extends FormSchemas>(
       </label>
       <InputController
         control={control}
-        defaultValue=""
+        defaultValue={null}
         name={name}
         render={({ field, fieldState: { error } }) => (
           <MultipleComboBox<T>
@@ -42,7 +42,6 @@ const MultipleComboBoxInput = <T extends FormSchemas>(
             name={name.toString()}
             options={options}
             placeholder={placeholder ?? 'Ingrese un valor'}
-            value={field.value as string}
             {...rest}
           />
         )}
