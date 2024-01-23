@@ -1,5 +1,4 @@
 import ResultsList from './List/ResultsList';
-import { mockedData } from './mocked';
 import ResultsTable from './Table/ResultsTable';
 import { useQuery } from '@tanstack/react-query';
 
@@ -10,16 +9,12 @@ import { useLoading } from '@/hooks';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Pagination } from '@/components/ui';
 
-const data = mockedData;
-const isError = false;
-const isLoading = false;
-
 const Results = () => {
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+  const { data, isLoading, isError, refetch, status } = useQuery({
     queryKey: ['employees'],
     queryFn: getEmployeesFn,
   });
@@ -39,12 +34,7 @@ const Results = () => {
   // -------------------------------------------------
 
   if (isError) {
-    return (
-      <>
-        <h2 className="mb-3 text-lg font-bold">Historial de cambios</h2>
-        <ErrorMessage refetch={handleRetry} />
-      </>
-    );
+    return <ErrorMessage refetch={handleRetry} />;
   }
 
   if (data?.data) {
@@ -65,7 +55,7 @@ const Results = () => {
         <ResultsTable data={data.data} />
         <ResultsList data={data.data} />
 
-        <Pagination totalElements={data.totalElements} />
+        <Pagination totalElements={data.totalElements || 0} />
       </section>
     );
   }

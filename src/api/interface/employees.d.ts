@@ -14,7 +14,7 @@ export interface API_Address {
 
 export interface API_GetEmployees {
   id: string;
-  dni: string;
+  dni: number;
   imgSrc: string;
   lastname: string;
   firstname: string;

@@ -36,9 +36,7 @@ export const fetchFn = async <T, V = T>({
       ? {
           ...request,
           headers: {
-            'Content-Type': isFormData
-              ? 'multipart/form-data'
-              : 'application/json',
+            ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
             ...(request.useToken ? { Authorization: `Bearer ${token}` } : {}),
             ...(request.headers || {}),
           },

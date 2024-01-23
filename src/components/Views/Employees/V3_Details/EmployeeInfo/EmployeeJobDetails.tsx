@@ -30,10 +30,10 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
 
   return (
     <article className="content-card animate-in-right card !sticky top-5 flex gap-3 sm:!flex-row lg:!flex-col">
-      <div className="relative">
+      <div className="relative sm:w-1/2 lg:w-auto">
         <img
           alt={data.lastname}
-          className="rounded-md object-cover sm:w-1/2 lg:w-auto"
+          className="h-[230px] w-full rounded-md object-cover"
           src={data.imgSrc}
         />
         <Button
@@ -43,14 +43,14 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
           <Icon iconComponent={<FaPencil size="1em" />} title="Editar" />
         </Button>
       </div>
-      <div className="flex flex-col gap-3 sm:w-1/2 lg:w-auto">
+      <div className="flex flex-col gap-3 sm:w-1/2 lg:w-full">
         <h2 className="text-center text-xl font-bold">{`${data.lastname}, ${data.firstname}`}</h2>
         <EmployeeDataField
           label="Estado"
           value={<EmployeeStatus noBadge status={data.status} />}
         />
         <EmployeeDataField label="Nro. Legajo" value={data.fileNumber} />
-        <EmployeeDataField label="Area" value={data.area.description} />
+        <EmployeeDataField label="Área" value={data.area.description} />
         <EmployeeDataField label="Puesto" value={data.position} />
         <EmployeeDataField
           label="Fecha de ingreso"

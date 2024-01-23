@@ -1,7 +1,6 @@
 import { FaPencil } from 'react-icons/fa6';
 import { Link, useParams } from 'react-router-dom';
 
-import { mockedEmployee } from '../../mocked';
 import EmployeeDataField from '../EmployeeDataField';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -10,35 +9,31 @@ import { getEmployeeFn } from '@/api/api-calls/employees';
 
 import { Grid, Icon } from '@/components/ui';
 
-const data = mockedEmployee;
-
 const EmployeePersonalTab = () => {
   const { id: employeeId } = useParams();
 
-  const {
-    /* data */
-    error,
-  } = useQuery({
+  const { data } = useQuery({
     queryKey: [`employee_${employeeId}`],
     queryFn: () => getEmployeeFn(employeeId!),
   });
 
-  console.log(error); // TODO: Remove this line and the error variable
+  if (!data) return null;
 
-  const formattedDni = data?.data?.dni.replace(
-    /(\d{2})(\d{3})(\d{3})/,
-    '$1.$2.$3'
-  );
+  const formattedDni = data?.data?.dni
+    .toString()
+    .replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
   const formattedBirthdate = data?.data?.birthdate
     ? dayjs(data.data.birthdate).format('DD/MM/YYYY')
     : '';
   const formattedAddress = data?.data?.address
-    ? `${data?.data?.address.street.description} ${data?.data?.address
-        .streetNumber}${
+    ? `${data?.data?.address.street.description} ${
+        data?.data?.address.streetNumber
+      }${
         data?.data?.address.apt ? ` - Dpto. ${data?.data?.address.apt}` : ''
-      }, ${data?.data?.address.locality.description}, ${data?.data?.address
-        .state.description}`
-    : '';
+      }, ${data?.data?.address.locality.description}, ${
+        data?.data?.address.state.description
+      }`
+    : 'N/A';
 
   return (
     <>
@@ -100,12 +95,19 @@ const EmployeePersonalTab = () => {
             <EmployeeDataField label="Email" value={data?.data?.email} />
           </Grid>
           <Grid item lg={6} xs={12}>
-            <EmployeeDataField label="Teléfono" value={data?.data?.phone} />
+            <EmployeeDataField
+              label="Teléfono"
+              value={data?.data?.phone || 'N/A'}
+            />
           </Grid>
           <Grid item className="hidden md:block" lg={6} xs={12}>
             <EmployeeDataField
               label="Ciudad"
-              value={data?.data?.address.locality.description}
+              value={
+                data?.data?.address
+                  ? data?.data?.address.locality.description
+                  : 'N/A'
+              }
             />
           </Grid>
           <Grid item className="mb-1" xs={12}>

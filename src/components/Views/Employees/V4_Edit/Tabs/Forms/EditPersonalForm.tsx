@@ -99,7 +99,7 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
     if (employeeOriginalData) {
       setValue('name', employeeOriginalData.firstname);
       setValue('lastname', employeeOriginalData.lastname);
-      setValue('dni', employeeOriginalData.dni);
+      setValue('dni', employeeOriginalData.dni.toString());
       setValue('gender', employeeOriginalData.gender);
       setValue('birthdate', employeeOriginalData.birthdate);
     }

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { areaOptions, genderOptions } from './mocked';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -49,7 +48,7 @@ const CreateForm = () => {
   // -------------------------------------------------
 
   const {
-    // data: genderOptions,
+    data: genderOptions,
     isLoading: isLoadingGenders,
     isError: isErrorGenders,
     status: statusGenders,
@@ -59,7 +58,7 @@ const CreateForm = () => {
   });
 
   const {
-    // data: areaOptions,
+    data: areaOptions,
     isLoading: isLoadingAreas,
     isError: isErrorAreas,
     status: statusAreas,
@@ -77,9 +76,7 @@ const CreateForm = () => {
       setIsLoading(false);
       reset();
       toast.success('Empleado creado con éxito');
-      window.setTimeout(() => {
-        navigate(paths.EMPLOYEES.MAIN);
-      }, 1000);
+      navigate(paths.EMPLOYEES.MAIN);
     },
   });
 
@@ -218,8 +215,7 @@ const CreateForm = () => {
             disabled={isLoading}
             label="Género"
             name="gender"
-            options={genderOptions.data}
-            // options={genderOptions?.data}
+            options={genderOptions?.data || []}
             placeholder="Seleccione un género"
           />
         </Grid>
@@ -260,8 +256,7 @@ const CreateForm = () => {
             disabled={isLoading}
             label="Área"
             name="area"
-            options={areaOptions.data}
-            // options={areaOptions?.data}
+            options={areaOptions?.data || []}
             placeholder="Seleccione un area"
           />
         </Grid>

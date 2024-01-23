@@ -16,7 +16,7 @@ import {
 export const mockedEmployee: { data: Employee } = {
   data: {
     id: generateRandomId(),
-    dni: '12345678',
+    dni: 12345678,
     imgSrc:
       'https://media.es.wired.com/photos/642df54a5c92c1355e3f3e01/1:1/w_2002,h_2002,c_limit/super%20mario%20bros%20criticas.jpg',
     lastname: 'Doe',
