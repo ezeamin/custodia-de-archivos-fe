@@ -10,14 +10,14 @@ const NavigationMenu = () => {
     <section className="flex flex-col gap-3 lg:flex-row">
       <div className="flex gap-3">
         <Link
-          className="btn w-[calc(50%_-0.30rem)] dark:border-gray-500 hover:dark:border-gray-400 lg:w-auto"
+          className="btn w-[calc(50%_-0.30rem)] lg:w-auto dark:border-gray-500 hover:dark:border-gray-400"
           to={paths.NOTIFICATIONS.HISTORY}
         >
           Historial
           <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
         </Link>
         <Link
-          className="btn w-[calc(50%_-0.30rem)] dark:border-gray-500 hover:dark:border-gray-400 lg:w-auto"
+          className="btn w-[calc(50%_-0.30rem)] lg:w-auto dark:border-gray-500 hover:dark:border-gray-400"
           to={paths.NOTIFICATIONS.SENT}
         >
           Enviadas

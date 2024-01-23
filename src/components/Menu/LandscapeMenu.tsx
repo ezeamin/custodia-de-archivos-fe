@@ -28,7 +28,7 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <div className="animate-in-left landscape-menu relative z-50 hidden h-screen w-[17rem] bg-white pl-4 pr-4 dark:bg-blue-950 md:block">
+      <div className="animate-in-left landscape-menu relative z-50 hidden h-screen w-[17rem] bg-white pl-4 pr-4 md:block dark:bg-blue-950">
         {/* PJT Logo */}
         <div className="mb-5 mt-3">
           <LogoCustodia />

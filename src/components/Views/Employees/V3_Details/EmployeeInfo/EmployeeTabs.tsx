@@ -33,7 +33,7 @@ const EmployeeTabs = () => {
   return (
     <>
       <article
-        className="animate-in-bottom a-delay-500 tabs-boxed tabs relative flex flex-col items-center justify-center rounded-xl bg-white p-2 shadow dark:border dark:border-gray-600 dark:bg-slate-800 sm:flex-row sm:gap-1 md:flex-col md:gap-0 lg:flex-row lg:gap-1 xl:grid xl:justify-normal"
+        className="animate-in-bottom a-delay-500 tabs-boxed tabs relative flex flex-col items-center justify-center rounded-xl bg-white p-2 shadow sm:flex-row sm:gap-1 md:flex-col md:gap-0 lg:flex-row lg:gap-1 xl:grid xl:justify-normal dark:border dark:border-gray-600 dark:bg-slate-800"
         id="tabs-selector"
       >
         <div className="flex w-full flex-col xl:hidden">

@@ -33,13 +33,11 @@ const EmployeePersonalTab = () => {
     ? dayjs(data.data.birthdate).format('DD/MM/YYYY')
     : '';
   const formattedAddress = data?.data?.address
-    ? `${data?.data?.address.street.description} ${
-        data?.data?.address.streetNumber
-      }${
+    ? `${data?.data?.address.street.description} ${data?.data?.address
+        .streetNumber}${
         data?.data?.address.apt ? ` - Dpto. ${data?.data?.address.apt}` : ''
-      }, ${data?.data?.address.locality.description}, ${
-        data?.data?.address.state.description
-      }`
+      }, ${data?.data?.address.locality.description}, ${data?.data?.address
+        .state.description}`
     : '';
 
   return (
