@@ -87,7 +87,7 @@ const AddNewDocumentModal = () => {
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
       <Modal
         submitButton
-        className="overflow-x-hidden"
+        className="overflow-x-hidden p-1"
         id="addNewDocument"
         loading={isLoading}
         title="Nuevo Documento"

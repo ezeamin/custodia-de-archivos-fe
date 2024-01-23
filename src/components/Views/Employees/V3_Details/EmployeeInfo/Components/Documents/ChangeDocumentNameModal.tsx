@@ -94,6 +94,7 @@ const ChangeDocumentNameModal = () => {
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
       <Modal
         submitButton
+        className="p-1"
         id="changeDocument"
         loading={isLoading}
         title="Cambiar nombre"
