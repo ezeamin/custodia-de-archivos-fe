@@ -38,13 +38,25 @@ const Results = () => {
   }
 
   if (data?.data) {
-    if (data.data.length === 0)
+    if (data.data.length === 0 && !window.location.search.includes('query'))
       return (
         <section className="mt-5 overflow-hidden">
           <Alert className="mb-3">
             <p>
               Atencion! No hay empleados creados aún. Puede crear uno nuevo
               desde el botón superior &quot;CREAR NUEVO EMPLEADO&quot;
+            </p>
+          </Alert>
+        </section>
+      );
+
+    if (data.data.length === 0 && window.location.search.includes('query'))
+      return (
+        <section className="mt-5 overflow-hidden">
+          <Alert className="mb-3" type="warning">
+            <p>
+              No se encontraron resultados para la búsqueda realizada. Intente
+              con otros valores
             </p>
           </Alert>
         </section>

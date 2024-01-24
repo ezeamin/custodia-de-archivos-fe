@@ -28,7 +28,6 @@ import { BasicUser, LoginLog, ReadOnlyUser } from '@/api/interface/users';
 
 export interface SearchFilterProps {
   queryKey: string;
-  showFilters?: boolean;
   placeholder?: string;
 }
 

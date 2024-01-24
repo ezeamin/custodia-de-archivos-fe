@@ -19,9 +19,10 @@ const EmployeePersonalTab = () => {
 
   if (!data) return null;
 
-  const formattedDni = data?.data?.dni
-    .toString()
-    .replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const formattedDni = data?.data?.dni.replace(
+    /(\d{2})(\d{3})(\d{3})/,
+    '$1.$2.$3'
+  );
   const formattedBirthdate = data?.data?.birthdate
     ? dayjs(data.data.birthdate).format('DD/MM/YYYY')
     : '';

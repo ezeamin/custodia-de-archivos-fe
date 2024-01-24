@@ -6,9 +6,10 @@ const HistoryListItem = (props: HistoryElementProps) => {
   const { data } = props;
 
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY - HH:mm:ss');
-  const formattedDni = data.user.description
-    .toString()
-    .replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const formattedDni = data.user.description.replace(
+    /(\d{2})(\d{3})(\d{3})/,
+    '$1.$2.$3'
+  );
 
   return (
     <article className="content-card">
@@ -24,7 +25,7 @@ const HistoryListItem = (props: HistoryElementProps) => {
           Campo: <b>{data.field}</b>
         </li>
         <li>
-          Valor anterior: <b>{data.previousValue}</b>
+          Valor anterior: <b>{data.previousValue || 'N/A'}</b>
         </li>
         <li>
           Valor nuevo: <b>{data.newValue || 'N/A'}</b>

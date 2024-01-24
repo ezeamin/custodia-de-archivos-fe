@@ -33,7 +33,7 @@ const ResetPassForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { mutate: postResetPassword, isSuccess } = useMutation({
+  const { mutate: putResetPassword, isSuccess } = useMutation({
     mutationFn: putResetPasswordFn,
     onError: () => {
       setIsLoading(false);
@@ -49,7 +49,7 @@ const ResetPassForm = () => {
 
   const handleSubmit = (data: ResetPasswordSchema) => {
     setIsLoading(true);
-    postResetPassword({ ...data, token });
+    putResetPassword({ password: data.password, token });
   };
 
   // -------------------------------------------------
@@ -87,11 +87,11 @@ const ResetPassForm = () => {
         colorLight="bg-gray-900"
         disabled={isSuccess}
         loading={isLoading}
+        startIcon={<IoMdSave />}
         textColorDark="dark:text-gray-900"
         textColorLight="text-white"
         type="submit"
       >
-        <Icon iconComponent={<IoMdSave />} title="Guardar" />
         GUARDAR
       </Button>
       <Link className="btn mt-2 w-full" to={paths.AUTH.LOGIN}>

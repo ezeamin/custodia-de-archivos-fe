@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
 import { IoSearch, IoTrash } from 'react-icons/io5';
-import { MdFilterAlt } from 'react-icons/md';
 import { useLocation } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
 
 import { useZodForm } from '@/hooks';
-import { useModal } from '@/stores/useModal';
 
 import { Button, Grid, Icon, TextInput } from '@/components/ui';
 
@@ -18,7 +16,7 @@ import {
 import { SearchFilterProps } from '@/components/interface/views';
 
 const SearchFilter = (props: SearchFilterProps) => {
-  const { queryKey, showFilters, placeholder } = props;
+  const { queryKey, placeholder } = props;
 
   const { control, onSubmitMiddleware, setValue, reset, watch } =
     useZodForm(searchSchema);
@@ -26,7 +24,6 @@ const SearchFilter = (props: SearchFilterProps) => {
   const query = watch('query');
 
   const location = useLocation();
-  const { openModal } = useModal();
 
   const queryClient = useQueryClient();
 
@@ -45,11 +42,6 @@ const SearchFilter = (props: SearchFilterProps) => {
     queryClient.invalidateQueries({
       queryKey: [queryKey],
     });
-  };
-
-  const handleModal = () => {
-    if (!showFilters) return;
-    openModal('employeeSearchFilter');
   };
 
   const handleClear = () => {
@@ -87,7 +79,7 @@ const SearchFilter = (props: SearchFilterProps) => {
           control={control}
           label="Buscar"
           name="query"
-          placeholder={placeholder || 'Buscar por nombre o apellido'}
+          placeholder={placeholder || 'Buscar por nombre, apellido, o DNI'}
         />
         <Button
           className="input-bordered p-3 hover:border-gray-500 md:hidden"
@@ -97,20 +89,7 @@ const SearchFilter = (props: SearchFilterProps) => {
         </Button>
       </div>
       <Grid container className="md:hidden" gap={2}>
-        {showFilters && (
-          <Grid item xs={6}>
-            <Button
-              disabled
-              className="input-bordered w-full p-3 hover:border-gray-500"
-              startIcon={<MdFilterAlt />}
-              type="button"
-              onClick={handleModal}
-            >
-              Filtros
-            </Button>
-          </Grid>
-        )}
-        <Grid item xs={showFilters ? 6 : 12}>
+        <Grid item xs={12}>
           <Button
             className="input-bordered w-full p-3 hover:border-gray-500"
             disabled={!query || query?.length === 0}
@@ -128,7 +107,7 @@ const SearchFilter = (props: SearchFilterProps) => {
           control={control}
           label="Buscar"
           name="query"
-          placeholder={placeholder || 'Buscar por nombre o apellido'}
+          placeholder={placeholder || 'Buscar por nombre, apellido, o DNI'}
         />
         <Button
           className="input-bordered p-3 hover:border-gray-500"
@@ -136,17 +115,6 @@ const SearchFilter = (props: SearchFilterProps) => {
         >
           <Icon iconComponent={<IoSearch />} size="23px" title="buscar" />
         </Button>
-        {showFilters && (
-          <Button
-            disabled
-            className="input-bordered p-3 hover:border-gray-500"
-            startIcon={<MdFilterAlt />}
-            type="button"
-            onClick={handleModal}
-          >
-            Filtros
-          </Button>
-        )}
         <Button
           className="input-bordered p-3 hover:border-gray-500"
           disabled={!query || query?.length === 0}

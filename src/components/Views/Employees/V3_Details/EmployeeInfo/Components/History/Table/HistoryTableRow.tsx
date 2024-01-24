@@ -7,9 +7,10 @@ const HistoryTableRow = (props: HistoryElementProps) => {
 
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY');
   const formattedHour = dayjs(data.date).format('HH:mm:ss');
-  const formattedDni = data.user.description
-    .toString()
-    .replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const formattedDni = data.user.description.replace(
+    /(\d{2})(\d{3})(\d{3})/,
+    '$1.$2.$3'
+  );
 
   return (
     <tr>
@@ -18,7 +19,7 @@ const HistoryTableRow = (props: HistoryElementProps) => {
         <p>{formattedHour}</p>
       </td>
       <td>{data.field}</td>
-      <td>{data.previousValue}</td>
+      <td>{data.previousValue || 'N/A'}</td>
       <td>{data.newValue || 'N/A'}</td>
       <td>{formattedDni}</td>
     </tr>

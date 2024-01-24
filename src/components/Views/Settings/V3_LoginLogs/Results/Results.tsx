@@ -1,5 +1,4 @@
 import ResultsList from './List/ResultsList';
-import { mockedLoginLogsList } from './mocked';
 import ResultsTable from './Table/ResultsTable';
 import { useQuery } from '@tanstack/react-query';
 
@@ -10,16 +9,12 @@ import { useLoading } from '@/hooks';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Pagination } from '@/components/ui';
 
-const data = mockedLoginLogsList;
-const isLoading = false;
-const isError = false;
-
 const Results = () => {
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+  const { data, isLoading, isError, refetch, status } = useQuery({
     queryKey: ['loginLogs'],
     queryFn: getLoginLogsFn,
   });
@@ -66,7 +61,7 @@ const Results = () => {
         <ResultsTable data={data.data} />
         <ResultsList data={data.data} />
 
-        <Pagination totalElements={data.totalElements} />
+        <Pagination totalElements={data.totalElements || 0} />
       </section>
     );
   }
