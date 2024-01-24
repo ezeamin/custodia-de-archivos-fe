@@ -107,6 +107,7 @@ const AddNewLateArrivalModal = () => {
           name="date"
         />
         <HourInput
+          className="mb-2"
           control={control}
           disabled={isLoading}
           label="Horario de llegada *"

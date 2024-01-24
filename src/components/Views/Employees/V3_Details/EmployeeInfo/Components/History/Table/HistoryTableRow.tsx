@@ -19,7 +19,7 @@ const HistoryTableRow = (props: HistoryElementProps) => {
       </td>
       <td>{data.field}</td>
       <td>{data.previousValue}</td>
-      <td>{data.newValue}</td>
+      <td>{data.newValue || 'N/A'}</td>
       <td>{formattedDni}</td>
     </tr>
   );

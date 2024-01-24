@@ -93,8 +93,6 @@ const TypesForm = () => {
   const handleSubmit = (data: TrainingTypeSchema) => {
     setIsLoading(true);
 
-    console.log(data);
-
     if (isEditing) {
       editType({ ...data, id: idBeingEdited });
     } else {

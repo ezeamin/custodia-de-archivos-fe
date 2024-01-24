@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 
-import { mockedEmployee } from '../../../V3_Details/mocked';
 import EditContactForm from '../Forms/EditContactForm';
 import EditJobForm from '../Forms/EditJobForm';
 import EditPersonalForm from '../Forms/EditPersonalForm';
@@ -11,10 +10,6 @@ import { getEmployeeFn } from '@/api/api-calls/employees';
 import { useLoading } from '@/hooks';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
-
-const data = mockedEmployee;
-const isError = false;
-const isLoading = false;
 
 const GlobalEmployeeResults = () => {
   // -------------------------------------------------
@@ -28,7 +23,7 @@ const GlobalEmployeeResults = () => {
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+  const { data, isLoading, isError, refetch, status } = useQuery({
     queryKey: [`employee_${employeeId}`],
     queryFn: () => getEmployeeFn(employeeId!),
   });

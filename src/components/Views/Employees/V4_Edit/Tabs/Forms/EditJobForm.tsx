@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { areaOptions } from '../../../V2_Create/mocked';
-import { mockedStatus } from '../../../V3_Details/mocked';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -29,7 +27,6 @@ import {
 
 import { EmployeeInfoProps } from '@/components/interface/views';
 
-const statusOptions = mockedStatus;
 const EditJobForm = (props: EmployeeInfoProps) => {
   const { data: employeeOriginalData } = props;
 
@@ -60,7 +57,7 @@ const EditJobForm = (props: EmployeeInfoProps) => {
   const queryClient = useQueryClient();
 
   const {
-    // data: statusOptions,
+    data: statusOptions,
     isLoading: isLoadingStatus,
     isError: isErrorStatus,
     status: statusStatusOpt,
@@ -70,7 +67,7 @@ const EditJobForm = (props: EmployeeInfoProps) => {
   });
 
   const {
-    // data: areaOptions,
+    data: areaOptions,
     isLoading: isLoadingAreas,
     isError: isErrorAreas,
     status: statusAreas,
@@ -161,10 +158,12 @@ const EditJobForm = (props: EmployeeInfoProps) => {
             disabled={isLoading}
             label="Estado *"
             name="status"
-            options={statusOptions.data.map((el) => ({
-              id: el.id,
-              description: displayStatusLabel(el.description),
-            }))}
+            options={
+              statusOptions?.data?.map((el) => ({
+                id: el.id,
+                description: displayStatusLabel(el.description),
+              })) || []
+            }
             placeholder="Seleccione un estado"
           />
         </Grid>
@@ -185,7 +184,7 @@ const EditJobForm = (props: EmployeeInfoProps) => {
             disabled={isLoading}
             label="Area *"
             name="area"
-            options={areaOptions.data}
+            options={areaOptions?.data || []}
             placeholder="Seleccione un area"
           />
         </Grid>

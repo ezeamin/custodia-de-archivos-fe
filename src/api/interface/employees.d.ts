@@ -37,6 +37,7 @@ export interface API_GetEmployee extends API_GetEmployees {
   address: API_Address;
   phone: string;
   email: string;
+  workingHours: number;
   gender: {
     id: string;
     description: string;
@@ -121,6 +122,7 @@ export interface API_GetTrainingsTypes {
 export interface API_GetLateArrivals {
   id: string;
   date: string;
+  time: string;
   observations?: string;
 }
 

@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
 
-import { mockedLateArrivals } from '../../../../mocked';
 import AddNewButton from '../NewButton/NewButton';
 import ObservationsMessage from '../Observations/ObservationsMessage';
 import Modal from './LateArrivalsModal';
@@ -18,10 +17,6 @@ import { useModal } from '@/stores/useModal';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Button } from '@/components/ui';
 
-const data = mockedLateArrivals;
-const isLoading = false;
-const isError = false;
-
 const Results = () => {
   // -------------------------------------------------
   // STATE & PARAMS
@@ -36,7 +31,7 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+  const { data, isLoading, isError, refetch, status } = useQuery({
     queryKey: [`employeeLateArrivals_${employeeId}`],
     queryFn: () => getEmployeeLateArrivalsFn(employeeId!),
   });
@@ -84,7 +79,7 @@ const Results = () => {
         </div>
       )}
 
-      {data.data && data.data.length > 0 && (
+      {data?.data && data.data.length > 0 && (
         <>
           <ObservationsMessage id="lateArrivals" />
           <section className="hidden sm:block">
@@ -105,11 +100,11 @@ const Results = () => {
         </>
       )}
 
-      {data.data && data.data.length === 0 && (
+      {data?.data && data.data.length === 0 && (
         <p className="my-3 text-center">No hay llegadas tarde registradas</p>
       )}
 
-      {createPortal(<Modal data={data?.data} />, document.body)}
+      {createPortal(<Modal data={data?.data || []} />, document.body)}
       {createPortal(<NewModal />, document.body)}
     </>
   );

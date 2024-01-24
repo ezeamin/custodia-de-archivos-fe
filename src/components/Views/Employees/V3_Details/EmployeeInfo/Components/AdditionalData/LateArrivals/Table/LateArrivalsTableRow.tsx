@@ -14,7 +14,6 @@ const LateArrivalsTableRow = (props: LateArrivalsElementProps) => {
   const { setObservationData } = useObservation();
 
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY');
-  const formattedTime = dayjs(data.date).format('HH:mm:ss');
 
   const handleClickObservations = () => {
     if (!data.observations) return;
@@ -25,7 +24,7 @@ const LateArrivalsTableRow = (props: LateArrivalsElementProps) => {
   return (
     <tr>
       <td className="w-[20%]">{formattedDate}</td>
-      <td className="w-[80%]">{formattedTime}</td>
+      <td className="w-[80%]">{data.time}</td>
       <td align="center">
         {data.observations ? (
           <IconButton

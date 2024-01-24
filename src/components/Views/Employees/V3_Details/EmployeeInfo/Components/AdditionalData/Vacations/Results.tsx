@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
 
-import { mockedVacations } from '../../../../mocked';
 import AddNewButton from '../NewButton/NewButton';
 import ObservationsMessage from '../Observations/ObservationsMessage';
 import List from './List/VacationsList';
@@ -18,10 +17,6 @@ import { useModal } from '@/stores/useModal';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Button } from '@/components/ui';
 
-const data = mockedVacations;
-const isLoading = false;
-const isError = false;
-
 const Results = () => {
   // -------------------------------------------------
   // STATE & PARAMS
@@ -36,7 +31,7 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+  const { data, isLoading, isError, refetch, status } = useQuery({
     queryKey: [`employeeVacations_${employeeId}`],
     queryFn: () => getEmployeeVacationsFn(employeeId!),
   });
@@ -84,7 +79,7 @@ const Results = () => {
         </div>
       )}
 
-      {data.data && data.data.length > 0 && (
+      {data?.data && data.data.length > 0 && (
         <>
           <Alert className="mb-3">
             La diferencia de días incluye fines de semana y feriados. No se hace
@@ -109,11 +104,11 @@ const Results = () => {
         </>
       )}
 
-      {data.data && data.data.length === 0 && (
+      {data?.data && data.data.length === 0 && (
         <p className="my-3 text-center">No hay vacaciones registradas</p>
       )}
 
-      {createPortal(<Modal data={data?.data} />, document.body)}
+      {createPortal(<Modal data={data?.data || []} />, document.body)}
       {createPortal(<NewModal />, document.body)}
     </>
   );

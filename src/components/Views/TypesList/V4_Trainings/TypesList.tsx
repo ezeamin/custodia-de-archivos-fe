@@ -1,5 +1,4 @@
 import ResultsList from './List/ResultsList';
-import { mockedTypesList } from './mocked';
 import { useQuery } from '@tanstack/react-query';
 
 import { getEmployeeTrainingsTypesFn } from '@/api/api-calls/employees';
@@ -9,16 +8,12 @@ import { useLoading } from '@/hooks';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert } from '@/components/ui';
 
-const data = mockedTypesList;
-const isLoading = false;
-const isError = false;
-
 const TypesList = () => {
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+  const { data, isLoading, isError, refetch, status } = useQuery({
     queryKey: ['employeeTrainingsTypes'],
     queryFn: getEmployeeTrainingsTypesFn,
   });

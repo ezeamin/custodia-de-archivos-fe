@@ -92,7 +92,7 @@ const AddNewVacationModal = () => {
           className="mb-2 w-full"
           control={control}
           disabled={isLoading}
-          label="Inicio de licencia *"
+          label="Inicio de vacaciones *"
           name="fromDate"
           placeholder="Seleccione fecha de inicio"
         />
@@ -100,7 +100,7 @@ const AddNewVacationModal = () => {
           className="mb-2 w-full"
           control={control}
           disabled={isLoading}
-          label="Fin de licencia *"
+          label="Fin de vacaciones *"
           name="toDate"
           placeholder="Seleccione fecha de fin"
         />
@@ -110,7 +110,7 @@ const AddNewVacationModal = () => {
           disabled={isLoading}
           label="Observaciones"
           name="observations"
-          placeholder="Esta licencia se pidio porque..."
+          placeholder="Estas vacaciones se pidieron porque..."
         />
       </Modal>
     </form>

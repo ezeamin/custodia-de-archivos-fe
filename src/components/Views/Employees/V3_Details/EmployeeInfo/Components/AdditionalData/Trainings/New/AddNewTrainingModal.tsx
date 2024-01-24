@@ -22,7 +22,6 @@ import {
   TextAreaInput,
   TextInput,
 } from '@/components/ui';
-import { mockedTrainingsTypes } from '@/components/Views/Employees/V3_Details/mocked';
 
 import { paths } from '@/constants/routes/paths';
 
@@ -30,10 +29,6 @@ import {
   AddNewTrainingSchema,
   addNewTrainingSchema,
 } from '@/form-schemas/schemas/employees/addNewTrainingSchema';
-
-const trainingsTypes = mockedTrainingsTypes;
-const isLoadingTrainingsTypes = false;
-const isErrorTrainingsTypes = false;
 
 const AddNewTrainingModal = () => {
   // -------------------------------------------------
@@ -58,9 +53,9 @@ const AddNewTrainingModal = () => {
   const queryClient = useQueryClient();
 
   const {
-    /* data: trainingsTypes,
+    data: trainingsTypes,
     isLoading: isLoadingTrainingsTypes,
-    isError: isErrorTrainingsTypes, */
+    isError: isErrorTrainingsTypes,
     status: statusTrainingsTypes,
   } = useQuery({
     queryKey: ['employeeTrainingsTypes'],
@@ -161,10 +156,12 @@ const AddNewTrainingModal = () => {
           disabled={isLoading}
           label="Tipo de capacitación *"
           name="type"
-          options={trainingsTypes.data.map((type) => ({
-            id: type.id,
-            description: type.title,
-          }))}
+          options={
+            trainingsTypes?.data?.map((type) => ({
+              id: type.id,
+              description: type.title,
+            })) || []
+          }
           placeholder="Elija un tipo de capacitación de la lista"
         />
         {!!trainingDescription && (

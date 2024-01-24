@@ -72,6 +72,7 @@ export const getEmployeeAdapter = (data: API_GetEmployee): Employee => ({
   address: data.address,
   fileNumber: data.fileNumber,
   status: data.status,
+  workingHours: data.workingHours,
   user: data.user,
 });
 
@@ -128,6 +129,7 @@ export const getEmployeeLicensesAdapter = (
     id: element.id,
     startDate: element.startDate,
     endDate: element.endDate,
+    observations: element.observations,
     type: {
       id: element.type.id,
       description: element.type.description,
@@ -170,6 +172,7 @@ export const getEmployeeTrainingsAdapter = (
     id: element.id,
     date: element.date,
     reason: element.reason,
+    observations: element.observations,
     type: {
       id: element.type.id,
       description: element.type.description,
@@ -201,6 +204,8 @@ export const getEmployeeLateArrivalsAdapter = (
   return data.map((element) => ({
     id: element.id,
     date: element.date,
+    time: element.time,
+    observations: element.observations,
   }));
 };
 
@@ -211,6 +216,7 @@ export const getEmployeeExtraHoursAdapter = (
     id: element.id,
     date: element.date,
     hours: element.hours,
+    observations: element.observations,
   }));
 };
 

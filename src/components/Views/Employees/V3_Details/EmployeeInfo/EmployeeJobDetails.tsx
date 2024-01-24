@@ -53,6 +53,10 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
         <EmployeeDataField label="Área" value={data.area.description} />
         <EmployeeDataField label="Puesto" value={data.position} />
         <EmployeeDataField
+          label="Horas de trabajo"
+          value={data.workingHours ? `${data.workingHours} horas` : 'N/A'}
+        />
+        <EmployeeDataField
           label="Fecha de ingreso"
           value={formattedStartDate}
         />

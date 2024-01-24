@@ -319,9 +319,11 @@ export const getEmployeeExtraHoursFn = async (id: string) => {
 };
 
 export const postEmployeeAbsenceFn = async (body: Record<string, unknown>) => {
-  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_ABSENCE();
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_ABSENCE({
+    employeeId: body.employeeId as string,
+  });
 
-  const dataToSend = cleanUpDataToSend(body);
+  const dataToSend = cleanUpDataToSend(body, 'employeeId');
 
   const data = await fetchFn<API_EmptyResponse>({
     request,
@@ -335,9 +337,11 @@ export const postEmployeeAbsenceFn = async (body: Record<string, unknown>) => {
 export const postEmployeeLateArrivalFn = async (
   body: Record<string, unknown>
 ) => {
-  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_LATE_ARRIVAL();
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_LATE_ARRIVAL({
+    employeeId: body.employeeId as string,
+  });
 
-  const dataToSend = cleanUpDataToSend(body);
+  const dataToSend = cleanUpDataToSend(body, 'employeeId');
 
   const data = await fetchFn<API_EmptyResponse>({
     request,
@@ -349,9 +353,11 @@ export const postEmployeeLateArrivalFn = async (
 };
 
 export const postEmployeeLicenseFn = async (body: Record<string, unknown>) => {
-  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_LICENSE();
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_LICENSE({
+    employeeId: body.employeeId as string,
+  });
 
-  const dataToSend = cleanUpDataToSend(body);
+  const dataToSend = cleanUpDataToSend(body, 'employeeId');
 
   const data = await fetchFn<API_EmptyResponse>({
     request,
@@ -385,9 +391,11 @@ export const deleteEmployeeLicenseFn = async ({
 export const postEmployeeExtraHoursFn = async (
   body: Record<string, unknown>
 ) => {
-  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_EXTRA_HOURS();
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_EXTRA_HOURS({
+    employeeId: body.employeeId as string,
+  });
 
-  const dataToSend = cleanUpDataToSend(body);
+  const dataToSend = cleanUpDataToSend(body, 'employeeId');
 
   const data = await fetchFn<API_EmptyResponse>({
     request,
@@ -399,9 +407,11 @@ export const postEmployeeExtraHoursFn = async (
 };
 
 export const postEmployeeVacationFn = async (body: Record<string, unknown>) => {
-  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_VACATION();
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_VACATION({
+    employeeId: body.employeeId as string,
+  });
 
-  const dataToSend = cleanUpDataToSend(body);
+  const dataToSend = cleanUpDataToSend(body, 'employeeId');
 
   const data = await fetchFn<API_EmptyResponse>({
     request,
@@ -435,9 +445,11 @@ export const deleteEmployeeVacationsFn = async ({
 export const postEmployeeFormalWarningFn = async (
   body: Record<string, unknown>
 ) => {
-  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_FORMAL_WARNING();
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_FORMAL_WARNING({
+    employeeId: body.employeeId as string,
+  });
 
-  const dataToSend = cleanUpDataToSend(body);
+  const dataToSend = cleanUpDataToSend(body, 'employeeId');
 
   const data = await fetchFn<API_EmptyResponse>({
     request,
@@ -449,9 +461,11 @@ export const postEmployeeFormalWarningFn = async (
 };
 
 export const postEmployeeTrainingFn = async (body: Record<string, unknown>) => {
-  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_TRAINING();
+  const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_TRAINING({
+    employeeId: body.employeeId as string,
+  });
 
-  const dataToSend = cleanUpDataToSend(body);
+  const dataToSend = cleanUpDataToSend(body, 'employeeId');
 
   const data = await fetchFn<API_EmptyResponse>({
     request,

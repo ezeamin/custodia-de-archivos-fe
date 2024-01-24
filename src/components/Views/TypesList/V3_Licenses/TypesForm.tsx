@@ -157,6 +157,7 @@ const TypesForm = () => {
             colorLight="btn-primary"
             disabled={!areAllFieldsFilled || isLoadingEditedData}
             loading={isLoading}
+            textColorLight="text-white"
             type="submit"
           >
             Guardar

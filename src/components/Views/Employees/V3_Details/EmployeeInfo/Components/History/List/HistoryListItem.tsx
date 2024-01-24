@@ -27,7 +27,7 @@ const HistoryListItem = (props: HistoryElementProps) => {
           Valor anterior: <b>{data.previousValue}</b>
         </li>
         <li>
-          Valor nuevo: <b>{data.newValue}</b>
+          Valor nuevo: <b>{data.newValue || 'N/A'}</b>
         </li>
       </ul>
     </article>
