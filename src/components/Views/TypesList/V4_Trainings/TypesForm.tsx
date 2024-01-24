@@ -61,7 +61,7 @@ const TypesForm = () => {
     onSuccess: () => {
       setIsLoading(false);
       reset();
-      toast.success('Tipo de Licencia creada con éxito');
+      toast.success('Tipo de Capacitación creada con éxito');
       queryClient.invalidateQueries({ queryKey: ['employeeTrainingsTypes'] });
     },
   });
@@ -74,8 +74,9 @@ const TypesForm = () => {
     onSuccess: () => {
       setIsLoading(false);
       reset(); // Clear form values
-      toast.success('Tipo de Licencia modificada con éxito');
+      toast.success('Tipo de Capacitación modificada con éxito');
       queryClient.invalidateQueries({ queryKey: ['employeeTrainingsTypes'] });
+      navigate(paths.TYPES_LIST.TRAININGS);
     },
   });
 
@@ -155,6 +156,7 @@ const TypesForm = () => {
             colorLight="btn-primary"
             disabled={!areAllFieldsFilled || isLoadingEditedData}
             loading={isLoading}
+            textColorLight="text-white"
             type="submit"
           >
             Guardar
@@ -165,7 +167,6 @@ const TypesForm = () => {
             <Button
               className="w-full"
               disabled={isLoadingEditedData}
-              loading={isLoading}
               onClick={handleCancelEdit}
             >
               Cancelar edición

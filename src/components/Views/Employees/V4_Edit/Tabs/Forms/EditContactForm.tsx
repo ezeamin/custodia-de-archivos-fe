@@ -117,7 +117,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
 
   const handleSubmit = (data: EditContactInfoSchema) => {
     setIsLoading(true);
-    editEmployee({ ...data, id: employeeOriginalData.id });
+    editEmployee({ ...data, id: employeeOriginalData.id, skipCleanUp: true });
   };
 
   // -------------------------------------------------
@@ -129,13 +129,15 @@ const EditContactForm = (props: EmployeeInfoProps) => {
     if (employeeOriginalData && stateList && !email) {
       setValue('email', employeeOriginalData.email);
       if (employeeOriginalData.phone)
-        setValue('phone', +employeeOriginalData.phone);
-      if (employeeOriginalData.address)
-        setValue('streetNumber', employeeOriginalData.address.streetNumber);
-      if (employeeOriginalData.address.apt)
-        setValue('apt', employeeOriginalData.address.apt);
-      if (employeeOriginalData.address)
-        setValue('state', employeeOriginalData.address.state);
+        setValue('phone', employeeOriginalData.phone);
+      if (employeeOriginalData.address) {
+        if (employeeOriginalData.address.streetNumber)
+          setValue('streetNumber', employeeOriginalData.address.streetNumber);
+        if (employeeOriginalData.address.apt)
+          setValue('apt', employeeOriginalData.address.apt);
+        if (employeeOriginalData.address.state)
+          setValue('state', employeeOriginalData.address.state);
+      }
     }
   }, [employeeOriginalData, setValue, email, stateList]);
 
@@ -143,7 +145,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   useEffect(() => {
     if (hasLoadedInfo) return;
 
-    if (state && localityList) {
+    if (state && localityList && employeeOriginalData.address) {
       const isLocalityInList = localityList.find(
         (loc) => loc.id === employeeOriginalData.address.locality.id
       );
@@ -156,7 +158,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   useEffect(() => {
     if (hasLoadedInfo) return;
 
-    if (locality && streetList) {
+    if (locality && streetList && employeeOriginalData.address) {
       const isStreetInList = streetList.find(
         (strt) => strt.id === employeeOriginalData.address.street.id
       );

@@ -76,6 +76,7 @@ const TypesForm = () => {
       reset(); // Clear form values
       toast.success('Tipo de Licencia modificada con éxito');
       queryClient.invalidateQueries({ queryKey: ['employeeLicensesTypes'] });
+      navigate(paths.TYPES_LIST.LICENSES);
     },
   });
 
@@ -92,8 +93,6 @@ const TypesForm = () => {
 
   const handleSubmit = (data: LicenseTypeSchema) => {
     setIsLoading(true);
-
-    console.log(data);
 
     if (isEditing) {
       editType({ ...data, id: idBeingEdited });
@@ -168,7 +167,6 @@ const TypesForm = () => {
             <Button
               className="w-full"
               disabled={isLoadingEditedData}
-              loading={isLoading}
               onClick={handleCancelEdit}
             >
               Cancelar edición

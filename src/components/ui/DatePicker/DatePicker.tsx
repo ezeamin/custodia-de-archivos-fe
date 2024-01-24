@@ -89,8 +89,13 @@ const DatePicker = (props: DatePickerProps): JSX.Element => {
   }, [onChange, options]);
 
   useEffect(() => {
-    if (inputRef.current && value && value !== inputRef.current.value) {
-      fp?.setDate(value);
+    if (
+      inputRef.current &&
+      value &&
+      typeof value === 'string' &&
+      value !== inputRef.current.value
+    ) {
+      fp?.setDate(new Date(value));
     }
   }, [value, fp]);
 

@@ -16,7 +16,6 @@ import {
   Grid,
   TextInput,
 } from '@/components/ui';
-import { genderOptions } from '@/components/Views/Employees/V2_Create/mocked';
 
 import {
   EditPersonalInfoSchema,
@@ -46,7 +45,7 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
   const queryClient = useQueryClient();
 
   const {
-    // data: genderOptions,
+    data: genderOptions,
     isLoading: isLoadingGenders,
     isError: isErrorGenders,
     status: statusGenders,
@@ -152,8 +151,7 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
             disabled={isLoading}
             label="Género"
             name="gender"
-            options={genderOptions.data}
-            // options={genderOptions?.data}
+            options={genderOptions?.data || []}
             placeholder="Seleccione un género"
           />
         </Grid>

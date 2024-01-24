@@ -35,6 +35,9 @@ const EmployeePersonalTab = () => {
         data?.data?.address.state.description
       }`
     : 'N/A';
+  const formattedPhone = data?.data?.phone
+    ? data.data.phone.replace(/(\d{2})(\d{4})(\d{4})/, '+$1 $2-$3')
+    : 'N/A';
 
   return (
     <>
@@ -96,10 +99,7 @@ const EmployeePersonalTab = () => {
             <EmployeeDataField label="Email" value={data?.data?.email} />
           </Grid>
           <Grid item lg={6} xs={12}>
-            <EmployeeDataField
-              label="Teléfono"
-              value={data?.data?.phone || 'N/A'}
-            />
+            <EmployeeDataField label="Teléfono" value={formattedPhone} />
           </Grid>
           <Grid item className="hidden md:block" lg={6} xs={12}>
             <EmployeeDataField

@@ -111,13 +111,13 @@ const CreateForm = () => {
       'startDate',
       typeof data.startDate === 'string'
         ? data.startDate
-        : data.startDate.toISOString()
+        : (data.startDate as Date).toISOString()
     );
     fd.append(
       'birthdate',
       typeof data.birthdate === 'string'
         ? data.birthdate
-        : data.birthdate.toISOString()
+        : (data.birthdate as Date).toISOString()
     );
     fd.append('position', data.position);
     fd.append('areaId', data.area.id);

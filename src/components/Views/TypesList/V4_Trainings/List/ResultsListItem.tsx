@@ -36,7 +36,7 @@ const ResultsListItem = (props: TrainingTypesResultsListItemProps) => {
     },
     onSuccess: () => {
       setIsLoading(false);
-      toast.success('Tipo de Licencia eliminada con éxito');
+      toast.success('Tipo de Capacitación eliminada con éxito');
       queryClient.invalidateQueries({ queryKey: ['employeeTrainingsTypes'] });
     },
   });

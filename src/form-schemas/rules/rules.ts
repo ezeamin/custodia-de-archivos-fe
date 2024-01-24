@@ -42,7 +42,14 @@ export const dateRules = <T extends boolean = false>(required: T) => {
       {
         message: `La fecha no es válida`,
       }
-    );
+    )
+    .transform((data) => {
+      // take to ISO format in UTC
+      const date = new Date(data);
+      const offset = date.getTimezoneOffset() * 60000;
+      const utcDate = new Date(date.getTime() - offset);
+      return utcDate.toISOString();
+    });
 
   return optionalWrapper(required, rule);
 };
@@ -387,7 +394,8 @@ export const phoneRules = <T extends boolean = false>(required: T) => {
     .max(9999999999999, {
       message: 'El número de teléfono debe tener como mucho 13 dígitos',
     })
-    .default(0);
+    .default(0)
+    .transform((data) => data.toString());
 
   return optionalWrapper(required, rule);
 };

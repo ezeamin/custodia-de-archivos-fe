@@ -479,7 +479,12 @@ export const postEmployeeTrainingFn = async (body: Record<string, unknown>) => {
 export const editEmployeeFn = async (body: Record<string, unknown>) => {
   const request = apiRoutes.EMPLOYEES.EDIT_EMPLOYEE({ id: body.id as string });
 
-  const dataToSend = cleanUpDataToSend(body);
+  let dataToSend = null;
+  if (!body.skipCleanUp) {
+    dataToSend = cleanUpDataToSend(body);
+  } else {
+    dataToSend = { ...body, id: undefined, skipCleanUp: undefined };
+  }
 
   const data = await fetchFn<API_EmptyResponse>({
     request,

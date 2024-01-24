@@ -10,7 +10,7 @@ import { postLoginFn } from '@/api/api-calls/auth';
 import { useZodForm } from '@/hooks';
 import { useSession } from '@/stores/useSession';
 
-import { Button, Icon, PasswordInput, TextInput } from '@/components/ui';
+import { Button, PasswordInput, TextInput } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
 
@@ -90,11 +90,11 @@ const LoginForm = () => {
         colorDark="dark:bg-gray-200"
         colorLight="bg-gray-900"
         loading={isLoading}
+        startIcon={<MdLogin />}
         textColorDark="dark:text-gray-900"
         textColorLight="text-white"
         type="submit"
       >
-        <Icon iconComponent={<MdLogin />} title="Enviar" />
         INGRESAR
       </Button>
     </form>

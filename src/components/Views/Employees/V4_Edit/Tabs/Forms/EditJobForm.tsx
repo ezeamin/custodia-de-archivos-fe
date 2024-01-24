@@ -40,11 +40,17 @@ const EditJobForm = (props: EmployeeInfoProps) => {
   const status = watch('status');
   const fileNumber = watch('fileNumber');
   const area = watch('area');
+  const workingHours = watch('workingHours');
   const position = watch('position');
   const startDate = watch('startDate');
 
   const areAllMandatoryFieldsFilled =
-    status && fileNumber && area && position && startDate;
+    status &&
+    fileNumber &&
+    area &&
+    position &&
+    startDate &&
+    workingHours !== null;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -126,6 +132,7 @@ const EditJobForm = (props: EmployeeInfoProps) => {
         ),
       });
       setValue('fileNumber', employeeOriginalData.fileNumber);
+      setValue('workingHours', employeeOriginalData.workingHours);
       setValue('area', employeeOriginalData.area);
       setValue('position', employeeOriginalData.position);
       setValue('startDate', employeeOriginalData.startDate);
@@ -175,6 +182,17 @@ const EditJobForm = (props: EmployeeInfoProps) => {
             label="Nro. de legajo *"
             name="fileNumber"
             placeholder="100"
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xs={12}>
+          <TextInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="Horas de trabajo *"
+            name="workingHours"
+            placeholder="8 (por día)"
+            type="number"
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>

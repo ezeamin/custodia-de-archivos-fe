@@ -1,4 +1,9 @@
+import { MdArrowOutward } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+
 import dayjs from 'dayjs';
+
+import { Icon } from '@/components/ui';
 
 import { HistoryElementProps } from '@/components/interface/views';
 
@@ -12,6 +17,12 @@ const HistoryTableRow = (props: HistoryElementProps) => {
     '$1.$2.$3'
   );
 
+  const isPreviousLink =
+    typeof data.previousValue === 'string' &&
+    data.previousValue?.includes('http');
+  const isNewLink =
+    typeof data.newValue === 'string' && data.newValue?.includes('http');
+
   return (
     <tr>
       <td>
@@ -19,8 +30,34 @@ const HistoryTableRow = (props: HistoryElementProps) => {
         <p>{formattedHour}</p>
       </td>
       <td>{data.field}</td>
-      <td>{data.previousValue || 'N/A'}</td>
-      <td>{data.newValue || 'N/A'}</td>
+      <td>
+        {isPreviousLink ? (
+          <Link
+            className="nowrap btn btn-outline btn-sm text-black hover:text-white dark:text-white dark:hover:text-black"
+            target="_blank"
+            to={data.previousValue}
+          >
+            <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
+            VER
+          </Link>
+        ) : (
+          data.previousValue || 'N/A'
+        )}
+      </td>
+      <td>
+        {isNewLink ? (
+          <Link
+            className="nowrap btn btn-outline btn-sm text-black hover:text-white dark:text-white dark:hover:text-black"
+            target="_blank"
+            to={data.newValue}
+          >
+            <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
+            VER
+          </Link>
+        ) : (
+          data.newValue || 'N/A'
+        )}
+      </td>
       <td>{formattedDni}</td>
     </tr>
   );

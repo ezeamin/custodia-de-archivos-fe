@@ -19,11 +19,13 @@ const ErrorPage = (): JSX.Element => {
           Lamentamos lo ocurrido. Este no es un error esperado, y agradeceríamos
           nos informe del mismo.
         </p>
-        <p className="mt-3 flex flex-col items-center gap-2 text-center md:flex-row">
-          Para continuar, por favor recargue la página con el boton superior
-          izquierdo:
+        <div className="mt-3 flex flex-col items-center gap-2 text-center md:flex-row">
+          <p>
+            Para continuar, por favor recargue la página con el boton superior
+            izquierdo:
+          </p>
           <Icon iconComponent={<AiOutlineReload />} title="Recargar" />{' '}
-        </p>
+        </div>
       </div>
     </div>
   );
