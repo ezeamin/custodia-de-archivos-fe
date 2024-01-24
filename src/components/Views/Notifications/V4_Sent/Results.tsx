@@ -63,7 +63,10 @@ const Results = () => {
     return (
       <section className="mt-5 overflow-hidden">
         <ResultsList data={data.data} />
-        <Pagination totalElements={data.totalElements} />
+        <Pagination
+          queryKey="sent_notifications"
+          totalElements={data.totalElements}
+        />
       </section>
     );
   }

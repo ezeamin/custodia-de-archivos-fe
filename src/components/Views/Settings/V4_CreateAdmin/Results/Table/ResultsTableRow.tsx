@@ -87,7 +87,7 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
       <td>
         <img
           alt={`${user.lastname}, ${user.firstname}`}
-          className="min-w-[50px] rounded-md object-cover"
+          className="h-[50px] w-[50px] min-w-[50px] rounded-md object-cover"
           height={80}
           src={user.imgSrc}
           width={80}

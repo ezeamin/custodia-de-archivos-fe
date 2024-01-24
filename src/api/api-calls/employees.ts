@@ -98,7 +98,9 @@ export const getEmployeeDocsFn = async (id: string) => {
 };
 
 export const getEmployeeHistoryFn = async (id: string) => {
-  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_HISTORY({ id });
+  const { search } = window.location;
+
+  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_HISTORY({ id, search });
 
   const data = await fetchFn<API_GetHistory[], History[]>({
     request,

@@ -1,7 +1,7 @@
 {
   "name": "custodia-de-archivos-fe",
   "private": true,
-  "version": "0.5.0",
+  "version": "0.8.0",
   "type": "module",
   "scripts": {
     "build": "npx tsx ./config/pre-build.ts --mode development",

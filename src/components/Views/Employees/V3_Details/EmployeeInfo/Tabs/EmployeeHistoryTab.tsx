@@ -9,6 +9,7 @@ import { getEmployeeHistoryFn } from '@/api/api-calls/employees';
 import { useLoading } from '@/hooks';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
+import { Pagination } from '@/components/ui';
 
 const EmployeeHistoryTab = () => {
   // -------------------------------------------------
@@ -71,6 +72,10 @@ const EmployeeHistoryTab = () => {
           <section className="sm:hidden md:block xl:hidden">
             <HistoryList data={data.data} />
           </section>
+          <Pagination
+            queryKey={`employeeHist_${employeeId}`}
+            totalElements={data.totalElements || 0}
+          />
         </>
       )}
 

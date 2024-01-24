@@ -145,9 +145,15 @@ export const apiRoutes = {
       url: `/employees/${employeeId}/docs/${fileId}`,
       useToken: true,
     }),
-    GET_EMPLOYEE_HISTORY: ({ id }: { id: string }): ApiRoute => ({
+    GET_EMPLOYEE_HISTORY: ({
+      id,
+      search = '',
+    }: {
+      id: string;
+      search: string;
+    }): ApiRoute => ({
       method: 'GET',
-      url: `/employees/${id}/history`,
+      url: `/employees/${id}/history${search}`,
       useToken: true,
     }),
     GET_EMPLOYEE_ABSENCES: ({ id }: { id: string }): ApiRoute => ({

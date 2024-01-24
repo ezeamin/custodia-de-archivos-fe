@@ -147,8 +147,8 @@ export const displayLabelRole = (role: string) => {
   switch (role) {
     case 'ADMIN':
       return 'Administrador';
-    case 'USER':
-      return 'Usuario';
+    case 'EMPLOYEE':
+      return 'Empleado';
     case 'READ_ONLY':
       return 'Solo lectura';
     default:

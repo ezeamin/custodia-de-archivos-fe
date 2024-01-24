@@ -61,7 +61,10 @@ const Results = () => {
         <ResultsTable data={data.data} />
         <ResultsList data={data.data} />
 
-        <Pagination totalElements={data.totalElements || 0} />
+        <Pagination
+          queryKey="loginLogs"
+          totalElements={data.totalElements || 0}
+        />
       </section>
     );
   }

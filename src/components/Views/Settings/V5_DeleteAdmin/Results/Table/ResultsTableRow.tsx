@@ -31,7 +31,7 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
     },
     onSuccess: () => {
       setIsLoading(false);
-      toast.success('El usuario ahora es administrador');
+      toast.success('El usuario ya no es administrador');
 
       queryClient.invalidateQueries({
         queryKey: ['users'],
@@ -80,7 +80,7 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
       <td>
         <img
           alt={`${user.lastname}, ${user.firstname}`}
-          className="min-w-[50px] rounded-md object-cover"
+          className="h-[50px] w-[50px] min-w-[50px] rounded-md object-cover"
           height={80}
           src={user.imgSrc}
           width={80}

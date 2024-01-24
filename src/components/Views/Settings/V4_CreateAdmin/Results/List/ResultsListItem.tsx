@@ -103,7 +103,7 @@ const ResultsListItem = (props: CreateAdminResultsElement) => {
           <div>
             <img
               alt={`${user.lastname}, ${user.firstname}`}
-              className="w-[70px] min-w-[70px] rounded-md object-cover sm:w-[100px]"
+              className="h-[70px] w-[70px] min-w-[70px] rounded-md object-cover sm:h-[100px] sm:w-[100px]"
               height={70}
               src={user.imgSrc}
               width={70}

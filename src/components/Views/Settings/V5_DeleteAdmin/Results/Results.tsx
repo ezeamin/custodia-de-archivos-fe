@@ -1,4 +1,3 @@
-import { mockedUserList } from '../../V4_CreateAdmin/Results/mocked';
 import ResultsList from './List/ResultsList';
 import ResultsTable from './Table/ResultsTable';
 import { useQuery } from '@tanstack/react-query';
@@ -12,21 +11,12 @@ import { Alert, Pagination } from '@/components/ui';
 
 import { BasicUser } from '@/api/interface/users';
 
-const data = {
-  ...mockedUserList,
-  data: mockedUserList.data.filter(
-    (user) => user?.role?.description === 'ADMIN'
-  ),
-};
-const isLoading = false;
-const isError = false;
-
 const Results = () => {
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+  const { data, isLoading, isError, refetch, status } = useQuery({
     queryKey: ['adminUsers'],
     queryFn: () => getUsersFn({ role: 'ADMIN' }),
   });
@@ -54,7 +44,7 @@ const Results = () => {
   }
 
   if (data?.data) {
-    if (data.data.length === 0)
+    if (data.data.length === 0 && !window.location.search.includes('query'))
       return (
         <section className="mt-5 overflow-hidden">
           <Alert className="mb-3">
@@ -70,12 +60,27 @@ const Results = () => {
         </section>
       );
 
+    if (data.data.length === 0 && window.location.search.includes('query'))
+      return (
+        <section className="mt-5 overflow-hidden">
+          <Alert className="mb-3" type="warning">
+            <p>
+              No se encontraron resultados para la búsqueda realizada. Intente
+              con otros valores
+            </p>
+          </Alert>
+        </section>
+      );
+
     return (
       <section className="mt-5 overflow-hidden">
         <ResultsTable data={data.data as BasicUser[]} />
         <ResultsList data={data.data as BasicUser[]} />
 
-        <Pagination totalElements={data.totalElements} />
+        <Pagination
+          queryKey="adminUsers"
+          totalElements={data.totalElements || 0}
+        />
       </section>
     );
   }

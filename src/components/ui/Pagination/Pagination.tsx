@@ -7,6 +7,8 @@ import {
 } from 'react-icons/md';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
+import { useQueryClient } from '@tanstack/react-query';
+
 import IconButton from '@/components/ui/IconButton/IconButton';
 
 import type { PaginationPropsType } from './Pagination.types';
@@ -21,10 +23,12 @@ import type { PaginationPropsType } from './Pagination.types';
  */
 
 const Pagination = (props: PaginationPropsType): JSX.Element => {
-  const { totalElements, onPageChange = () => {} } = props;
+  const { totalElements, onPageChange = () => {}, queryKey } = props;
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const queryClient = useQueryClient();
 
   // ----------------------------------------------
   // SEARCH PARAMS VALIDATION
@@ -55,6 +59,10 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
 
     navigate(`${pathname}?${newSearchString}`);
 
+    queryClient.invalidateQueries({
+      queryKey: [queryKey],
+    });
+
     onPageChange(event, 0);
   };
   const handleBackButtonClick = (
@@ -64,6 +72,10 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
     const newSearchParams = { ...searchParams, page: newPage };
     const newSearchString = new URLSearchParams(newSearchParams).toString();
     navigate(`${pathname}?${newSearchString}`);
+
+    queryClient.invalidateQueries({
+      queryKey: [queryKey],
+    });
 
     onPageChange(event, page - 1);
   };
@@ -75,6 +87,10 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
     const newSearchString = new URLSearchParams(newSearchParams).toString();
     navigate(`${pathname}?${newSearchString}`);
 
+    queryClient.invalidateQueries({
+      queryKey: [queryKey],
+    });
+
     onPageChange(event, page + 1);
   };
   const handleLastPageButtonClick = (
@@ -84,6 +100,10 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
     const newSearchParams = { ...searchParams, page: newPage };
     const newSearchString = new URLSearchParams(newSearchParams).toString();
     navigate(`${pathname}?${newSearchString}`);
+
+    queryClient.invalidateQueries({
+      queryKey: [queryKey],
+    });
 
     onPageChange(event, availablePages - 1);
   };

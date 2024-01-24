@@ -1,4 +1,3 @@
-import { mockedUserList } from '../../V4_CreateAdmin/Results/mocked';
 import ResultsList from './List/ResultsList';
 import ResultsTable from './Table/ResultsTable';
 import { useQuery } from '@tanstack/react-query';
@@ -10,21 +9,12 @@ import { useLoading } from '@/hooks';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Pagination } from '@/components/ui';
 
-const data = {
-  ...mockedUserList,
-  data: mockedUserList.data.filter(
-    (user) => user.role.description === 'READ_ONLY'
-  ),
-};
-const isLoading = false;
-const isError = false;
-
 const Results = () => {
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+  const { data, isLoading, isError, refetch, status } = useQuery({
     queryKey: ['readOnlyUsers'],
     queryFn: () => getUsersFn({ role: 'READ_ONLY' }),
   });
@@ -72,7 +62,10 @@ const Results = () => {
         <ResultsTable data={data.data} />
         <ResultsList data={data.data} />
 
-        <Pagination totalElements={data.totalElements} />
+        <Pagination
+          queryKey="readOnlyUsers"
+          totalElements={data.totalElements || 0}
+        />
       </section>
     );
   }
