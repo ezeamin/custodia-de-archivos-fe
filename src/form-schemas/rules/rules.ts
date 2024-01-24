@@ -322,7 +322,7 @@ export const fileNameRules = <T extends boolean = false>(required: T) => {
     .max(35, {
       message: 'El Nombre debe tener menos de 35 caracteres',
     })
-    .regex(/^[a-zA-Z0-9]*$/, {
+    .regex(/^[a-zA-Z0-9_-]*$/, {
       message:
         'El Nombre no puede contener espacios, caracteres especiales ni puntos',
     })

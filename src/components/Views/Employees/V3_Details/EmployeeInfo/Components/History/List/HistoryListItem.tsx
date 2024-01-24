@@ -6,6 +6,9 @@ const HistoryListItem = (props: HistoryElementProps) => {
   const { data } = props;
 
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY - HH:mm:ss');
+  const formattedDni = data.user.description
+    .toString()
+    .replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
 
   return (
     <article className="content-card">
@@ -14,10 +17,11 @@ const HistoryListItem = (props: HistoryElementProps) => {
           Fecha: <b>{formattedDate}</b>
         </li>
         <li>
-          Campo: <b>{data.field}</b>
+          Usuario: <b>{formattedDni}</b>
         </li>
+        <div className="divider my-0" />
         <li>
-          Usuario: <b>{data.user.description}</b>
+          Campo: <b>{data.field}</b>
         </li>
         <li>
           Valor anterior: <b>{data.previousValue}</b>

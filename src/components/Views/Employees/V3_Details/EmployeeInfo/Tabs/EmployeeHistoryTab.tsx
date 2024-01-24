@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 
-import { mockedHistory } from '../../mocked';
 import HistoryList from '../Components/History/List/HistoryList';
 import HistoryTable from '../Components/History/Table/HistoryTable';
 import { useQuery } from '@tanstack/react-query';
@@ -10,10 +9,6 @@ import { getEmployeeHistoryFn } from '@/api/api-calls/employees';
 import { useLoading } from '@/hooks';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
-
-const data = mockedHistory;
-const isLoading = false;
-const isError = false;
 
 const EmployeeHistoryTab = () => {
   // -------------------------------------------------
@@ -29,7 +24,7 @@ const EmployeeHistoryTab = () => {
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+  const { data, isLoading, isError, refetch, status } = useQuery({
     queryKey: [`employeeHist_${employeeId}`],
     queryFn: () => getEmployeeHistoryFn(employeeId!),
   });
@@ -68,18 +63,18 @@ const EmployeeHistoryTab = () => {
         </div>
       )}
 
-      {data.data && data.data.length > 0 && (
+      {data?.data && data.data.length > 0 && (
         <>
-          <section className="hidden sm:block md:hidden lg:block">
+          <section className="hidden sm:block md:hidden xl:block">
             <HistoryTable data={data.data} />
           </section>
-          <section className="sm:hidden md:block lg:hidden">
+          <section className="sm:hidden md:block xl:hidden">
             <HistoryList data={data.data} />
           </section>
         </>
       )}
 
-      {data.data && data.data.length === 0 && (
+      {data?.data && data.data.length === 0 && (
         <p className="my-3 text-center">No hay cambios registrados</p>
       )}
     </>

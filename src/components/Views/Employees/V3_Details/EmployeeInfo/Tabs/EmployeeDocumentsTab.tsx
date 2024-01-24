@@ -57,19 +57,21 @@ const EmployeeDocumentsTab = () => {
         <AddNewDocument />
       </div>
       {data?.data?.length && data.data.length > 0 ? (
-        <Alert closable className="mb-4">
+        <Alert closable className="mb-4 mt-2">
           Una vez que se elimine un archivo, este no se podrá recuperar.
         </Alert>
       ) : (
-        <Alert>Aún no se cargaron documentos para este empleado.</Alert>
+        <Alert className="mt-2">
+          Aún no se cargaron documentos para este empleado.
+        </Alert>
       )}
       <Grid container gap={3}>
         {isLoading && (
           <>
-            <Grid item md={12} sm={6} xl={6} xs={12}>
+            <Grid item className="mt-4" md={12} sm={6} xl={6} xs={12}>
               <DocumentItem doc={undefined} />
             </Grid>
-            <Grid item md={12} sm={6} xl={6} xs={12}>
+            <Grid item className="mt-4" md={12} sm={6} xl={6} xs={12}>
               <DocumentItem doc={undefined} />
             </Grid>
           </>

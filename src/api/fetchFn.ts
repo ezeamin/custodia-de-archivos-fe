@@ -32,7 +32,7 @@ export const fetchFn = async <T, V = T>({
   }
 
   const optionObj =
-    request.method === 'POST'
+    request.method === 'POST' || request.method === 'PUT'
       ? {
           ...request,
           headers: {
