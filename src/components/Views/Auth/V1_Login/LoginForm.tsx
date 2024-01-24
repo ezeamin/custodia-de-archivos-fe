@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { MdLogin } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -26,6 +26,7 @@ const LoginForm = () => {
 
   const { control, onSubmitMiddleware } = useZodForm(loginSchema);
   const { login } = useSession();
+  const navigate = useNavigate();
 
   // -------------------------------------------------
   // API
@@ -40,10 +41,19 @@ const LoginForm = () => {
     },
     onSuccess: (data) => {
       setIsLoading(false);
-      toast.success('Inicio de sesión exitoso');
 
       // Store in session
-      if (data.data) login(data.data.token);
+      if (data.data) {
+        if (data.data.shouldChangePass) {
+          navigate(
+            `/auth/reset-password?token=${data.data.token}&continue=true`
+          );
+          return;
+        }
+
+        toast.success('Inicio de sesión exitoso');
+        login(data.data.token);
+      }
     },
   });
 

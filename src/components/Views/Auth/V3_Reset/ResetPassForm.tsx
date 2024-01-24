@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { IoMdSave } from 'react-icons/io';
 import { IoArrowBackOutline } from 'react-icons/io5';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { useMutation } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 import { putResetPasswordFn } from '@/api/api-calls/auth';
 
 import { useZodForm } from '@/hooks';
+import { useSession } from '@/stores/useSession';
 
 import { Alert, Button, Icon, PasswordInput } from '@/components/ui';
 
@@ -24,8 +26,13 @@ const ResetPassForm = () => {
   // -------------------------------------------------
 
   const { control, onSubmitMiddleware } = useZodForm(resetPasswordSchema);
+  const { login } = useSession();
   const searchParams = useSearchParams();
   const token = searchParams[0].get('token') ?? '';
+  const shouldContinue = useMemo(
+    () => !!searchParams[0].get('continue') ?? '',
+    [searchParams]
+  );
 
   // -------------------------------------------------
   // API
@@ -40,6 +47,10 @@ const ResetPassForm = () => {
     },
     onSuccess: () => {
       setIsLoading(false);
+      if (shouldContinue) {
+        toast.success('Contraseña cambiada correctamente. Bienvenido');
+        login(token);
+      }
     },
   });
 
@@ -51,6 +62,22 @@ const ResetPassForm = () => {
     setIsLoading(true);
     putResetPassword({ password: data.password, token });
   };
+
+  // -------------------------------------------------
+  // EFFECTS
+  // -------------------------------------------------
+
+  useEffect(() => {
+    if (shouldContinue) {
+      toast.info(
+        'Bienvenido al Portal de Empleados de Custodia de Archivos Noroeste S.R.L. Por favor, para continuar le pedimos que cree una nueva contraseña, siguiendo las indicaciones para su seguridad',
+        {
+          duration: 10000,
+          position: 'bottom-right',
+        }
+      );
+    }
+  }, [shouldContinue]);
 
   // -------------------------------------------------
   // RENDER

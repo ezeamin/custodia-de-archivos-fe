@@ -47,6 +47,7 @@ export const apiRoutes = {
     PUT_RESET_PASS: (): ApiRoute => ({
       method: 'PUT',
       url: '/auth/reset-password',
+      useToken: true,
     }),
   },
   USERS: {

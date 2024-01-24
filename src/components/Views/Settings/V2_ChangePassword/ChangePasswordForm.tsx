@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { postResetPasswordFn } from '@/api/api-calls/auth';
+import { putResetPasswordFromSettingsFn } from '@/api/api-calls/auth';
 
 import { useZodForm } from '@/hooks';
 
@@ -31,8 +31,8 @@ const ChangePasswordForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { mutate: postResetPassword, isSuccess } = useMutation({
-    mutationFn: postResetPasswordFn,
+  const { mutate: putResetPassword, isSuccess } = useMutation({
+    mutationFn: putResetPasswordFromSettingsFn,
     onError: () => {
       setIsLoading(false);
     },
@@ -47,7 +47,7 @@ const ChangePasswordForm = () => {
 
   const handleSubmit = (data: ResetPasswordSchema) => {
     setIsLoading(true);
-    postResetPassword(data);
+    putResetPassword(data);
   };
 
   // -------------------------------------------------
@@ -58,7 +58,7 @@ const ChangePasswordForm = () => {
     <form className="content-card" onSubmit={onSubmitMiddleware(handleSubmit)}>
       {isSuccess && (
         <Alert className="mb-3 mt-2" type="success">
-          Contraseña cambiada correctamente. Ahora puede volver a loguearse.
+          Contraseña cambiada correctamente.
         </Alert>
       )}
       <Alert className="mb-3">
@@ -92,7 +92,7 @@ const ChangePasswordForm = () => {
       <div className="mt-3 flex flex-col-reverse justify-end gap-3 sm:flex-row">
         <Link className="btn" to={paths.SETTINGS.MAIN}>
           <Icon iconComponent={<IoArrowBackOutline />} title="Volver" />
-          CANCELAR Y VOLVER
+          {isSuccess ? 'VOLVER' : 'CANCELAR Y VOLVER'}
         </Link>
         <Button
           unbordered

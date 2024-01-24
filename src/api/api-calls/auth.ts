@@ -68,6 +68,7 @@ export const putResetPasswordFn = async (body: {
   const request = {
     ...apiRoutes.AUTH.PUT_RESET_PASS(),
     headers: { Authorization: `Bearer ${body.token}` },
+    useToken: false,
   };
 
   const data = await fetchFn<API_EmptyResponse>({
@@ -80,7 +81,7 @@ export const putResetPasswordFn = async (body: {
 };
 
 // From settings tab
-export const postResetPasswordFn = async (body: {
+export const putResetPasswordFromSettingsFn = async (body: {
   password: string;
   repeatPassword: string;
 }) => {
@@ -89,7 +90,7 @@ export const postResetPasswordFn = async (body: {
   const data = await fetchFn<API_EmptyResponse>({
     request,
     adapter: (APIData) => APIData,
-    body,
+    body: { password: body.password },
   });
 
   return data;
