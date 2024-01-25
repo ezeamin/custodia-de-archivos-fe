@@ -1,3 +1,5 @@
+import { userRoles } from '@/constants/userRoles/userRoles';
+
 import { Route } from '@/constants/interface';
 
 /**
@@ -145,11 +147,11 @@ export const displayStatusLabel = (status: string) => {
 
 export const displayLabelRole = (role: string) => {
   switch (role) {
-    case 'ADMIN':
+    case userRoles.ADMIN:
       return 'Administrador';
-    case 'EMPLOYEE':
+    case userRoles.EMPLOYEE:
       return 'Empleado';
-    case 'READ_ONLY':
+    case userRoles.THIRD_PARTY:
       return 'Solo lectura';
     default:
       return 'Sin rol';

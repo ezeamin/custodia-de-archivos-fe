@@ -1,5 +1,3 @@
-import { Role } from './params';
-
 import { BasicList } from '@/interface';
 
 // ----------------------------------------------------------------------
@@ -13,6 +11,7 @@ export interface API_GetUsers {
   firstname: string;
   lastname: string;
   role: BasicList;
+  description?: string;
 }
 export interface API_PostUser {
   username: string;
@@ -33,9 +32,5 @@ export interface API_GetLoginLogs {
 
 export interface BasicUser extends API_GetUsers {}
 export interface CreatedUser extends API_PostUser {}
-export interface ReadOnlyUser {
-  id: string;
-  username: string;
-  role: Role;
-}
+export interface ReadOnlyUser extends API_GetUsers {}
 export interface LoginLog extends API_GetLoginLogs {}

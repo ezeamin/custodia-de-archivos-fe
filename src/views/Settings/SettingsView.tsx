@@ -15,13 +15,17 @@ const routes = {
       id: 1,
       path: paths.SETTINGS.CHANGE_PASSWORD,
       name: 'Cambiar contraseña de este perfil',
-      allowedRoles: [userRoles.ADMIN, userRoles.READ_ONLY, userRoles.EMPLOYEE],
+      allowedRoles: [
+        userRoles.ADMIN,
+        userRoles.THIRD_PARTY,
+        userRoles.EMPLOYEE,
+      ],
     },
     {
       id: 2,
       path: paths.SETTINGS.LOGIN_LOGS,
       name: 'Ver registros de inicios de sesión',
-      allowedRoles: [userRoles.ADMIN, userRoles.READ_ONLY],
+      allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY],
     },
   ],
   ADMIN: [

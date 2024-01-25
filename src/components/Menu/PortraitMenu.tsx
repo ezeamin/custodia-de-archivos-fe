@@ -57,7 +57,7 @@ const PortraitMenu = (): JSX.Element => {
                 <h2 className="text-xl dark:text-white">
                   Hola, <span className="font-bold">{user?.name}</span>
                 </h2>
-                {user?.role === userRoles.READ_ONLY && (
+                {user?.role === userRoles.THIRD_PARTY && (
                   <Alert hideIcon className="mt-3 text-center" type="warning">
                     Usuario de solo lectura
                   </Alert>

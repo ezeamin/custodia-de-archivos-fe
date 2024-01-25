@@ -12,7 +12,8 @@ const RoutingCard = (props: RoutingCardProps) => {
 
   const { user } = useSession();
 
-  if (!route.allowedRoles?.includes(user?.role ?? '')) return null;
+  if (route.allowedRoles && !route.allowedRoles?.includes(user?.role ?? ''))
+    return null;
 
   return (
     <Link

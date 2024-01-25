@@ -8,7 +8,7 @@ import { postReadOnlyUserFn } from '@/api/api-calls/users';
 
 import { useZodForm } from '@/hooks';
 
-import { Button, Grid, PasswordInput, TextInput } from '@/components/ui';
+import { Alert, Button, Grid, TextInput } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
 
@@ -63,46 +63,80 @@ const CreateForm = () => {
   // -------------------------------------------------
 
   return (
-    <form
-      className="content-card animate-in-bottom a-delay-200 card"
-      onSubmit={onSubmitMiddleware(handleSubmit)}
-    >
-      <Grid container gap={2}>
-        <Grid item sm={6} xs={12}>
-          <TextInput
-            autoComplete="one-time-code"
-            className="w-full"
-            control={control}
-            disabled={isLoading}
-            label="D.N.I. (sin puntos)"
-            name="username"
-            placeholder="12345678"
-          />
-        </Grid>
-        <Grid item sm={6} xs={12}>
-          <PasswordInput
-            autoComplete="one-time-code"
-            className="w-full"
-            control={control}
-            disabled={isLoading}
-            helperText="La contraseña debe tener al menos 6 caracteres, entre ellos: una mayúscula, una minúscula y un número"
-            label="Contraseña"
-            name="password"
-            placeholder="*******"
-          />
-        </Grid>
-      </Grid>
-      <Button
-        className="mt-4"
-        colorLight="btn-primary"
-        disabled={!areAllFieldsFilled}
-        loading={isLoading}
-        textColorLight="text-white"
-        type="submit"
+    <>
+      <Alert className="mb-3">
+        Tras la creación de este usuario, le llegará al mail que debajo indique,
+        su usuario y una contraseña temporal que luego deberá cambiar.
+      </Alert>
+      <form
+        className="content-card animate-in-bottom a-delay-200 card"
+        onSubmit={onSubmitMiddleware(handleSubmit)}
       >
-        Guardar
-      </Button>
-    </form>
+        <Grid container gap={2}>
+          <Grid item lg={4} sm={6} xs={12}>
+            <TextInput
+              className="w-full"
+              control={control}
+              disabled={isLoading}
+              label="Nombre *"
+              name="name"
+              placeholder="Juan"
+            />
+          </Grid>
+          <Grid item lg={4} sm={6} xs={12}>
+            <TextInput
+              className="w-full"
+              control={control}
+              disabled={isLoading}
+              label="Apellido *"
+              name="lastname"
+              placeholder="Pérez"
+            />
+          </Grid>
+          <Grid item lg={4} sm={6} xs={12}>
+            <TextInput
+              className="w-full"
+              control={control}
+              disabled={isLoading}
+              label="DNI (Sin puntos) *"
+              maxLength={8}
+              name="dni"
+              placeholder="15235647"
+            />
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <TextInput
+              className="w-full"
+              control={control}
+              disabled={isLoading}
+              label="Email *"
+              name="email"
+              placeholder="juanperez@gmail.com"
+            />
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <TextInput
+              className="w-full"
+              control={control}
+              disabled={isLoading}
+              label="Descripción *"
+              name="description"
+              placeholder="Contador de la empresa"
+            />
+          </Grid>
+        </Grid>
+        <Button
+          className="mt-4"
+          colorLight="btn-primary"
+          disabled={!areAllFieldsFilled}
+          loading={isLoading}
+          textColorLight="text-white"
+          type="submit"
+        >
+          Guardar
+        </Button>
+      </form>
+    </>
   );
 };
 export default CreateForm;

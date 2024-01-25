@@ -19,7 +19,7 @@ const useGetUserAllowedRoutes = (): Route[] => {
       return adminRoutes;
     case userRoles.EMPLOYEE:
       return employeeRoutes;
-    case userRoles.READ_ONLY:
+    case userRoles.THIRD_PARTY:
       return readOnlyRoutes;
     default:
       return [];

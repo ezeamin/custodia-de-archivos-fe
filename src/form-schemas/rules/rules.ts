@@ -164,13 +164,14 @@ export const nameRules = <T extends boolean = false>(required: T) => {
 
 export const textRules = <T extends boolean = false>(
   required: T,
-  fieldName = 'Texto'
+  fieldName = 'Texto',
+  maxLength = 1000
 ) => {
   const rule = z
     .string()
     .trim()
-    .max(1000, {
-      message: `El ${fieldName} debe tener como máximo 1000 caracteres`,
+    .max(maxLength, {
+      message: `El ${fieldName} debe tener como máximo ${maxLength} caracteres`,
     })
     .refine(
       // Min length is 3 when it does have content (cannot use .min() because it's initially empty)

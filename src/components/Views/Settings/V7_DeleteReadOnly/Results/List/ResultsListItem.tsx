@@ -56,7 +56,7 @@ const ResultsListItem = (props: DeleteReadOnlyUserResultsElement) => {
   const handleClick = () => {
     Swal.fire({
       title: '¿Está seguro?',
-      text: `Este usuario dejará de existir: DNI ${dni}`,
+      text: `Este usuario dejará de existir: ${user.firstname} ${user.lastname}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
@@ -81,7 +81,28 @@ const ResultsListItem = (props: DeleteReadOnlyUserResultsElement) => {
       style={{ animationDelay: `${index! * 200}ms` }}
     >
       <div className="card-body p-0">
-        <h2 className="text-center text-xl font-bold">DNI: {dni}</h2>
+        <h2 className="card-title">
+          {user.lastname}, {user.firstname}
+        </h2>
+        <div className="flex justify-between gap-3">
+          <div>
+            <p>
+              DNI: <span className="font-bold">{dni}</span>
+            </p>
+            <p>
+              Descripción: <span className="font-bold">{user.description}</span>
+            </p>
+          </div>
+          <div>
+            <img
+              alt={`${user.lastname}, ${user.firstname}`}
+              className="h-[70px] w-[70px] min-w-[70px] rounded-md object-cover sm:h-[100px] sm:w-[100px]"
+              height={70}
+              src={user.imgSrc}
+              width={70}
+            />
+          </div>
+        </div>
         <div className="divider my-0" />
         <div className="card-actions">
           <Button

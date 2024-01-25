@@ -71,10 +71,7 @@ export const deleteAdminFn = async (userId: string) => {
   return data;
 };
 
-export const postReadOnlyUserFn = async (body: {
-  username: string;
-  password: string;
-}) => {
+export const postReadOnlyUserFn = async (body: Record<string, unknown>) => {
   const request = apiRoutes.USERS.POST_READ_ONLY_USER();
 
   const data = await fetchFn<API_EmptyResponse>({

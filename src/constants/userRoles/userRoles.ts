@@ -1,6 +1,6 @@
 export const userRoles = {
   ADMIN: 'ADMIN',
-  READ_ONLY: 'READ_ONLY',
+  THIRD_PARTY: 'THIRD_PARTY',
   EMPLOYEE: 'EMPLOYEE',
 } as const;
 

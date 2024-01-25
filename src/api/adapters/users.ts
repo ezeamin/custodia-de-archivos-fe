@@ -15,6 +15,7 @@ export const getUsersAdapter = (data: API_GetUsers[]): BasicUser[] =>
     firstname: user.firstname,
     lastname: user.lastname,
     role: user.role,
+    description: user.description,
   }));
 
 export const postUserAdapter = (data: API_PostUser): CreatedUser => ({

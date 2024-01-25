@@ -16,7 +16,7 @@ const Results = () => {
 
   const { data, isLoading, isFetching, isError, refetch, status } = useQuery({
     queryKey: ['readOnlyUsers'],
-    queryFn: () => getUsersFn({ role: 'READ_ONLY' }),
+    queryFn: () => getUsersFn({ role: 'THIRD_PARTY' }),
   });
 
   useLoading(isLoading, status, isFetching);

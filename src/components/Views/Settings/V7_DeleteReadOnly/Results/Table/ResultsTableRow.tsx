@@ -56,7 +56,7 @@ const ResultsTableRow = (props: DeleteReadOnlyUserResultsElement) => {
   const handleClick = () => {
     Swal.fire({
       title: '¿Está seguro?',
-      text: `Este usuario dejará de existir: DNI ${dni}`,
+      text: `Este usuario dejará de existir: ${user.firstname} ${user.lastname}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
@@ -77,7 +77,21 @@ const ResultsTableRow = (props: DeleteReadOnlyUserResultsElement) => {
 
   return (
     <tr>
-      <td>{dni}</td>
+      <td className="hidden lg:table-cell">
+        <img
+          alt={`${user.lastname}, ${user.firstname}`}
+          className="h-[50px] w-[50px] min-w-[50px] rounded-md object-cover"
+          height={80}
+          src={user.imgSrc}
+          width={80}
+        />
+      </td>
+      <td>
+        <p className="font-bold lg:font-normal">{`${user.lastname}, ${user.firstname}`}</p>
+        <p className="text-xs lg:hidden">DNI: {dni}</p>
+      </td>
+      <td className="hidden lg:table-cell">{dni}</td>
+      <td>{user.description}</td>
       <td className="text-end">
         <Button
           colorLight="btn-primary"

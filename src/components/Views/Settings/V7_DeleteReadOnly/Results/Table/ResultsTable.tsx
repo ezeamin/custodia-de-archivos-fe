@@ -13,7 +13,11 @@ const ResultsTable = (props: DeleteReadOnlyUserResults) => {
         <Table rounded transparent zebra>
           <thead>
             <tr>
+              <th className="hidden w-16 text-center lg:table-cell">Foto</th>
+              <th className="hidden lg:table-cell">Apellido, Nombre</th>
               <th className="hidden lg:table-cell">DNI</th>
+              <th className="rounded-tl-lg lg:hidden">Información</th>
+              <th>Descripción</th>
               <th />
             </tr>
           </thead>

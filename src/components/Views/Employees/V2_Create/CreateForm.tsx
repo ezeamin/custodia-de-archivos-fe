@@ -148,7 +148,7 @@ const CreateForm = () => {
           )}
         </div>
         <div>
-          <FileInput<CreateSchema>
+          <FileInput
             control={control}
             disabled={isLoading}
             label="Seleccione una imagen"
@@ -159,7 +159,7 @@ const CreateForm = () => {
       </div>
       <Grid container gap={2}>
         <Grid item lg={4} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -169,7 +169,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -179,7 +179,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -190,7 +190,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={8} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -200,7 +200,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -210,7 +210,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <ComboBoxInput<CreateSchema>
+          <ComboBoxInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -221,7 +221,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <DateInput<CreateSchema>
+          <DateInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -231,7 +231,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <DateInput<CreateSchema>
+          <DateInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -241,7 +241,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={8} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -251,7 +251,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <ComboBoxInput<CreateSchema>
+          <ComboBoxInput
             className="w-full"
             control={control}
             disabled={isLoading}
