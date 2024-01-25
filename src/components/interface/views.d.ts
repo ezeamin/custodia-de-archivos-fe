@@ -200,7 +200,7 @@ export interface RoutingCardProps {
     id: number;
     path: string;
     name: string;
-    disabled?: boolean;
+    allowedRoles?: string[];
   };
   index: number;
   showType?: boolean;

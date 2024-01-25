@@ -184,6 +184,7 @@ const CreateForm = () => {
             control={control}
             disabled={isLoading}
             label="DNI"
+            maxLength={8}
             name="dni"
             placeholder="15235647"
           />

@@ -14,7 +14,7 @@ export const paths = {
   NOTIFICATIONS: {
     MAIN: '/notifications',
     CREATE: '/notifications/create',
-    HISTORY: '/notifications/history',
+    READ: '/notifications/read',
     DETAILS: '/notifications/:id',
     SENT: '/notifications/sent',
   },

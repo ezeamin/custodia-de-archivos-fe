@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 import Title from '@/components/Common/Title';
 import { Icon } from '@/components/ui';
-import Results from '@/components/Views/Notifications/V3_History/Results';
+import Results from '@/components/Views/Notifications/V3_Read/Results';
 
 import { paths } from '@/constants/routes/paths';
 
-const NotificationsHistoryView = () => {
+const NotificationsReadListView = () => {
   return (
     <>
-      <Title title="Historial de Notificaciones" />
+      <Title title="Notificaciones Leidas" />
       <Link
         className="btn w-full dark:border-gray-500 hover:dark:border-gray-400 sm:w-auto"
         to={paths.NOTIFICATIONS.MAIN}
@@ -22,4 +22,4 @@ const NotificationsHistoryView = () => {
     </>
   );
 };
-export default NotificationsHistoryView;
+export default NotificationsReadListView;

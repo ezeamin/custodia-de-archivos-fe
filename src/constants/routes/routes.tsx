@@ -18,7 +18,7 @@ import EmployeeListView from '@/views/Employees/EmployeeListView';
 import HomeView from '@/views/Home/HomeView';
 import CreateNotificationView from '@/views/Notifications/CreateNotificationView';
 import NotificationDetailView from '@/views/Notifications/NotificationDetailView';
-import NotificationsHistoryView from '@/views/Notifications/NotificationsHistoryView';
+import NotificationsReadListView from '@/views/Notifications/NotificationsReadListView';
 import NotificationsSentListView from '@/views/Notifications/NotificationsSentListView';
 import NotificationsView from '@/views/Notifications/NotificationsView';
 import ChangePasswordView from '@/views/Settings/ChangePasswordView';
@@ -145,10 +145,10 @@ export const routes: Route[] = [
         id: 4002,
         title: 'Historial de Notificaciones',
         description: 'Historial notificaciones',
-        path: paths.NOTIFICATIONS.HISTORY,
+        path: paths.NOTIFICATIONS.READ,
         subpaths: [],
         privateRoute: true,
-        element: <NotificationsHistoryView />,
+        element: <NotificationsReadListView />,
         allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
       },
       {

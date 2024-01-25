@@ -1,10 +1,13 @@
 import packageJson from '../../../package.json';
 
+import { useSession } from '@/stores/useSession';
+
 import RoutingCard from '@/components/Common/RoutingCard';
 import Title from '@/components/Common/Title';
 import { Grid } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
+import { userRoles } from '@/constants/userRoles/userRoles';
 
 const routes = {
   GENERAL: [
@@ -12,11 +15,13 @@ const routes = {
       id: 1,
       path: paths.SETTINGS.CHANGE_PASSWORD,
       name: 'Cambiar contraseña de este perfil',
+      allowedRoles: [userRoles.ADMIN, userRoles.READ_ONLY, userRoles.EMPLOYEE],
     },
     {
       id: 2,
       path: paths.SETTINGS.LOGIN_LOGS,
       name: 'Ver registros de inicios de sesión',
+      allowedRoles: [userRoles.ADMIN, userRoles.READ_ONLY],
     },
   ],
   ADMIN: [
@@ -48,6 +53,8 @@ const routes = {
 const appVersion = packageJson.version;
 
 const SettingsView = () => {
+  const { user } = useSession();
+
   return (
     <section className="overflow-hidden pb-0.5 pr-0.5">
       <Title title="Ajustes" />
@@ -62,26 +69,30 @@ const SettingsView = () => {
             </Grid>
           ))}
         </Grid>
-        <h3 className="animate-in-bottom a-delay-500 mb-2 mt-6 text-xl font-bold">
-          Usuarios Administradores
-        </h3>
-        <Grid container gap={3}>
-          {routes.ADMIN.map((route, index) => (
-            <Grid item key={route.id} sm={6} xl={4} xs={12}>
-              <RoutingCard index={index + 3} route={route} />
+        {user?.role === userRoles.ADMIN && (
+          <>
+            <h3 className="animate-in-bottom a-delay-500 mb-2 mt-6 text-xl font-bold">
+              Usuarios Administradores
+            </h3>
+            <Grid container gap={3}>
+              {routes.ADMIN.map((route, index) => (
+                <Grid item key={route.id} sm={6} xl={4} xs={12}>
+                  <RoutingCard index={index + 3} route={route} />
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-        <h3 className="animate-in-bottom a-delay-800 mb-2 mt-6 text-xl font-bold">
-          Usuarios Solo Lectura
-        </h3>
-        <Grid container gap={3}>
-          {routes.READ_ONLY.map((route, index) => (
-            <Grid item key={route.id} sm={6} xl={4} xs={12}>
-              <RoutingCard index={index + 6} route={route} />
+            <h3 className="animate-in-bottom a-delay-800 mb-2 mt-6 text-xl font-bold">
+              Usuarios Solo Lectura
+            </h3>
+            <Grid container gap={3}>
+              {routes.READ_ONLY.map((route, index) => (
+                <Grid item key={route.id} sm={6} xl={4} xs={12}>
+                  <RoutingCard index={index + 6} route={route} />
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
+          </>
+        )}
       </article>
       <p className="animate-in-top mt-5 text-center md:fixed md:bottom-2 md:right-2 md:mt-0">
         Versión: {appVersion}
