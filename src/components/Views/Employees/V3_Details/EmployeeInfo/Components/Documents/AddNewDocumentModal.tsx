@@ -42,9 +42,6 @@ const AddNewDocumentModal = () => {
       setIsLoading(false);
       closeModal();
       reset();
-      toast.error(
-        'Ocurrió un error guardando el documento. Intente nuevamente más tarde'
-      );
     },
     onSuccess: () => {
       setIsLoading(false);

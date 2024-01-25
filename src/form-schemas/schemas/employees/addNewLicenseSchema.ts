@@ -2,7 +2,6 @@ import { z } from 'zod';
 
 import {
   dateRules,
-  fromDateAfterOrToday,
   fromDateBeforeToDate,
   textRules,
   typeRules,
@@ -15,7 +14,6 @@ export const addNewLicenseSchema = z
     type: typeRules(true, 'tipo de licencia'),
     observations: textRules(false),
   })
-  .refine(fromDateAfterOrToday, fromDateAfterOrToday.msg)
   .refine(fromDateBeforeToDate, fromDateBeforeToDate.msg);
 
 export type AddNewLicenseSchema = z.infer<typeof addNewLicenseSchema>;
