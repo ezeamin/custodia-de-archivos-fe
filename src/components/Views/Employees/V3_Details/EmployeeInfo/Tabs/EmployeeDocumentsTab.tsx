@@ -24,7 +24,7 @@ const EmployeeDocumentsTab = () => {
   // API
   // -------------------------------------------------
 
-  const { data, isLoading, isError, refetch } = useQuery({
+  const { data, isFetching, isError, refetch } = useQuery({
     queryKey: [`employeeDocs_${employeeId}`],
     queryFn: () => getEmployeeDocsFn(employeeId!),
   });
@@ -66,7 +66,7 @@ const EmployeeDocumentsTab = () => {
         </Alert>
       )}
       <Grid container gap={3}>
-        {isLoading && (
+        {isFetching && (
           <>
             <Grid item className="mt-4" md={12} sm={6} xl={6} xs={12}>
               <DocumentItem doc={undefined} />
@@ -76,11 +76,12 @@ const EmployeeDocumentsTab = () => {
             </Grid>
           </>
         )}
-        {data?.data?.map((doc) => (
-          <Grid item key={doc.id} md={12} sm={6} xl={6} xs={12}>
-            <DocumentItem doc={doc} />
-          </Grid>
-        ))}
+        {!isFetching &&
+          data?.data?.map((doc) => (
+            <Grid item key={doc.id} md={12} sm={6} xl={6} xs={12}>
+              <DocumentItem doc={doc} />
+            </Grid>
+          ))}
       </Grid>
 
       {createPortal(<ChangeDocumentNameModal />, document.body)}

@@ -6,6 +6,7 @@ import { getLoginLogsFn } from '@/api/api-calls/users';
 
 import { useLoading } from '@/hooks';
 
+import EmptyAlert from '@/components/Common/EmptyAlert';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Pagination } from '@/components/ui';
 
@@ -14,12 +15,12 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { data, isLoading, isError, refetch, status } = useQuery({
+  const { data, isLoading, isFetching, isError, refetch, status } = useQuery({
     queryKey: ['loginLogs'],
     queryFn: getLoginLogsFn,
   });
 
-  useLoading(isLoading, status);
+  useLoading(isLoading, status, isFetching);
 
   // -------------------------------------------------
   // HANDLERS
@@ -42,13 +43,19 @@ const Results = () => {
   }
 
   if (data?.data) {
-    /* TODO: Check, this shouldn't ever happen */
-    if (data.data.length === 0)
+    if (data.data.length === 0 && !window.location.search.includes('query'))
       return (
         <section className="mt-5 overflow-hidden">
           <Alert className="mb-3">
             <p>Atencion! No hay inicios de sesión registrados aún.</p>
           </Alert>
+        </section>
+      );
+
+    if (data.data.length === 0 && window.location.search.includes('query'))
+      return (
+        <section className="mt-5 overflow-hidden">
+          <EmptyAlert queryKey="loginLogs" />
         </section>
       );
 

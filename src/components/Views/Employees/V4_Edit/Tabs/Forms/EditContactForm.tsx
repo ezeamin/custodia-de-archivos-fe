@@ -101,9 +101,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
       queryClient.invalidateQueries({
         queryKey: [`employee_${employeeOriginalData.id}`],
       });
-      window.setTimeout(() => {
-        navigate(`/employees/${employeeOriginalData.id}/personal`);
-      }, 1000);
+      navigate(`/employees/${employeeOriginalData.id}/personal`);
     },
   });
 
@@ -222,7 +220,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
             className="w-full"
             control={control}
             disabled={isLoading}
-            helperText='Introduce el número con codigo de país y area, pero sin el "+", ejemplo: "5493815857499"'
+            helperText='Introduce el número con codigo de país y área, pero sin el "+", ejemplo: "5493815857499"'
             label="Teléfono"
             name="phone"
             placeholder="5493815857499"

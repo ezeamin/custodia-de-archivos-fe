@@ -66,9 +66,7 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
       queryClient.invalidateQueries({
         queryKey: [`employee_${employeeOriginalData.id}`],
       });
-      window.setTimeout(() => {
-        navigate(`/employees/${employeeOriginalData.id}/personal`);
-      }, 1000);
+      navigate(`/employees/${employeeOriginalData.id}/personal`);
     },
   });
 

@@ -14,12 +14,12 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { data, isLoading, isError, refetch, status } = useQuery({
+  const { data, isLoading, isFetching, isError, refetch, status } = useQuery({
     queryKey: ['readOnlyUsers'],
     queryFn: () => getUsersFn({ role: 'READ_ONLY' }),
   });
 
-  useLoading(isLoading, status);
+  useLoading(isLoading, status, isFetching);
 
   // -------------------------------------------------
   // HANDLERS

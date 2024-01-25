@@ -32,6 +32,8 @@ const SearchFilter = (props: SearchFilterProps) => {
 
     const params = new URLSearchParams(search);
     params.set('query', data.query);
+    params.set('page', '0');
+    params.set('entries', '10');
 
     window.history.replaceState(
       {},
@@ -49,6 +51,8 @@ const SearchFilter = (props: SearchFilterProps) => {
 
     const params = new URLSearchParams(search);
     params.delete('query');
+    params.set('page', '0');
+    params.set('entries', '10');
 
     window.history.replaceState(
       {},

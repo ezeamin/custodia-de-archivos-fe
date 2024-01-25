@@ -31,7 +31,7 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { data, isLoading, isError, refetch, status } = useQuery({
+  const { data, isLoading, isFetching, isError, refetch, status } = useQuery({
     queryKey: [`employeeTrainings_${employeeId}`],
     queryFn: () => getEmployeeTrainingsFn(employeeId!),
   });
@@ -72,14 +72,14 @@ const Results = () => {
         <h2 className="text-lg font-bold">Capacitaciones</h2>
         <AddNewButton modalName="addNewTraining" />
       </div>
-      {isLoading && (
+      {isFetching && (
         <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
           <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
           <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
         </div>
       )}
 
-      {data?.data && data.data.length > 0 && (
+      {!isFetching && data?.data && data.data.length > 0 && (
         <>
           <ObservationsMessage id="trainings" />
           <section className="hidden sm:block">
@@ -100,7 +100,7 @@ const Results = () => {
         </>
       )}
 
-      {data?.data && data.data.length === 0 && (
+      {!isFetching && data?.data && data.data.length === 0 && (
         <p className="my-3 text-center">No hay capacitaciones registradas</p>
       )}
 

@@ -25,7 +25,7 @@ const EmployeeHistoryTab = () => {
   // API
   // -------------------------------------------------
 
-  const { data, isLoading, isError, refetch, status } = useQuery({
+  const { data, isFetching, isLoading, isError, refetch, status } = useQuery({
     queryKey: [`employeeHist_${employeeId}`],
     queryFn: () => getEmployeeHistoryFn(employeeId!),
   });
@@ -57,14 +57,14 @@ const EmployeeHistoryTab = () => {
     <>
       <h2 className="mb-3 text-lg font-bold">Historial de cambios</h2>
 
-      {isLoading && (
+      {isFetching && (
         <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
           <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
           <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
         </div>
       )}
 
-      {data?.data && data.data.length > 0 && (
+      {!isFetching && data?.data && data.data.length > 0 && (
         <>
           <section className="hidden sm:block md:hidden xl:block">
             <HistoryTable data={data.data} />
@@ -79,7 +79,7 @@ const EmployeeHistoryTab = () => {
         </>
       )}
 
-      {data?.data && data.data.length === 0 && (
+      {!isFetching && data?.data && data.data.length === 0 && (
         <p className="my-3 text-center">No hay cambios registrados</p>
       )}
     </>
