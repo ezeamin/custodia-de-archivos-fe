@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 
 import { getEmployeeFn } from '@/api/api-calls/employees';
 
-import { Grid, Icon } from '@/components/ui';
+import { Alert, Grid, Icon } from '@/components/ui';
 
 const EmployeePersonalTab = () => {
   const { id: employeeId } = useParams();
@@ -113,6 +113,29 @@ const EmployeePersonalTab = () => {
           </Grid>
           <Grid item className="mb-1" xs={12}>
             <EmployeeDataField label="Dirección" value={formattedAddress} />
+          </Grid>
+        </Grid>
+      </article>
+      <div className="divider" />
+      <article>
+        <div className="mb-2 flex items-center justify-between">
+          <h2 className="text-lg font-bold">Información familiar</h2>
+          <Link
+            className="tooltip tooltip-left"
+            data-tip="Editar"
+            to={`/employees/${employeeId}/edit/family`}
+          >
+            <Icon iconComponent={<FaPencil size="1em" />} title="Editar" />
+          </Link>
+        </div>
+        <Grid container component="section" gap={2}>
+          {/* <Grid item xs={12}>
+            <EmployeeDataField label="Email" value={data?.data?.email} />
+          </Grid> */}
+          <Grid item xs={12}>
+            <Alert type="warning">
+              Atención! Esta información aún no está disponible. Lo sentimos
+            </Alert>
           </Grid>
         </Grid>
       </article>

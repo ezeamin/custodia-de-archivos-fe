@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 
 import EditContactForm from '../Forms/EditContactForm';
+import EditFamilyForm from '../Forms/EditFamilyForm';
 import EditJobForm from '../Forms/EditJobForm';
 import EditPersonalForm from '../Forms/EditPersonalForm';
 import { useQuery } from '@tanstack/react-query';
@@ -57,6 +58,9 @@ const GlobalEmployeeResults = () => {
         break;
       case 'contact':
         renderedComp = <EditContactForm data={data.data} />;
+        break;
+      case 'family':
+        renderedComp = <EditFamilyForm data={data.data} />;
         break;
       default:
         break;
