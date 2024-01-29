@@ -1,9 +1,5 @@
-import { MdArrowOutward } from 'react-icons/md';
-import { Link } from 'react-router-dom';
-
+import HistoryListValue from './HistoryListValue';
 import dayjs from 'dayjs';
-
-import { Icon } from '@/components/ui';
 
 import { HistoryElementProps } from '@/components/interface/views';
 
@@ -16,11 +12,8 @@ const HistoryListItem = (props: HistoryElementProps) => {
     '$1.$2.$3'
   );
 
-  const isPreviousLink =
-    typeof data.previousValue === 'string' &&
-    data.previousValue?.includes('http');
-  const isNewLink =
-    typeof data.newValue === 'string' && data.newValue?.includes('http');
+  const isJSON = data.field.includes('JSON');
+  const label = isJSON ? data.field.split(' - ')[0] : data.field;
 
   return (
     <article className="content-card">
@@ -33,37 +26,15 @@ const HistoryListItem = (props: HistoryElementProps) => {
         </li>
         <div className="divider my-0" />
         <li>
-          Campo: <b>{data.field}</b>
+          Campo: <b>{label}</b>
         </li>
         <li>
           Valor anterior:{' '}
-          {isPreviousLink ? (
-            <Link
-              className="nowrap btn btn-outline btn-sm mb-2 w-full text-black hover:text-white dark:text-white dark:hover:text-black"
-              target="_blank"
-              to={data.previousValue}
-            >
-              <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
-              VER
-            </Link>
-          ) : (
-            <b>{data.previousValue || 'N/A'}</b>
-          )}
+          <HistoryListValue isJSON={isJSON} value={data.previousValue} />
         </li>
         <li>
           Valor nuevo:{' '}
-          {isNewLink ? (
-            <Link
-              className="nowrap btn btn-outline btn-sm w-full text-black hover:text-white dark:text-white dark:hover:text-black"
-              target="_blank"
-              to={data.newValue}
-            >
-              <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
-              VER
-            </Link>
-          ) : (
-            <b>{data.newValue || 'N/A'}</b>
-          )}
+          <HistoryListValue isJSON={isJSON} value={data.newValue} />
         </li>
       </ul>
     </article>

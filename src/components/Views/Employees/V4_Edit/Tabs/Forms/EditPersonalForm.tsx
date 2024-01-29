@@ -5,7 +5,10 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { editEmployeeFn } from '@/api/api-calls/employees';
-import { getGenderOptionsFn } from '@/api/api-calls/params';
+import {
+  getCivilStatusOptionsFn,
+  getGenderOptionsFn,
+} from '@/api/api-calls/params';
 
 import { useLoading, useZodForm } from '@/hooks';
 
@@ -45,6 +48,16 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
   const queryClient = useQueryClient();
 
   const {
+    data: civilStatusOptions,
+    isLoading: isLoadingCivilStatus,
+    isError: isErrorCivilStatus,
+    status: statusCivilStatus,
+  } = useQuery({
+    queryKey: ['civilStatusOptions'],
+    queryFn: getCivilStatusOptionsFn,
+  });
+
+  const {
     data: genderOptions,
     isLoading: isLoadingGenders,
     isError: isErrorGenders,
@@ -64,15 +77,16 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
       reset();
       toast.success('Información personal editada con éxito');
       queryClient.invalidateQueries({
-        queryKey: [`employee_${employeeOriginalData.id}`],
+        queryKey: ['employee', employeeOriginalData.id],
       });
       navigate(`/employees/${employeeOriginalData.id}/personal`);
     },
   });
 
   useLoading(isLoadingGenders, statusGenders);
+  useLoading(isLoadingCivilStatus, statusCivilStatus);
 
-  if (isErrorGenders) {
+  if (isErrorGenders || isErrorCivilStatus) {
     toast.error(
       'Error al cargar datos necesarios para editar el empleado. Reintente más tarde'
     );
@@ -99,6 +113,7 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
       setValue('dni', employeeOriginalData.dni.toString());
       setValue('gender', employeeOriginalData.gender);
       setValue('birthdate', employeeOriginalData.birthdate);
+      setValue('civilStatus', employeeOriginalData.civilStatus);
     }
   }, [employeeOriginalData, setValue]);
 
@@ -151,6 +166,17 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
             name="gender"
             options={genderOptions?.data || []}
             placeholder="Seleccione un género"
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xs={12}>
+          <ComboBoxInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="Estado Civil"
+            name="civilStatus"
+            options={civilStatusOptions?.data || []}
+            placeholder="Seleccione un estado civil"
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>

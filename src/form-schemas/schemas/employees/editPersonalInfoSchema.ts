@@ -14,8 +14,9 @@ export const editPersonalInfoSchema = z
     name: nameRules(true),
     lastname: lastnameRules(true),
     dni: dniRules(true),
-    gender: typeRules(true, 'género'),
+    gender: typeRules(true, 'Género'),
     birthdate: dateRules(true),
+    civilStatus: typeRules(true, 'Estado Civil'),
   })
   .refine(
     (data) => {

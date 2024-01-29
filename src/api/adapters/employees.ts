@@ -5,6 +5,7 @@ import {
   API_GetEmployeeDocs,
   API_GetEmployees,
   API_GetExtraHours,
+  API_GetFamilyMember,
   API_GetFormalWarnings,
   API_GetHistory,
   API_GetLateArrivals,
@@ -19,6 +20,7 @@ import {
   Employee,
   EmployeeDoc,
   ExtraHours,
+  FamilyMember,
   FormalWarning,
   History,
   LateArrival,
@@ -64,6 +66,7 @@ export const getEmployeeAdapter = (data: API_GetEmployee): Employee => ({
   email: data.email,
   age: data.age,
   gender: data.gender,
+  civilStatus: data.civilStatus,
   antiquity: data.antiquity,
   startDate: data.startDate,
   endDate: data.endDate,
@@ -74,6 +77,20 @@ export const getEmployeeAdapter = (data: API_GetEmployee): Employee => ({
   status: data.status,
   workingHours: data.workingHours,
   user: data.user,
+  familyMembers: data.familyMembers,
+});
+
+export const getFamilyMemberInfoAdapter = (
+  data: API_GetFamilyMember
+): FamilyMember => ({
+  id: data.id,
+  name: data.name,
+  lastname: data.lastname,
+  dni: data.dni,
+  gender: data.gender,
+  phone: data.phone,
+  address: data.address,
+  relationship: data.relationship,
 });
 
 export const getEmployeeDocsAdapter = (

@@ -5,12 +5,14 @@ import {
   Employee,
   EmployeeDoc,
   ExtraHours,
+  FamilyMember,
   FormalWarning,
   History,
   LateArrival,
   License,
   LicenseType,
   MinimalEmployee,
+  MinimalFamilyMember,
   Training,
   TrainingType,
   Vacation,
@@ -60,6 +62,26 @@ export interface EmployeeDataFieldProps {
   label: string;
   value: string | number | React.ReactNode | undefined | null;
   className?: string;
+}
+
+export interface FamilyListProps {
+  data: MinimalFamilyMember[];
+}
+
+export interface FamilyButtonProps {
+  member: MinimalFamilyMember;
+}
+
+export interface FamilyModalData {
+  data: string;
+}
+
+export interface FamilyMemberFormProps {
+  memberOriginalData?: FamilyMember;
+}
+
+export interface FamilyInfoModalContentProps {
+  data: FamilyMember;
 }
 
 export interface EditDocumentsFormProps {

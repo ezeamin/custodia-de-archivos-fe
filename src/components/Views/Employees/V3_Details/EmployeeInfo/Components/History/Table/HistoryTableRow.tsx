@@ -1,9 +1,5 @@
-import { MdArrowOutward } from 'react-icons/md';
-import { Link } from 'react-router-dom';
-
+import HistoryTableValue from './HistoryTableValue';
 import dayjs from 'dayjs';
-
-import { Icon } from '@/components/ui';
 
 import { HistoryElementProps } from '@/components/interface/views';
 
@@ -17,11 +13,8 @@ const HistoryTableRow = (props: HistoryElementProps) => {
     '$1.$2.$3'
   );
 
-  const isPreviousLink =
-    typeof data.previousValue === 'string' &&
-    data.previousValue?.includes('http');
-  const isNewLink =
-    typeof data.newValue === 'string' && data.newValue?.includes('http');
+  const isJSON = data.field.includes('JSON');
+  const label = isJSON ? data.field.split(' - ')[0] : data.field;
 
   return (
     <tr>
@@ -29,34 +22,12 @@ const HistoryTableRow = (props: HistoryElementProps) => {
         <p>{formattedDate}</p>
         <p>{formattedHour}</p>
       </td>
-      <td>{data.field}</td>
+      <td>{label}</td>
       <td>
-        {isPreviousLink ? (
-          <Link
-            className="nowrap btn btn-outline btn-sm text-black hover:text-white dark:text-white dark:hover:text-black"
-            target="_blank"
-            to={data.previousValue}
-          >
-            <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
-            VER
-          </Link>
-        ) : (
-          data.previousValue || 'N/A'
-        )}
+        <HistoryTableValue isJSON={isJSON} value={data.previousValue} />
       </td>
       <td>
-        {isNewLink ? (
-          <Link
-            className="nowrap btn btn-outline btn-sm text-black hover:text-white dark:text-white dark:hover:text-black"
-            target="_blank"
-            to={data.newValue}
-          >
-            <Icon iconComponent={<MdArrowOutward />} title="Navegar" />
-            VER
-          </Link>
-        ) : (
-          data.newValue || 'N/A'
-        )}
+        <HistoryTableValue isJSON={isJSON} value={data.newValue} />
       </td>
       <td>{formattedDni}</td>
     </tr>

@@ -1,19 +1,21 @@
+import { FaPlus } from 'react-icons/fa';
 import { FaPencil } from 'react-icons/fa6';
 import { Link, useParams } from 'react-router-dom';
 
+import FamilyList from '../Components/Family/FamilyList';
 import EmployeeDataField from '../EmployeeDataField';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
 import { getEmployeeFn } from '@/api/api-calls/employees';
 
-import { Alert, Grid, Icon } from '@/components/ui';
+import { Grid, Icon } from '@/components/ui';
 
 const EmployeePersonalTab = () => {
   const { id: employeeId } = useParams();
 
   const { data } = useQuery({
-    queryKey: [`employee_${employeeId}`],
+    queryKey: ['employee', employeeId],
     queryFn: () => getEmployeeFn(employeeId!),
   });
 
@@ -80,6 +82,12 @@ const EmployeePersonalTab = () => {
               value={data?.data?.gender.description}
             />
           </Grid>
+          <Grid item lg={6} xs={12}>
+            <EmployeeDataField
+              label="Estado civil"
+              value={data?.data?.civilStatus?.description || 'N/A'}
+            />
+          </Grid>
         </Grid>
       </article>
       <div className="divider" />
@@ -122,22 +130,16 @@ const EmployeePersonalTab = () => {
           <h2 className="text-lg font-bold">Información familiar</h2>
           <Link
             className="tooltip tooltip-left"
-            data-tip="Editar"
-            to={`/employees/${employeeId}/edit/family`}
+            data-tip="Agregar nuevo miembro"
+            to={`/employees/${employeeId}/family`}
           >
-            <Icon iconComponent={<FaPencil size="1em" />} title="Editar" />
+            <Icon
+              iconComponent={<FaPlus size="1em" />}
+              title="Agregar nuevo miembro"
+            />
           </Link>
         </div>
-        <Grid container component="section" gap={2}>
-          {/* <Grid item xs={12}>
-            <EmployeeDataField label="Email" value={data?.data?.email} />
-          </Grid> */}
-          <Grid item xs={12}>
-            <Alert type="warning">
-              Atención! Esta información aún no está disponible. Lo sentimos
-            </Alert>
-          </Grid>
-        </Grid>
+        <FamilyList data={data?.data?.familyMembers || []} />
       </article>
     </>
   );

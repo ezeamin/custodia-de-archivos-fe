@@ -13,7 +13,9 @@ import LoginView from '@/views/Auth/LoginView';
 import RecoverPasswordView from '@/views/Auth/RecoverPasswordView';
 import ResetPasswordView from '@/views/Auth/ResetPasswordView';
 import CreateEmployeeView from '@/views/Employees/CreateEmployeeView';
+import CreateFamilyMemberView from '@/views/Employees/CreateFamilyMemberView';
 import EditEmployeeView from '@/views/Employees/EditEmployeeView';
+import EditFamilyMemberView from '@/views/Employees/EditFamilyMemberView';
 import EmployeeDetailsView from '@/views/Employees/EmployeeDetailsView';
 import EmployeeListView from '@/views/Employees/EmployeeListView';
 import HomeView from '@/views/Home/HomeView';
@@ -126,6 +128,26 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <EditEmployeeView />,
+        allowedRoles: [userRoles.ADMIN],
+      },
+      {
+        id: 3004,
+        title: 'Agregar familiar',
+        description: 'Agregar miembro familiar',
+        path: paths.EMPLOYEES.EMPLOYEE_FAMILY_CREATE,
+        subpaths: [],
+        privateRoute: true,
+        element: <CreateFamilyMemberView />,
+        allowedRoles: [userRoles.ADMIN],
+      },
+      {
+        id: 3005,
+        title: 'Editar familiar',
+        description: 'Editar miembro familiar',
+        path: paths.EMPLOYEES.EMPLOYEE_FAMILY_EDIT,
+        subpaths: [],
+        privateRoute: true,
+        element: <EditFamilyMemberView />,
         allowedRoles: [userRoles.ADMIN],
       },
     ],

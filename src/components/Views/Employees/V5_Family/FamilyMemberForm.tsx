@@ -1,60 +1,101 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import {
-  editEmployeeFn,
   getLocalitiesFn,
   getStatesFn,
   getStreetsFn,
+  postFamilyMemberFn,
+  putFamilyMemberFn,
 } from '@/api/api-calls/employees';
+import {
+  getGenderOptionsFn,
+  getRelationshipOptionsFn,
+} from '@/api/api-calls/params';
 
 import { useLoading, useZodForm } from '@/hooks';
 
 import { Button, ComboBoxInput, Grid, TextInput } from '@/components/ui';
 
 import {
-  EditContactInfoSchema,
-  editContactInfoSchema,
-} from '@/form-schemas/schemas/employees/editContactInfoSchema';
+  FamilyMemberFormSchema,
+  familyMemberFormSchema,
+} from '@/form-schemas/schemas/employees/familyMemberFormSchema';
 
-import { EmployeeInfoProps } from '@/components/interface/views';
+import { FamilyMemberFormProps } from '@/components/interface/views';
 import { BasicList } from '@/interface';
 
-const EditContactForm = (props: EmployeeInfoProps) => {
-  const { data: employeeOriginalData } = props;
+const FamilyMemberForm = (props: FamilyMemberFormProps) => {
+  const { memberOriginalData } = props;
+
+  const { id: employeeId } = useParams();
+  const navigate = useNavigate();
+
+  const isEditing = !!memberOriginalData;
 
   // -------------------------------------------------
   // FORM & STATES
   // -------------------------------------------------
 
   const { control, onSubmitMiddleware, setValue, reset, watch } = useZodForm(
-    editContactInfoSchema
+    familyMemberFormSchema
   );
 
-  const email = watch('email');
+  const name = watch('name');
+  const lastname = watch('lastname');
+  const phone = watch('phone');
+  const gender = watch('gender');
+  const dni = watch('dni');
+  const relationship = watch('relationship');
+  const street = watch('street');
   const state = watch('state');
   const locality = watch('locality');
-  const street = watch('street');
   const streetNumber = watch('streetNumber');
   const areAllMandatoryFieldsFilled =
-    email && state && street && locality && streetNumber;
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
+    name &&
+    lastname &&
+    gender &&
+    phone &&
+    dni &&
+    relationship &&
+    state &&
+    street &&
+    locality &&
+    streetNumber;
 
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
+  const [isLoading, setIsLoading] = useState(false);
   const [hasLoadedInfo, setHasLoadedInfo] = useState(false);
   const [localityList, setLocalityList] = useState<BasicList[]>([]);
   const [streetList, setStreetList] = useState<BasicList[]>([]);
 
   const queryClient = useQueryClient();
+
+  const {
+    data: genderList,
+    isLoading: genderListIsLoading,
+    isError: genderListIsError,
+    status: genderStatus,
+  } = useQuery({
+    queryKey: ['genderOptions'],
+    queryFn: getGenderOptionsFn,
+  });
+
+  const {
+    data: relationshipList,
+    isLoading: relationshipListIsLoading,
+    isError: relationshipListIsError,
+    status: relationshipStatus,
+  } = useQuery({
+    queryKey: ['relationshipOptions'],
+    queryFn: getRelationshipOptionsFn,
+  });
 
   const {
     data: stateList,
@@ -92,43 +133,90 @@ const EditContactForm = (props: EmployeeInfoProps) => {
     enabled: !!locality,
   });
 
-  const { mutate: editEmployee } = useMutation({
-    mutationFn: editEmployeeFn,
+  const { mutate: createFamilyMember } = useMutation({
+    mutationFn: postFamilyMemberFn,
     onError: () => {
       setIsLoading(false);
     },
     onSuccess: () => {
       setIsLoading(false);
       reset();
-      toast.success('Información de contacto editada con éxito');
+      toast.success('Familiar agregado con éxito');
       queryClient.invalidateQueries({
-        queryKey: ['employee', employeeOriginalData.id],
+        queryKey: ['employee', employeeId],
       });
-      navigate(`/employees/${employeeOriginalData.id}/personal`);
+      navigate(`/employees/${employeeId}/personal`);
     },
   });
 
+  const { mutate: editFamilyMember } = useMutation({
+    mutationFn: putFamilyMemberFn,
+    onError: () => {
+      setIsLoading(false);
+    },
+    onSuccess: () => {
+      setIsLoading(false);
+      reset();
+      toast.success('Información del familiar editada con éxito');
+      queryClient.invalidateQueries({
+        queryKey: ['familyMember', memberOriginalData?.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['employee', employeeId],
+      });
+      navigate(`/employees/${employeeId}/personal`);
+    },
+  });
+
+  useLoading(relationshipListIsLoading, relationshipStatus);
+  useLoading(genderListIsLoading, genderStatus);
   useLoading(stateListIsLoading, stateListStatus);
   useLoading(localityListIsLoading, localityListStatus);
   useLoading(streetListIsLoading, streetListStatus);
 
-  if (streetListIsError || localityListIsError || stateListIsError) {
+  if (
+    streetListIsError ||
+    localityListIsError ||
+    stateListIsError ||
+    genderListIsError ||
+    relationshipListIsError
+  ) {
     toast.error(
       'Ocurrió un error cargando la información necesaria para completar el formulario. Reintente más tarde',
       {
         duration: 10000,
       }
     );
-    navigate(`/employees/${employeeOriginalData.id}/personal`);
+    navigate(`/employees/${employeeId}/personal`);
   }
 
   // -------------------------------------------------
   // HANDLERS
   // -------------------------------------------------
 
-  const handleSubmit = (data: EditContactInfoSchema) => {
+  const handleSubmit = (data: FamilyMemberFormSchema) => {
     setIsLoading(true);
-    editEmployee({ ...data, id: employeeOriginalData.id, skipCleanUp: true });
+
+    if (isEditing) {
+      editFamilyMember({
+        ...data,
+        memberId: memberOriginalData?.id,
+        genderId: data.gender.id,
+        relationshipId: data.relationship.id,
+        employeeId,
+        gender: undefined,
+        relationship: undefined,
+      });
+    } else {
+      createFamilyMember({
+        ...data,
+        id: employeeId,
+        genderId: data.gender.id,
+        relationshipId: data.relationship.id,
+        gender: undefined,
+        relationship: undefined,
+      });
+    }
   };
 
   // -------------------------------------------------
@@ -136,49 +224,55 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   // -------------------------------------------------
 
   useEffect(() => {
-    // if !email only to check if information has been loaded
-    if (employeeOriginalData && stateList && !email) {
-      setValue('email', employeeOriginalData.email);
-      if (employeeOriginalData.phone)
-        setValue('phone', employeeOriginalData.phone);
-      if (employeeOriginalData.address) {
-        if (employeeOriginalData.address.streetNumber)
-          setValue('streetNumber', employeeOriginalData.address.streetNumber);
-        if (employeeOriginalData.address.apt)
-          setValue('apt', employeeOriginalData.address.apt);
-        if (employeeOriginalData.address.state)
-          setValue('state', employeeOriginalData.address.state);
+    // if !name only to check if information has been loaded
+    if (memberOriginalData && stateList && !name) {
+      setValue('name', memberOriginalData.name);
+      if (memberOriginalData.lastname)
+        setValue('lastname', memberOriginalData.lastname);
+      if (memberOriginalData.dni) setValue('dni', memberOriginalData.dni);
+      if (memberOriginalData.relationship)
+        setValue('relationship', memberOriginalData.relationship);
+      if (memberOriginalData.gender)
+        setValue('gender', memberOriginalData.gender);
+      if (memberOriginalData.phone) setValue('phone', memberOriginalData.phone);
+      if (memberOriginalData.address) {
+        if (memberOriginalData.address.streetNumber)
+          setValue('streetNumber', memberOriginalData.address.streetNumber);
+        if (memberOriginalData.address.apt)
+          setValue('apt', memberOriginalData.address.apt);
+        if (memberOriginalData.address.state)
+          setValue('state', memberOriginalData.address.state);
       }
     }
-  }, [employeeOriginalData, setValue, email, stateList]);
+  }, [memberOriginalData, setValue, name, stateList]);
 
   // Load locality from original data if it is in the list, after localityList has loaded
   useEffect(() => {
     if (hasLoadedInfo) return;
 
-    if (state && localityList && employeeOriginalData.address) {
+    if (state && localityList && memberOriginalData?.address) {
       const isLocalityInList = localityList.find(
-        (loc) => loc.id === employeeOriginalData.address.locality.id
+        (loc) => loc.id === memberOriginalData?.address.locality.id
       );
       if (isLocalityInList)
-        setValue('locality', employeeOriginalData.address.locality);
+        setValue('locality', memberOriginalData.address.locality);
     }
-  }, [employeeOriginalData, setValue, state, localityList, hasLoadedInfo]);
+  }, [memberOriginalData, setValue, state, localityList, hasLoadedInfo]);
 
   // Load street from original data if it is in the list, after streetList has loaded
   useEffect(() => {
     if (hasLoadedInfo) return;
 
-    if (locality && streetList && employeeOriginalData.address) {
+    if (locality && streetList && memberOriginalData?.address) {
       const isStreetInList = streetList.find(
-        (strt) => strt.id === employeeOriginalData.address.street.id
+        (strt) => strt.id === memberOriginalData?.address.street.id
       );
       if (isStreetInList) {
-        setValue('street', employeeOriginalData.address.street);
+        setValue('street', memberOriginalData.address.street);
         setHasLoadedInfo(true);
       }
     }
-  }, [employeeOriginalData, setValue, locality, streetList, hasLoadedInfo]);
+  }, [memberOriginalData, setValue, locality, streetList, hasLoadedInfo]);
 
   // Reset localities and streets if no state is selected
   useEffect(() => {
@@ -218,14 +312,35 @@ const EditContactForm = (props: EmployeeInfoProps) => {
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
       <Grid container gap={2}>
-        <Grid item lg={8} sm={6} xs={12}>
+        <Grid item lg={4} sm={6} xs={12}>
           <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
-            label="Email *"
-            name="email"
-            placeholder="juan@hotmail.com"
+            label="Nombre *"
+            name="name"
+            placeholder="Juan"
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xs={12}>
+          <TextInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="Apellido *"
+            name="lastname"
+            placeholder="Perez"
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xs={12}>
+          <TextInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="DNI (sin puntos) *"
+            maxLength={8}
+            name="dni"
+            placeholder="1234578"
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
@@ -238,6 +353,28 @@ const EditContactForm = (props: EmployeeInfoProps) => {
             name="phone"
             placeholder="5493815857499"
             type="tel"
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xs={12}>
+          <ComboBoxInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="Género *"
+            name="gender"
+            options={genderList?.data || []}
+            placeholder="Seleccione una opción"
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xs={12}>
+          <ComboBoxInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="Parentesco *"
+            name="relationship"
+            options={relationshipList?.data || []}
+            placeholder="Seleccione una opción"
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
@@ -316,4 +453,4 @@ const EditContactForm = (props: EmployeeInfoProps) => {
     </form>
   );
 };
-export default EditContactForm;
+export default FamilyMemberForm;

@@ -67,8 +67,8 @@ const VacationsListItem = (props: VacationsElementProps) => {
 
   const handleClickDelete = () => {
     Swal.fire({
-      title: '¿Estás seguro?',
-      html: `<p>Eliminarás las vacaciones del <b>${startDate.format(
+      title: '¿Está seguro?',
+      html: `<p>Eliminará las vacaciones del <b>${startDate.format(
         'DD/MM/YYYY'
       )}</b> al <b>${endDate.format(
         'DD/MM/YYYY'

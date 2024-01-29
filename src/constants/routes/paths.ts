@@ -9,6 +9,8 @@ export const paths = {
     MAIN: '/employees',
     EMPLOYEE_DETAILS: '/employees/:id/:tab',
     EMPLOYEE_DETAILS_EDIT: '/employees/:id/edit/:subtab',
+    EMPLOYEE_FAMILY_CREATE: '/employees/:id/family',
+    EMPLOYEE_FAMILY_EDIT: '/employees/:id/family/:memberId',
     CREATE: '/employees/create',
   },
   NOTIFICATIONS: {

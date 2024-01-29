@@ -47,7 +47,7 @@ const Results = () => {
   const queryClient = useQueryClient();
 
   const { data, isLoading, isError, refetch, status } = useQuery({
-    queryKey: [`employee_${employeeId}`],
+    queryKey: ['employee', employeeId],
     queryFn: () => getEmployeeFn(employeeId!),
   });
 
@@ -62,7 +62,7 @@ const Results = () => {
       setModalData(res);
       openModal('newUser');
       queryClient.invalidateQueries({
-        queryKey: [`employee_${employeeId}`],
+        queryKey: ['employee', employeeId],
       });
     },
   });

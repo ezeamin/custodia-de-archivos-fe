@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 
 import EditContactForm from '../Forms/EditContactForm';
-import EditFamilyForm from '../Forms/EditFamilyForm';
 import EditJobForm from '../Forms/EditJobForm';
 import EditPersonalForm from '../Forms/EditPersonalForm';
 import { useQuery } from '@tanstack/react-query';
@@ -25,7 +24,7 @@ const GlobalEmployeeResults = () => {
   // -------------------------------------------------
 
   const { data, isLoading, isError, refetch, status } = useQuery({
-    queryKey: [`employee_${employeeId}`],
+    queryKey: ['employee', employeeId],
     queryFn: () => getEmployeeFn(employeeId!),
   });
 
@@ -58,9 +57,6 @@ const GlobalEmployeeResults = () => {
         break;
       case 'contact':
         renderedComp = <EditContactForm data={data.data} />;
-        break;
-      case 'family':
-        renderedComp = <EditFamilyForm data={data.data} />;
         break;
       default:
         break;

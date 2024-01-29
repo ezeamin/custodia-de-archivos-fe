@@ -68,8 +68,8 @@ const LicensesTableRow = (props: LicensesElementProps) => {
 
   const handleClickDelete = () => {
     Swal.fire({
-      title: '¿Estás seguro?',
-      html: `<p>Eliminarás la licencia <b>"${data.type.description}"</b> de este usuario. Esta acción no se puede revertir.</p>`,
+      title: '¿Está seguro?',
+      html: `<p>Eliminará la licencia <b>"${data.type.description}"</b> de este usuario. Esta acción no se puede revertir.</p>`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

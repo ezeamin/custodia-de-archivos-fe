@@ -22,6 +22,16 @@ export const apiRoutes = {
       url: '/params/areas',
       useToken: true,
     }),
+    GET_RELATIONSHIPS: (): ApiRoute => ({
+      method: 'GET',
+      url: '/params/relationships',
+      useToken: true,
+    }),
+    GET_CIVIL_STATUS: (): ApiRoute => ({
+      method: 'GET',
+      url: '/params/civil-status',
+      useToken: true,
+    }),
   },
   AUTH: {
     POST_LOGIN: (): ApiRoute => ({
@@ -324,6 +334,44 @@ export const apiRoutes = {
     }): ApiRoute => ({
       method: 'POST',
       url: `/employees/${employeeId}/extra-hours`,
+      useToken: true,
+    }),
+    GET_FAMILY_MEMBER_INFO: ({
+      employeeId,
+      memberId,
+    }: {
+      employeeId: string;
+      memberId: string;
+    }): ApiRoute => ({
+      method: 'GET',
+      url: `/employees/${employeeId}/family/${memberId}`,
+      useToken: true,
+    }),
+    POST_FAMILY_MEMBER: ({ employeeId }: { employeeId: string }): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/${employeeId}/family`,
+      useToken: true,
+    }),
+    PUT_FAMILY_MEMBER: ({
+      employeeId,
+      memberId,
+    }: {
+      employeeId: string;
+      memberId: string;
+    }): ApiRoute => ({
+      method: 'PUT',
+      url: `/employees/${employeeId}/family/${memberId}`,
+      useToken: true,
+    }),
+    DELETE_FAMILY_MEMBER: ({
+      employeeId,
+      memberId,
+    }: {
+      employeeId: string;
+      memberId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/family/${memberId}`,
       useToken: true,
     }),
   },

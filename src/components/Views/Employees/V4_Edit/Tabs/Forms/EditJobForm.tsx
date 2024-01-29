@@ -92,7 +92,7 @@ const EditJobForm = (props: EmployeeInfoProps) => {
       reset();
       toast.success('Información laboral editada con éxito');
       queryClient.invalidateQueries({
-        queryKey: [`employee_${employeeOriginalData.id}`],
+        queryKey: ['employee', employeeOriginalData.id],
       });
       navigate(`/employees/${employeeOriginalData.id}/personal`);
     },
