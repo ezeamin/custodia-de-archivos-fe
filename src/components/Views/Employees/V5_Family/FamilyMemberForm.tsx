@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
+import Swal from 'sweetalert2';
 
 import {
   getLocalitiesFn,
@@ -54,6 +55,7 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
   const state = watch('state');
   const locality = watch('locality');
   const streetNumber = watch('streetNumber');
+  const apt = watch('apt');
   const areAllMandatoryFieldsFilled =
     name &&
     lastname &&
@@ -135,8 +137,40 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
 
   const { mutate: createFamilyMember } = useMutation({
     mutationFn: postFamilyMemberFn,
-    onError: () => {
+    onError: (err) => {
       setIsLoading(false);
+      if (err.message.includes('ya existe')) {
+        Swal.fire({
+          title: 'Atención',
+          html: `Ya existe una persona registrada bajo el DNI ${dni} en el sistema.<br/><br/>
+           De continuar, se registrará el parentesco, y SOLO se actualizarán los datos faltantes (de haberlos).`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, continuar',
+          cancelButtonText: 'Cancelar',
+        }).then((res) => {
+          if (res.isConfirmed) {
+            setIsLoading(true);
+            createFamilyMember({
+              force: true,
+              id: employeeId,
+              genderId: gender.id,
+              relationshipId: relationship.id,
+              dni,
+              name,
+              lastname,
+              phone,
+              street,
+              locality,
+              state,
+              streetNumber,
+              apt,
+            });
+          }
+        });
+      }
     },
     onSuccess: () => {
       setIsLoading(false);
