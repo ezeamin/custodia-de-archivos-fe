@@ -47,6 +47,7 @@ import {
   API_GetTrainings,
   API_GetTrainingsTypes,
   API_GetVacations,
+  API_PostFamilyMember,
   Employee,
   EmployeeDoc,
   ExtraHours,
@@ -530,7 +531,7 @@ export const postFamilyMemberFn = async (body: Record<string, unknown>) => {
     id: undefined,
   };
 
-  const data = await fetchFn<API_EmptyResponse>({
+  const data = await fetchFn<API_PostFamilyMember>({
     request,
     body: dataToSend,
     adapter: (APIData) => APIData,

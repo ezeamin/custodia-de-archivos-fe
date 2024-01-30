@@ -137,43 +137,52 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
 
   const { mutate: createFamilyMember } = useMutation({
     mutationFn: postFamilyMemberFn,
-    onError: (err) => {
+    onError: () => {
       setIsLoading(false);
-      if (err.message.includes('ya existe')) {
-        Swal.fire({
-          title: 'Atención',
-          html: `Ya existe una persona registrada bajo el DNI ${dni} en el sistema.<br/><br/>
-           De continuar, se registrará el parentesco, y SOLO se actualizarán los datos faltantes (de haberlos).`,
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí, continuar',
-          cancelButtonText: 'Cancelar',
-        }).then((res) => {
-          if (res.isConfirmed) {
-            setIsLoading(true);
-            createFamilyMember({
-              force: true,
-              id: employeeId,
-              genderId: gender.id,
-              relationshipId: relationship.id,
-              dni,
-              name,
-              lastname,
-              phone,
-              street,
-              locality,
-              state,
-              streetNumber,
-              apt,
-            });
-          }
-        });
-      }
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       setIsLoading(false);
+
+      if (data && data.message?.includes('Duplicate')) {
+        const personData = data.data;
+        if (personData) {
+          Swal.fire({
+            title: 'Atención',
+            html: `Ya existe una persona registrada bajo el DNI ${dni} en el sistema.<br/><br/>
+          Nombre: <b>${personData.lastname}, ${personData.name}</b><br/>
+          ${personData.phone ? `Teléfono: <b>${personData.phone}</b><br/>` : ''}
+          ${personData.address ? `Dirección: <b>${personData.address}</b><br/>` : ''}
+          <br/>De continuar, se registrará el parentesco, y SOLO se actualizarán los datos faltantes (de haberlos).`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, continuar',
+            cancelButtonText: 'Cancelar',
+          }).then((res) => {
+            if (res.isConfirmed) {
+              setIsLoading(true);
+              createFamilyMember({
+                force: true,
+                id: employeeId,
+                genderId: gender.id,
+                relationshipId: relationship.id,
+                dni,
+                name,
+                lastname,
+                phone,
+                street,
+                locality,
+                state,
+                streetNumber,
+                apt,
+              });
+            }
+          });
+          return;
+        }
+      }
+
       reset();
       toast.success('Familiar agregado con éxito');
       queryClient.invalidateQueries({
