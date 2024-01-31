@@ -59,7 +59,7 @@ const Results = () => {
     },
     onSuccess: (res) => {
       setIsLoadingCreateUser(false);
-      setModalData(res);
+      setModalData(res.data);
       openModal('newUser');
       queryClient.invalidateQueries({
         queryKey: ['employee', employeeId],

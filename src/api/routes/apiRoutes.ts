@@ -7,9 +7,9 @@ export const apiRoutes = {
       url: '/params/status',
       useToken: true,
     }),
-    GET_ROLES: (): ApiRoute => ({
+    GET_ROLES: ({ notifications }: { notifications: boolean }): ApiRoute => ({
       method: 'GET',
-      url: '/params/roles',
+      url: `/params/roles${notifications ? '?notifications=true' : ''}`,
       useToken: true,
     }),
     GET_GENDERS: (): ApiRoute => ({
@@ -17,9 +17,13 @@ export const apiRoutes = {
       url: '/params/genders',
       useToken: true,
     }),
-    GET_AREAS: (): ApiRoute => ({
+    GET_AREAS: ({
+      filterAssignable,
+    }: {
+      filterAssignable: boolean;
+    }): ApiRoute => ({
       method: 'GET',
-      url: '/params/areas',
+      url: `/params/areas${filterAssignable ? '?filterAssignable=true' : ''}`,
       useToken: true,
     }),
     GET_RELATIONSHIPS: (): ApiRoute => ({
@@ -381,19 +385,20 @@ export const apiRoutes = {
       url: `/notifications${params}`,
       useToken: true,
     }),
-    GET_NOTIFICATION: ({ id }: { id: string }): ApiRoute => ({
+    GET_NOTIFICATION: ({
+      id,
+      sent,
+    }: {
+      id: string;
+      sent?: boolean;
+    }): ApiRoute => ({
       method: 'GET',
-      url: `/notifications/${id}`,
+      url: `/notifications/${id}${sent ? '?sent=true' : ''}`,
       useToken: true,
     }),
     POST_NOTIFICATION: (): ApiRoute => ({
       method: 'POST',
       url: '/notifications',
-      useToken: true,
-    }),
-    READ_NOTIFICATION: ({ id }: { id: string }): ApiRoute => ({
-      method: 'PUT',
-      url: `/notifications/${id}/read`,
       useToken: true,
     }),
     GET_NOTIFICATION_RECEIVERS: (): ApiRoute => ({

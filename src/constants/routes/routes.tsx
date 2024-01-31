@@ -24,6 +24,7 @@ import NotificationDetailView from '@/views/Notifications/NotificationDetailView
 import NotificationsReadListView from '@/views/Notifications/NotificationsReadListView';
 import NotificationsSentListView from '@/views/Notifications/NotificationsSentListView';
 import NotificationsView from '@/views/Notifications/NotificationsView';
+import SentNotificationDetailView from '@/views/Notifications/SentNotificationDetailView';
 import ChangePasswordView from '@/views/Settings/ChangePasswordView';
 import CreateAdminView from '@/views/Settings/CreateAdminView';
 import CreateReadOnlyView from '@/views/Settings/CreateReadOnlyView';
@@ -170,11 +171,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <CreateNotificationView />,
-        allowedRoles: [
-          userRoles.ADMIN,
-          userRoles.EMPLOYEE,
-          userRoles.THIRD_PARTY,
-        ],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
       },
       {
         id: 4002,
@@ -184,11 +181,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <NotificationsReadListView />,
-        allowedRoles: [
-          userRoles.ADMIN,
-          userRoles.EMPLOYEE,
-          userRoles.THIRD_PARTY,
-        ],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
       },
       {
         id: 4003,
@@ -198,11 +191,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <NotificationDetailView />,
-        allowedRoles: [
-          userRoles.ADMIN,
-          userRoles.EMPLOYEE,
-          userRoles.THIRD_PARTY,
-        ],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
       },
       {
         id: 4004,
@@ -212,30 +201,22 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <NotificationsSentListView />,
-        allowedRoles: [
-          userRoles.ADMIN,
-          userRoles.EMPLOYEE,
-          userRoles.THIRD_PARTY,
-        ],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
       },
       {
         id: 4005,
-        title: 'Detalle Notificación',
-        description: 'Detalle Notificación',
-        path: paths.NOTIFICATIONS.DETAILS,
+        title: 'Detalle Notificación Enviada',
+        description: 'Detalle Notificación Enviada',
+        path: paths.NOTIFICATIONS.SENT_DETAILS,
         subpaths: [],
         privateRoute: true,
-        element: <NotificationDetailView />,
-        allowedRoles: [
-          userRoles.ADMIN,
-          userRoles.EMPLOYEE,
-          userRoles.THIRD_PARTY,
-        ],
+        element: <SentNotificationDetailView />,
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
       },
     ],
     privateRoute: true,
     element: <NotificationsView />,
-    allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.THIRD_PARTY],
+    allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
   },
   {
     id: 5000,

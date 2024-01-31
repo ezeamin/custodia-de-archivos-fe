@@ -2,10 +2,38 @@ import {
   API_GetNotifications,
   API_GetNotificationsReceivers,
   API_GetNotificationsTypes,
+  API_GetSentNotifications,
   Notification,
   NotificationReceiver,
   NotificationType,
+  SentNotification,
 } from '../interface/notifications';
+
+export const getSentNotificationsAdapter = (
+  data: API_GetSentNotifications[]
+): SentNotification[] => {
+  return data.map((notification) => ({
+    id: notification.id,
+    message: notification.message,
+    issuer: {
+      id: notification.issuer.id,
+      firstname: notification.issuer.firstname,
+      lastname: notification.issuer.lastname,
+      email: notification.issuer.email,
+      imgSrc: notification.issuer.imgSrc,
+    },
+    receivers: notification.receivers.map((receiver) => ({
+      id: receiver.id,
+      name: receiver.name,
+      email: receiver.email,
+      imgSrc: receiver.imgSrc,
+      hasReadNotification: receiver.hasReadNotification,
+    })),
+    type: notification.type,
+    date: notification.date,
+    files: notification.files,
+  }));
+};
 
 export const getNotificationsAdapter = (
   data: API_GetNotifications[]
@@ -14,18 +42,15 @@ export const getNotificationsAdapter = (
     id: notification.id,
     message: notification.message,
     issuer: {
+      id: notification.issuer.id,
       firstname: notification.issuer.firstname,
       lastname: notification.issuer.lastname,
-      id: notification.issuer.id,
+      email: notification.issuer.email,
+      imgSrc: notification.issuer.imgSrc,
     },
-    receiver: {
-      firstname: notification.receiver.firstname,
-      lastname: notification.receiver.lastname,
-      id: notification.receiver.id,
-    },
+    hasBeenRead: notification.hasBeenRead,
     type: notification.type,
     date: notification.date,
-    hasBeenRead: notification.hasBeenRead,
     files: notification.files,
   }));
 };
@@ -39,15 +64,36 @@ export const getNotificationAdapter = (
     firstname: data.issuer.firstname,
     lastname: data.issuer.lastname,
     id: data.issuer.id,
-  },
-  receiver: {
-    firstname: data.receiver.firstname,
-    lastname: data.receiver.lastname,
-    id: data.receiver.id,
+    email: data.issuer.email,
+    imgSrc: data.issuer.imgSrc,
   },
   type: data.type,
   date: data.date,
   hasBeenRead: data.hasBeenRead,
+  files: data.files,
+});
+
+export const getSentNotificationAdapter = (
+  data: API_GetSentNotifications
+): SentNotification => ({
+  id: data.id,
+  message: data.message,
+  issuer: {
+    firstname: data.issuer.firstname,
+    lastname: data.issuer.lastname,
+    id: data.issuer.id,
+    email: data.issuer.email,
+    imgSrc: data.issuer.imgSrc,
+  },
+  receivers: data.receivers.map((receiver) => ({
+    id: receiver.id,
+    name: receiver.name,
+    email: receiver.email,
+    imgSrc: receiver.imgSrc,
+    hasReadNotification: receiver.hasReadNotification,
+  })),
+  type: data.type,
+  date: data.date,
   files: data.files,
 });
 
@@ -81,5 +127,6 @@ export const getNotificationsReceiversAdapter = (
   return data.map((notification) => ({
     id: notification.id,
     description: notification.description,
+    type: notification.type,
   }));
 };

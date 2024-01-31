@@ -1,5 +1,4 @@
 import ResultsList from '../V1_List/List/ResultsList';
-import { mockedData } from '../V1_List/mocked';
 import { useQuery } from '@tanstack/react-query';
 
 import { getSentNotificationsFn } from '@/api/api-calls/notifications';
@@ -9,19 +8,12 @@ import { useLoading } from '@/hooks';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Pagination } from '@/components/ui';
 
-const data = {
-  ...mockedData,
-  data: mockedData.data,
-};
-const isError = false;
-const isLoading = false;
-
 const Results = () => {
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+  const { data, isLoading, isError, refetch, status } = useQuery({
     queryKey: ['sent_notifications'],
     queryFn: () => getSentNotificationsFn(),
   });
@@ -54,7 +46,8 @@ const Results = () => {
               superior de
             </p>
             <p className="my-3 text-center font-bold">
-              &quot;Notificaciones&quot; &gt; &quot;CREAR NUEVO EMPLEADO&quot;
+              &quot;Notificaciones&quot; &gt; &quot;CREAR NUEVA
+              NOTIFICACION&quot;
             </p>
           </Alert>
         </section>
@@ -62,10 +55,10 @@ const Results = () => {
 
     return (
       <section className="mt-5 overflow-hidden">
-        <ResultsList data={data.data} />
+        <ResultsList sent data={data.data} />
         <Pagination
           queryKey="sent_notifications"
-          totalElements={data.totalElements}
+          totalElements={data.totalElements || 1}
         />
       </section>
     );

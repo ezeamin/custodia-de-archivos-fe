@@ -65,7 +65,7 @@ const Results = () => {
 
         <Pagination
           queryKey="employees"
-          totalElements={data.totalElements || 0}
+          totalElements={data.totalElements || 1}
         />
       </section>
     );

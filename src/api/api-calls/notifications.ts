@@ -9,6 +9,8 @@ import {
   getNotificationsReceiversAdapter,
   getNotificationsTypesAdapter,
   getNotificationTypeAdapter,
+  getSentNotificationAdapter,
+  getSentNotificationsAdapter,
 } from '../adapters/notifications';
 
 import { API_EmptyResponse } from '../interface';
@@ -16,9 +18,11 @@ import {
   API_GetNotifications,
   API_GetNotificationsReceivers,
   API_GetNotificationsTypes,
+  API_GetSentNotifications,
   Notification,
   NotificationReceiver,
   NotificationType,
+  SentNotification,
 } from '@/api/interface/notifications';
 
 export const getNotificationsFn = async (read: boolean) => {
@@ -47,9 +51,23 @@ export const getSentNotificationsFn = async () => {
     params: `?${query.toString()}`,
   });
 
-  const data = await fetchFn<API_GetNotifications[], Notification[]>({
+  const data = await fetchFn<API_GetSentNotifications[], SentNotification[]>({
     request,
-    adapter: getNotificationsAdapter,
+    adapter: getSentNotificationsAdapter,
+  });
+
+  return data;
+};
+
+export const getSentNotificationFn = async (id: string) => {
+  const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION({
+    id,
+    sent: true,
+  });
+
+  const data = await fetchFn<API_GetSentNotifications, SentNotification>({
+    request,
+    adapter: getSentNotificationAdapter,
   });
 
   return data;
@@ -63,19 +81,6 @@ export const getNotificationFn = async (id: string) => {
   const data = await fetchFn<API_GetNotifications, Notification>({
     request,
     adapter: getNotificationAdapter,
-  });
-
-  return data;
-};
-
-export const putReadNotificationFn = async (id: string) => {
-  const request = apiRoutes.NOTIFICATIONS.READ_NOTIFICATION({
-    id,
-  });
-
-  const data = await fetchFn<API_EmptyResponse>({
-    request,
-    adapter: (APIData) => APIData,
   });
 
   return data;

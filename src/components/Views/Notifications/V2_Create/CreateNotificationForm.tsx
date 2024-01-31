@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import {
-  receiverOptions as mockedReceiverOptions,
-  typeOptions as mockedTypeOptions,
-} from './mocked';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -42,7 +38,7 @@ const CreateNotificationForm = () => {
     useZodForm(createSchema);
 
   const selectedNotificationType = watch('type');
-  const selectedReceivers = watch('receiver');
+  const selectedReceivers = watch('receivers');
   const message = watch('message');
   const uploadedFiles = watch('files');
 
@@ -85,6 +81,15 @@ const CreateNotificationForm = () => {
     queryFn: getNotificationReceiversFn,
   });
 
+  const formattedReceivers = useMemo(
+    () =>
+      notificationReceivers?.data?.map((receiver) => ({
+        id: receiver.id,
+        description: receiver.description,
+      })) || [],
+    [notificationReceivers?.data]
+  );
+
   const { mutate: createNotification } = useMutation({
     mutationFn: postNotificationFn,
     onError: () => {
@@ -94,9 +99,7 @@ const CreateNotificationForm = () => {
       setIsLoading(false);
       reset();
       toast.success('Notificación creada y enviada con éxito');
-      window.setTimeout(() => {
-        navigate(paths.NOTIFICATIONS.MAIN);
-      }, 1000);
+      navigate(paths.NOTIFICATIONS.MAIN);
     },
   });
 
@@ -120,12 +123,21 @@ const CreateNotificationForm = () => {
   const handleSubmit = (data: CreateSchema) => {
     setIsLoading(true);
 
-    console.log(data);
-
     const fd = new FormData();
 
+    const receivers = data.receivers.map((r) => {
+      const type = notificationReceivers?.data?.find(
+        (ro) => ro.id === r.id
+      )?.type;
+
+      return {
+        id: r.id,
+        type,
+      };
+    });
+
     fd.append('typeId', data.type.id);
-    fd.append('receiverId', JSON.stringify(data.receiver.map((r) => r.id)));
+    fd.append('receivers', JSON.stringify(receivers));
     fd.append('message', data.message);
     if (data.files) {
       data.files.forEach((file) => {
@@ -189,7 +201,7 @@ const CreateNotificationForm = () => {
       }
 
       setValue('type', type);
-      setValue('receiver', [receiver]);
+      setValue('receivers', [receiver]);
     }
   }, [
     receiverId,
@@ -222,6 +234,28 @@ const CreateNotificationForm = () => {
       className="content-card animate-in-bottom a-delay-200 card"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
+      {notificationTypes?.data && notificationTypes.data.length === 0 && (
+        <Alert className="mb-3">
+          <p>
+            Parece que no hay Tipos de Notificaciones creadas, por lo que no
+            podrá crear una notificación. Para crear un tipo, por favor dirijase
+            al siguiente enlace
+          </p>
+          <Link className="btn mt-2" to={paths.TYPES_LIST.NOTIFICATIONS}>
+            CREAR TIPO
+          </Link>
+        </Alert>
+      )}
+      {notificationReceivers?.data &&
+        notificationReceivers.data.findIndex((r) => r.type === 'user') ===
+          -1 && (
+          <Alert className="mb-3">
+            Si su notificación es para un empleado en particular, esto no podrá
+            hacerlo hasta que ese empleado tenga un usuario en el Portal. Esto
+            puede realizarlo desde el detalle del empleado, en el botón
+            &quot;CREAR USUARIO&quot;.
+          </Alert>
+        )}
       <Grid container gap={2}>
         <Grid item sm={6} xs={12}>
           <ComboBoxInput<CreateSchema>
@@ -230,14 +264,12 @@ const CreateNotificationForm = () => {
             disabled={isLoading}
             label="Tipo de notificación"
             name="type"
-            options={mockedTypeOptions.data.map((type) => ({
-              id: type.id,
-              description: type.title,
-            }))}
-            /* options={notificationTypes.data.map((type) => ({
-              id: type.id,
-              description: type.title,
-            }))} */
+            options={
+              notificationTypes?.data?.map((type) => ({
+                id: type.id,
+                description: type.title,
+              })) || []
+            }
             placeholder="Seleccione un tipo"
           />
         </Grid>
@@ -248,9 +280,8 @@ const CreateNotificationForm = () => {
             disabled={isLoading}
             helperText="Si algún empleado no figura, puede que no tenga usuario creado"
             label="Receptor(es)"
-            name="receiver"
-            options={mockedReceiverOptions.data}
-            // options={notificationReceivers.data}
+            name="receivers"
+            options={formattedReceivers}
             placeholder="Seleccione al menos 1 receptor"
           />
         </Grid>
@@ -302,6 +333,7 @@ const CreateNotificationForm = () => {
         colorLight="btn-primary"
         disabled={!canSendForm}
         loading={isLoading && canSendForm}
+        textColorLight="text-white"
         type="submit"
       >
         Guardar y enviar

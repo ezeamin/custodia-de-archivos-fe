@@ -74,7 +74,7 @@ const EmployeeHistoryTab = () => {
           </section>
           <Pagination
             queryKey={`employeeHist_${employeeId}`}
-            totalElements={data.totalElements || 0}
+            totalElements={data.totalElements || 1}
           />
         </>
       )}

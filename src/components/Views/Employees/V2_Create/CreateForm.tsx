@@ -63,8 +63,8 @@ const CreateForm = () => {
     isError: isErrorAreas,
     status: statusAreas,
   } = useQuery({
-    queryKey: ['areaOptions'],
-    queryFn: getAreaOptionsFn,
+    queryKey: ['areaOptions', true],
+    queryFn: () => getAreaOptionsFn(true),
   });
 
   const { mutate: createEmployee } = useMutation({

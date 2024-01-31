@@ -63,6 +63,7 @@ const PasswordInput = <T extends FormSchemas>(
             <button
               className="btn btn-ghost absolute bottom-0 right-0 top-0 z-50 block h-full w-[40px] rounded-btn p-0"
               disabled={rest.disabled}
+              tabIndex={-1}
               type="button"
               onClick={handleChange}
             >

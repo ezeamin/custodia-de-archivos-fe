@@ -1,21 +1,34 @@
-import ResultsList from './List/ResultsList';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import NotificationInfo from '../V5_Details/NotificationInfo/NotificationInfo';
 import { useQuery } from '@tanstack/react-query';
 
-import { getNotificationTypesFn } from '@/api/api-calls/notifications';
+import { getSentNotificationFn } from '@/api/api-calls/notifications';
 
 import { useLoading } from '@/hooks';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
-import { Alert } from '@/components/ui';
 
-const TypesList = () => {
+import { uuidRegex } from '@/constants/regex/regex';
+import { paths } from '@/constants/routes/paths';
+
+const Results = () => {
+  const params = useParams();
+  const { id: notificationId } = params;
+
+  const navigate = useNavigate();
+
+  if (!notificationId || !uuidRegex.test(notificationId)) {
+    navigate(paths.NOTIFICATIONS.MAIN);
+  }
+
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
   const { data, isLoading, isError, refetch, status } = useQuery({
-    queryKey: ['notificationTypes'],
-    queryFn: getNotificationTypesFn,
+    queryKey: ['sentNotification', notificationId],
+    queryFn: () => getSentNotificationFn(notificationId!),
   });
 
   useLoading(isLoading, status);
@@ -37,22 +50,9 @@ const TypesList = () => {
   }
 
   if (data?.data) {
-    if (data.data.length === 0)
-      return (
-        <section className="mt-5 overflow-hidden">
-          <Alert className="mb-3">
-            <p>Aún no hay tipos de notificaciones creadas.</p>
-          </Alert>
-        </section>
-      );
-
-    return (
-      <section className="animate-in-bottom a-delay-600 mt-4 overflow-hidden">
-        <ResultsList data={data.data} />
-      </section>
-    );
+    return <NotificationInfo sent data={data.data} />;
   }
 
   return null;
 };
-export default TypesList;
+export default Results;

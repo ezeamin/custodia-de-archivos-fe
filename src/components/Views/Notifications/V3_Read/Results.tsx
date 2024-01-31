@@ -1,5 +1,4 @@
 import ResultsList from '../V1_List/List/ResultsList';
-import { mockedData } from '../V1_List/mocked';
 import { useQuery } from '@tanstack/react-query';
 
 import { getNotificationsFn } from '@/api/api-calls/notifications';
@@ -9,20 +8,13 @@ import { useLoading } from '@/hooks';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Pagination } from '@/components/ui';
 
-const data = {
-  ...mockedData,
-  data: mockedData.data.filter((item) => item.hasBeenRead === true),
-};
-const isError = false;
-const isLoading = false;
-
 const Results = () => {
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
-    queryKey: ['notifications'],
+  const { data, isLoading, isError, refetch, status } = useQuery({
+    queryKey: ['notifications', true],
     queryFn: () => getNotificationsFn(true),
   });
 
@@ -59,7 +51,7 @@ const Results = () => {
         <ResultsList hasBeenRead data={data.data} />
         <Pagination
           queryKey="notifications"
-          totalElements={data.totalElements}
+          totalElements={data.totalElements || 1}
         />
       </section>
     );

@@ -4,7 +4,7 @@ import Results from '@/components/Views/Notifications/V5_Details/Results';
 const NotificationDetailView = () => {
   return (
     <>
-      <Title title="Notificación" />
+      <Title title="Notificación recibida" />
       <Results />
     </>
   );

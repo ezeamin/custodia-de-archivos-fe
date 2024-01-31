@@ -21,6 +21,7 @@ import {
   Notification,
   NotificationFile,
   NotificationType,
+  SentNotification,
 } from '@/api/interface/notifications';
 import { BasicUser, LoginLog, ReadOnlyUser } from '@/api/interface/users';
 
@@ -104,10 +105,8 @@ export interface ChangeDocModalData extends ModalStore {
 
 export interface NewUserModalData extends ModalStore {
   data: {
-    data: {
-      username: string;
-      password: string;
-    };
+    username: string;
+    password: string;
   };
 }
 
@@ -189,28 +188,38 @@ export interface TrainingsElementProps {
 // --------------------------------------------------
 
 export interface NotificationsResultsListProps {
-  data: Notification[];
+  data: (Notification | SentNotification)[];
   hasBeenRead?: boolean;
+  sent?: boolean;
 }
 
 export interface NotificationsResultsListItemProps {
-  notification: Notification;
+  notification: Notification | SentNotification;
   index: number;
   hasBeenRead: boolean;
+  sent?: boolean;
 }
 
 export interface NotificationInfoProps {
-  data: Notification;
-  showReadAlert: boolean;
-  isLoadingRead: boolean;
+  data: Notification | SentNotification;
+  sent?: boolean;
+  showReadAlert?: boolean;
 }
 
 export interface NotificationInfoContentProps {
-  data: Notification;
+  data: Notification | SentNotification;
 }
 
 export interface NotificationFileItemProps {
   file: NotificationFile;
+}
+
+export interface ReceiverItemProps {
+  data: Notification['receivers'][0];
+}
+
+export interface IssuerItemProps {
+  data: Notification['issuer'];
 }
 
 // --------------------------------------------------

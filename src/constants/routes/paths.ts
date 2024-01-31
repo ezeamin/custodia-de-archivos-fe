@@ -19,6 +19,7 @@ export const paths = {
     READ: '/notifications/read',
     DETAILS: '/notifications/:id',
     SENT: '/notifications/sent',
+    SENT_DETAILS: '/notifications/sent/:id',
   },
   TYPES_LIST: {
     MAIN: '/types-list',

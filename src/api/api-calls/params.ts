@@ -47,8 +47,8 @@ export const getStatusOptionsFn = async () => {
   return data;
 };
 
-export const getRolesOptionsFn = async () => {
-  const request = apiRoutes.PARAMS.GET_ROLES();
+export const getRolesOptionsFn = async (notifications = false) => {
+  const request = apiRoutes.PARAMS.GET_ROLES({ notifications });
 
   const data = await fetchFn<API_GetRoles[], Role[]>({
     request,
@@ -69,8 +69,8 @@ export const getGenderOptionsFn = async () => {
   return data;
 };
 
-export const getAreaOptionsFn = async () => {
-  const request = apiRoutes.PARAMS.GET_AREAS();
+export const getAreaOptionsFn = async (filterAssignable = false) => {
+  const request = apiRoutes.PARAMS.GET_AREAS({ filterAssignable });
 
   const data = await fetchFn<API_GetAreas[], Area[]>({
     request,
