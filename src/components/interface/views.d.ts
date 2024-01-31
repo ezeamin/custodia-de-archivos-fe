@@ -208,6 +208,7 @@ export interface NotificationInfoProps {
 
 export interface NotificationInfoContentProps {
   data: Notification | SentNotification;
+  sent?: boolean;
 }
 
 export interface NotificationFileItemProps {

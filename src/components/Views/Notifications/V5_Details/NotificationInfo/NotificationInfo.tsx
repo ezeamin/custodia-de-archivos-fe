@@ -33,7 +33,7 @@ const NotificationInfo = (props: NotificationInfoProps) => {
         <Alert type="success">Esta notifición fue marcada como leida</Alert>
       )}
       <NotificationHeader data={data} />
-      <NotificationBody data={data} />
+      <NotificationBody data={data} sent={sent} />
       <FilesModal data={data} />
     </>
   );

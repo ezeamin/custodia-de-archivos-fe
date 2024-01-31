@@ -1,5 +1,5 @@
 import { FaPaperclip } from 'react-icons/fa6';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import dayjs from 'dayjs';
 
@@ -12,12 +12,9 @@ import { paths } from '@/constants/routes/paths';
 import { NotificationInfoContentProps } from '@/components/interface/views';
 
 const NotificationBody = (props: NotificationInfoContentProps) => {
-  const { data } = props;
+  const { data, sent } = props;
 
   const { openModal } = useModal();
-
-  const location = useLocation();
-  const isSent = location.pathname.includes('sent');
 
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY - HH:mm:ss');
 
@@ -37,7 +34,7 @@ const NotificationBody = (props: NotificationInfoContentProps) => {
       </div>
       <Grid container className="mt-3" gap={2}>
         {!!data?.files?.length && (
-          <Grid item sm={6} xs={12}>
+          <Grid item sm={sent ? 12 : 6} xs={12}>
             <Button
               outlineButton
               className="w-full"
@@ -49,11 +46,11 @@ const NotificationBody = (props: NotificationInfoContentProps) => {
             </Button>
           </Grid>
         )}
-        {!isSent && (
+        {!sent && (
           <Grid item sm={data?.files?.length ? 6 : 12} xs={12}>
             <Link
               className="btn btn-primary w-full text-white"
-              to={`${paths.NOTIFICATIONS.CREATE}?type=response&receiverId=${data.issuer.id}`}
+              to={`${paths.NOTIFICATIONS.CREATE}?type=response&receiverId=${data.issuer.id}&message=RE:%20${data.message}`}
             >
               RESPONDER
             </Link>

@@ -13,7 +13,13 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { data, isLoading, isError, refetch, status } = useQuery({
+  const {
+    data,
+    isFetching: isLoading,
+    isError,
+    refetch,
+    status,
+  } = useQuery({
     queryKey: ['sent_notifications'],
     queryFn: () => getSentNotificationsFn(),
   });
@@ -42,7 +48,7 @@ const Results = () => {
         <section className="mt-5 overflow-hidden">
           <Alert className="mb-3" type="info">
             <p>
-              Aún no se envió ninguna notifiación. Puede hacerlo desde el botón
+              Aún no envió ninguna notifiación. Puede hacerlo desde el botón
               superior de
             </p>
             <p className="my-3 text-center font-bold">

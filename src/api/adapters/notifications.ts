@@ -107,6 +107,7 @@ export const getNotificationsTypesAdapter = (
     startHour: notification.startHour,
     endHour: notification.endHour,
     allowedRoles: notification.allowedRoles,
+    canModify: notification.canModify,
   }));
 };
 
@@ -119,6 +120,7 @@ export const getNotificationTypeAdapter = (
   startHour: data.startHour,
   endHour: data.endHour,
   allowedRoles: data.allowedRoles,
+  canModify: data.canModify,
 });
 
 export const getNotificationsReceiversAdapter = (

@@ -1,5 +1,5 @@
+import SearchFilter from '@/components/Common/SearchFilter';
 import Title from '@/components/Common/Title';
-import SearchFilter from '@/components/Views/Employees/V1_List/Filters/SearchFilter';
 import Results from '@/components/Views/Settings/V7_DeleteReadOnly/Results/Results';
 
 const RemoveReadOnlyView = () => {

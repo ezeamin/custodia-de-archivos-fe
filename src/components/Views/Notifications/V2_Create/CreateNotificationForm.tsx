@@ -54,8 +54,12 @@ const CreateNotificationForm = () => {
   const { search } = useLocation();
 
   const isResponse =
-    search.includes('type=response') && search.includes('receiverId=');
-  const receiverId = search.split('receiverId=')[1];
+    search.includes('type=response') &&
+    search.includes('receiverId=') &&
+    search.includes('message=');
+  const searchParams = new URLSearchParams(search);
+  const receiverId = searchParams.get('receiverId');
+  const prevMessage = searchParams.get('message');
 
   // -------------------------------------------------
   // API
@@ -182,15 +186,14 @@ const CreateNotificationForm = () => {
     if (
       isResponse &&
       receiverId &&
+      prevMessage &&
       notificationTypes?.data &&
       notificationReceivers?.data
     ) {
       const receiver = notificationReceivers.data.find(
         (r) => r.id === receiverId
       );
-      const type = notificationTypes.data.find(
-        (t) => t.description === 'Respuesta'
-      );
+      const type = notificationTypes.data.find((t) => t.title === 'Respuesta');
 
       if (!receiver || !type) {
         toast.error(
@@ -200,11 +203,18 @@ const CreateNotificationForm = () => {
         return;
       }
 
-      setValue('type', type);
+      const formattedType = {
+        id: type.id,
+        description: type.title,
+      };
+
+      setValue('type', formattedType);
       setValue('receivers', [receiver]);
+      setValue('message', prevMessage);
     }
   }, [
     receiverId,
+    prevMessage,
     isResponse,
     notificationTypes?.data,
     setValue,

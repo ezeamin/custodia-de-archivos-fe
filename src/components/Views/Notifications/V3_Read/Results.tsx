@@ -13,7 +13,13 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { data, isLoading, isError, refetch, status } = useQuery({
+  const {
+    data,
+    isFetching: isLoading,
+    isError,
+    refetch,
+    status,
+  } = useQuery({
     queryKey: ['notifications', true],
     queryFn: () => getNotificationsFn(true),
   });

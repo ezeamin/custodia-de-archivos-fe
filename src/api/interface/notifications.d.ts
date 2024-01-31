@@ -65,6 +65,7 @@ export interface API_GetNotificationsTypes {
   startHour: string;
   endHour: string;
   allowedRoles: Role[];
+  canModify: boolean;
 }
 
 export interface API_GetNotificationsReceivers extends BasicList {

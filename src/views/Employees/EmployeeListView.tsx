@@ -1,6 +1,6 @@
+import SearchFilter from '@/components/Common/SearchFilter';
 import Title from '@/components/Common/Title';
-import Legend from '@/components/Views/Employees/V1_List/Filters/Legend';
-import SearchFilter from '@/components/Views/Employees/V1_List/Filters/SearchFilter';
+import Legend from '@/components/Views/Employees/V1_List/Results/Legend';
 import Results from '@/components/Views/Employees/V1_List/Results/Results';
 
 import { paths } from '@/constants/routes/paths';

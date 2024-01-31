@@ -119,26 +119,37 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
           >
             VER DESCRIPCION
           </Button>
-          <Grid container gap={2}>
-            <Grid item sm={6} xs={12}>
-              <Link
-                className="btn btn-outline btn-primary w-full hover:text-white"
-                to={`${paths.TYPES_LIST.NOTIFICATIONS}?edit=true&id=${notificationType.id}`}
-              >
-                EDITAR
-              </Link>
+          {notificationType.canModify ? (
+            <Grid container gap={2}>
+              <Grid item sm={6} xs={12}>
+                <Link
+                  className="btn btn-outline btn-primary w-full hover:text-white"
+                  to={`${paths.TYPES_LIST.NOTIFICATIONS}?edit=true&id=${notificationType.id}`}
+                >
+                  EDITAR
+                </Link>
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <Button
+                  outlineButton
+                  className="w-full hover:text-white"
+                  colorLight="btn-error"
+                  onClick={handleDelete}
+                >
+                  ELIMINAR
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item sm={6} xs={12}>
-              <Button
-                outlineButton
-                className="w-full hover:text-white"
-                colorLight="btn-error"
-                onClick={handleDelete}
-              >
-                ELIMINAR
-              </Button>
-            </Grid>
-          </Grid>
+          ) : (
+            <Button
+              disabled
+              outlineButton
+              className="w-full"
+              colorLight="btn-error"
+            >
+              NO SE PUEDE EDITAR
+            </Button>
+          )}
         </footer>
       </div>
     </article>
