@@ -271,7 +271,7 @@ const CreateNotificationForm = () => {
           <ComboBoxInput<CreateSchema>
             className="w-full"
             control={control}
-            disabled={isLoading}
+            disabled={isLoading || isResponse}
             label="Tipo de notificación"
             name="type"
             options={
@@ -287,7 +287,7 @@ const CreateNotificationForm = () => {
           <MultipleComboBoxInput<CreateSchema>
             className="w-full"
             control={control}
-            disabled={isLoading}
+            disabled={isLoading || isResponse}
             helperText="Si algún empleado no figura, puede que no tenga usuario creado"
             label="Receptor(es)"
             name="receivers"

@@ -25,9 +25,9 @@ const HourPicker = forwardRef(
       className = '',
       error = false,
       name,
-      onChange,
       disabled = false,
       placeholder,
+      ...rest
     } = props;
 
     return (
@@ -43,7 +43,7 @@ const HourPicker = forwardRef(
         placeholder={placeholder || 'Seleccione la Hora'}
         ref={inputRef}
         type="time"
-        onChange={onChange}
+        {...rest}
       />
     );
   }

@@ -30,16 +30,17 @@ const HourInput = <T extends FormSchemas>(
         control={control}
         defaultValue=""
         name={name}
-        render={({
-          field: { onChange, name: inputName },
-          fieldState: { error },
-        }) => (
+        render={({ field, fieldState: { error } }) => (
           <HourPicker
             className={!hideLabel ? 'mt-1' : undefined}
             disabled={rest.disabled}
             error={Boolean(error)}
-            name={inputName}
-            onChange={onChange}
+            id={name as string}
+            name={field.name}
+            ref={field.ref}
+            value={field.value as string}
+            onBlur={field.onBlur}
+            onChange={field.onChange}
             {...rest}
           />
         )}

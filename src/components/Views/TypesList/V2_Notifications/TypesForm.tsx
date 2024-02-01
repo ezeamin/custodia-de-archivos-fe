@@ -123,6 +123,7 @@ const TypesForm = () => {
   };
 
   const handleCancelEdit = () => {
+    reset();
     navigate(paths.TYPES_LIST.NOTIFICATIONS);
   };
 
