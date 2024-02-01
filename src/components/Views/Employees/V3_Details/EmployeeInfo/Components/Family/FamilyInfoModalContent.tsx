@@ -74,15 +74,14 @@ const FamilyInfoModalContent = (props: FamilyInfoModalContentProps) => {
   // -------------------------------------------------
 
   const formattedDni = data.dni.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
-  const formattedPhone = data.phone.replace(
-    /(\d{2})(\d{4})(\d{4})/,
-    '+$1 $2-$3'
-  );
-  const formattedAddress = `${data.address.street.description} ${
-    data.address.streetNumber
-  }${
-    data.address.apt ? ` - Dpto. ${data.address.apt}` : ''
-  }, ${data.address.locality.description}, ${data.address.state.description}`;
+  const formattedPhone = data.phone
+    ? data.phone.replace(/(\d{2})(\d{4})(\d{4})/, '+$1 $2-$3')
+    : 'N/A';
+  const formattedAddress = data.address
+    ? `${data.address.street.description} ${data.address.streetNumber}${
+        data.address.apt ? ` - Dpto. ${data.address.apt}` : ''
+      }, ${data.address.locality.description}, ${data.address.state.description}`
+    : 'N/A';
 
   return (
     <>
@@ -104,7 +103,7 @@ const FamilyInfoModalContent = (props: FamilyInfoModalContentProps) => {
         <Grid item md={6} xs={12}>
           <EmployeeDataField
             label="Localidad"
-            value={data.address.locality.description}
+            value={data.address ? data.address.locality.description : 'N/A'}
           />
         </Grid>
         <Grid item xs={12}>
