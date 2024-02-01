@@ -97,7 +97,7 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
               <span className="text-sm text-gray-500 dark:text-gray-400">
                 Roles permitidos:
               </span>
-              <div className="flex gap-1">
+              <div className="flex flex-wrap gap-1">
                 {notificationType.allowedRoles.map((role) => (
                   <span
                     className="rounded-md bg-gray-200 px-2 py-1 text-xs text-gray-500 dark:bg-gray-600 dark:text-gray-400"

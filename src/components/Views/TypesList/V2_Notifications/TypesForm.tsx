@@ -90,6 +90,7 @@ const TypesForm = () => {
       reset(); // Clear form values
       toast.success('Tipo de Notificación modificada con éxito');
       queryClient.invalidateQueries({ queryKey: ['notificationTypes'] });
+      navigate(paths.TYPES_LIST.NOTIFICATIONS);
     },
   });
 
@@ -222,8 +223,7 @@ const TypesForm = () => {
           {isEditing && (
             <Button
               className="w-full"
-              disabled={isLoadingEditedData}
-              loading={isLoading}
+              disabled={isLoadingEditedData || isLoading}
               onClick={handleCancelEdit}
             >
               Cancelar edición
