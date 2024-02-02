@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
+import Swal from 'sweetalert2';
 
 import { postEmployeeFn } from '@/api/api-calls/employees';
 import { getAreaOptionsFn, getGenderOptionsFn } from '@/api/api-calls/params';
@@ -39,6 +40,8 @@ const CreateForm = () => {
     reset,
   } = useZodForm(createSchema);
 
+  const uploadedImage = watch('imgFile');
+
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -72,8 +75,52 @@ const CreateForm = () => {
     onError: () => {
       setIsLoading(false);
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       setIsLoading(false);
+
+      // Person already exists, but is not an employee.
+      if (data && data.data && data.message?.includes('Duplicate')) {
+        const personData = data.data;
+        const { body } = data.data;
+
+        Swal.fire({
+          title: 'Atención',
+          html: `Ya existe una persona registrada bajo el DNI ${personData.dni} en el sistema.<br/><br/>
+          Nombre: <b>${personData.lastname}, ${personData.name}</b><br/>
+          ${personData.phone ? `Teléfono: <b>${personData.phone}</b><br/>` : ''}
+          ${personData.address ? `Dirección: <b>${personData.address}</b><br/>` : ''}
+          <br/>De continuar, se creará el empleado sin modificar los datos personales ya registrados.`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, continuar',
+          cancelButtonText: 'Cancelar',
+        }).then((res) => {
+          if (res.isConfirmed) {
+            setIsLoading(true);
+
+            const fd = new FormData();
+
+            fd.append('name', body.name);
+            fd.append('lastname', body.lastname);
+            fd.append('email', body.email);
+            fd.append('dni', body.dni);
+            fd.append('fileNumber', body.fileNumber);
+            fd.append('genderId', body.genderId);
+            fd.append('startDate', body.startDate);
+            fd.append('birthdate', body.birthdate);
+            fd.append('position', body.position);
+            fd.append('areaId', body.areaId);
+            fd.append('imgFile', uploadedImage);
+            fd.append('force', 'true');
+
+            createEmployee(fd);
+          }
+        });
+        return;
+      }
+
       reset();
       toast.success('Empleado creado con éxito');
       navigate(paths.EMPLOYEES.MAIN);
@@ -93,8 +140,6 @@ const CreateForm = () => {
   // -------------------------------------------------
   // HANDLERS
   // -------------------------------------------------
-
-  const uploadedImage = watch('imgFile');
 
   const handleSubmit = (data: CreateSchema) => {
     setIsLoading(true);

@@ -47,6 +47,7 @@ import {
   API_GetTrainings,
   API_GetTrainingsTypes,
   API_GetVacations,
+  API_PostEmployee,
   API_PostFamilyMember,
   Employee,
   EmployeeDoc,
@@ -119,7 +120,7 @@ export const postEmployeeFn = async (body: FormData) => {
 
   const dataToSend = cleanUpDataToSend(body);
 
-  const data = await fetchFn<API_EmptyResponse>({
+  const data = await fetchFn<API_PostEmployee>({
     request,
     adapter: (APIData) => APIData,
     body: dataToSend,

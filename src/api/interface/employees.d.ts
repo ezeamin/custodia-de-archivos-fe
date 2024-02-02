@@ -65,6 +65,15 @@ export interface API_GetFamilyMember {
   address: API_Address;
 }
 
+export interface API_PostEmployee {
+  body: Record<string, string>;
+  name: string;
+  lastname: string;
+  dni: string;
+  phone: string | null;
+  address: string | null;
+}
+
 export interface API_PostFamilyMember {
   name: string;
   lastname: string;
