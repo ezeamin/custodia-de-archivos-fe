@@ -14,7 +14,7 @@ export const notificationTypeSchema = z
     description: textRules(true),
     startHour: hourRules(true),
     endHour: hourRules(true),
-    allowedRoles: multipleValuesRules(true),
+    allowedRoles: multipleValuesRules(true, 'Rol habilitado'),
   })
   .refine(fromHourBeforeToHour, fromHourBeforeToHour.msg);
 

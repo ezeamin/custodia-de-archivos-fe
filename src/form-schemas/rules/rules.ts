@@ -301,7 +301,10 @@ export const positionRules = <T extends boolean = false>(required: T) => {
   return optionalWrapper(required, rule);
 };
 
-export const multipleValuesRules = <T extends boolean = false>(required: T) => {
+export const multipleValuesRules = <T extends boolean = false>(
+  required: T,
+  fieldName = ''
+) => {
   // each value is of type {id: string, description: string}, that's an interface called BasicList
   const rule = z
     .array(
@@ -310,7 +313,18 @@ export const multipleValuesRules = <T extends boolean = false>(required: T) => {
         description: z.string().trim().min(1),
       })
     )
-    .default([]);
+    .default([])
+    .refine(
+      (data) => {
+        if (required) {
+          return data.length > 0;
+        }
+        return true;
+      },
+      {
+        message: `Debe seleccionar al menos un ${fieldName}`,
+      }
+    );
 
   return optionalWrapper(required, rule);
 };

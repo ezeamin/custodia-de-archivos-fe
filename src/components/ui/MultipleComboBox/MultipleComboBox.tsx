@@ -70,7 +70,15 @@ const MultipleComboBox = <T extends FieldValues>(
 
   useEffect(() => {
     if (JSON.stringify(controller.value) !== JSON.stringify(selectedOptions)) {
-      handleSelect(controller.value);
+      const newValue =
+        controller.value && controller.value.length > 0
+          ? filteredOptions.filter(({ id: optionId }) =>
+              controller.value.some(
+                ({ id: valueId }: { id: string }) => valueId === optionId
+              )
+            )
+          : [];
+      handleSelect(newValue);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- causes an infinite loop
   }, [controller.value]);
@@ -112,7 +120,7 @@ const MultipleComboBox = <T extends FieldValues>(
 
             <Combobox.Button
               aria-label="Expandir/comprimir opciones"
-              className="absolute inset-y-0 right-0 flex items-center border border-l-0 border-gray-300 bg-gray-100 p-3 hover:bg-gray-200 dark:border-gray-600 dark:bg-slate-700 hover:dark:bg-slate-800"
+              className="absolute inset-y-0 right-0 flex items-center border border-l-0 border-gray-300 bg-gray-100 p-3 hover:bg-gray-200 disabled:border-none dark:border-gray-600 dark:bg-slate-700 hover:dark:bg-slate-800"
             >
               <Icon iconComponent={<MdExpandMore />} title="expand more icon" />
             </Combobox.Button>

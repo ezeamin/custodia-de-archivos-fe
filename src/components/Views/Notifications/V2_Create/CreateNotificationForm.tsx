@@ -198,22 +198,22 @@ const CreateNotificationForm = () => {
 
   // TODO: This doesn't work because it looses the reference to the original object in the way
   // If "Todos los empleados" is selected, set value to that option and remove the other selected ones
-  // useEffect(() => {
-  //   if (
-  //     selectedReceivers &&
-  //     selectedReceivers.length > 1 &&
-  //     selectedReceivers.some((r) =>
-  //       r.description.toLowerCase().includes('todos')
-  //     )
-  //   ) {
-  //     setValue(
-  //       'receivers',
-  //       formattedReceivers.filter((r) =>
-  //         r.description.toLowerCase().includes('todos')
-  //       )
-  //     );
-  //   }
-  // }, [selectedReceivers, formattedReceivers, setValue]);
+  useEffect(() => {
+    if (
+      selectedReceivers &&
+      selectedReceivers.length > 1 &&
+      selectedReceivers.some((r) =>
+        r.description.toLowerCase().includes('todos')
+      )
+    ) {
+      setValue(
+        'receivers',
+        formattedReceivers.filter((r) =>
+          r.description.toLowerCase().includes('todos')
+        )
+      );
+    }
+  }, [selectedReceivers, formattedReceivers, setValue]);
 
   // Enable submit button
   useEffect(() => {

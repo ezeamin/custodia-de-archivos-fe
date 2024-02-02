@@ -46,7 +46,8 @@ const TypesForm = () => {
     status: statusEditedData,
   } = useQuery({
     queryKey: [
-      `employeeLicenseType_${idBeingEdited}`,
+      'employeeLicenseType',
+      idBeingEdited,
       isEditing && idBeingEdited,
     ],
     queryFn: () => getEmployeeLicenseTypeFn(idBeingEdited ?? ''),
@@ -76,6 +77,13 @@ const TypesForm = () => {
       reset(); // Clear form values
       toast.success('Tipo de Licencia modificada con éxito');
       queryClient.invalidateQueries({ queryKey: ['employeeLicensesTypes'] });
+      queryClient.invalidateQueries({
+        queryKey: [
+          'employeeLicenseType',
+          idBeingEdited,
+          isEditing && idBeingEdited,
+        ],
+      });
       navigate(paths.TYPES_LIST.LICENSES);
     },
   });
