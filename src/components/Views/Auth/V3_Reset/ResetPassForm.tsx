@@ -92,6 +92,7 @@ const ResetPassForm = () => {
         </Alert>
       )}
       <PasswordInput
+        autoComplete="new-password"
         className="animate-in-left a-delay-400 w-full"
         control={control}
         helperText="La contraseña debe tener al menos 6 caracteres, entre ellos: una mayúscula, una minúscula y un número"
@@ -101,6 +102,7 @@ const ResetPassForm = () => {
         placeholder="Ingrese nueva contraseña"
       />
       <PasswordInput
+        autoComplete="new-password"
         className="animate-in-left a-delay-400 mt-3 w-full"
         control={control}
         label="Repetir nueva contraseña"

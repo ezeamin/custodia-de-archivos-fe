@@ -32,6 +32,7 @@ const MultipleComboBox = <T extends FieldValues>(
 ): JSX.Element => {
   const {
     className,
+    controller,
     disabled = false,
     error = false,
     inputClassName,
@@ -42,7 +43,6 @@ const MultipleComboBox = <T extends FieldValues>(
     positionedColorOption,
     selectedColorOption,
     sizing,
-    controller,
   } = props;
 
   const [query, setQuery] = useState('');

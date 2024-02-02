@@ -29,6 +29,8 @@ import {
   createSchema,
 } from '@/form-schemas/schemas/notifications/createSchema';
 
+import { BasicList } from '@/interface';
+
 const CreateNotificationForm = () => {
   // -------------------------------------------------
   // FORM
@@ -53,10 +55,13 @@ const CreateNotificationForm = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
 
-  const isResponse =
-    search.includes('type=response') &&
-    search.includes('receiverId=') &&
-    search.includes('message=');
+  const isResponse = useMemo(
+    () =>
+      search.includes('type=response') &&
+      search.includes('receiverId=') &&
+      search.includes('message='),
+    [search]
+  );
   const searchParams = new URLSearchParams(search);
   const receiverId = searchParams.get('receiverId');
   const prevMessage = searchParams.get('message');
@@ -84,6 +89,23 @@ const CreateNotificationForm = () => {
     queryKey: ['receiverOptions'],
     queryFn: getNotificationReceiversFn,
   });
+
+  // Remove "Respuesta" from types if it is not a response
+  const formattedTypes = useMemo(
+    () =>
+      (notificationTypes?.data
+        ?.map((type) => {
+          if (!isResponse && type.title.toLowerCase() === 'respuesta')
+            return null;
+
+          return {
+            id: type.id,
+            description: type.title,
+          };
+        })
+        .filter(Boolean) as BasicList[]) || [],
+    [notificationTypes?.data, isResponse]
+  );
 
   const formattedReceivers = useMemo(
     () =>
@@ -148,6 +170,7 @@ const CreateNotificationForm = () => {
         fd.append('files', file);
       });
     }
+    fd.append('isResponse', isResponse.toString());
 
     createNotification(fd);
   };
@@ -155,6 +178,42 @@ const CreateNotificationForm = () => {
   // -------------------------------------------------
   // EFFECTS
   // -------------------------------------------------
+
+  // Avoid selecting "Respuesta" as notification type (only a safeguard, should not happen in the UI)
+  useEffect(() => {
+    if (
+      selectedNotificationType &&
+      selectedNotificationType.description.toLowerCase() === 'respuesta' &&
+      !isResponse
+    ) {
+      toast.warning(
+        `No se puede mandar una respuesta cuando no lo es. Para crear una respuesta, seleccione "RESPONDER" desde una notificación recibida`,
+        { duration: 7000 }
+      );
+      reset({
+        type: undefined,
+      });
+    }
+  }, [selectedNotificationType, reset, isResponse]);
+
+  // TODO: This doesn't work because it looses the reference to the original object in the way
+  // If "Todos los empleados" is selected, set value to that option and remove the other selected ones
+  // useEffect(() => {
+  //   if (
+  //     selectedReceivers &&
+  //     selectedReceivers.length > 1 &&
+  //     selectedReceivers.some((r) =>
+  //       r.description.toLowerCase().includes('todos')
+  //     )
+  //   ) {
+  //     setValue(
+  //       'receivers',
+  //       formattedReceivers.filter((r) =>
+  //         r.description.toLowerCase().includes('todos')
+  //       )
+  //     );
+  //   }
+  // }, [selectedReceivers, formattedReceivers, setValue]);
 
   // Enable submit button
   useEffect(() => {
@@ -274,12 +333,7 @@ const CreateNotificationForm = () => {
             disabled={isLoading || isResponse}
             label="Tipo de notificación"
             name="type"
-            options={
-              notificationTypes?.data?.map((type) => ({
-                id: type.id,
-                description: type.title,
-              })) || []
-            }
+            options={formattedTypes}
             placeholder="Seleccione un tipo"
           />
         </Grid>
