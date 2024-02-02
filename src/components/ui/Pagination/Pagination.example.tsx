@@ -19,7 +19,7 @@ const PaginationExample = (): JSX.Element => {
         Width 50%
         <p>{page1}</p>
         <Pagination
-          queryKey=""
+          queryKey={['']}
           totalElements={150}
           onPageChange={changePage1}
         />
@@ -28,7 +28,7 @@ const PaginationExample = (): JSX.Element => {
         Width 100%
         <p>{page2}</p>
         <Pagination
-          queryKey=""
+          queryKey={['']}
           totalElements={150}
           onPageChange={changePage2}
         />

@@ -55,10 +55,13 @@ const Results = () => {
     return (
       <section className="mt-5 overflow-hidden">
         <ResultsList hasBeenRead data={data.data} />
-        <Pagination
-          queryKey="notifications"
-          totalElements={data.totalElements || 1}
-        />
+        {data.data.length > 12 && (
+          <Pagination
+            entries={12}
+            queryKey={['notifications']}
+            totalElements={data.totalElements || 1}
+          />
+        )}
       </section>
     );
   }

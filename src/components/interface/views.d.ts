@@ -30,8 +30,9 @@ import { BasicUser, LoginLog, ReadOnlyUser } from '@/api/interface/users';
 // --------------------------------------------------
 
 export interface SearchFilterProps {
-  queryKey: string;
+  queryKey: string | string[];
   placeholder?: string;
+  className?: string;
 }
 
 export interface EmployeesResultsTableProps {

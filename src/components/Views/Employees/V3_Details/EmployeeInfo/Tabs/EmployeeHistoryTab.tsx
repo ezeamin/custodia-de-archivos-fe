@@ -8,8 +8,9 @@ import { getEmployeeHistoryFn } from '@/api/api-calls/employees';
 
 import { useLoading } from '@/hooks';
 
+import SearchFilter from '@/components/Common/SearchFilter';
 import ErrorMessage from '@/components/Error/ErrorMessage';
-import { Pagination } from '@/components/ui';
+import { Alert, Pagination } from '@/components/ui';
 
 const EmployeeHistoryTab = () => {
   // -------------------------------------------------
@@ -26,7 +27,7 @@ const EmployeeHistoryTab = () => {
   // -------------------------------------------------
 
   const { data, isFetching, isLoading, isError, refetch, status } = useQuery({
-    queryKey: [`employeeHist_${employeeId}`],
+    queryKey: ['employeeHist', employeeId],
     queryFn: () => getEmployeeHistoryFn(employeeId!),
   });
 
@@ -48,6 +49,11 @@ const EmployeeHistoryTab = () => {
     return (
       <>
         <h2 className="text-lg font-bold">Historial de cambios</h2>
+        <SearchFilter
+          className="mb-3"
+          placeholder="Buscar por campo"
+          queryKey={['employeeHist', employeeId!]}
+        />
         <ErrorMessage refetch={handleRetry} />
       </>
     );
@@ -58,30 +64,63 @@ const EmployeeHistoryTab = () => {
       <h2 className="mb-3 text-lg font-bold">Historial de cambios</h2>
 
       {isFetching && (
-        <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
-          <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
-          <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
-        </div>
+        <>
+          <SearchFilter
+            className="mb-3"
+            placeholder="Buscar por campo"
+            queryKey={['employeeHist', employeeId!]}
+          />
+          <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
+            <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
+            <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
+          </div>
+        </>
       )}
 
       {!isFetching && data?.data && data.data.length > 0 && (
         <>
+          <SearchFilter
+            className="mb-3"
+            placeholder="Buscar por campo"
+            queryKey={['employeeHist', employeeId!]}
+          />
           <section className="hidden sm:block md:hidden xl:block">
             <HistoryTable data={data.data} />
           </section>
           <section className="sm:hidden md:block xl:hidden">
             <HistoryList data={data.data} />
           </section>
-          <Pagination
-            queryKey={`employeeHist_${employeeId}`}
-            totalElements={data.totalElements || 1}
-          />
+          {data.data.length > 10 && (
+            <Pagination
+              queryKey={['employeeHist', employeeId!]}
+              totalElements={data.totalElements || 1}
+            />
+          )}
         </>
       )}
 
-      {!isFetching && data?.data && data.data.length === 0 && (
-        <p className="my-3 text-center">No hay cambios registrados</p>
-      )}
+      {!isFetching &&
+        data?.data &&
+        data.data.length === 0 &&
+        window.location.search.includes('query') && (
+          <>
+            <SearchFilter
+              className="mb-3"
+              placeholder="Buscar por campo"
+              queryKey={['employeeHist', employeeId!]}
+            />
+            <Alert>
+              No se encontraron resultados para la búsqueda ingresada.
+            </Alert>
+          </>
+        )}
+
+      {!isFetching &&
+        data?.data &&
+        data.data.length === 0 &&
+        !window.location.search.includes('query') && (
+          <p className="my-3 text-center">No hay cambios registrados</p>
+        )}
     </>
   );
 };

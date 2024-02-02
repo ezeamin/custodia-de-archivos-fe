@@ -17,7 +17,11 @@ const Legend = () => {
       </p>
       <p className="animate-in-bottom a-delay-600 text-nowrap">
         <span className="mr-2 inline-block h-3 w-3 rounded-full bg-red-500" />
-        <span>De baja</span>
+        <span>Inactivo</span>
+      </p>
+      <p className="animate-in-bottom a-delay-600 text-nowrap">
+        <span className="mr-2 inline-block h-3 w-3 rounded-full bg-gray-600" />
+        <span>Eliminado</span>
       </p>
     </article>
   );

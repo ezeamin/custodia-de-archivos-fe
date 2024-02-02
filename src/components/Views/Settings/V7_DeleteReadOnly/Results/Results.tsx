@@ -62,10 +62,12 @@ const Results = () => {
         <ResultsTable data={data.data} />
         <ResultsList data={data.data} />
 
-        <Pagination
-          queryKey="readOnlyUsers"
-          totalElements={data.totalElements || 1}
-        />
+        {data.data.length > 10 && (
+          <Pagination
+            queryKey={['readOnlyUsers']}
+            totalElements={data.totalElements || 1}
+          />
+        )}
       </section>
     );
   }

@@ -23,7 +23,12 @@ import type { PaginationPropsType } from './Pagination.types';
  */
 
 const Pagination = (props: PaginationPropsType): JSX.Element => {
-  const { totalElements, onPageChange = () => {}, queryKey } = props;
+  const {
+    totalElements,
+    onPageChange = () => {},
+    queryKey,
+    entries = 10,
+  } = props;
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -60,7 +65,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
     navigate(`${pathname}?${newSearchString}`);
 
     queryClient.invalidateQueries({
-      queryKey: [queryKey],
+      queryKey,
     });
 
     onPageChange(event, 0);
@@ -74,7 +79,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
     navigate(`${pathname}?${newSearchString}`);
 
     queryClient.invalidateQueries({
-      queryKey: [queryKey],
+      queryKey,
     });
 
     onPageChange(event, page - 1);
@@ -88,7 +93,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
     navigate(`${pathname}?${newSearchString}`);
 
     queryClient.invalidateQueries({
-      queryKey: [queryKey],
+      queryKey,
     });
 
     onPageChange(event, page + 1);
@@ -102,7 +107,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
     navigate(`${pathname}?${newSearchString}`);
 
     queryClient.invalidateQueries({
-      queryKey: [queryKey],
+      queryKey,
     });
 
     onPageChange(event, availablePages - 1);
@@ -116,7 +121,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
   useEffect(() => {
     if (!('page' in searchParams) || !('entries' in searchParams)) {
       const newPage = '0';
-      const newEntries = '10';
+      const newEntries = entries.toString();
       const newSearchParams = {
         ...searchParams,
         page: newPage,
@@ -125,7 +130,7 @@ const Pagination = (props: PaginationPropsType): JSX.Element => {
       const newSearchString = new URLSearchParams(newSearchParams).toString();
       navigate(`${pathname}?${newSearchString}`);
     }
-  }, [pathname, navigate, searchParams]);
+  }, [pathname, navigate, searchParams, entries]);
 
   // ----------------------------------------------
   // RENDER

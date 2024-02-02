@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { IoSearch, IoTrash } from 'react-icons/io5';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
 
 import { useZodForm } from '@/hooks';
 
 import { Button, Grid, Icon, TextInput } from '@/components/ui';
+
+import { cn } from '@/utilities';
 
 import {
   SearchSchema,
@@ -16,7 +18,7 @@ import {
 import { SearchFilterProps } from '@/components/interface/views';
 
 const SearchFilter = (props: SearchFilterProps) => {
-  const { queryKey, placeholder } = props;
+  const { queryKey, placeholder, className } = props;
 
   const { control, onSubmitMiddleware, setValue, reset, watch } =
     useZodForm(searchSchema);
@@ -24,6 +26,7 @@ const SearchFilter = (props: SearchFilterProps) => {
   const query = watch('query');
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 
@@ -35,14 +38,10 @@ const SearchFilter = (props: SearchFilterProps) => {
     params.set('page', '0');
     params.set('entries', '10');
 
-    window.history.replaceState(
-      {},
-      '',
-      `${window.location.pathname}?${params.toString()}`
-    );
+    navigate(`${window.location.pathname}?${params.toString()}`);
 
     queryClient.invalidateQueries({
-      queryKey: [queryKey],
+      queryKey: typeof queryKey === 'string' ? [queryKey] : queryKey,
     });
   };
 
@@ -54,14 +53,10 @@ const SearchFilter = (props: SearchFilterProps) => {
     params.set('page', '0');
     params.set('entries', '10');
 
-    window.history.replaceState(
-      {},
-      '',
-      `${window.location.pathname}?${params.toString()}`
-    );
+    navigate(`${window.location.pathname}?${params.toString()}`);
 
     queryClient.invalidateQueries({
-      queryKey: [queryKey],
+      queryKey: typeof queryKey === 'string' ? [queryKey] : queryKey,
     });
 
     reset();
@@ -69,13 +64,17 @@ const SearchFilter = (props: SearchFilterProps) => {
 
   useEffect(() => {
     const searchQuery = new URLSearchParams(location.search).get('query');
+    console.log(location);
     if (searchQuery) {
       setValue('query', searchQuery);
     }
   }, [setValue, location]);
 
   return (
-    <form className="w-full" onSubmit={onSubmitMiddleware(handleSubmit)}>
+    <form
+      className={cn('w-full', className)}
+      onSubmit={onSubmitMiddleware(handleSubmit)}
+    >
       <div className="mb-3 flex gap-1 md:mb-0">
         <TextInput
           hideLabel
