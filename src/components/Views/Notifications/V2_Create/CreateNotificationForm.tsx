@@ -76,7 +76,7 @@ const CreateNotificationForm = () => {
 
   const {
     data: notificationTypes,
-    isLoading: isLoadingTypes,
+    isFetching: isLoadingTypes,
     isError: isErrorTypes,
     status: statusTypes,
   } = useQuery({
@@ -86,7 +86,7 @@ const CreateNotificationForm = () => {
 
   const {
     data: notificationReceivers,
-    isLoading: isLoadingReceivers,
+    isFetching: isLoadingReceivers,
     isError: isErrorReceivers,
     status: statusReceivers,
   } = useQuery({

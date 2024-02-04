@@ -406,6 +406,17 @@ export const apiRoutes = {
       url: '/notifications/receivers',
       useToken: true,
     }),
+    GET_NOTIFICATION_AREA_RECEIVERS: ({
+      notificationId,
+      areaId,
+    }: {
+      notificationId: string;
+      areaId: string;
+    }): ApiRoute => ({
+      method: 'GET',
+      url: `/notifications/${notificationId}/receivers/${areaId}`,
+      useToken: true,
+    }),
     GET_NOTIFICATION_TYPES: ({ all }: { all: boolean }): ApiRoute => ({
       method: 'GET',
       url: `/notifications/types${all ? '?all=true' : ''}`,

@@ -6,6 +6,7 @@ import { cleanUpDataToSend } from '@/utilities/utils';
 import {
   getNotificationAdapter,
   getNotificationsAdapter,
+  getNotificationsAreaReceiversAdapter,
   getNotificationsReceiversAdapter,
   getNotificationsTypesAdapter,
   getNotificationTypeAdapter,
@@ -16,11 +17,13 @@ import {
 import { API_EmptyResponse } from '../interface';
 import {
   API_GetNotifications,
+  API_GetNotificationsAreaReceivers,
   API_GetNotificationsReceivers,
   API_GetNotificationsTypes,
   API_GetSentNotifications,
   Notification,
   NotificationReceiver,
+  NotificationsAreaReceiver,
   NotificationType,
   SentNotification,
 } from '@/api/interface/notifications';
@@ -109,6 +112,29 @@ export const getNotificationReceiversFn = async () => {
   >({
     request,
     adapter: getNotificationsReceiversAdapter,
+  });
+
+  return data;
+};
+
+export const getNotificationAreaReceiversFn = async ({
+  notificationId,
+  areaId,
+}: {
+  notificationId: string;
+  areaId: string;
+}) => {
+  const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION_AREA_RECEIVERS({
+    notificationId,
+    areaId,
+  });
+
+  const data = await fetchFn<
+    API_GetNotificationsAreaReceivers[],
+    NotificationsAreaReceiver[]
+  >({
+    request,
+    adapter: getNotificationsAreaReceiversAdapter,
   });
 
   return data;

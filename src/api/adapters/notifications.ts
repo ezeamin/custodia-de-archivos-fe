@@ -1,10 +1,12 @@
 import {
   API_GetNotifications,
+  API_GetNotificationsAreaReceivers,
   API_GetNotificationsReceivers,
   API_GetNotificationsTypes,
   API_GetSentNotifications,
   Notification,
   NotificationReceiver,
+  NotificationsAreaReceiver,
   NotificationType,
   SentNotification,
 } from '../interface/notifications';
@@ -132,5 +134,18 @@ export const getNotificationsReceiversAdapter = (
     id: notification.id,
     description: notification.description,
     type: notification.type,
+  }));
+};
+
+export const getNotificationsAreaReceiversAdapter = (
+  data: API_GetNotificationsAreaReceivers[]
+): NotificationsAreaReceiver[] => {
+  return data.map((receiver) => ({
+    id: receiver.id,
+    name: receiver.name,
+    email: receiver.email,
+    imgSrc: receiver.imgSrc,
+    hasReadNotification: receiver.hasReadNotification,
+    timeReadNotification: receiver.timeReadNotification,
   }));
 };

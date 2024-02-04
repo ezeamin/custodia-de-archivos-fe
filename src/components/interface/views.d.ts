@@ -20,6 +20,7 @@ import {
 import {
   Notification,
   NotificationFile,
+  NotificationsAreaReceiver,
   NotificationType,
   SentNotification,
 } from '@/api/interface/notifications';
@@ -222,6 +223,14 @@ export interface ReceiverItemProps {
 
 export interface IssuerItemProps {
   data: Notification['issuer'];
+}
+
+export interface ModalNotificacionAreaReceiver extends ModalStore {
+  data: { areaId: string };
+}
+
+export interface AreaReceiverItemProps {
+  receiver: NotificationsAreaReceiver;
 }
 
 // --------------------------------------------------

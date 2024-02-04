@@ -1,4 +1,5 @@
-import FilesModal from './FilesModal';
+import AreaReceiversModal from './AreaReceiver/AreaReceiversModal';
+import FilesModal from './Files/FilesModal';
 import NotificationBody from './NotificationBody';
 import NotificationHeader from './NotificationHeader';
 
@@ -18,12 +19,6 @@ const NotificationInfo = (props: NotificationInfoProps) => {
 
   return (
     <>
-      {sent && includesAreas && (
-        <Alert>
-          Atención: Esta notificación fue destinada a una o más áreas, que no
-          registrarán cuando la notificación sea leída.
-        </Alert>
-      )}
       {sent && hasEveryoneReadIt && (
         <Alert className={includesAreas ? 'mt-2' : ''} type="success">
           Atención: Esta notificación ya fue leida por todos los destinatarios
@@ -34,7 +29,9 @@ const NotificationInfo = (props: NotificationInfoProps) => {
       )}
       <NotificationHeader data={data} />
       <NotificationBody data={data} sent={sent} />
+
       <FilesModal data={data} />
+      <AreaReceiversModal />
     </>
   );
 };
