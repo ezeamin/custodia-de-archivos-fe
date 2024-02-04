@@ -406,9 +406,9 @@ export const apiRoutes = {
       url: '/notifications/receivers',
       useToken: true,
     }),
-    GET_NOTIFICATION_TYPES: (): ApiRoute => ({
+    GET_NOTIFICATION_TYPES: ({ all }: { all: boolean }): ApiRoute => ({
       method: 'GET',
-      url: '/notifications/types',
+      url: `/notifications/types${all ? '?all=true' : ''}`,
       useToken: true,
     }),
     GET_NOTIFICATION_TYPE: ({ id }: { id: string }): ApiRoute => ({

@@ -114,8 +114,12 @@ export const getNotificationReceiversFn = async () => {
   return data;
 };
 
-export const getNotificationTypesFn = async () => {
-  const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION_TYPES();
+export const getNotificationTypesFn = async ({
+  all = false,
+}: {
+  all?: boolean;
+}) => {
+  const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATION_TYPES({ all });
 
   const data = await fetchFn<API_GetNotificationsTypes[], NotificationType[]>({
     request,

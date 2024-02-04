@@ -35,6 +35,7 @@ export const dateRules = <T extends boolean = false>(required: T) => {
     .refine(
       // If it has a value, it must be a valid date
       (data) => {
+        if (required && !data) return false;
         if (!data) return true;
         const date = dayjs(data);
         return date.isValid();

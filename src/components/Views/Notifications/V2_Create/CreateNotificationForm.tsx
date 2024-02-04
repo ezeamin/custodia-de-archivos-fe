@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
+import Swal from 'sweetalert2';
 
 import {
   getNotificationReceiversFn,
@@ -11,6 +12,7 @@ import {
 } from '@/api/api-calls/notifications';
 
 import { useLoading, useZodForm } from '@/hooks';
+import { useSession } from '@/stores/useSession';
 
 import {
   Alert,
@@ -23,6 +25,7 @@ import {
 } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
+import { userRoles } from '@/constants/userRoles/userRoles';
 
 import {
   CreateSchema,
@@ -32,6 +35,7 @@ import {
 import { BasicList } from '@/interface';
 
 const CreateNotificationForm = () => {
+  const { user } = useSession();
   // -------------------------------------------------
   // FORM
   // -------------------------------------------------
@@ -76,8 +80,8 @@ const CreateNotificationForm = () => {
     isError: isErrorTypes,
     status: statusTypes,
   } = useQuery({
-    queryKey: ['notificationTypes'],
-    queryFn: getNotificationTypesFn,
+    queryKey: ['notificationTypes', false],
+    queryFn: () => getNotificationTypesFn({ all: false }),
   });
 
   const {
@@ -196,7 +200,6 @@ const CreateNotificationForm = () => {
     }
   }, [selectedNotificationType, reset, isResponse]);
 
-  // TODO: This doesn't work because it looses the reference to the original object in the way
   // If "Todos los empleados" is selected, set value to that option and remove the other selected ones
   useEffect(() => {
     if (
@@ -214,6 +217,35 @@ const CreateNotificationForm = () => {
       );
     }
   }, [selectedReceivers, formattedReceivers, setValue]);
+
+  // Check for current hour and if it is in the range of the selected notification type
+  useEffect(() => {
+    const type = notificationTypes?.data?.find(
+      (t) => t.id === selectedNotificationType?.id
+    );
+
+    if (!type) return;
+
+    const { startHour, endHour } = type;
+
+    const currentHour = new Date().getHours();
+    const currentMinutes = new Date().getMinutes();
+    const currentTime = `${currentHour}:${currentMinutes}`;
+
+    if (currentTime < startHour || currentTime > endHour) {
+      Swal.fire({
+        title: 'Atención',
+        html: `No se puede enviar este tipo de notificación en este horario. Por favor, intente nuevamente en el rango de ${startHour} a ${endHour}`,
+        icon: 'info',
+        showConfirmButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Entendido',
+      });
+      reset({
+        type: undefined,
+      });
+    }
+  }, [selectedNotificationType, notificationTypes?.data, reset]);
 
   // Enable submit button
   useEffect(() => {
@@ -303,18 +335,31 @@ const CreateNotificationForm = () => {
       className="content-card animate-in-bottom a-delay-200 card"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
-      {notificationTypes?.data && notificationTypes.data.length === 0 && (
-        <Alert className="mb-3">
-          <p>
+      {notificationTypes?.data &&
+        formattedTypes.length === 0 &&
+        user &&
+        user.role === userRoles.ADMIN && (
+          <Alert className="mb-3">
+            <p>
+              Parece que no hay Tipos de Notificaciones creadas, por lo que no
+              podrá crear una notificación. Para crear un tipo, por favor
+              dirijase al siguiente enlace
+            </p>
+            <Link className="btn mt-2" to={paths.TYPES_LIST.NOTIFICATIONS}>
+              CREAR TIPO
+            </Link>
+          </Alert>
+        )}
+      {notificationTypes?.data &&
+        formattedTypes.length === 0 &&
+        user &&
+        user.role !== userRoles.ADMIN && (
+          <Alert className="mb-3">
             Parece que no hay Tipos de Notificaciones creadas, por lo que no
-            podrá crear una notificación. Para crear un tipo, por favor dirijase
-            al siguiente enlace
-          </p>
-          <Link className="btn mt-2" to={paths.TYPES_LIST.NOTIFICATIONS}>
-            CREAR TIPO
-          </Link>
-        </Alert>
-      )}
+            podrá crear una notificación. Para solicitar la creación de un tipo,
+            por favor contacte con un administrador.
+          </Alert>
+        )}
       {notificationReceivers?.data &&
         notificationReceivers.data.findIndex((r) => r.type === 'user') ===
           -1 && (
@@ -331,6 +376,7 @@ const CreateNotificationForm = () => {
             className="w-full"
             control={control}
             disabled={isLoading || isResponse}
+            helperText="Si no figura el tipo que necesita, debe solicitarle a un administrador que lo genere"
             label="Tipo de notificación"
             name="type"
             options={formattedTypes}

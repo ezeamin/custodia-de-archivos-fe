@@ -41,6 +41,7 @@ const TypesList = () => {
       <section className="mt-5 flex gap-3 overflow-hidden">
         <div className="custom-skeleton h-[300px] w-full rounded-lg !bg-white dark:!bg-gray-900 sm:w-1/2 md:w-[280px] " />
         <div className="custom-skeleton hidden h-[300px] w-[280px] rounded-lg !bg-white dark:!bg-gray-900 sm:block" />
+        <div className="custom-skeleton hidden h-[300px] w-[280px] rounded-lg !bg-white dark:!bg-gray-900 sm:block" />
       </section>
     );
   }
