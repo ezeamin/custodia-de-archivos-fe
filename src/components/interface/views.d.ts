@@ -217,7 +217,7 @@ export interface NotificationFileItemProps {
 }
 
 export interface ReceiverItemProps {
-  data: Notification['receivers'][0];
+  data: SentNotification['receivers'][0];
 }
 
 export interface IssuerItemProps {

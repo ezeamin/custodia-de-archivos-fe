@@ -27,6 +27,7 @@ export interface API_GetSentNotifications {
     id: string;
     imgSrc: string;
     hasReadNotification: boolean;
+    timeReadNotification: string;
     email?: string;
   }[];
   type: {

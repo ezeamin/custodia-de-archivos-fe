@@ -120,7 +120,7 @@ const MultipleComboBox = <T extends FieldValues>(
 
             <Combobox.Button
               aria-label="Expandir/comprimir opciones"
-              className="absolute inset-y-0 right-0 flex items-center border border-l-0 border-gray-300 bg-gray-100 p-3 hover:bg-gray-200 disabled:border-none dark:border-gray-600 dark:bg-slate-700 hover:dark:bg-slate-800"
+              className={`absolute inset-y-0 right-0 flex items-center border border-l-0 bg-gray-100 p-3 hover:bg-gray-200 disabled:border-none  dark:bg-slate-700 hover:dark:bg-slate-800 ${error ? 'border-error' : 'border-gray-300 dark:border-gray-600'}`}
             >
               <Icon iconComponent={<MdExpandMore />} title="expand more icon" />
             </Combobox.Button>

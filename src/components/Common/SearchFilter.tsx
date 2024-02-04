@@ -64,7 +64,6 @@ const SearchFilter = (props: SearchFilterProps) => {
 
   useEffect(() => {
     const searchQuery = new URLSearchParams(location.search).get('query');
-    console.log(location);
     if (searchQuery) {
       setValue('query', searchQuery);
     }
