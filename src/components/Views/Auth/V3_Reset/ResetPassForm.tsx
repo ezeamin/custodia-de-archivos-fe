@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { IoMdSave } from 'react-icons/io';
 import { IoArrowBackOutline } from 'react-icons/io5';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { useMutation } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 import { putResetPasswordFn } from '@/api/api-calls/auth';
 
 import { useZodForm } from '@/hooks';
+import { useSession } from '@/stores/useSession';
 
 import { Alert, Button, Icon, PasswordInput } from '@/components/ui';
 
@@ -24,8 +26,13 @@ const ResetPassForm = () => {
   // -------------------------------------------------
 
   const { control, onSubmitMiddleware } = useZodForm(resetPasswordSchema);
+  const { login } = useSession();
   const searchParams = useSearchParams();
   const token = searchParams[0].get('token') ?? '';
+  const shouldContinue = useMemo(
+    () => !!searchParams[0].get('continue') ?? '',
+    [searchParams]
+  );
 
   // -------------------------------------------------
   // API
@@ -33,13 +40,17 @@ const ResetPassForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { mutate: postResetPassword, isSuccess } = useMutation({
+  const { mutate: putResetPassword, isSuccess } = useMutation({
     mutationFn: putResetPasswordFn,
     onError: () => {
       setIsLoading(false);
     },
     onSuccess: () => {
       setIsLoading(false);
+      if (shouldContinue) {
+        toast.success('Contraseña cambiada correctamente. Bienvenido');
+        login(token);
+      }
     },
   });
 
@@ -49,8 +60,25 @@ const ResetPassForm = () => {
 
   const handleSubmit = (data: ResetPasswordSchema) => {
     setIsLoading(true);
-    postResetPassword({ ...data, token });
+    putResetPassword({ password: data.password, token });
   };
+
+  // -------------------------------------------------
+  // EFFECTS
+  // -------------------------------------------------
+
+  useEffect(() => {
+    if (shouldContinue) {
+      toast.info(
+        'Bienvenido al Portal de Empleados de Custodia de Archivos Noroeste S.R.L. Por favor, para continuar le pedimos que cree una nueva contraseña, siguiendo las indicaciones para su seguridad',
+        {
+          duration: 10000,
+          position: 'bottom-right',
+        }
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // -------------------------------------------------
   // RENDER
@@ -64,19 +92,21 @@ const ResetPassForm = () => {
         </Alert>
       )}
       <PasswordInput
+        autoComplete="new-password"
         className="animate-in-left a-delay-400 w-full"
         control={control}
         helperText="La contraseña debe tener al menos 6 caracteres, entre ellos: una mayúscula, una minúscula y un número"
         label="Nueva contraseña"
-        maxLength={8}
+        maxLength={25}
         name="password"
         placeholder="Ingrese nueva contraseña"
       />
       <PasswordInput
+        autoComplete="new-password"
         className="animate-in-left a-delay-400 mt-3 w-full"
         control={control}
         label="Repetir nueva contraseña"
-        maxLength={8}
+        maxLength={25}
         name="repeatPassword"
         placeholder="Repita nueva contraseña"
       />
@@ -87,11 +117,11 @@ const ResetPassForm = () => {
         colorLight="bg-gray-900"
         disabled={isSuccess}
         loading={isLoading}
+        startIcon={<IoMdSave />}
         textColorDark="dark:text-gray-900"
         textColorLight="text-white"
         type="submit"
       >
-        <Icon iconComponent={<IoMdSave />} title="Guardar" />
         GUARDAR
       </Button>
       <Link className="btn mt-2 w-full" to={paths.AUTH.LOGIN}>

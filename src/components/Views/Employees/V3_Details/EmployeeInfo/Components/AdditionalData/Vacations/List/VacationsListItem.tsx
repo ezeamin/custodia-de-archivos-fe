@@ -46,7 +46,7 @@ const VacationsListItem = (props: VacationsElementProps) => {
     },
     onSuccess: () => {
       setIsLoading(false);
-      toast.success('Licencia eliminada con éxito');
+      toast.success('Vacaciones eliminadas con éxito');
       queryClient.invalidateQueries({
         queryKey: [`employeeVacations_${employeeId}`],
       });
@@ -67,8 +67,8 @@ const VacationsListItem = (props: VacationsElementProps) => {
 
   const handleClickDelete = () => {
     Swal.fire({
-      title: '¿Estás seguro?',
-      html: `<p>Eliminarás las vacaciones del <b>${startDate.format(
+      title: '¿Está seguro?',
+      html: `<p>Eliminará las vacaciones del <b>${startDate.format(
         'DD/MM/YYYY'
       )}</b> al <b>${endDate.format(
         'DD/MM/YYYY'

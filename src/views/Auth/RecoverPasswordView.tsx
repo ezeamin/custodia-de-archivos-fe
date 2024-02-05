@@ -7,7 +7,7 @@ const RecoverPasswordView = () => {
         Recuperar contraseña
       </h2>
       <div className="animate-in-right a-delay-300 divider mb-1 mt-0" />
-      <RecoverPassForm />;
+      <RecoverPassForm />
     </>
   );
 };

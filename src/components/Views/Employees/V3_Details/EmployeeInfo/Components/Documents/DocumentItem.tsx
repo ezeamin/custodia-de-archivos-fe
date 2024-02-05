@@ -33,13 +33,8 @@ const DocumentItem = (props: DocumentItemProps) => {
 
   const { mutate: deleteFile, status: deleteStatus } = useMutation({
     mutationFn: deleteFileFn,
-    onError: (e) => {
+    onError: () => {
       setIsLoading(false);
-      toast.error(
-        e instanceof Error
-          ? e.message
-          : 'Ocurrió un error eliminando el archivo. Intente nuevamente más tarde'
-      );
     },
     onSuccess: () => {
       setIsLoading(false);

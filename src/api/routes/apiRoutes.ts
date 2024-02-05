@@ -7,9 +7,9 @@ export const apiRoutes = {
       url: '/params/status',
       useToken: true,
     }),
-    GET_ROLES: (): ApiRoute => ({
+    GET_ROLES: ({ notifications }: { notifications: boolean }): ApiRoute => ({
       method: 'GET',
-      url: '/params/roles',
+      url: `/params/roles${notifications ? '?notifications=true' : ''}`,
       useToken: true,
     }),
     GET_GENDERS: (): ApiRoute => ({
@@ -17,9 +17,23 @@ export const apiRoutes = {
       url: '/params/genders',
       useToken: true,
     }),
-    GET_AREAS: (): ApiRoute => ({
+    GET_AREAS: ({
+      filterAssignable,
+    }: {
+      filterAssignable: boolean;
+    }): ApiRoute => ({
       method: 'GET',
-      url: '/params/areas',
+      url: `/params/areas${filterAssignable ? '?filterAssignable=true' : ''}`,
+      useToken: true,
+    }),
+    GET_RELATIONSHIPS: (): ApiRoute => ({
+      method: 'GET',
+      url: '/params/relationships',
+      useToken: true,
+    }),
+    GET_CIVIL_STATUS: (): ApiRoute => ({
+      method: 'GET',
+      url: '/params/civil-status',
       useToken: true,
     }),
   },
@@ -29,8 +43,8 @@ export const apiRoutes = {
       url: '/auth/login',
       credentials: 'include',
     }),
-    GET_REFRESH_TOKEN: (): ApiRoute => ({
-      method: 'GET',
+    POST_REFRESH_TOKEN: (): ApiRoute => ({
+      method: 'POST',
       url: '/auth/refresh-token',
       credentials: 'include',
     }),
@@ -47,6 +61,7 @@ export const apiRoutes = {
     PUT_RESET_PASS: (): ApiRoute => ({
       method: 'PUT',
       url: '/auth/reset-password',
+      useToken: true,
     }),
   },
   USERS: {
@@ -63,6 +78,26 @@ export const apiRoutes = {
     PUT_CREATE_ADMIN: ({ id }: { id: string }): ApiRoute => ({
       method: 'PUT',
       url: `/users/create-admin/${id}`,
+      useToken: true,
+    }),
+    DELETE_ADMIN: ({ id }: { id: string }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/users/delete-admin/${id}`,
+      useToken: true,
+    }),
+    POST_READ_ONLY_USER: (): ApiRoute => ({
+      method: 'POST',
+      url: `/users/create-read-only`,
+      useToken: true,
+    }),
+    DELETE_READ_ONLY_USER: ({ id }: { id: string }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/users/delete-read-only/${id}`,
+      useToken: true,
+    }),
+    GET_LOGIN_LOGS: ({ params }: { params: string }): ApiRoute => ({
+      method: 'GET',
+      url: `/users/login-logs${params}`,
       useToken: true,
     }),
   },
@@ -124,9 +159,15 @@ export const apiRoutes = {
       url: `/employees/${employeeId}/docs/${fileId}`,
       useToken: true,
     }),
-    GET_EMPLOYEE_HISTORY: ({ id }: { id: string }): ApiRoute => ({
+    GET_EMPLOYEE_HISTORY: ({
+      id,
+      search = '',
+    }: {
+      id: string;
+      search: string;
+    }): ApiRoute => ({
       method: 'GET',
-      url: `/employees/${id}/history`,
+      url: `/employees/${id}/history${search}`,
       useToken: true,
     }),
     GET_EMPLOYEE_ABSENCES: ({ id }: { id: string }): ApiRoute => ({
@@ -134,9 +175,13 @@ export const apiRoutes = {
       url: `/employees/${id}/absences`,
       useToken: true,
     }),
-    POST_EMPLOYEE_ABSENCE: (): ApiRoute => ({
+    POST_EMPLOYEE_ABSENCE: ({
+      employeeId,
+    }: {
+      employeeId: string;
+    }): ApiRoute => ({
       method: 'POST',
-      url: `/employees/absences`,
+      url: `/employees/${employeeId}/absences`,
       useToken: true,
     }),
     GET_EMPLOYEE_LICENSES: ({ id }: { id: string }): ApiRoute => ({
@@ -154,9 +199,13 @@ export const apiRoutes = {
       url: `/employees/licenses/types/${id}`,
       useToken: true,
     }),
-    POST_EMPLOYEE_LICENSE: (): ApiRoute => ({
+    POST_EMPLOYEE_LICENSE: ({
+      employeeId,
+    }: {
+      employeeId: string;
+    }): ApiRoute => ({
       method: 'POST',
-      url: `/employees/licenses`,
+      url: `/employees/${employeeId}/licenses`,
       useToken: true,
     }),
     DELETE_EMPLOYEE_LICENSE: ({
@@ -190,9 +239,13 @@ export const apiRoutes = {
       url: `/employees/${id}/vacations`,
       useToken: true,
     }),
-    POST_EMPLOYEE_VACATION: (): ApiRoute => ({
+    POST_EMPLOYEE_VACATION: ({
+      employeeId,
+    }: {
+      employeeId: string;
+    }): ApiRoute => ({
       method: 'POST',
-      url: `/employees/vacations`,
+      url: `/employees/${employeeId}/vacations`,
       useToken: true,
     }),
     DELETE_EMPLOYEE_VACATIONS: ({
@@ -211,9 +264,13 @@ export const apiRoutes = {
       url: `/employees/${id}/formal-warnings`,
       useToken: true,
     }),
-    POST_EMPLOYEE_FORMAL_WARNING: (): ApiRoute => ({
+    POST_EMPLOYEE_FORMAL_WARNING: ({
+      employeeId,
+    }: {
+      employeeId: string;
+    }): ApiRoute => ({
       method: 'POST',
-      url: `/employees/formal-warnings`,
+      url: `/employees/${employeeId}/formal-warnings`,
       useToken: true,
     }),
     GET_EMPLOYEE_TRAININGS: ({ id }: { id: string }): ApiRoute => ({
@@ -246,9 +303,13 @@ export const apiRoutes = {
       url: `/employees/trainings/types/${id}`,
       useToken: true,
     }),
-    POST_EMPLOYEE_TRAINING: (): ApiRoute => ({
+    POST_EMPLOYEE_TRAINING: ({
+      employeeId,
+    }: {
+      employeeId: string;
+    }): ApiRoute => ({
       method: 'POST',
-      url: `/employees/trainings`,
+      url: `/employees/${employeeId}/trainings`,
       useToken: true,
     }),
     GET_EMPLOYEE_LATE_ARRIVALS: ({ id }: { id: string }): ApiRoute => ({
@@ -256,9 +317,13 @@ export const apiRoutes = {
       url: `/employees/${id}/late-arrivals`,
       useToken: true,
     }),
-    POST_EMPLOYEE_LATE_ARRIVAL: (): ApiRoute => ({
+    POST_EMPLOYEE_LATE_ARRIVAL: ({
+      employeeId,
+    }: {
+      employeeId: string;
+    }): ApiRoute => ({
       method: 'POST',
-      url: `/employees/late-arrivals`,
+      url: `/employees/${employeeId}/late-arrivals`,
       useToken: true,
     }),
     GET_EMPLOYEE_EXTRA_HOURS: ({ id }: { id: string }): ApiRoute => ({
@@ -266,9 +331,51 @@ export const apiRoutes = {
       url: `/employees/${id}/extra-hours`,
       useToken: true,
     }),
-    POST_EMPLOYEE_EXTRA_HOURS: (): ApiRoute => ({
+    POST_EMPLOYEE_EXTRA_HOURS: ({
+      employeeId,
+    }: {
+      employeeId: string;
+    }): ApiRoute => ({
       method: 'POST',
-      url: `/employees/extra-hours`,
+      url: `/employees/${employeeId}/extra-hours`,
+      useToken: true,
+    }),
+    GET_FAMILY_MEMBER_INFO: ({
+      employeeId,
+      memberId,
+    }: {
+      employeeId: string;
+      memberId: string;
+    }): ApiRoute => ({
+      method: 'GET',
+      url: `/employees/${employeeId}/family/${memberId}`,
+      useToken: true,
+    }),
+    POST_FAMILY_MEMBER: ({ employeeId }: { employeeId: string }): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/${employeeId}/family`,
+      useToken: true,
+    }),
+    PUT_FAMILY_MEMBER: ({
+      employeeId,
+      memberId,
+    }: {
+      employeeId: string;
+      memberId: string;
+    }): ApiRoute => ({
+      method: 'PUT',
+      url: `/employees/${employeeId}/family/${memberId}`,
+      useToken: true,
+    }),
+    DELETE_FAMILY_MEMBER: ({
+      employeeId,
+      memberId,
+    }: {
+      employeeId: string;
+      memberId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/family/${memberId}`,
       useToken: true,
     }),
   },
@@ -278,9 +385,15 @@ export const apiRoutes = {
       url: `/notifications${params}`,
       useToken: true,
     }),
-    GET_NOTIFICATION: ({ id }: { id: string }): ApiRoute => ({
+    GET_NOTIFICATION: ({
+      id,
+      sent,
+    }: {
+      id: string;
+      sent?: boolean;
+    }): ApiRoute => ({
       method: 'GET',
-      url: `/notifications/${id}`,
+      url: `/notifications/${id}${sent ? '?sent=true' : ''}`,
       useToken: true,
     }),
     POST_NOTIFICATION: (): ApiRoute => ({
@@ -288,19 +401,25 @@ export const apiRoutes = {
       url: '/notifications',
       useToken: true,
     }),
-    READ_NOTIFICATION: ({ id }: { id: string }): ApiRoute => ({
-      method: 'PUT',
-      url: `/notifications/${id}/read`,
-      useToken: true,
-    }),
     GET_NOTIFICATION_RECEIVERS: (): ApiRoute => ({
       method: 'GET',
       url: '/notifications/receivers',
       useToken: true,
     }),
-    GET_NOTIFICATION_TYPES: (): ApiRoute => ({
+    GET_NOTIFICATION_AREA_RECEIVERS: ({
+      notificationId,
+      areaId,
+    }: {
+      notificationId: string;
+      areaId: string;
+    }): ApiRoute => ({
       method: 'GET',
-      url: '/notifications/types',
+      url: `/notifications/${notificationId}/receivers/${areaId}`,
+      useToken: true,
+    }),
+    GET_NOTIFICATION_TYPES: ({ all }: { all: boolean }): ApiRoute => ({
+      method: 'GET',
+      url: `/notifications/types${all ? '?all=true' : ''}`,
       useToken: true,
     }),
     GET_NOTIFICATION_TYPE: ({ id }: { id: string }): ApiRoute => ({

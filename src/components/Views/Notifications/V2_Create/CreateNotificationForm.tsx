@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import {
-  receiverOptions as mockedReceiverOptions,
-  typeOptions as mockedTypeOptions,
-} from './mocked';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
+import Swal from 'sweetalert2';
 
 import {
   getNotificationReceiversFn,
@@ -15,6 +12,7 @@ import {
 } from '@/api/api-calls/notifications';
 
 import { useLoading, useZodForm } from '@/hooks';
+import { useSession } from '@/stores/useSession';
 
 import {
   Alert,
@@ -27,13 +25,17 @@ import {
 } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
+import { userRoles } from '@/constants/userRoles/userRoles';
 
 import {
   CreateSchema,
   createSchema,
 } from '@/form-schemas/schemas/notifications/createSchema';
 
+import { BasicList } from '@/interface';
+
 const CreateNotificationForm = () => {
+  const { user } = useSession();
   // -------------------------------------------------
   // FORM
   // -------------------------------------------------
@@ -42,7 +44,7 @@ const CreateNotificationForm = () => {
     useZodForm(createSchema);
 
   const selectedNotificationType = watch('type');
-  const selectedReceivers = watch('receiver');
+  const selectedReceivers = watch('receivers');
   const message = watch('message');
   const uploadedFiles = watch('files');
 
@@ -57,9 +59,16 @@ const CreateNotificationForm = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
 
-  const isResponse =
-    search.includes('type=response') && search.includes('receiverId=');
-  const receiverId = search.split('receiverId=')[1];
+  const isResponse = useMemo(
+    () =>
+      search.includes('type=response') &&
+      search.includes('receiverId=') &&
+      search.includes('message='),
+    [search]
+  );
+  const searchParams = new URLSearchParams(search);
+  const receiverId = searchParams.get('receiverId');
+  const prevMessage = searchParams.get('message');
 
   // -------------------------------------------------
   // API
@@ -67,23 +76,49 @@ const CreateNotificationForm = () => {
 
   const {
     data: notificationTypes,
-    isLoading: isLoadingTypes,
+    isFetching: isLoadingTypes,
     isError: isErrorTypes,
     status: statusTypes,
   } = useQuery({
-    queryKey: ['notificationTypes'],
-    queryFn: getNotificationTypesFn,
+    queryKey: ['notificationTypes', false],
+    queryFn: () => getNotificationTypesFn({ all: false }),
   });
 
   const {
     data: notificationReceivers,
-    isLoading: isLoadingReceivers,
+    isFetching: isLoadingReceivers,
     isError: isErrorReceivers,
     status: statusReceivers,
   } = useQuery({
     queryKey: ['receiverOptions'],
     queryFn: getNotificationReceiversFn,
   });
+
+  // Remove "Respuesta" from types if it is not a response
+  const formattedTypes = useMemo(
+    () =>
+      (notificationTypes?.data
+        ?.map((type) => {
+          if (!isResponse && type.title.toLowerCase() === 'respuesta')
+            return null;
+
+          return {
+            id: type.id,
+            description: type.title,
+          };
+        })
+        .filter(Boolean) as BasicList[]) || [],
+    [notificationTypes?.data, isResponse]
+  );
+
+  const formattedReceivers = useMemo(
+    () =>
+      notificationReceivers?.data?.map((receiver) => ({
+        id: receiver.id,
+        description: receiver.description,
+      })) || [],
+    [notificationReceivers?.data]
+  );
 
   const { mutate: createNotification } = useMutation({
     mutationFn: postNotificationFn,
@@ -94,9 +129,7 @@ const CreateNotificationForm = () => {
       setIsLoading(false);
       reset();
       toast.success('Notificación creada y enviada con éxito');
-      window.setTimeout(() => {
-        navigate(paths.NOTIFICATIONS.MAIN);
-      }, 1000);
+      navigate(paths.NOTIFICATIONS.MAIN);
     },
   });
 
@@ -120,18 +153,28 @@ const CreateNotificationForm = () => {
   const handleSubmit = (data: CreateSchema) => {
     setIsLoading(true);
 
-    console.log(data);
-
     const fd = new FormData();
 
+    const receivers = data.receivers.map((r) => {
+      const type = notificationReceivers?.data?.find(
+        (ro) => ro.id === r.id
+      )?.type;
+
+      return {
+        id: r.id,
+        type,
+      };
+    });
+
     fd.append('typeId', data.type.id);
-    fd.append('receiverId', JSON.stringify(data.receiver.map((r) => r.id)));
+    fd.append('receivers', JSON.stringify(receivers));
     fd.append('message', data.message);
     if (data.files) {
       data.files.forEach((file) => {
         fd.append('files', file);
       });
     }
+    fd.append('isResponse', isResponse.toString());
 
     createNotification(fd);
   };
@@ -139,6 +182,70 @@ const CreateNotificationForm = () => {
   // -------------------------------------------------
   // EFFECTS
   // -------------------------------------------------
+
+  // Avoid selecting "Respuesta" as notification type (only a safeguard, should not happen in the UI)
+  useEffect(() => {
+    if (
+      selectedNotificationType &&
+      selectedNotificationType.description.toLowerCase() === 'respuesta' &&
+      !isResponse
+    ) {
+      toast.warning(
+        `No se puede mandar una respuesta cuando no lo es. Para crear una respuesta, seleccione "RESPONDER" desde una notificación recibida`,
+        { duration: 7000 }
+      );
+      reset({
+        type: undefined,
+      });
+    }
+  }, [selectedNotificationType, reset, isResponse]);
+
+  // If "Todos los empleados" is selected, set value to that option and remove the other selected ones
+  useEffect(() => {
+    if (
+      selectedReceivers &&
+      selectedReceivers.length > 1 &&
+      selectedReceivers.some((r) =>
+        r.description.toLowerCase().includes('todos')
+      )
+    ) {
+      setValue(
+        'receivers',
+        formattedReceivers.filter((r) =>
+          r.description.toLowerCase().includes('todos')
+        )
+      );
+    }
+  }, [selectedReceivers, formattedReceivers, setValue]);
+
+  // Check for current hour and if it is in the range of the selected notification type
+  useEffect(() => {
+    const type = notificationTypes?.data?.find(
+      (t) => t.id === selectedNotificationType?.id
+    );
+
+    if (!type) return;
+
+    const { startHour, endHour } = type;
+
+    const currentHour = new Date().getHours();
+    const currentMinutes = new Date().getMinutes();
+    const currentTime = `${currentHour}:${currentMinutes}`;
+
+    if (currentTime < startHour || currentTime > endHour) {
+      Swal.fire({
+        title: 'Atención',
+        html: `No se puede enviar este tipo de notificación en este horario. Por favor, intente nuevamente en el rango de ${startHour} a ${endHour}`,
+        icon: 'info',
+        showConfirmButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Entendido',
+      });
+      reset({
+        type: undefined,
+      });
+    }
+  }, [selectedNotificationType, notificationTypes?.data, reset]);
 
   // Enable submit button
   useEffect(() => {
@@ -170,15 +277,14 @@ const CreateNotificationForm = () => {
     if (
       isResponse &&
       receiverId &&
+      prevMessage &&
       notificationTypes?.data &&
       notificationReceivers?.data
     ) {
       const receiver = notificationReceivers.data.find(
         (r) => r.id === receiverId
       );
-      const type = notificationTypes.data.find(
-        (t) => t.description === 'Respuesta'
-      );
+      const type = notificationTypes.data.find((t) => t.title === 'Respuesta');
 
       if (!receiver || !type) {
         toast.error(
@@ -188,11 +294,18 @@ const CreateNotificationForm = () => {
         return;
       }
 
-      setValue('type', type);
-      setValue('receiver', [receiver]);
+      const formattedType = {
+        id: type.id,
+        description: type.title,
+      };
+
+      setValue('type', formattedType);
+      setValue('receivers', [receiver]);
+      setValue('message', prevMessage);
     }
   }, [
     receiverId,
+    prevMessage,
     isResponse,
     notificationTypes?.data,
     setValue,
@@ -222,22 +335,51 @@ const CreateNotificationForm = () => {
       className="content-card animate-in-bottom a-delay-200 card"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
+      {notificationTypes?.data &&
+        formattedTypes.length === 0 &&
+        user &&
+        user.role === userRoles.ADMIN && (
+          <Alert className="mb-3">
+            <p>
+              Parece que no hay Tipos de Notificaciones creadas, por lo que no
+              podrá crear una notificación. Para crear un tipo, por favor
+              dirijase al siguiente enlace
+            </p>
+            <Link className="btn mt-2" to={paths.TYPES_LIST.NOTIFICATIONS}>
+              CREAR TIPO
+            </Link>
+          </Alert>
+        )}
+      {notificationTypes?.data &&
+        formattedTypes.length === 0 &&
+        user &&
+        user.role !== userRoles.ADMIN && (
+          <Alert className="mb-3">
+            Parece que no hay Tipos de Notificaciones creadas, por lo que no
+            podrá crear una notificación. Para solicitar la creación de un tipo,
+            por favor contacte con un administrador.
+          </Alert>
+        )}
+      {notificationReceivers?.data &&
+        notificationReceivers.data.findIndex((r) => r.type === 'user') ===
+          -1 && (
+          <Alert className="mb-3">
+            Si su notificación es para un empleado en particular, esto no podrá
+            hacerlo hasta que ese empleado tenga un usuario en el Portal. Esto
+            puede realizarlo desde el detalle del empleado, en el botón
+            &quot;CREAR USUARIO&quot;.
+          </Alert>
+        )}
       <Grid container gap={2}>
         <Grid item sm={6} xs={12}>
           <ComboBoxInput<CreateSchema>
             className="w-full"
             control={control}
-            disabled={isLoading}
+            disabled={isLoading || isResponse}
+            helperText="Si no figura el tipo que necesita, debe solicitarle a un administrador que lo genere"
             label="Tipo de notificación"
             name="type"
-            options={mockedTypeOptions.data.map((type) => ({
-              id: type.id,
-              description: type.title,
-            }))}
-            /* options={notificationTypes.data.map((type) => ({
-              id: type.id,
-              description: type.title,
-            }))} */
+            options={formattedTypes}
             placeholder="Seleccione un tipo"
           />
         </Grid>
@@ -245,12 +387,11 @@ const CreateNotificationForm = () => {
           <MultipleComboBoxInput<CreateSchema>
             className="w-full"
             control={control}
-            disabled={isLoading}
+            disabled={isLoading || isResponse}
             helperText="Si algún empleado no figura, puede que no tenga usuario creado"
             label="Receptor(es)"
-            name="receiver"
-            options={mockedReceiverOptions.data}
-            // options={notificationReceivers.data}
+            name="receivers"
+            options={formattedReceivers}
             placeholder="Seleccione al menos 1 receptor"
           />
         </Grid>
@@ -302,6 +443,7 @@ const CreateNotificationForm = () => {
         colorLight="btn-primary"
         disabled={!canSendForm}
         loading={isLoading && canSendForm}
+        textColorLight="text-white"
         type="submit"
       >
         Guardar y enviar

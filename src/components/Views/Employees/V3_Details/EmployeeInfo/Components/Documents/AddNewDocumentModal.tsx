@@ -42,9 +42,6 @@ const AddNewDocumentModal = () => {
       setIsLoading(false);
       closeModal();
       reset();
-      toast.error(
-        'Ocurrió un error guardando el documento. Intente nuevamente más tarde'
-      );
     },
     onSuccess: () => {
       setIsLoading(false);
@@ -87,7 +84,7 @@ const AddNewDocumentModal = () => {
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
       <Modal
         submitButton
-        className="overflow-x-hidden"
+        className="overflow-x-hidden p-1"
         id="addNewDocument"
         loading={isLoading}
         title="Nuevo Documento"

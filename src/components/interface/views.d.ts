@@ -5,12 +5,14 @@ import {
   Employee,
   EmployeeDoc,
   ExtraHours,
+  FamilyMember,
   FormalWarning,
   History,
   LateArrival,
   License,
   LicenseType,
   MinimalEmployee,
+  MinimalFamilyMember,
   Training,
   TrainingType,
   Vacation,
@@ -18,17 +20,20 @@ import {
 import {
   Notification,
   NotificationFile,
+  NotificationsAreaReceiver,
   NotificationType,
+  SentNotification,
 } from '@/api/interface/notifications';
-import { BasicUser } from '@/api/interface/users';
+import { BasicUser, LoginLog, ReadOnlyUser } from '@/api/interface/users';
 
 // --------------------------------------------------
 // EMPLOYEES
 // --------------------------------------------------
 
 export interface SearchFilterProps {
-  queryKey: string;
-  showFilters?: boolean;
+  queryKey: string | string[];
+  placeholder?: string;
+  className?: string;
 }
 
 export interface EmployeesResultsTableProps {
@@ -62,6 +67,26 @@ export interface EmployeeDataFieldProps {
   className?: string;
 }
 
+export interface FamilyListProps {
+  data: MinimalFamilyMember[];
+}
+
+export interface FamilyButtonProps {
+  member: MinimalFamilyMember;
+}
+
+export interface FamilyModalData {
+  data: string;
+}
+
+export interface FamilyMemberFormProps {
+  memberOriginalData?: FamilyMember;
+}
+
+export interface FamilyInfoModalContentProps {
+  data: FamilyMember;
+}
+
 export interface EditDocumentsFormProps {
   data: EmployeeDoc[];
 }
@@ -82,10 +107,8 @@ export interface ChangeDocModalData extends ModalStore {
 
 export interface NewUserModalData extends ModalStore {
   data: {
-    data: {
-      username: string;
-      password: string;
-    };
+    username: string;
+    password: string;
   };
 }
 
@@ -167,28 +190,47 @@ export interface TrainingsElementProps {
 // --------------------------------------------------
 
 export interface NotificationsResultsListProps {
-  data: Notification[];
+  data: (Notification | SentNotification)[];
   hasBeenRead?: boolean;
+  sent?: boolean;
 }
 
 export interface NotificationsResultsListItemProps {
-  notification: Notification;
+  notification: Notification | SentNotification;
   index: number;
   hasBeenRead: boolean;
+  sent?: boolean;
 }
 
 export interface NotificationInfoProps {
-  data: Notification;
-  showReadAlert: boolean;
-  isLoadingRead: boolean;
+  data: Notification | SentNotification;
+  sent?: boolean;
+  showReadAlert?: boolean;
 }
 
 export interface NotificationInfoContentProps {
-  data: Notification;
+  data: Notification | SentNotification;
+  sent?: boolean;
 }
 
 export interface NotificationFileItemProps {
   file: NotificationFile;
+}
+
+export interface ReceiverItemProps {
+  data: SentNotification['receivers'][0];
+}
+
+export interface IssuerItemProps {
+  data: Notification['issuer'];
+}
+
+export interface ModalNotificacionAreaReceiver extends ModalStore {
+  data: { areaId: string };
+}
+
+export interface AreaReceiverItemProps {
+  receiver: NotificationsAreaReceiver;
 }
 
 // --------------------------------------------------
@@ -200,7 +242,7 @@ export interface RoutingCardProps {
     id: number;
     path: string;
     name: string;
-    disabled?: boolean;
+    allowedRoles?: string[];
   };
   index: number;
   showType?: boolean;
@@ -236,11 +278,29 @@ export interface TrainingTypesResultsListItemProps {
 // SETTINGS
 // --------------------------------------------------
 
+export interface LoginLogsResults {
+  data: LoginLog[];
+}
+
+export interface LoginLogsResultsElement {
+  log: LoginLog;
+  index?: number;
+}
+
 export interface CreateAdminResults {
   data: BasicUser[];
 }
 
 export interface CreateAdminResultsElement {
   user: BasicUser;
+  index?: number;
+}
+
+export interface DeleteReadOnlyUserResults {
+  data: ReadOnlyUser[];
+}
+
+export interface DeleteReadOnlyUserResultsElement {
+  user: ReadOnlyUser;
   index?: number;
 }

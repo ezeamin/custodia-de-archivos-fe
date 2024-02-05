@@ -27,7 +27,7 @@ export const postLoginFn = async (body: {
 };
 
 export const getRefreshTokenFn = async () => {
-  const request = apiRoutes.AUTH.GET_REFRESH_TOKEN();
+  const request = apiRoutes.AUTH.POST_REFRESH_TOKEN();
 
   const data = await fetchFn<API_PostLogin, Login>({
     request,
@@ -60,22 +60,37 @@ export const postRecoverPasswordFn = async (body: { username: string }) => {
   return data;
 };
 
+// From email link
 export const putResetPasswordFn = async (body: {
   password: string;
-  repeatPassword: string;
   token: string;
 }) => {
-  const { token, ...bodyWithoutToken } = body;
-
   const request = {
     ...apiRoutes.AUTH.PUT_RESET_PASS(),
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${body.token}` },
+    useToken: false,
   };
 
   const data = await fetchFn<API_EmptyResponse>({
     request,
     adapter: (APIData) => APIData,
-    body: bodyWithoutToken,
+    body: { password: body.password },
+  });
+
+  return data;
+};
+
+// From settings tab
+export const putResetPasswordFromSettingsFn = async (body: {
+  password: string;
+  repeatPassword: string;
+}) => {
+  const request = apiRoutes.AUTH.PUT_RESET_PASS();
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body: { password: body.password },
   });
 
   return data;

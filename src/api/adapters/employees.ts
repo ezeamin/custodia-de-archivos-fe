@@ -5,6 +5,7 @@ import {
   API_GetEmployeeDocs,
   API_GetEmployees,
   API_GetExtraHours,
+  API_GetFamilyMember,
   API_GetFormalWarnings,
   API_GetHistory,
   API_GetLateArrivals,
@@ -19,6 +20,7 @@ import {
   Employee,
   EmployeeDoc,
   ExtraHours,
+  FamilyMember,
   FormalWarning,
   History,
   LateArrival,
@@ -64,6 +66,7 @@ export const getEmployeeAdapter = (data: API_GetEmployee): Employee => ({
   email: data.email,
   age: data.age,
   gender: data.gender,
+  civilStatus: data.civilStatus,
   antiquity: data.antiquity,
   startDate: data.startDate,
   endDate: data.endDate,
@@ -72,7 +75,22 @@ export const getEmployeeAdapter = (data: API_GetEmployee): Employee => ({
   address: data.address,
   fileNumber: data.fileNumber,
   status: data.status,
+  workingHours: data.workingHours,
   user: data.user,
+  familyMembers: data.familyMembers,
+});
+
+export const getFamilyMemberInfoAdapter = (
+  data: API_GetFamilyMember
+): FamilyMember => ({
+  id: data.id,
+  name: data.name,
+  lastname: data.lastname,
+  dni: data.dni,
+  gender: data.gender,
+  phone: data.phone,
+  address: data.address,
+  relationship: data.relationship,
 });
 
 export const getEmployeeDocsAdapter = (
@@ -128,6 +146,7 @@ export const getEmployeeLicensesAdapter = (
     id: element.id,
     startDate: element.startDate,
     endDate: element.endDate,
+    observations: element.observations,
     type: {
       id: element.type.id,
       description: element.type.description,
@@ -170,6 +189,7 @@ export const getEmployeeTrainingsAdapter = (
     id: element.id,
     date: element.date,
     reason: element.reason,
+    observations: element.observations,
     type: {
       id: element.type.id,
       description: element.type.description,
@@ -201,6 +221,8 @@ export const getEmployeeLateArrivalsAdapter = (
   return data.map((element) => ({
     id: element.id,
     date: element.date,
+    time: element.time,
+    observations: element.observations,
   }));
 };
 
@@ -211,6 +233,7 @@ export const getEmployeeExtraHoursAdapter = (
     id: element.id,
     date: element.date,
     hours: element.hours,
+    observations: element.observations,
   }));
 };
 

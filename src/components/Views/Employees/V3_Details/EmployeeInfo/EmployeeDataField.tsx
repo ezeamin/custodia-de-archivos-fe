@@ -3,7 +3,7 @@ import { EmployeeDataFieldProps } from '@/components/interface/views';
 const EmployeeDataField = (props: EmployeeDataFieldProps) => {
   const { label, value } = props;
 
-  if (value !== 0 && !value) {
+  if (value !== 0 && value === undefined) {
     return <div className="custom-skeleton h-[52px] rounded-md" />;
   }
 

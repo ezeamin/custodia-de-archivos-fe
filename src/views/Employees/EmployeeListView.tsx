@@ -1,8 +1,6 @@
+import SearchFilter from '@/components/Common/SearchFilter';
 import Title from '@/components/Common/Title';
-import { Modal } from '@/components/ui';
-import FilterModalForm from '@/components/Views/Employees/V1_List/Filters/FilterModalForm';
-import Legend from '@/components/Views/Employees/V1_List/Filters/Legend';
-import SearchFilter from '@/components/Views/Employees/V1_List/Filters/SearchFilter';
+import Legend from '@/components/Views/Employees/V1_List/Results/Legend';
 import Results from '@/components/Views/Employees/V1_List/Results/Results';
 
 import { paths } from '@/constants/routes/paths';
@@ -16,14 +14,10 @@ const EmployeeListView = () => {
         title="Listado de Empleados"
       />
       <section className="flex items-center justify-between">
-        <SearchFilter showFilters queryKey="employees" />
+        <SearchFilter queryKey="employees" />
         <Legend />
       </section>
       <Results />
-
-      <Modal id="employeeSearchFilter" title="Filtrar resultados">
-        <FilterModalForm />
-      </Modal>
     </>
   );
 };

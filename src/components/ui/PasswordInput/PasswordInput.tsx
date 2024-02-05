@@ -42,7 +42,9 @@ const PasswordInput = <T extends FormSchemas>(
         name={name}
         render={({ field, fieldState: { error } }) => (
           <div
-            className={`input input-bordered relative ${!hideLabel ? 'mt-1' : ''} overflow-hidden bg-gray-100 px-0 dark:bg-slate-700 ${
+            className={`input input-bordered relative ${
+              !hideLabel ? 'mt-1' : ''
+            } overflow-hidden bg-gray-100 px-0 dark:bg-slate-700 ${
               error ? 'border-error' : ''
             }`}
           >
@@ -61,6 +63,7 @@ const PasswordInput = <T extends FormSchemas>(
             <button
               className="btn btn-ghost absolute bottom-0 right-0 top-0 z-50 block h-full w-[40px] rounded-btn p-0"
               disabled={rest.disabled}
+              tabIndex={-1}
               type="button"
               onClick={handleChange}
             >

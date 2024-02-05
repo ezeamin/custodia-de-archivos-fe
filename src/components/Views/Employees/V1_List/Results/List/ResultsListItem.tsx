@@ -31,14 +31,14 @@ const ResultsListItem = (props: EmployeesResultsListItemProps) => {
               Puesto: <span className="font-bold">{employee.position}</span>
             </p>
             <p>
-              Area:{' '}
+              Área:{' '}
               <span className="font-bold">{employee.area.description}</span>
             </p>
           </div>
           <div>
             <img
               alt={`${employee.lastname}, ${employee.firstname}`}
-              className="w-[70px] min-w-[70px] rounded-md object-cover sm:w-[100px]"
+              className="h-[70px] w-[70px] min-w-[70px] rounded-md object-cover sm:h-[100px] sm:w-[100px]"
               height={70}
               src={employee.imgSrc}
               width={70}

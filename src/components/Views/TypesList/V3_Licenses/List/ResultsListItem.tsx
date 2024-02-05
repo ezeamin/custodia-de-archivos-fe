@@ -49,8 +49,8 @@ const ResultsListItem = (props: LicensesTypesResultsListItemProps) => {
 
   const handleDelete = () => {
     Swal.fire({
-      title: '¿Estás seguro?',
-      html: `<p>Eliminarás el tipo <b>"${licenseType.title}"</b>. Esta acción no se puede revertir. Esto NO eliminará las licencias ya creadas con este tipo.</p>`,
+      title: '¿Está seguro?',
+      html: `<p>Eliminará el tipo <b>"${licenseType.title}"</b>. Esta acción no se puede revertir. Esto NO eliminará las licencias ya creadas con este tipo.</p>`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

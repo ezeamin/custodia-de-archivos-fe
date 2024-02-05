@@ -58,3 +58,7 @@ export interface MenuOptionButtonProps extends AnyProp {
 export interface ThemeTogglerButtonProps extends AnyProp {
   className?: string;
 }
+
+export interface EmptyAlertProps {
+  queryKey: string;
+}

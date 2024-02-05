@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
 
-import { mockedFormalWarnings } from '../../../../mocked';
 import AddNewButton from '../NewButton/NewButton';
 import Modal from './FormalWarningsModal';
 import List from './List/FormalWarningsList';
@@ -17,10 +16,6 @@ import { useModal } from '@/stores/useModal';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Button } from '@/components/ui';
 
-const data = mockedFormalWarnings;
-const isLoading = false;
-const isError = false;
-
 const Results = () => {
   // -------------------------------------------------
   // STATE & PARAMS
@@ -35,7 +30,7 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
+  const { data, isLoading, isFetching, isError, refetch, status } = useQuery({
     queryKey: [`employeeFormalWarnings_${employeeId}`],
     queryFn: () => getEmployeeFormalWarningsFn(employeeId!),
   });
@@ -76,14 +71,14 @@ const Results = () => {
         <h2 className="text-lg font-bold">Llamados de atención</h2>
         <AddNewButton modalName="addNewFormalWarning" />
       </div>
-      {isLoading && (
+      {isFetching && (
         <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
           <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
           <div className="custom-skeleton h-[100px] w-full rounded-md sm:w-1/2 md:w-full lg:w-1/2" />
         </div>
       )}
 
-      {data.data && data.data.length > 0 && (
+      {!isFetching && data?.data && data.data.length > 0 && (
         <>
           <section className="hidden sm:block">
             <Table data={data.data.slice(0, 5)} />
@@ -103,13 +98,13 @@ const Results = () => {
         </>
       )}
 
-      {data.data && data.data.length === 0 && (
+      {!isFetching && data?.data && data.data.length === 0 && (
         <p className="my-3 text-center">
           No hay llamados de atención registradas
         </p>
       )}
 
-      {createPortal(<Modal data={data?.data} />, document.body)}
+      {createPortal(<Modal data={data?.data || []} />, document.body)}
       {createPortal(<NewModal />, document.body)}
     </>
   );

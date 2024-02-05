@@ -68,8 +68,13 @@ const RecoverPassForm = () => {
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
       {responseData?.data?.email && (
         <Alert className="mb-3 mt-2">
-          Se ha enviado un mail al correo electrónico asociado a {username}:
-          {responseData.data.email}
+          <p>
+            Se ha enviado un mail al correo electrónico asociado al DNI{' '}
+            {username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3')}:
+          </p>
+          <p className="mt-1 text-center font-bold">
+            {responseData.data.email}
+          </p>
         </Alert>
       )}
       <TextInput
@@ -87,11 +92,11 @@ const RecoverPassForm = () => {
         colorLight="bg-gray-900"
         disabled={isSuccess}
         loading={isLoading}
+        startIcon={<IoMdSend />}
         textColorDark="dark:text-gray-900"
         textColorLight="text-white"
         type="submit"
       >
-        <Icon iconComponent={<IoMdSend />} title="Enviar" />
         ENVIAR MAIL
       </Button>
       <Link className="btn mt-2 w-full" to={paths.AUTH.LOGIN}>

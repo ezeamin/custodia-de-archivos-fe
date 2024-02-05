@@ -36,7 +36,7 @@ const ResultsListItem = (props: TrainingTypesResultsListItemProps) => {
     },
     onSuccess: () => {
       setIsLoading(false);
-      toast.success('Tipo de Licencia eliminada con éxito');
+      toast.success('Tipo de Capacitación eliminada con éxito');
       queryClient.invalidateQueries({ queryKey: ['employeeTrainingsTypes'] });
     },
   });
@@ -49,8 +49,8 @@ const ResultsListItem = (props: TrainingTypesResultsListItemProps) => {
 
   const handleDelete = () => {
     Swal.fire({
-      title: '¿Estás seguro?',
-      html: `<p>Eliminarás el tipo <b>"${trainingType.title}"</b>. Esta acción no se puede revertir. Esto NO eliminará las capacitaciones ya creadas con este tipo.</p>`,
+      title: '¿Está seguro?',
+      html: `<p>Eliminará el tipo <b>"${trainingType.title}"</b>. Esta acción no se puede revertir. Esto NO eliminará las capacitaciones ya creadas con este tipo.</p>`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

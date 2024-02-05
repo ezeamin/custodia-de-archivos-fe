@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { areaOptions, genderOptions } from './mocked';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
+import Swal from 'sweetalert2';
 
 import { postEmployeeFn } from '@/api/api-calls/employees';
 import { getAreaOptionsFn, getGenderOptionsFn } from '@/api/api-calls/params';
@@ -40,6 +40,8 @@ const CreateForm = () => {
     reset,
   } = useZodForm(createSchema);
 
+  const uploadedImage = watch('imgFile');
+
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -49,7 +51,7 @@ const CreateForm = () => {
   // -------------------------------------------------
 
   const {
-    // data: genderOptions,
+    data: genderOptions,
     isLoading: isLoadingGenders,
     isError: isErrorGenders,
     status: statusGenders,
@@ -59,13 +61,13 @@ const CreateForm = () => {
   });
 
   const {
-    // data: areaOptions,
+    data: areaOptions,
     isLoading: isLoadingAreas,
     isError: isErrorAreas,
     status: statusAreas,
   } = useQuery({
-    queryKey: ['areaOptions'],
-    queryFn: getAreaOptionsFn,
+    queryKey: ['areaOptions', true],
+    queryFn: () => getAreaOptionsFn(true),
   });
 
   const { mutate: createEmployee } = useMutation({
@@ -73,13 +75,55 @@ const CreateForm = () => {
     onError: () => {
       setIsLoading(false);
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       setIsLoading(false);
+
+      // Person already exists, but is not an employee.
+      if (data && data.data && data.message?.includes('Duplicate')) {
+        const personData = data.data;
+        const { body } = data.data;
+
+        Swal.fire({
+          title: 'Atención',
+          html: `Ya existe una persona registrada bajo el DNI ${personData.dni} en el sistema.<br/><br/>
+          Nombre: <b>${personData.lastname}, ${personData.name}</b><br/>
+          ${personData.phone ? `Teléfono: <b>${personData.phone}</b><br/>` : ''}
+          ${personData.address ? `Dirección: <b>${personData.address}</b><br/>` : ''}
+          <br/>De continuar, se creará el empleado sin modificar los datos personales ya registrados.`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, continuar',
+          cancelButtonText: 'Cancelar',
+        }).then((res) => {
+          if (res.isConfirmed) {
+            setIsLoading(true);
+
+            const fd = new FormData();
+
+            fd.append('name', body.name);
+            fd.append('lastname', body.lastname);
+            fd.append('email', body.email);
+            fd.append('dni', body.dni);
+            fd.append('fileNumber', body.fileNumber);
+            fd.append('genderId', body.genderId);
+            fd.append('startDate', body.startDate);
+            fd.append('birthdate', body.birthdate);
+            fd.append('position', body.position);
+            fd.append('areaId', body.areaId);
+            fd.append('imgFile', uploadedImage);
+            fd.append('force', 'true');
+
+            createEmployee(fd);
+          }
+        });
+        return;
+      }
+
       reset();
       toast.success('Empleado creado con éxito');
-      window.setTimeout(() => {
-        navigate(paths.EMPLOYEES.MAIN);
-      }, 1000);
+      navigate(paths.EMPLOYEES.MAIN);
     },
   });
 
@@ -97,8 +141,6 @@ const CreateForm = () => {
   // HANDLERS
   // -------------------------------------------------
 
-  const uploadedImage = watch('imgFile');
-
   const handleSubmit = (data: CreateSchema) => {
     setIsLoading(true);
 
@@ -114,13 +156,13 @@ const CreateForm = () => {
       'startDate',
       typeof data.startDate === 'string'
         ? data.startDate
-        : data.startDate.toISOString()
+        : (data.startDate as Date).toISOString()
     );
     fd.append(
       'birthdate',
       typeof data.birthdate === 'string'
         ? data.birthdate
-        : data.birthdate.toISOString()
+        : (data.birthdate as Date).toISOString()
     );
     fd.append('position', data.position);
     fd.append('areaId', data.area.id);
@@ -151,7 +193,7 @@ const CreateForm = () => {
           )}
         </div>
         <div>
-          <FileInput<CreateSchema>
+          <FileInput
             control={control}
             disabled={isLoading}
             label="Seleccione una imagen"
@@ -162,7 +204,7 @@ const CreateForm = () => {
       </div>
       <Grid container gap={2}>
         <Grid item lg={4} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -172,7 +214,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -182,17 +224,18 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
             label="DNI"
+            maxLength={8}
             name="dni"
             placeholder="15235647"
           />
         </Grid>
         <Grid item lg={8} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -202,7 +245,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -212,19 +255,18 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <ComboBoxInput<CreateSchema>
+          <ComboBoxInput
             className="w-full"
             control={control}
             disabled={isLoading}
             label="Género"
             name="gender"
-            options={genderOptions.data}
-            // options={genderOptions?.data}
+            options={genderOptions?.data || []}
             placeholder="Seleccione un género"
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <DateInput<CreateSchema>
+          <DateInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -234,7 +276,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <DateInput<CreateSchema>
+          <DateInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -244,7 +286,7 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={8} sm={6} xs={12}>
-          <TextInput<CreateSchema>
+          <TextInput
             className="w-full"
             control={control}
             disabled={isLoading}
@@ -254,14 +296,13 @@ const CreateForm = () => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
-          <ComboBoxInput<CreateSchema>
+          <ComboBoxInput
             className="w-full"
             control={control}
             disabled={isLoading}
             label="Área"
             name="area"
-            options={areaOptions.data}
-            // options={areaOptions?.data}
+            options={areaOptions?.data || []}
             placeholder="Seleccione un area"
           />
         </Grid>
@@ -271,6 +312,7 @@ const CreateForm = () => {
         colorLight="btn-primary"
         disabled={!areAllFieldsFilled}
         loading={isLoading}
+        textColorLight="text-white"
         type="submit"
       >
         Guardar

@@ -7,6 +7,7 @@ import {
 
 export const postLoginAdapter = (data: API_PostLogin): Login => ({
   token: data.token,
+  shouldChangePass: data.shouldChangePass,
 });
 
 export const postRecoverPasswordAdapter = (

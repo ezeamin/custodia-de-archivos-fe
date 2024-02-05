@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
 
-import { mockedDocs } from '../../mocked';
 import AddNewDocument from '../Components/Documents/AddNewDocument';
 import AddNewDocumentModal from '../Components/Documents/AddNewDocumentModal';
 import ChangeDocumentNameModal from '../Components/Documents/ChangeDocumentNameModal';
@@ -12,10 +11,6 @@ import { getEmployeeDocsFn } from '@/api/api-calls/employees';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Grid } from '@/components/ui';
-
-const data = mockedDocs;
-const isLoading = false;
-const isError = false;
 
 const EmployeeDocumentsTab = () => {
   // -------------------------------------------------
@@ -29,7 +24,7 @@ const EmployeeDocumentsTab = () => {
   // API
   // -------------------------------------------------
 
-  const { /* data, isLoading, isError, */ refetch } = useQuery({
+  const { data, isFetching, isError, refetch } = useQuery({
     queryKey: [`employeeDocs_${employeeId}`],
     queryFn: () => getEmployeeDocsFn(employeeId!),
   });
@@ -61,25 +56,32 @@ const EmployeeDocumentsTab = () => {
         <h2 className="text-lg font-bold">Documentos</h2>
         <AddNewDocument />
       </div>
-      <Alert closable className="mb-4">
-        Una vez que se elimine un archivo, este no se podrá recuperar.
-      </Alert>
+      {data?.data?.length && data.data.length > 0 ? (
+        <Alert closable className="mb-4 mt-2">
+          Una vez que se elimine un archivo, este no se podrá recuperar.
+        </Alert>
+      ) : (
+        <Alert className="mt-2">
+          Aún no se cargaron documentos para este empleado.
+        </Alert>
+      )}
       <Grid container gap={3}>
-        {isLoading && (
+        {isFetching && (
           <>
-            <Grid item md={12} sm={6} xl={6} xs={12}>
+            <Grid item className="mt-4" md={12} sm={6} xl={6} xs={12}>
               <DocumentItem doc={undefined} />
             </Grid>
-            <Grid item md={12} sm={6} xl={6} xs={12}>
+            <Grid item className="mt-4" md={12} sm={6} xl={6} xs={12}>
               <DocumentItem doc={undefined} />
             </Grid>
           </>
         )}
-        {data.data.map((doc) => (
-          <Grid item key={doc.id} md={12} sm={6} xl={6} xs={12}>
-            <DocumentItem doc={doc} />
-          </Grid>
-        ))}
+        {!isFetching &&
+          data?.data?.map((doc) => (
+            <Grid item key={doc.id} md={12} sm={6} xl={6} xs={12}>
+              <DocumentItem doc={doc} />
+            </Grid>
+          ))}
       </Grid>
 
       {createPortal(<ChangeDocumentNameModal />, document.body)}

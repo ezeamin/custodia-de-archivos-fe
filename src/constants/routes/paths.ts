@@ -9,14 +9,17 @@ export const paths = {
     MAIN: '/employees',
     EMPLOYEE_DETAILS: '/employees/:id/:tab',
     EMPLOYEE_DETAILS_EDIT: '/employees/:id/edit/:subtab',
+    EMPLOYEE_FAMILY_CREATE: '/employees/:id/family',
+    EMPLOYEE_FAMILY_EDIT: '/employees/:id/family/:memberId',
     CREATE: '/employees/create',
   },
   NOTIFICATIONS: {
     MAIN: '/notifications',
     CREATE: '/notifications/create',
-    HISTORY: '/notifications/history',
+    READ: '/notifications/read',
     DETAILS: '/notifications/:id',
     SENT: '/notifications/sent',
+    SENT_DETAILS: '/notifications/sent/:id',
   },
   TYPES_LIST: {
     MAIN: '/types-list',

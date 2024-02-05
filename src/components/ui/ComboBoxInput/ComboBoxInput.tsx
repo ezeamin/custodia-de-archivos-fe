@@ -32,7 +32,7 @@ const ComboBoxInput = <T extends FormSchemas>(
       )}
       <InputController
         control={control}
-        defaultValue=""
+        defaultValue={null}
         name={name}
         render={({ field, fieldState: { error } }) => (
           <ComboBox<T>
@@ -44,7 +44,6 @@ const ComboBoxInput = <T extends FormSchemas>(
             name={name.toString()}
             options={options}
             placeholder={placeholder ?? 'Ingrese un valor'}
-            value={field.value as string}
             {...rest}
           />
         )}

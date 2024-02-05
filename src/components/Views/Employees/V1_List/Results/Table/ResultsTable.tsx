@@ -19,9 +19,9 @@ const ResultsTable = (props: EmployeesResultsTableProps) => {
               <th className="lg:hidden">Datos personales</th>
               <th className="hidden text-center lg:table-cell">Edad</th>
               <th className="hidden text-center lg:table-cell">Antiguedad</th>
-              <th className="xl:hidden">Puesto y area</th>
+              <th className="xl:hidden">Puesto y área</th>
               <th className="hidden xl:table-cell">Puesto</th>
-              <th className="hidden xl:table-cell">Area</th>
+              <th className="hidden xl:table-cell">Área</th>
               <th />
             </tr>
           </thead>

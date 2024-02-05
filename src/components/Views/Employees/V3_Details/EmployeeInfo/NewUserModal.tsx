@@ -20,10 +20,10 @@ const NewUserModal = () => {
         loguee por primera vez
       </p>
       <h2 className="mb-2 mt-3">
-        Usuario: <b>{data?.data?.username}</b>
+        Usuario: <b>{data?.username}</b>
       </h2>
       <h2>
-        Contraseña: <b>{data?.data?.password}</b>
+        Contraseña: <b>{data?.password}</b>
       </h2>
     </Modal>
   );

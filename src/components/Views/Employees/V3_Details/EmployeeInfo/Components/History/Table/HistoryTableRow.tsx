@@ -1,3 +1,4 @@
+import HistoryTableValue from './HistoryTableValue';
 import dayjs from 'dayjs';
 
 import { HistoryElementProps } from '@/components/interface/views';
@@ -7,6 +8,13 @@ const HistoryTableRow = (props: HistoryElementProps) => {
 
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY');
   const formattedHour = dayjs(data.date).format('HH:mm:ss');
+  const formattedDni = data.user.description.replace(
+    /(\d{2})(\d{3})(\d{3})/,
+    '$1.$2.$3'
+  );
+
+  const isJSON = data.field.includes('JSON');
+  const label = isJSON ? data.field.split(' - ')[0] : data.field;
 
   return (
     <tr>
@@ -14,10 +22,14 @@ const HistoryTableRow = (props: HistoryElementProps) => {
         <p>{formattedDate}</p>
         <p>{formattedHour}</p>
       </td>
-      <td>{data.field}</td>
-      <td>{data.previousValue}</td>
-      <td>{data.newValue}</td>
-      <td>{data.user.description}</td>
+      <td>{label}</td>
+      <td>
+        <HistoryTableValue isJSON={isJSON} value={data.previousValue} />
+      </td>
+      <td>
+        <HistoryTableValue isJSON={isJSON} value={data.newValue} />
+      </td>
+      <td>{formattedDni}</td>
     </tr>
   );
 };

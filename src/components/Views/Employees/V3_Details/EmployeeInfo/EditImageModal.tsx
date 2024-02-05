@@ -48,7 +48,7 @@ const EditImageModal = () => {
       reset();
       toast.success('Imagen editada con éxito');
       queryClient.invalidateQueries({
-        queryKey: [`employee_${employeeId}`],
+        queryKey: ['employee', employeeId],
       });
       closeModal();
     },

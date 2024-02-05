@@ -1,4 +1,5 @@
 import { FiLogOut } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -22,17 +23,25 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
 
   const { closeMenu } = usePortraitMenu();
   const { logout } = useSession();
+  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 
   const { mutate: postLogout } = useMutation({
     mutationFn: postLogoutFn,
     onError: () => {
+      // Its an error, but we should provide the user the ability to logout even if it fails
       toast.dismiss(loadingToastId);
+      queryClient.clear();
+      // Navigate home so that "redirectTo" doesn't get called
+      navigate('/');
+      logout();
     },
     onSuccess: () => {
       toast.dismiss(loadingToastId);
       queryClient.clear();
+      // Navigate home so that "redirectTo" doesn't get called
+      navigate('/');
       logout();
     },
   });

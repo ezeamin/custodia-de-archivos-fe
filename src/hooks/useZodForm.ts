@@ -27,7 +27,9 @@ export const useZodForm = <T extends ZodSchema>(
   // Check if all fields are filled
   const areAllFieldsFilled =
     Object.values(watchAllFields).length > 0 &&
-    Object.values(watchAllFields).every((value) => !!value);
+    Object.values(watchAllFields).every((value) =>
+      Array.isArray(value) ? value.length > 0 : !!value
+    );
 
   useEffect(() => {
     Object.values(errors).forEach((error) => {

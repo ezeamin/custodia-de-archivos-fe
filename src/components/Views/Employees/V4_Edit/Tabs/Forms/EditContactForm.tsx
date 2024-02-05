@@ -59,6 +59,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   const {
     data: stateList,
     isLoading: stateListIsLoading,
+    isError: stateListIsError,
     status: stateListStatus,
   } = useQuery({
     queryKey: ['states'],
@@ -68,6 +69,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   const {
     data: localityAPIList,
     isLoading: localityListIsLoading,
+    isError: localityListIsError,
     status: localityListStatus,
   } = useQuery({
     queryKey: [`localities_${state?.id || ''}`, !!state],
@@ -78,6 +80,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   const {
     data: streetAPIList,
     isLoading: streetListIsLoading,
+    isError: streetListIsError,
     status: streetListStatus,
   } = useQuery({
     queryKey: [`streets_${locality?.id || ''}`, !!locality],
@@ -99,11 +102,9 @@ const EditContactForm = (props: EmployeeInfoProps) => {
       reset();
       toast.success('Información de contacto editada con éxito');
       queryClient.invalidateQueries({
-        queryKey: [`employee_${employeeOriginalData.id}`],
+        queryKey: ['employee', employeeOriginalData.id],
       });
-      window.setTimeout(() => {
-        navigate(`/employees/${employeeOriginalData.id}/personal`);
-      }, 1000);
+      navigate(`/employees/${employeeOriginalData.id}/personal`);
     },
   });
 
@@ -111,13 +112,23 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   useLoading(localityListIsLoading, localityListStatus);
   useLoading(streetListIsLoading, streetListStatus);
 
+  if (streetListIsError || localityListIsError || stateListIsError) {
+    toast.error(
+      'Ocurrió un error cargando la información necesaria para completar el formulario. Reintente más tarde',
+      {
+        duration: 10000,
+      }
+    );
+    navigate(`/employees/${employeeOriginalData.id}/personal`);
+  }
+
   // -------------------------------------------------
   // HANDLERS
   // -------------------------------------------------
 
   const handleSubmit = (data: EditContactInfoSchema) => {
     setIsLoading(true);
-    editEmployee({ ...data, id: employeeOriginalData.id });
+    editEmployee({ ...data, id: employeeOriginalData.id, skipCleanUp: true });
   };
 
   // -------------------------------------------------
@@ -129,13 +140,15 @@ const EditContactForm = (props: EmployeeInfoProps) => {
     if (employeeOriginalData && stateList && !email) {
       setValue('email', employeeOriginalData.email);
       if (employeeOriginalData.phone)
-        setValue('phone', +employeeOriginalData.phone);
-      if (employeeOriginalData.address)
-        setValue('streetNumber', employeeOriginalData.address.streetNumber);
-      if (employeeOriginalData.address.apt)
-        setValue('apt', employeeOriginalData.address.apt);
-      if (employeeOriginalData.address)
-        setValue('state', employeeOriginalData.address.state);
+        setValue('phone', employeeOriginalData.phone);
+      if (employeeOriginalData.address) {
+        if (employeeOriginalData.address.streetNumber)
+          setValue('streetNumber', employeeOriginalData.address.streetNumber);
+        if (employeeOriginalData.address.apt)
+          setValue('apt', employeeOriginalData.address.apt);
+        if (employeeOriginalData.address.state)
+          setValue('state', employeeOriginalData.address.state);
+      }
     }
   }, [employeeOriginalData, setValue, email, stateList]);
 
@@ -143,7 +156,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   useEffect(() => {
     if (hasLoadedInfo) return;
 
-    if (state && localityList) {
+    if (state && localityList && employeeOriginalData.address) {
       const isLocalityInList = localityList.find(
         (loc) => loc.id === employeeOriginalData.address.locality.id
       );
@@ -156,7 +169,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   useEffect(() => {
     if (hasLoadedInfo) return;
 
-    if (locality && streetList) {
+    if (locality && streetList && employeeOriginalData.address) {
       const isStreetInList = streetList.find(
         (strt) => strt.id === employeeOriginalData.address.street.id
       );
@@ -220,7 +233,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
             className="w-full"
             control={control}
             disabled={isLoading}
-            helperText='Introduce el número con codigo de país y area, pero sin el "+", ejemplo: "5493815857499"'
+            helperText='Introduce el número con codigo de país y área, pero sin el "+", ejemplo: "5493815857499"'
             label="Teléfono"
             name="phone"
             placeholder="5493815857499"

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { MdLogin } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -10,7 +10,7 @@ import { postLoginFn } from '@/api/api-calls/auth';
 import { useZodForm } from '@/hooks';
 import { useSession } from '@/stores/useSession';
 
-import { Button, Icon, PasswordInput, TextInput } from '@/components/ui';
+import { Button, PasswordInput, TextInput } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
 
@@ -26,6 +26,7 @@ const LoginForm = () => {
 
   const { control, onSubmitMiddleware } = useZodForm(loginSchema);
   const { login } = useSession();
+  const navigate = useNavigate();
 
   // -------------------------------------------------
   // API
@@ -40,10 +41,19 @@ const LoginForm = () => {
     },
     onSuccess: (data) => {
       setIsLoading(false);
-      toast.success('Inicio de sesión exitoso');
 
       // Store in session
-      if (data.data) login(data.data.token);
+      if (data.data) {
+        if (data.data.shouldChangePass) {
+          navigate(
+            `/auth/reset-password?token=${data.data.token}&continue=true`
+          );
+          return;
+        }
+
+        toast.success('Inicio de sesión exitoso');
+        login(data.data.token);
+      }
     },
   });
 
@@ -63,6 +73,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={onSubmitMiddleware(handleSubmit)}>
       <TextInput
+        autoComplete="username"
         className="animate-in-left a-delay-400 w-full"
         control={control}
         label="Nombre de usuario"
@@ -71,6 +82,7 @@ const LoginForm = () => {
         placeholder="DNI"
       />
       <PasswordInput
+        autoComplete="current-password"
         className="animate-in-right a-delay-500 mt-2 w-full"
         control={control}
         label="Contraseña"
@@ -88,11 +100,11 @@ const LoginForm = () => {
         colorDark="dark:bg-gray-200"
         colorLight="bg-gray-900"
         loading={isLoading}
+        startIcon={<MdLogin />}
         textColorDark="dark:text-gray-900"
         textColorLight="text-white"
         type="submit"
       >
-        <Icon iconComponent={<MdLogin />} title="Enviar" />
         INGRESAR
       </Button>
     </form>

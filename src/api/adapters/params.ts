@@ -1,13 +1,26 @@
 import {
   API_GetAreas,
+  API_GetCivilStatus,
   API_GetGenders,
+  API_GetRelationships,
   API_GetRoles,
   API_GetStatus,
   Area,
+  CivilStatus,
   Gender,
+  Relationship,
   Role,
   Status,
 } from '../interface/params';
+
+export const getRelationshipsAdapter = (
+  data: API_GetRelationships[]
+): Relationship[] => {
+  return data.map((relationship) => ({
+    id: relationship.id,
+    description: relationship.description,
+  }));
+};
 
 export const getStatusAdapter = (data: API_GetStatus[]): Status[] => {
   return data.map((status) => ({
@@ -31,6 +44,15 @@ export const getGendersAdapter = (data: API_GetGenders[]): Gender[] => {
 };
 
 export const getAreasAdapter = (data: API_GetAreas[]): Area[] => {
+  return data.map((area) => ({
+    id: area.id,
+    description: area.description,
+  }));
+};
+
+export const getCivilStatusAdapter = (
+  data: API_GetCivilStatus[]
+): CivilStatus[] => {
   return data.map((area) => ({
     id: area.id,
     description: area.description,

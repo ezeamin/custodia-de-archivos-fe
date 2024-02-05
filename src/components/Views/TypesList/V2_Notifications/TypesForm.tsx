@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { userRoles } from './mocked';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -59,13 +58,13 @@ const TypesForm = () => {
   });
 
   const {
-    // data: rolesOptions,
+    data: rolesOptions,
     isLoading: isLoadingRoles,
     isError: isErrorRoles,
     status: statusRoles,
   } = useQuery({
     queryKey: ['rolesOptions'],
-    queryFn: getRolesOptionsFn,
+    queryFn: () => getRolesOptionsFn(true),
   });
 
   const { mutate: createType } = useMutation({
@@ -91,6 +90,7 @@ const TypesForm = () => {
       reset(); // Clear form values
       toast.success('Tipo de Notificación modificada con éxito');
       queryClient.invalidateQueries({ queryKey: ['notificationTypes'] });
+      navigate(paths.TYPES_LIST.NOTIFICATIONS);
     },
   });
 
@@ -116,8 +116,6 @@ const TypesForm = () => {
   const handleSubmit = (data: NotificationTypeSchema) => {
     setIsLoading(true);
 
-    console.log(data);
-
     if (isEditing) {
       editType({ ...data, id: idBeingEdited });
     } else {
@@ -126,6 +124,7 @@ const TypesForm = () => {
   };
 
   const handleCancelEdit = () => {
+    reset();
     navigate(paths.TYPES_LIST.NOTIFICATIONS);
   };
 
@@ -151,7 +150,7 @@ const TypesForm = () => {
 
   return (
     <form
-      className="content-card animate-in-bottom a-delay-400 card"
+      className="content-card animate-in-bottom a-delay-400 card z-[30]"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
       <Grid container gap={2}>
@@ -202,8 +201,7 @@ const TypesForm = () => {
             disabled={isLoading}
             label="Roles habilitados"
             name="allowedRoles"
-            options={userRoles}
-            // options={rolesOptions?.data}
+            options={rolesOptions?.data || []}
             placeholder="Elige uno o más roles"
           />
         </Grid>
@@ -215,6 +213,7 @@ const TypesForm = () => {
             colorLight="btn-primary"
             disabled={!areAllFieldsFilled || isLoadingEditedData}
             loading={isLoading}
+            textColorLight="text-white"
             type="submit"
           >
             Guardar
@@ -224,8 +223,7 @@ const TypesForm = () => {
           {isEditing && (
             <Button
               className="w-full"
-              disabled={isLoadingEditedData}
-              loading={isLoading}
+              disabled={isLoadingEditedData || isLoading}
               onClick={handleCancelEdit}
             >
               Cancelar edición

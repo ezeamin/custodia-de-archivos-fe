@@ -1,7 +1,8 @@
+import { FaPlus } from 'react-icons/fa';
 import { FaPencil } from 'react-icons/fa6';
 import { Link, useParams } from 'react-router-dom';
 
-import { mockedEmployee } from '../../mocked';
+import FamilyList from '../Components/Family/FamilyList';
 import EmployeeDataField from '../EmployeeDataField';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -10,20 +11,15 @@ import { getEmployeeFn } from '@/api/api-calls/employees';
 
 import { Grid, Icon } from '@/components/ui';
 
-const data = mockedEmployee;
-
 const EmployeePersonalTab = () => {
   const { id: employeeId } = useParams();
 
-  const {
-    /* data */
-    error,
-  } = useQuery({
-    queryKey: [`employee_${employeeId}`],
+  const { data } = useQuery({
+    queryKey: ['employee', employeeId],
     queryFn: () => getEmployeeFn(employeeId!),
   });
 
-  console.log(error); // TODO: Remove this line and the error variable
+  if (!data) return null;
 
   const formattedDni = data?.data?.dni.replace(
     /(\d{2})(\d{3})(\d{3})/,
@@ -40,7 +36,10 @@ const EmployeePersonalTab = () => {
       }, ${data?.data?.address.locality.description}, ${
         data?.data?.address.state.description
       }`
-    : '';
+    : 'N/A';
+  const formattedPhone = data?.data?.phone
+    ? data.data.phone.replace(/(\d{2})(\d{4})(\d{4})/, '+$1 $2-$3')
+    : 'N/A';
 
   return (
     <>
@@ -83,6 +82,12 @@ const EmployeePersonalTab = () => {
               value={data?.data?.gender.description}
             />
           </Grid>
+          <Grid item lg={6} xs={12}>
+            <EmployeeDataField
+              label="Estado civil"
+              value={data?.data?.civilStatus?.description || 'N/A'}
+            />
+          </Grid>
         </Grid>
       </article>
       <div className="divider" />
@@ -102,18 +107,39 @@ const EmployeePersonalTab = () => {
             <EmployeeDataField label="Email" value={data?.data?.email} />
           </Grid>
           <Grid item lg={6} xs={12}>
-            <EmployeeDataField label="Teléfono" value={data?.data?.phone} />
+            <EmployeeDataField label="Teléfono" value={formattedPhone} />
           </Grid>
           <Grid item className="hidden md:block" lg={6} xs={12}>
             <EmployeeDataField
               label="Ciudad"
-              value={data?.data?.address.locality.description}
+              value={
+                data?.data?.address
+                  ? data?.data?.address.locality.description
+                  : 'N/A'
+              }
             />
           </Grid>
           <Grid item className="mb-1" xs={12}>
             <EmployeeDataField label="Dirección" value={formattedAddress} />
           </Grid>
         </Grid>
+      </article>
+      <div className="divider" />
+      <article>
+        <div className="mb-2 flex items-center justify-between">
+          <h2 className="text-lg font-bold">Información familiar</h2>
+          <Link
+            className="tooltip tooltip-left"
+            data-tip="Agregar nuevo miembro"
+            to={`/employees/${employeeId}/family`}
+          >
+            <Icon
+              iconComponent={<FaPlus size="1em" />}
+              title="Agregar nuevo miembro"
+            />
+          </Link>
+        </div>
+        <FamilyList data={data?.data?.familyMembers || []} />
       </article>
     </>
   );

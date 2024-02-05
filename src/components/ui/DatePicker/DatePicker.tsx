@@ -89,8 +89,13 @@ const DatePicker = (props: DatePickerProps): JSX.Element => {
   }, [onChange, options]);
 
   useEffect(() => {
-    if (inputRef.current && value && value !== inputRef.current.value) {
-      fp?.setDate(value);
+    if (
+      inputRef.current &&
+      value &&
+      typeof value === 'string' &&
+      value !== inputRef.current.value
+    ) {
+      fp?.setDate(new Date(value));
     }
   }, [value, fp]);
 
@@ -98,7 +103,7 @@ const DatePicker = (props: DatePickerProps): JSX.Element => {
     <input
       className={cn(
         `input input-bordered w-full bg-gray-100 dark:bg-slate-700 ${
-          error && 'border-error'
+          error ? 'border-error' : ''
         }`,
         className
       )}

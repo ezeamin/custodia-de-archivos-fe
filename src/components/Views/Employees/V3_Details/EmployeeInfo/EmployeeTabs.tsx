@@ -114,7 +114,7 @@ const EmployeeTabs = () => {
         </Link>
         <EmployeeTabsBackdrop />
       </article>
-      <article className="content-card animate-in-bottom a-delay-800 card mt-3">
+      <article className="content-card animate-in-bottom a-delay-800 card mt-3 overflow-x-auto">
         {renderedComp}
       </article>
     </>

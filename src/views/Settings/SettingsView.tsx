@@ -1,10 +1,13 @@
 import packageJson from '../../../package.json';
 
+import { useSession } from '@/stores/useSession';
+
 import RoutingCard from '@/components/Common/RoutingCard';
 import Title from '@/components/Common/Title';
-import { Alert, Grid } from '@/components/ui';
+import { Grid } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
+import { userRoles } from '@/constants/userRoles/userRoles';
 
 const routes = {
   GENERAL: [
@@ -12,12 +15,17 @@ const routes = {
       id: 1,
       path: paths.SETTINGS.CHANGE_PASSWORD,
       name: 'Cambiar contraseña de este perfil',
+      allowedRoles: [
+        userRoles.ADMIN,
+        userRoles.THIRD_PARTY,
+        userRoles.EMPLOYEE,
+      ],
     },
     {
       id: 2,
       path: paths.SETTINGS.LOGIN_LOGS,
       name: 'Ver registros de inicios de sesión',
-      disabled: true,
+      allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY],
     },
   ],
   ADMIN: [
@@ -30,7 +38,6 @@ const routes = {
       id: 2,
       path: paths.SETTINGS.REMOVE_ADMIN,
       name: 'Quitar permisos de administrador a otro usuario',
-      disabled: true,
     },
   ],
   READ_ONLY: [
@@ -38,36 +45,23 @@ const routes = {
       id: 1,
       path: paths.SETTINGS.MAKE_READ_ONLY,
       name: 'Crear usuario de solo lectura',
-      disabled: true,
     },
     {
       id: 2,
       path: paths.SETTINGS.REMOVE_READ_ONLY,
       name: 'Eliminar usuario de solo lectura',
-      disabled: true,
     },
   ],
-};
-
-const isThereAnyDisabledRoute = () => {
-  const routesArray = Object.values(routes);
-  return routesArray.some((higherOrderRoute) =>
-    higherOrderRoute.some((element) => element.disabled)
-  );
 };
 
 const appVersion = packageJson.version;
 
 const SettingsView = () => {
+  const { user } = useSession();
+
   return (
     <section className="overflow-hidden pb-0.5 pr-0.5">
       <Title title="Ajustes" />
-      {isThereAnyDisabledRoute() && (
-        <Alert className="animate-in-right mb-5" type="warning">
-          ¡Lo sentimos! Algunas de nuestras funcionalidades no están aún
-          disponibles.
-        </Alert>
-      )}
       <article className="relative z-10">
         <h3 className="animate-in-bottom a-delay-100 mb-2 text-xl font-bold">
           General
@@ -79,26 +73,30 @@ const SettingsView = () => {
             </Grid>
           ))}
         </Grid>
-        <h3 className="animate-in-bottom a-delay-500 mb-2 mt-6 text-xl font-bold">
-          Usuarios Administradores
-        </h3>
-        <Grid container gap={3}>
-          {routes.ADMIN.map((route, index) => (
-            <Grid item key={route.id} sm={6} xl={4} xs={12}>
-              <RoutingCard index={index + 3} route={route} />
+        {user?.role === userRoles.ADMIN && (
+          <>
+            <h3 className="animate-in-bottom a-delay-500 mb-2 mt-6 text-xl font-bold">
+              Usuarios Administradores
+            </h3>
+            <Grid container gap={3}>
+              {routes.ADMIN.map((route, index) => (
+                <Grid item key={route.id} sm={6} xl={4} xs={12}>
+                  <RoutingCard index={index + 3} route={route} />
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-        <h3 className="animate-in-bottom a-delay-800 mb-2 mt-6 text-xl font-bold">
-          Usuarios Solo Lectura
-        </h3>
-        <Grid container gap={3}>
-          {routes.READ_ONLY.map((route, index) => (
-            <Grid item key={route.id} sm={6} xl={4} xs={12}>
-              <RoutingCard index={index + 6} route={route} />
+            <h3 className="animate-in-bottom a-delay-800 mb-2 mt-6 text-xl font-bold">
+              Usuarios Solo Lectura
+            </h3>
+            <Grid container gap={3}>
+              {routes.READ_ONLY.map((route, index) => (
+                <Grid item key={route.id} sm={6} xl={4} xs={12}>
+                  <RoutingCard index={index + 6} route={route} />
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
+          </>
+        )}
       </article>
       <p className="animate-in-top mt-5 text-center md:fixed md:bottom-2 md:right-2 md:mt-0">
         Versión: {appVersion}

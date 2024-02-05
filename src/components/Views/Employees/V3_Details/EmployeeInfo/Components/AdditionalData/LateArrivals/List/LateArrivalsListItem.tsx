@@ -12,7 +12,6 @@ const LateArrivalsListItem = (props: LateArrivalsElementProps) => {
   const { message, setObservationData } = useObservation();
 
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY');
-  const formattedTime = dayjs(data.date).format('HH:mm:ss');
 
   const handleClickObservations = () => {
     if (!data.observations) return;
@@ -27,7 +26,7 @@ const LateArrivalsListItem = (props: LateArrivalsElementProps) => {
           Fecha: <b>{formattedDate}</b>
         </li>
         <li>
-          Hora de llegada: <b>{formattedTime}</b>
+          Hora de llegada: <b>{data.time}</b>
         </li>
       </ul>
       <footer>

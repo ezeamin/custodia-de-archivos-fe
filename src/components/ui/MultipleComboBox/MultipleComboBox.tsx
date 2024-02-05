@@ -32,6 +32,7 @@ const MultipleComboBox = <T extends FieldValues>(
 ): JSX.Element => {
   const {
     className,
+    controller,
     disabled = false,
     error = false,
     inputClassName,
@@ -42,7 +43,6 @@ const MultipleComboBox = <T extends FieldValues>(
     positionedColorOption,
     selectedColorOption,
     sizing,
-    controller,
   } = props;
 
   const [query, setQuery] = useState('');
@@ -70,7 +70,15 @@ const MultipleComboBox = <T extends FieldValues>(
 
   useEffect(() => {
     if (JSON.stringify(controller.value) !== JSON.stringify(selectedOptions)) {
-      handleSelect(controller.value);
+      const newValue =
+        controller.value && controller.value.length > 0
+          ? filteredOptions.filter(({ id: optionId }) =>
+              controller.value.some(
+                ({ id: valueId }: { id: string }) => valueId === optionId
+              )
+            )
+          : [];
+      handleSelect(newValue);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- causes an infinite loop
   }, [controller.value]);
@@ -82,7 +90,7 @@ const MultipleComboBox = <T extends FieldValues>(
         multiple
         aria-describedby="error-message"
         aria-label="Seleccione una opción"
-        disabled={disabled}
+        disabled={disabled || options.length === 0}
         ref={controller.ref}
         value={selectedOptions}
         onChange={handleSelect}
@@ -112,7 +120,7 @@ const MultipleComboBox = <T extends FieldValues>(
 
             <Combobox.Button
               aria-label="Expandir/comprimir opciones"
-              className="absolute inset-y-0 right-0 flex items-center border border-l-0 border-gray-300 bg-gray-100 p-3 hover:bg-gray-200 dark:border-gray-600 dark:bg-slate-700 hover:dark:bg-slate-800"
+              className={`absolute inset-y-0 right-0 flex items-center border border-l-0 bg-gray-100 p-3 hover:bg-gray-200 disabled:border-none  dark:bg-slate-700 hover:dark:bg-slate-800 ${error ? 'border-error' : 'border-gray-300 dark:border-gray-600'}`}
             >
               <Icon iconComponent={<MdExpandMore />} title="expand more icon" />
             </Combobox.Button>
@@ -126,7 +134,7 @@ const MultipleComboBox = <T extends FieldValues>(
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Combobox.Options className="absolute z-40 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-500 dark:*:text-white sm:text-sm">
+            <Combobox.Options className="absolute z-[1000] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-500 dark:*:text-white sm:text-sm">
               {filteredOptions.length === 0 && !query ? (
                 <div
                   aria-atomic="true"

@@ -1,0 +1,71 @@
+import ResultsList from '../V1_List/List/ResultsList';
+import { useQuery } from '@tanstack/react-query';
+
+import { getNotificationsFn } from '@/api/api-calls/notifications';
+
+import { useLoading } from '@/hooks';
+
+import ErrorMessage from '@/components/Error/ErrorMessage';
+import { Alert, Pagination } from '@/components/ui';
+
+const Results = () => {
+  // -------------------------------------------------
+  // API
+  // -------------------------------------------------
+
+  const {
+    data,
+    isFetching: isLoading,
+    isError,
+    refetch,
+    status,
+  } = useQuery({
+    queryKey: ['notifications', true],
+    queryFn: () => getNotificationsFn(true),
+  });
+
+  useLoading(isLoading, status);
+
+  // -------------------------------------------------
+  // HANDLERS
+  // -------------------------------------------------
+
+  const handleRetry = () => {
+    refetch();
+  };
+
+  // -------------------------------------------------
+  // RENDER
+  // -------------------------------------------------
+
+  if (isError) {
+    return <ErrorMessage refetch={handleRetry} />;
+  }
+
+  if (data?.data) {
+    if (data.data.length === 0)
+      return (
+        <section className="mt-5 overflow-hidden">
+          <Alert className="mb-3">
+            <p>¡Lo sentimos! No hay notificaciones recibidas aún.</p>
+          </Alert>
+        </section>
+      );
+
+    return (
+      <section className="mt-5 overflow-hidden">
+        <ResultsList hasBeenRead data={data.data} />
+        {data.data.length > 12 && (
+          <Pagination
+            entries={12}
+            queryKey={['notifications']}
+            totalElements={data.totalElements || 1}
+          />
+        )}
+      </section>
+    );
+  }
+
+  return null;
+};
+export default Results;

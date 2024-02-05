@@ -21,7 +21,6 @@ import {
   Modal,
   TextAreaInput,
 } from '@/components/ui';
-import { mockedLicensesTypes } from '@/components/Views/Employees/V3_Details/mocked';
 
 import { paths } from '@/constants/routes/paths';
 
@@ -29,10 +28,6 @@ import {
   AddNewLicenseSchema,
   addNewLicenseSchema,
 } from '@/form-schemas/schemas/employees/addNewLicenseSchema';
-
-const licensesTypes = mockedLicensesTypes;
-const isLoadingLicensesTypes = false;
-const isErrorLicensesTypes = false;
 
 const AddNewLicenseModal = () => {
   // -------------------------------------------------
@@ -57,9 +52,9 @@ const AddNewLicenseModal = () => {
   const queryClient = useQueryClient();
 
   const {
-    /* data: licensesTypes,
+    data: licensesTypes,
     isLoading: isLoadingLicensesTypes,
-    isError: isErrorLicensesTypes, */
+    isError: isErrorLicensesTypes,
     status: statusLicensesTypes,
   } = useQuery({
     queryKey: ['employeeLicensesTypes'],
@@ -149,10 +144,12 @@ const AddNewLicenseModal = () => {
           disabled={isLoading}
           label="Tipo de licencia *"
           name="type"
-          options={licensesTypes.data.map((type) => ({
-            id: type.id,
-            description: type.description,
-          }))}
+          options={
+            licensesTypes?.data?.map((type) => ({
+              id: type.id,
+              description: type.title,
+            })) || []
+          }
           placeholder="Elija un tipo de licencia de la lista"
         />
         {!!licenseDescription && (

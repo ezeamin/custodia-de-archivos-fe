@@ -18,6 +18,16 @@ export const editJobInfoSchema = z.object({
   position: textRules(true, 'campo Puesto'),
   startDate: dateRules(true),
   endDate: z.union([dateRules(false), z.null()]),
+  workingHours: z.coerce
+    .number({
+      invalid_type_error: 'El campo Horas de trabajo debe ser un número',
+    })
+    .int({
+      message: 'El campo Horas de trabajo debe ser un número entero',
+    })
+    .positive({
+      message: 'El campo Horas de trabajo debe ser un número positivo',
+    }),
 });
 
 export type EditJobInfoSchema = z.infer<typeof editJobInfoSchema>;

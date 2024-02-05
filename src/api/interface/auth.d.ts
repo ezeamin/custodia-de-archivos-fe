@@ -4,6 +4,7 @@
 
 export interface API_PostLogin {
   token: string;
+  shouldChangePass: boolean;
 }
 
 export interface API_PostRecoverPassword {

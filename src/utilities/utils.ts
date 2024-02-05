@@ -1,3 +1,5 @@
+import { userRoles } from '@/constants/userRoles/userRoles';
+
 import { Route } from '@/constants/interface';
 
 /**
@@ -59,7 +61,8 @@ export const openFile = (url: string, name: string) => {
 };
 
 export const cleanUpDataToSend = (
-  data: Record<string, unknown> | FormData
+  data: Record<string, unknown> | FormData,
+  removeFieldName?: string
 ): Record<string, unknown> | FormData => {
   // Check if body is FormData Type
   if (data instanceof FormData) {
@@ -88,6 +91,10 @@ export const cleanUpDataToSend = (
       }
     }
 
+    if (removeFieldName) {
+      newData.delete(removeFieldName);
+    }
+
     return newData;
   }
 
@@ -95,18 +102,23 @@ export const cleanUpDataToSend = (
   const { id, ...rest } = data;
 
   // if there are any object of type {id: string, description: string} in the data, remove the field and create a new one with the same name + "Id", with only the id
-  const newData = Object.entries(rest).reduce(
+  let newData = Object.entries(rest).reduce(
     (acc, [key, value]) => ({
       ...acc,
-      [key]: value,
       ...(typeof value === 'object' && value !== null && 'id' in value
         ? {
             [`${key}Id`]: value.id,
           }
-        : {}),
+        : { [key]: value }),
     }),
     {}
   );
+
+  if (removeFieldName) {
+    const { [removeFieldName as keyof typeof newData]: _, ...restData } =
+      newData;
+    newData = restData;
+  }
 
   return newData;
 };
@@ -135,11 +147,11 @@ export const displayStatusLabel = (status: string) => {
 
 export const displayLabelRole = (role: string) => {
   switch (role) {
-    case 'ADMIN':
+    case userRoles.ADMIN:
       return 'Administrador';
-    case 'USER':
-      return 'Usuario';
-    case 'READ_ONLY':
+    case userRoles.EMPLOYEE:
+      return 'Empleado';
+    case userRoles.THIRD_PARTY:
       return 'Solo lectura';
     default:
       return 'Sin rol';

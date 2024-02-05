@@ -4,14 +4,23 @@ import { useLoadingState } from '@/stores/useLoadingState';
 
 type statusType = 'idle' | 'pending' | 'success' | 'error';
 
-// eslint-disable-next-line @typescript-eslint/default-param-last
-export const useLoading = (isLoading = false, status: statusType) => {
+export const useLoading = (
+  // eslint-disable-next-line @typescript-eslint/default-param-last
+  isLoading = false,
+  status: statusType,
+  isFetching = false
+) => {
   const { setIsLoading } = useLoadingState();
 
   useEffect(() => {
     if (isLoading && status === 'pending') setIsLoading(true);
+    if (isFetching && status === 'success') setIsLoading(true);
 
-    if (!isLoading && (status === 'success' || status === 'error'))
+    if (
+      !isLoading &&
+      (status === 'success' || status === 'error') &&
+      !isFetching
+    )
       setIsLoading(false);
-  }, [isLoading, status, setIsLoading]);
+  }, [isLoading, status, isFetching, setIsLoading]);
 };

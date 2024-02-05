@@ -12,6 +12,7 @@
 
   --header-background: #325d85;
   --button-text-color: #ffffff;
+  --input-text-color: #ffffff;
 
   --scrollbar-background: #686868;
   --scrollbar-hover-background: #797979;
@@ -31,6 +32,7 @@
 
   --header-background: white;
   --button-text-color: #000000;
+  --input-text-color: #000000;
 
   --scrollbar-background: #797979;
   --scrollbar-hover-background: #444444;
@@ -56,6 +58,11 @@ body {
 
 #root {
   background: transparent;
+}
+
+input:not([type='checkbox']),
+textarea {
+  color: var(--input-text-color) !important;
 }
 
 /* GLOBAL COMPONENTS ----------------------------------- */

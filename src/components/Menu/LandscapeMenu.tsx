@@ -9,7 +9,9 @@ import ThemeTogglerButton from './ThemeTogglerButton';
 import useGetUserAllowedRoutes from '@/hooks/useGetUserAllowedRoutes';
 import { useSession } from '@/stores/useSession';
 
-import { Button, Icon } from '@/components/ui';
+import { Alert, Button, Icon } from '@/components/ui';
+
+import { userRoles } from '@/constants/userRoles/userRoles';
 
 import { type LandscapeMenuProps } from '@/components/interface';
 
@@ -33,6 +35,11 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
           <h2 className="mt-3 text-xl dark:text-white">
             Hola, <span className="font-bold">{user?.name}</span>
           </h2>
+          {user?.role === userRoles.THIRD_PARTY && (
+            <Alert hideIcon className="mt-3 text-center" type="warning">
+              Usuario de solo lectura
+            </Alert>
+          )}
         </div>
 
         {/* Module Buttons */}

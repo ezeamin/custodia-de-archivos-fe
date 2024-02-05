@@ -32,13 +32,11 @@ export const fetchFn = async <T, V = T>({
   }
 
   const optionObj =
-    request.method === 'POST'
+    request.method === 'POST' || request.method === 'PUT'
       ? {
           ...request,
           headers: {
-            'Content-Type': isFormData
-              ? 'multipart/form-data'
-              : 'application/json',
+            ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
             ...(request.useToken ? { Authorization: `Bearer ${token}` } : {}),
             ...(request.headers || {}),
           },
@@ -66,9 +64,9 @@ export const fetchFn = async <T, V = T>({
 
   if (!res.ok) {
     // Avoid showing error message when trying to refresh token
-    if (!(request.url === apiRoutes.AUTH.GET_REFRESH_TOKEN().url))
+    if (!(request.url === apiRoutes.AUTH.POST_REFRESH_TOKEN().url))
       toast.error(data.message || 'Ocurrió un error al leer la información.');
-    throw new Error();
+    throw new Error(data.message || '');
   }
 
   if (data) {

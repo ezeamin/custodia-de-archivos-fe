@@ -1,5 +1,7 @@
-import { MdArrowOutward, MdOutlineCancel } from 'react-icons/md';
+import { MdArrowOutward } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+
+import { useSession } from '@/stores/useSession';
 
 import { Icon } from '@/components/ui';
 
@@ -8,26 +10,10 @@ import { RoutingCardProps } from '@/components/interface/views';
 const RoutingCard = (props: RoutingCardProps) => {
   const { route, index, showType = false } = props;
 
-  if (route.disabled) {
-    return (
-      <div
-        className="animate-in-bottom content-card h-full cursor-not-allowed !flex-row items-center justify-between gap-2 !bg-gray-200 dark:!bg-gray-600"
-        style={{ animationDelay: `${index * 100 + 100}ms` }}
-      >
-        <div className="flex max-w-[60%] flex-row items-center gap-3">
-          <Icon iconComponent={<MdOutlineCancel />} title="No Navegar" />
-          {showType ? (
-            <p className="truncate">
-              Tipos de <b>{route.name}</b>
-            </p>
-          ) : (
-            <p className="truncate">{route.name}</p>
-          )}
-        </div>
-        <p className="w-1/2 text-end font-bold">No disponible</p>
-      </div>
-    );
-  }
+  const { user } = useSession();
+
+  if (route.allowedRoles && !route.allowedRoles?.includes(user?.role ?? ''))
+    return null;
 
   return (
     <Link

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { areaOptions } from '../../../V2_Create/mocked';
-import { mockedStatus } from '../../../V3_Details/mocked';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -29,7 +27,6 @@ import {
 
 import { EmployeeInfoProps } from '@/components/interface/views';
 
-const statusOptions = mockedStatus;
 const EditJobForm = (props: EmployeeInfoProps) => {
   const { data: employeeOriginalData } = props;
 
@@ -43,11 +40,17 @@ const EditJobForm = (props: EmployeeInfoProps) => {
   const status = watch('status');
   const fileNumber = watch('fileNumber');
   const area = watch('area');
+  const workingHours = watch('workingHours');
   const position = watch('position');
   const startDate = watch('startDate');
 
   const areAllMandatoryFieldsFilled =
-    status && fileNumber && area && position && startDate;
+    status &&
+    fileNumber &&
+    area &&
+    position &&
+    startDate &&
+    workingHours !== null;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -60,7 +63,7 @@ const EditJobForm = (props: EmployeeInfoProps) => {
   const queryClient = useQueryClient();
 
   const {
-    // data: statusOptions,
+    data: statusOptions,
     isLoading: isLoadingStatus,
     isError: isErrorStatus,
     status: statusStatusOpt,
@@ -70,13 +73,13 @@ const EditJobForm = (props: EmployeeInfoProps) => {
   });
 
   const {
-    // data: areaOptions,
+    data: areaOptions,
     isLoading: isLoadingAreas,
     isError: isErrorAreas,
     status: statusAreas,
   } = useQuery({
-    queryKey: ['areaOptions'],
-    queryFn: getAreaOptionsFn,
+    queryKey: ['areaOptions', true],
+    queryFn: () => getAreaOptionsFn(true),
   });
 
   const { mutate: editEmployee } = useMutation({
@@ -89,11 +92,9 @@ const EditJobForm = (props: EmployeeInfoProps) => {
       reset();
       toast.success('Información laboral editada con éxito');
       queryClient.invalidateQueries({
-        queryKey: [`employee_${employeeOriginalData.id}`],
+        queryKey: ['employee', employeeOriginalData.id],
       });
-      window.setTimeout(() => {
-        navigate(`/employees/${employeeOriginalData.id}/personal`);
-      }, 1000);
+      navigate(`/employees/${employeeOriginalData.id}/personal`);
     },
   });
 
@@ -129,6 +130,7 @@ const EditJobForm = (props: EmployeeInfoProps) => {
         ),
       });
       setValue('fileNumber', employeeOriginalData.fileNumber);
+      setValue('workingHours', employeeOriginalData.workingHours);
       setValue('area', employeeOriginalData.area);
       setValue('position', employeeOriginalData.position);
       setValue('startDate', employeeOriginalData.startDate);
@@ -161,10 +163,12 @@ const EditJobForm = (props: EmployeeInfoProps) => {
             disabled={isLoading}
             label="Estado *"
             name="status"
-            options={statusOptions.data.map((el) => ({
-              id: el.id,
-              description: displayStatusLabel(el.description),
-            }))}
+            options={
+              statusOptions?.data?.map((el) => ({
+                id: el.id,
+                description: displayStatusLabel(el.description),
+              })) || []
+            }
             placeholder="Seleccione un estado"
           />
         </Grid>
@@ -179,13 +183,24 @@ const EditJobForm = (props: EmployeeInfoProps) => {
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
+          <TextInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="Horas de trabajo *"
+            name="workingHours"
+            placeholder="8 (por día)"
+            type="number"
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xs={12}>
           <ComboBoxInput
             className="w-full"
             control={control}
             disabled={isLoading}
             label="Area *"
             name="area"
-            options={areaOptions.data}
+            options={areaOptions?.data || []}
             placeholder="Seleccione un area"
           />
         </Grid>

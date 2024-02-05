@@ -15,7 +15,7 @@ const ResultsTableRow = (props: EmployeesResultsTableRowProps) => {
       <td className="px-0">
         <img
           alt={`${employee.lastname}, ${employee.firstname}`}
-          className="min-w-[50px] rounded-md object-cover"
+          className="h-[80px] w-[80px] min-w-[80px] rounded-md object-cover"
           height={80}
           src={employee.imgSrc}
           width={80}

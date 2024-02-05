@@ -46,7 +46,8 @@ const TypesForm = () => {
     status: statusEditedData,
   } = useQuery({
     queryKey: [
-      `employeeLicenseType_${idBeingEdited}`,
+      'employeeLicenseType',
+      idBeingEdited,
       isEditing && idBeingEdited,
     ],
     queryFn: () => getEmployeeLicenseTypeFn(idBeingEdited ?? ''),
@@ -76,6 +77,14 @@ const TypesForm = () => {
       reset(); // Clear form values
       toast.success('Tipo de Licencia modificada con éxito');
       queryClient.invalidateQueries({ queryKey: ['employeeLicensesTypes'] });
+      queryClient.invalidateQueries({
+        queryKey: [
+          'employeeLicenseType',
+          idBeingEdited,
+          isEditing && idBeingEdited,
+        ],
+      });
+      navigate(paths.TYPES_LIST.LICENSES);
     },
   });
 
@@ -92,8 +101,6 @@ const TypesForm = () => {
 
   const handleSubmit = (data: LicenseTypeSchema) => {
     setIsLoading(true);
-
-    console.log(data);
 
     if (isEditing) {
       editType({ ...data, id: idBeingEdited });
@@ -157,6 +164,7 @@ const TypesForm = () => {
             colorLight="btn-primary"
             disabled={!areAllFieldsFilled || isLoadingEditedData}
             loading={isLoading}
+            textColorLight="text-white"
             type="submit"
           >
             Guardar
@@ -167,7 +175,6 @@ const TypesForm = () => {
             <Button
               className="w-full"
               disabled={isLoadingEditedData}
-              loading={isLoading}
               onClick={handleCancelEdit}
             >
               Cancelar edición

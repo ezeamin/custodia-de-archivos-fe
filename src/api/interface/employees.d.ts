@@ -12,6 +12,12 @@ export interface API_Address {
   locality: BasicList;
 }
 
+export interface API_MinimalFamilyMember {
+  id: string;
+  name: string;
+  relationship: string;
+}
+
 export interface API_GetEmployees {
   id: string;
   dni: string;
@@ -35,17 +41,45 @@ export interface API_GetEmployees {
 export interface API_GetEmployee extends API_GetEmployees {
   birthdate: string;
   address: API_Address;
+  familyMembers: API_MinimalFamilyMember[];
+  civilStatus: BasicList;
   phone: string;
   email: string;
-  gender: {
-    id: string;
-    description: string;
-  };
+  workingHours: number;
+  gender: BasicList;
   startDate: string;
   endDate: string | null;
   user: {
     id: string;
   } | null;
+}
+
+export interface API_GetFamilyMember {
+  id: string;
+  name: string;
+  lastname: string;
+  dni: string;
+  gender: BasicList;
+  relationship: BasicList;
+  phone: string;
+  address: API_Address;
+}
+
+export interface API_PostEmployee {
+  body: Record<string, string>;
+  name: string;
+  lastname: string;
+  dni: string;
+  phone: string | null;
+  address: string | null;
+}
+
+export interface API_PostFamilyMember {
+  name: string;
+  lastname: string;
+  dni: string;
+  phone: string | null;
+  address: string | null;
 }
 
 export interface API_GetEmployeeDocs {
@@ -121,6 +155,7 @@ export interface API_GetTrainingsTypes {
 export interface API_GetLateArrivals {
   id: string;
   date: string;
+  time: string;
   observations?: string;
 }
 
@@ -172,3 +207,5 @@ export interface ExtraHours extends API_GetExtraHours {}
 export interface State extends BasicList {}
 export interface Locality extends BasicList {}
 export interface Street extends BasicList {}
+export interface MinimalFamilyMember extends API_MinimalFamilyMember {}
+export interface FamilyMember extends API_GetFamilyMember {}

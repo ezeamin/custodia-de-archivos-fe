@@ -32,9 +32,22 @@ export const createSchema = z
       .positive({
         message: 'Debe ingresar un número positivo en Nro de Legajo',
       }),
-    imgFile: z.instanceof(File, {
-      message: 'El archivo es requerido',
-    }),
+    imgFile: z
+      .instanceof(File, {
+        message: 'La imagen es requerida',
+      })
+      .refine(
+        (data) => {
+          const { size } = data;
+          const maxSize = 5 * 1024 * 1024; // 5MB
+
+          return size <= maxSize;
+        },
+        {
+          message:
+            'La imagen no debe superar los 5MB. Por favor, seleccione otra',
+        }
+      ),
   })
   .refine(
     (data) => {

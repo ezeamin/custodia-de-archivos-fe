@@ -6,21 +6,25 @@ import {
   IoSettingsSharp,
 } from 'react-icons/io5';
 
+import { userRoles } from '../userRoles/userRoles';
 import { paths } from './paths';
 
 import LoginView from '@/views/Auth/LoginView';
 import RecoverPasswordView from '@/views/Auth/RecoverPasswordView';
 import ResetPasswordView from '@/views/Auth/ResetPasswordView';
 import CreateEmployeeView from '@/views/Employees/CreateEmployeeView';
+import CreateFamilyMemberView from '@/views/Employees/CreateFamilyMemberView';
 import EditEmployeeView from '@/views/Employees/EditEmployeeView';
+import EditFamilyMemberView from '@/views/Employees/EditFamilyMemberView';
 import EmployeeDetailsView from '@/views/Employees/EmployeeDetailsView';
 import EmployeeListView from '@/views/Employees/EmployeeListView';
 import HomeView from '@/views/Home/HomeView';
 import CreateNotificationView from '@/views/Notifications/CreateNotificationView';
 import NotificationDetailView from '@/views/Notifications/NotificationDetailView';
-import NotificationsHistoryView from '@/views/Notifications/NotificationsHistoryView';
+import NotificationsReadListView from '@/views/Notifications/NotificationsReadListView';
 import NotificationsSentListView from '@/views/Notifications/NotificationsSentListView';
 import NotificationsView from '@/views/Notifications/NotificationsView';
+import SentNotificationDetailView from '@/views/Notifications/SentNotificationDetailView';
 import ChangePasswordView from '@/views/Settings/ChangePasswordView';
 import CreateAdminView from '@/views/Settings/CreateAdminView';
 import CreateReadOnlyView from '@/views/Settings/CreateReadOnlyView';
@@ -55,7 +59,11 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: false,
         element: <RecoverPasswordView />,
-        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+        allowedRoles: [
+          userRoles.ADMIN,
+          userRoles.EMPLOYEE,
+          userRoles.THIRD_PARTY,
+        ],
       },
       {
         id: 1002,
@@ -65,10 +73,14 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: false,
         element: <ResetPasswordView />,
-        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+        allowedRoles: [
+          userRoles.ADMIN,
+          userRoles.EMPLOYEE,
+          userRoles.THIRD_PARTY,
+        ],
       },
     ],
-    allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+    allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.THIRD_PARTY],
   },
   {
     id: 2000,
@@ -80,7 +92,7 @@ export const routes: Route[] = [
     element: <HomeView />,
     privateRoute: true,
     hidden: true,
-    allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+    allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.THIRD_PARTY],
   },
   {
     id: 3000,
@@ -97,7 +109,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <CreateEmployeeView />,
-        allowedRoles: ['ADMIN', 'READ_ONLY'],
+        allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY],
       },
       {
         id: 3002,
@@ -107,7 +119,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <EmployeeDetailsView />,
-        allowedRoles: ['ADMIN', 'READ_ONLY'],
+        allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY],
       },
       {
         id: 3003,
@@ -117,12 +129,32 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <EditEmployeeView />,
-        allowedRoles: ['ADMIN'],
+        allowedRoles: [userRoles.ADMIN],
+      },
+      {
+        id: 3004,
+        title: 'Agregar familiar',
+        description: 'Agregar miembro familiar',
+        path: paths.EMPLOYEES.EMPLOYEE_FAMILY_CREATE,
+        subpaths: [],
+        privateRoute: true,
+        element: <CreateFamilyMemberView />,
+        allowedRoles: [userRoles.ADMIN],
+      },
+      {
+        id: 3005,
+        title: 'Editar familiar',
+        description: 'Editar miembro familiar',
+        path: paths.EMPLOYEES.EMPLOYEE_FAMILY_EDIT,
+        subpaths: [],
+        privateRoute: true,
+        element: <EditFamilyMemberView />,
+        allowedRoles: [userRoles.ADMIN],
       },
     ],
     privateRoute: true,
     element: <EmployeeListView />,
-    allowedRoles: ['ADMIN', 'READ_ONLY'],
+    allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY],
   },
   {
     id: 4000,
@@ -139,17 +171,17 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <CreateNotificationView />,
-        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
       },
       {
         id: 4002,
         title: 'Historial de Notificaciones',
         description: 'Historial notificaciones',
-        path: paths.NOTIFICATIONS.HISTORY,
+        path: paths.NOTIFICATIONS.READ,
         subpaths: [],
         privateRoute: true,
-        element: <NotificationsHistoryView />,
-        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+        element: <NotificationsReadListView />,
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
       },
       {
         id: 4003,
@@ -159,7 +191,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <NotificationDetailView />,
-        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
       },
       {
         id: 4004,
@@ -169,22 +201,22 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <NotificationsSentListView />,
-        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
       },
       {
         id: 4005,
-        title: 'Detalle Notificación',
-        description: 'Detalle Notificación',
-        path: paths.NOTIFICATIONS.DETAILS,
+        title: 'Detalle Notificación Enviada',
+        description: 'Detalle Notificación Enviada',
+        path: paths.NOTIFICATIONS.SENT_DETAILS,
         subpaths: [],
         privateRoute: true,
-        element: <NotificationDetailView />,
-        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+        element: <SentNotificationDetailView />,
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
       },
     ],
     privateRoute: true,
     element: <NotificationsView />,
-    allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+    allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
   },
   {
     id: 5000,
@@ -201,7 +233,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <NotificationsTypesView />,
-        allowedRoles: ['ADMIN'],
+        allowedRoles: [userRoles.ADMIN],
       },
       {
         id: 5002,
@@ -211,7 +243,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <LicensesTypesView />,
-        allowedRoles: ['ADMIN'],
+        allowedRoles: [userRoles.ADMIN],
       },
       {
         id: 5003,
@@ -221,12 +253,12 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <TrainingsTypesView />,
-        allowedRoles: ['ADMIN'],
+        allowedRoles: [userRoles.ADMIN],
       },
     ],
     privateRoute: true,
     element: <TypesListView />,
-    allowedRoles: ['ADMIN'],
+    allowedRoles: [userRoles.ADMIN],
   },
   {
     id: 6000,
@@ -243,7 +275,11 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <ChangePasswordView />,
-        allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+        allowedRoles: [
+          userRoles.ADMIN,
+          userRoles.EMPLOYEE,
+          userRoles.THIRD_PARTY,
+        ],
       },
       {
         id: 6002,
@@ -253,7 +289,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <LoginLogsView />,
-        allowedRoles: ['ADMIN'],
+        allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY],
       },
       {
         id: 6003,
@@ -263,7 +299,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <CreateAdminView />,
-        allowedRoles: ['ADMIN'],
+        allowedRoles: [userRoles.ADMIN],
       },
       {
         id: 6004,
@@ -273,7 +309,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <RemoveAdminView />,
-        allowedRoles: ['ADMIN'],
+        allowedRoles: [userRoles.ADMIN],
       },
       {
         id: 6005,
@@ -283,7 +319,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <CreateReadOnlyView />,
-        allowedRoles: ['ADMIN'],
+        allowedRoles: [userRoles.ADMIN],
       },
       {
         id: 6006,
@@ -293,25 +329,25 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <RemoveReadOnlyView />,
-        allowedRoles: ['ADMIN'],
+        allowedRoles: [userRoles.ADMIN],
       },
     ],
     privateRoute: true,
     element: <SettingsView />,
-    allowedRoles: ['ADMIN', 'EMPLOYEE', 'READ_ONLY'],
+    allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.THIRD_PARTY],
   },
 ];
 
 export const flattedRoutes = flattenRoutes(routes);
 
 export const adminRoutes = routes.filter((route) =>
-  route.allowedRoles.includes('ADMIN')
+  route.allowedRoles.includes(userRoles.ADMIN)
 );
 
 export const employeeRoutes = routes.filter((route) =>
-  route.allowedRoles.includes('EMPLOYEE')
+  route.allowedRoles.includes(userRoles.EMPLOYEE)
 );
 
 export const readOnlyRoutes = routes.filter((route) =>
-  route.allowedRoles.includes('READ_ONLY')
+  route.allowedRoles.includes(userRoles.THIRD_PARTY)
 );

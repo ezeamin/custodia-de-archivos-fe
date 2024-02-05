@@ -27,7 +27,7 @@ export const refreshTokenFetch = async (
 
   // 1. Build the refresh token request
   const { url: refreshUrl, ...refreshRequest } =
-    apiRoutes.AUTH.GET_REFRESH_TOKEN();
+    apiRoutes.AUTH.POST_REFRESH_TOKEN();
 
   const fullPath = `${baseUrl}${refreshUrl}`;
 
@@ -39,12 +39,21 @@ export const refreshTokenFetch = async (
   if (refreshResult?.data) {
     // Adapt the response
     const formatRes = postLoginAdapter(refreshResult);
+    const newAccessToken = formatRes.token;
+
+    console.log(formatRes);
 
     // Login the user with the new token
-    useSession.getState().login(formatRes.token);
+    useSession.getState().login(newAccessToken);
 
     // Retry the initial query with the new token
-    result = await fetch(input, init);
+    result = await fetch(input, {
+      ...init,
+      headers: {
+        ...init?.headers,
+        Authorization: `Bearer ${newAccessToken}`,
+      },
+    });
   } else {
     // Logout the user (refresh token is already expired, so user has been logged out automatically)
     const currentPath = window.location.pathname;

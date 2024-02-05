@@ -52,8 +52,8 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
 
   const handleDelete = () => {
     Swal.fire({
-      title: '¿Estás seguro?',
-      html: `<p>Eliminarás el tipo <b>"${notificationType.title}"</b>. Esta acción no se puede revertir. Esto NO eliminará las notificaciones ya creadas con este tipo.</p>`,
+      title: '¿Está seguro?',
+      html: `<p>Eliminará el tipo <b>"${notificationType.title}"</b>. Esta acción no se puede revertir. Esto NO eliminará las notificaciones ya creadas con este tipo.</p>`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -97,7 +97,7 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
               <span className="text-sm text-gray-500 dark:text-gray-400">
                 Roles permitidos:
               </span>
-              <div className="flex gap-1">
+              <div className="flex flex-wrap gap-1">
                 {notificationType.allowedRoles.map((role) => (
                   <span
                     className="rounded-md bg-gray-200 px-2 py-1 text-xs text-gray-500 dark:bg-gray-600 dark:text-gray-400"
@@ -119,26 +119,37 @@ const ResultsListItem = (props: NotificationsTypeResultsListItemProps) => {
           >
             VER DESCRIPCION
           </Button>
-          <Grid container gap={2}>
-            <Grid item sm={6} xs={12}>
-              <Link
-                className="btn btn-outline btn-primary w-full hover:text-white"
-                to={`${paths.TYPES_LIST.NOTIFICATIONS}?edit=true&id=${notificationType.id}`}
-              >
-                EDITAR
-              </Link>
+          {notificationType.canModify ? (
+            <Grid container gap={2}>
+              <Grid item sm={6} xs={12}>
+                <Link
+                  className="btn btn-outline btn-primary w-full hover:text-white"
+                  to={`${paths.TYPES_LIST.NOTIFICATIONS}?edit=true&id=${notificationType.id}`}
+                >
+                  EDITAR
+                </Link>
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <Button
+                  outlineButton
+                  className="w-full hover:text-white"
+                  colorLight="btn-error"
+                  onClick={handleDelete}
+                >
+                  ELIMINAR
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item sm={6} xs={12}>
-              <Button
-                outlineButton
-                className="w-full hover:text-white"
-                colorLight="btn-error"
-                onClick={handleDelete}
-              >
-                ELIMINAR
-              </Button>
-            </Grid>
-          </Grid>
+          ) : (
+            <Button
+              disabled
+              outlineButton
+              className="w-full"
+              colorLight="btn-error"
+            >
+              NO SE PUEDE EDITAR
+            </Button>
+          )}
         </footer>
       </div>
     </article>

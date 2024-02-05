@@ -35,6 +35,7 @@ export const dateRules = <T extends boolean = false>(required: T) => {
     .refine(
       // If it has a value, it must be a valid date
       (data) => {
+        if (required && !data) return false;
         if (!data) return true;
         const date = dayjs(data);
         return date.isValid();
@@ -43,13 +44,22 @@ export const dateRules = <T extends boolean = false>(required: T) => {
         message: `La fecha no es válida`,
       }
     );
+  // .transform((data) => {
+  //   // take to ISO format in UTC
+  //   const date = new Date(data);
+  //   const offset = date.getTimezoneOffset() * 60000;
+  //   const utcDate = new Date(date.getTime() - offset);
+  //   return utcDate.toISOString();
+  // });
 
   return optionalWrapper(required, rule);
 };
 
 export const hourRules = <T extends boolean = false>(required: T) => {
   const rule = z
-    .string()
+    .string({
+      invalid_type_error: 'Debe ingresar una hora válida',
+    })
     .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
       message: 'La hora debe tener el formato HH:MM',
     })
@@ -78,6 +88,7 @@ export const typeRules = <T extends boolean = false>(
 export const cuilRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
+    .trim()
     .regex(/^\d+$/, {
       message: 'El CUIL debe contener solo números',
     })
@@ -105,6 +116,7 @@ export const cuilRules = <T extends boolean = false>(required: T) => {
 export const lastnameRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
+    .trim()
     .max(50, {
       message: 'El Apellido debe tener como máximo 50 caracteres',
     })
@@ -129,6 +141,7 @@ export const lastnameRules = <T extends boolean = false>(required: T) => {
 export const nameRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
+    .trim()
     .max(50, {
       message: 'El Nombre debe tener como máximo 50 caracteres',
     })
@@ -152,13 +165,14 @@ export const nameRules = <T extends boolean = false>(required: T) => {
 
 export const textRules = <T extends boolean = false>(
   required: T,
-  fieldName = 'Texto'
+  fieldName = 'Texto',
+  maxLength = 1000
 ) => {
   const rule = z
     .string()
     .trim()
-    .max(1000, {
-      message: `El ${fieldName} debe tener como máximo 1000 caracteres`,
+    .max(maxLength, {
+      message: `El ${fieldName} debe tener como máximo ${maxLength} caracteres`,
     })
     .refine(
       // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
@@ -211,6 +225,7 @@ export const booleanRules = <T extends boolean = false>(required: T) => {
 export const emailRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
+    .trim()
     .email({
       message: 'Debe ingresar un Email válido',
     })
@@ -238,6 +253,7 @@ export const emailRules = <T extends boolean = false>(required: T) => {
 export const dniRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
+    .trim()
     .regex(/^\d+$/, {
       message: 'El DNI debe contener solo números',
     })
@@ -286,16 +302,30 @@ export const positionRules = <T extends boolean = false>(required: T) => {
   return optionalWrapper(required, rule);
 };
 
-export const multipleValuesRules = <T extends boolean = false>(required: T) => {
+export const multipleValuesRules = <T extends boolean = false>(
+  required: T,
+  fieldName = ''
+) => {
   // each value is of type {id: string, description: string}, that's an interface called BasicList
   const rule = z
     .array(
       z.object({
-        id: z.string(),
-        description: z.string(),
+        id: z.string().trim().min(1),
+        description: z.string().trim().min(1),
       })
     )
-    .default([]);
+    .default([])
+    .refine(
+      (data) => {
+        if (required) {
+          return data.length > 0;
+        }
+        return true;
+      },
+      {
+        message: `Debe seleccionar al menos un ${fieldName}`,
+      }
+    );
 
   return optionalWrapper(required, rule);
 };
@@ -315,7 +345,7 @@ export const fileNameRules = <T extends boolean = false>(required: T) => {
     .max(35, {
       message: 'El Nombre debe tener menos de 35 caracteres',
     })
-    .regex(/^[a-zA-Z0-9]*$/, {
+    .regex(/^[a-zA-Z0-9_-]*$/, {
       message:
         'El Nombre no puede contener espacios, caracteres especiales ni puntos',
     })
@@ -340,9 +370,7 @@ export const fileNameRules = <T extends boolean = false>(required: T) => {
 export const passwordRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
-    .min(6, {
-      message: 'La contraseña debe tener al menos 6 caracteres',
-    })
+    .trim()
     .max(25, {
       message: 'La contraseña debe tener como máximo 25 caracteres',
     })
@@ -350,6 +378,19 @@ export const passwordRules = <T extends boolean = false>(required: T) => {
       message:
         'La contraseña debe tener al menos una mayúscula, una minúscula y un número',
     })
+    .refine(
+      // Min length is 6 when it does have content (cannot use .min() because it's initially empty)
+      (data) => {
+        if (required) {
+          return data.length >= 6;
+        }
+
+        return true;
+      },
+      {
+        message: 'La contraseña debe tener al menos 6 caracteres',
+      }
+    )
     .default('');
 
   return optionalWrapper(required, rule);
@@ -369,7 +410,8 @@ export const phoneRules = <T extends boolean = false>(required: T) => {
     .max(9999999999999, {
       message: 'El número de teléfono debe tener como mucho 13 dígitos',
     })
-    .default(0);
+    .default(0)
+    .transform((data) => data.toString());
 
   return optionalWrapper(required, rule);
 };

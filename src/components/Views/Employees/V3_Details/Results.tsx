@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import EmployeeJobDetails from './EmployeeInfo/EmployeeJobDetails';
 import EmployeeTabs from './EmployeeInfo/EmployeeTabs';
 import NewUserModal from './EmployeeInfo/NewUserModal';
-import { mockedEmployee } from './mocked';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -19,10 +18,6 @@ import { Alert, Button } from '@/components/ui';
 
 import { uuidRegex } from '@/constants/regex/regex';
 import { paths } from '@/constants/routes/paths';
-
-const data = mockedEmployee;
-const isError = false;
-const isLoading = false;
 
 const Results = () => {
   // -------------------------------------------------
@@ -51,8 +46,8 @@ const Results = () => {
 
   const queryClient = useQueryClient();
 
-  const { /* data, isLoading, isError, */ refetch, status } = useQuery({
-    queryKey: [`employee_${employeeId}`],
+  const { data, isLoading, isError, refetch, status } = useQuery({
+    queryKey: ['employee', employeeId],
     queryFn: () => getEmployeeFn(employeeId!),
   });
 
@@ -64,10 +59,10 @@ const Results = () => {
     },
     onSuccess: (res) => {
       setIsLoadingCreateUser(false);
-      setModalData(res);
+      setModalData(res.data);
       openModal('newUser');
       queryClient.invalidateQueries({
-        queryKey: [`employee_${employeeId}`],
+        queryKey: ['employee', employeeId],
       });
     },
   });
