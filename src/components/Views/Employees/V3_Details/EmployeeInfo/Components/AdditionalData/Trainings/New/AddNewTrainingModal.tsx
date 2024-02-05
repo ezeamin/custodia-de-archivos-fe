@@ -129,10 +129,6 @@ const AddNewTrainingModal = () => {
         loading={isLoading}
         title="Nueva Capacitación"
       >
-        <Alert className="mb-2">
-          <b>Atención:</b> Una vez cargada la capacitación, no se podrá editar
-          ni eliminar del sistema.
-        </Alert>
         <Alert className="mb-3">
           ¿No encuentra el tipo de capacitación que busca? Deberá agregarla
           desde Tipos de listado &gt; Tipos de capacitaciones

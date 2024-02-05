@@ -9,13 +9,7 @@ import { postEmployeeExtraHoursFn } from '@/api/api-calls/employees';
 import { useZodForm } from '@/hooks';
 import { useModal } from '@/stores/useModal';
 
-import {
-  Alert,
-  DateInput,
-  Modal,
-  TextAreaInput,
-  TextInput,
-} from '@/components/ui';
+import { DateInput, Modal, TextAreaInput, TextInput } from '@/components/ui';
 
 import {
   AddNewExtraHoursSchema,
@@ -95,10 +89,6 @@ const AddNewExtraHoursModal = () => {
         loading={isLoading}
         title="Nueva Llegada Tarde"
       >
-        <Alert className="mb-3">
-          <b>Atención:</b> Una vez cargadas las horas extra, no se las podrá
-          editar ni eliminar del sistema.
-        </Alert>
         <DateInput
           className="mb-2"
           control={control}

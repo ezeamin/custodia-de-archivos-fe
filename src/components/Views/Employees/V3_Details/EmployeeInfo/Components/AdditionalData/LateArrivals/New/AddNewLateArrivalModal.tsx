@@ -9,13 +9,7 @@ import { postEmployeeLateArrivalFn } from '@/api/api-calls/employees';
 import { useZodForm } from '@/hooks';
 import { useModal } from '@/stores/useModal';
 
-import {
-  Alert,
-  DateInput,
-  HourInput,
-  Modal,
-  TextAreaInput,
-} from '@/components/ui';
+import { DateInput, HourInput, Modal, TextAreaInput } from '@/components/ui';
 
 import {
   AddNewLateArrivalSchema,
@@ -95,10 +89,6 @@ const AddNewLateArrivalModal = () => {
         loading={isLoading}
         title="Nueva Llegada Tarde"
       >
-        <Alert className="mb-3">
-          <b>Atención:</b> Una vez cargada la llegada tarde, no se podrá editar
-          ni eliminar del sistema.
-        </Alert>
         <DateInput
           className="mb-2"
           control={control}

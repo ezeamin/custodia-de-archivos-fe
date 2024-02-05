@@ -9,7 +9,7 @@ import { postEmployeeFormalWarningFn } from '@/api/api-calls/employees';
 import { useZodForm } from '@/hooks';
 import { useModal } from '@/stores/useModal';
 
-import { Alert, DateInput, Modal, TextAreaInput } from '@/components/ui';
+import { DateInput, Modal, TextAreaInput } from '@/components/ui';
 
 import {
   AddNewFormalWarningSchema,
@@ -85,10 +85,6 @@ const AddNewFormalWarningModal = () => {
         loading={isLoading}
         title="Nuevo Llamado de Atención"
       >
-        <Alert className="mb-3">
-          <b>Atención:</b> Una vez cargado el llamado de atención, no se podrá
-          editar ni eliminar del sistema.
-        </Alert>
         <DateInput
           control={control}
           disabled={isLoading}

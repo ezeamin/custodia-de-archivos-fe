@@ -9,7 +9,7 @@ import { postEmployeeAbsenceFn } from '@/api/api-calls/employees';
 import { useZodForm } from '@/hooks';
 import { useModal } from '@/stores/useModal';
 
-import { Alert, DateInput, Modal, TextAreaInput } from '@/components/ui';
+import { DateInput, Modal, TextAreaInput } from '@/components/ui';
 
 import {
   AddNewAbsenceSchema,
@@ -85,10 +85,6 @@ const AddNewAbsenceModal = () => {
         loading={isLoading}
         title="Nueva Inasistencia"
       >
-        <Alert className="mb-3">
-          <b>Atención:</b> Una vez cargada la inasistencia, no se podrá editar
-          ni eliminar del sistema.
-        </Alert>
         <DateInput
           control={control}
           disabled={isLoading}
