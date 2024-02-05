@@ -30,7 +30,7 @@ const NotificationBody = (props: NotificationInfoContentProps) => {
       </div>
       <Alert className="mb-1 mt-2">{data.type.description}</Alert>
       <div className="mt-3 rounded-md border bg-gray-200 p-4 dark:border-gray-500 dark:bg-gray-700">
-        <p>{data.message}</p>
+        <p className="whitespace-pre-line">{data.message}</p>
       </div>
       <Grid container className="mt-3" gap={2}>
         {!!data?.files?.length && (
