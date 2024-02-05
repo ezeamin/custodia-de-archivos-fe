@@ -13,6 +13,7 @@ const FormalWarningsTable = (props: FormalWarningsProps) => {
         <tr>
           <th>Fecha</th>
           <th>Razón</th>
+          <th align="center">Acciones</th>
         </tr>
       </thead>
       <tbody>

@@ -15,6 +15,7 @@ const TrainingsTable = (props: TrainingsProps) => {
           <th>Tipo</th>
           <th>Razón</th>
           <th align="center">Observaciones</th>
+          <th align="center">Acciones</th>
         </tr>
       </thead>
       <tbody>

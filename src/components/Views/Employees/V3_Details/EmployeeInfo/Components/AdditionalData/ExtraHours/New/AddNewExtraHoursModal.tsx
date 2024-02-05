@@ -59,7 +59,7 @@ const AddNewExtraHoursModal = () => {
       reset();
       toast.success(`Las horas extras fueron registradas correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeExtraHours_${employeeId}`],
+        queryKey: ['employeeExtraHours', employeeId],
       });
     },
   });

@@ -14,6 +14,7 @@ const LateArrivalsTable = (props: LateArrivalsProps) => {
           <th>Fecha</th>
           <th>Hora de llegada</th>
           <th align="center">Observaciones</th>
+          <th align="center">Acciones</th>
         </tr>
       </thead>
       <tbody>

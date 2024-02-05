@@ -59,7 +59,7 @@ const AddNewLateArrivalModal = () => {
       reset();
       toast.success(`La llegada tarde fue registrada correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeLateArrivals_${employeeId}`],
+        queryKey: ['employeeLateArrivals', employeeId],
       });
     },
   });

@@ -13,6 +13,7 @@ const AbsencesTable = (props: AbsencesProps) => {
         <tr>
           <th>Fecha</th>
           <th>Razón</th>
+          <th align="center">Acciones</th>
         </tr>
       </thead>
       <tbody>

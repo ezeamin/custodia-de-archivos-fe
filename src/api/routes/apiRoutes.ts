@@ -184,6 +184,17 @@ export const apiRoutes = {
       url: `/employees/${employeeId}/absences`,
       useToken: true,
     }),
+    DELETE_EMPLOYEE_ABSENCE: ({
+      employeeId,
+      absenceId,
+    }: {
+      employeeId: string;
+      absenceId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/absences/${absenceId}`,
+      useToken: true,
+    }),
     GET_EMPLOYEE_LICENSES: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/licenses`,
@@ -273,6 +284,17 @@ export const apiRoutes = {
       url: `/employees/${employeeId}/formal-warnings`,
       useToken: true,
     }),
+    DELETE_EMPLOYEE_FORMAL_WARNING: ({
+      employeeId,
+      formalWarningId,
+    }: {
+      employeeId: string;
+      formalWarningId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/formal-warnings/${formalWarningId}`,
+      useToken: true,
+    }),
     GET_EMPLOYEE_TRAININGS: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/trainings`,
@@ -312,6 +334,17 @@ export const apiRoutes = {
       url: `/employees/${employeeId}/trainings`,
       useToken: true,
     }),
+    DELETE_EMPLOYEE_TRAINING: ({
+      employeeId,
+      trainingId,
+    }: {
+      employeeId: string;
+      trainingId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/trainings/${trainingId}`,
+      useToken: true,
+    }),
     GET_EMPLOYEE_LATE_ARRIVALS: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/late-arrivals`,
@@ -326,6 +359,17 @@ export const apiRoutes = {
       url: `/employees/${employeeId}/late-arrivals`,
       useToken: true,
     }),
+    DELETE_EMPLOYEE_LATE_ARRIVAL: ({
+      employeeId,
+      lateArrivalId,
+    }: {
+      employeeId: string;
+      lateArrivalId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/late-arrivals/${lateArrivalId}`,
+      useToken: true,
+    }),
     GET_EMPLOYEE_EXTRA_HOURS: ({ id }: { id: string }): ApiRoute => ({
       method: 'GET',
       url: `/employees/${id}/extra-hours`,
@@ -338,6 +382,17 @@ export const apiRoutes = {
     }): ApiRoute => ({
       method: 'POST',
       url: `/employees/${employeeId}/extra-hours`,
+      useToken: true,
+    }),
+    DELETE_EMPLOYEE_EXTRA_HOURS: ({
+      employeeId,
+      extraHoursId,
+    }: {
+      employeeId: string;
+      extraHoursId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/extra-hours/${extraHoursId}`,
       useToken: true,
     }),
     GET_FAMILY_MEMBER_INFO: ({

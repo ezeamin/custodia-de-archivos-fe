@@ -77,7 +77,7 @@ const AddNewLicenseModal = () => {
       closeModal();
       toast.success(`La licencia fue registrada correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeLicenses_${employeeId}`],
+        queryKey: ['employeeLicenses', employeeId],
       });
     },
   });

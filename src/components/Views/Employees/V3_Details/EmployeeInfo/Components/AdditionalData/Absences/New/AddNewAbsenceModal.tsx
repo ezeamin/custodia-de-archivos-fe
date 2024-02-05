@@ -49,7 +49,7 @@ const AddNewAbsenceModal = () => {
       closeModal();
       toast.success(`La inasistencia fue registrada correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeAbsences_${employeeId}`],
+        queryKey: ['employeeAbsences', employeeId],
       });
     },
   });

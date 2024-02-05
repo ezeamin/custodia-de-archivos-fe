@@ -31,7 +31,7 @@ const Results = () => {
   // -------------------------------------------------
 
   const { data, isLoading, isFetching, isError, refetch, status } = useQuery({
-    queryKey: [`employeeFormalWarnings_${employeeId}`],
+    queryKey: ['employeeFormalWarnings', employeeId],
     queryFn: () => getEmployeeFormalWarningsFn(employeeId!),
   });
 

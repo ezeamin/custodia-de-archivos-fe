@@ -49,7 +49,7 @@ const AddNewFormalWarningModal = () => {
       closeModal();
       toast.success(`El llamado de atención fue registrado correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeFormalWarnings_${employeeId}`],
+        queryKey: ['employeeFormalWarnings', employeeId],
       });
     },
   });

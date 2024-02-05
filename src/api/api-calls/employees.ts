@@ -341,6 +341,26 @@ export const postEmployeeAbsenceFn = async (body: Record<string, unknown>) => {
   return data;
 };
 
+export const deleteEmployeeAbsenceFn = async ({
+  employeeId,
+  absenceId,
+}: {
+  employeeId: string;
+  absenceId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.DELETE_EMPLOYEE_ABSENCE({
+    employeeId,
+    absenceId,
+  });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
 export const postEmployeeLateArrivalFn = async (
   body: Record<string, unknown>
 ) => {
@@ -354,6 +374,26 @@ export const postEmployeeLateArrivalFn = async (
     request,
     adapter: (APIData) => APIData,
     body: dataToSend,
+  });
+
+  return data;
+};
+
+export const deleteEmployeeLateArrivalFn = async ({
+  employeeId,
+  lateArrivalId,
+}: {
+  employeeId: string;
+  lateArrivalId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.DELETE_EMPLOYEE_LATE_ARRIVAL({
+    employeeId,
+    lateArrivalId,
+  });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
   });
 
   return data;
@@ -413,6 +453,26 @@ export const postEmployeeExtraHoursFn = async (
   return data;
 };
 
+export const deleteEmployeeExtraHoursFn = async ({
+  employeeId,
+  extraHoursId,
+}: {
+  employeeId: string;
+  extraHoursId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.DELETE_EMPLOYEE_EXTRA_HOURS({
+    employeeId,
+    extraHoursId,
+  });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
 export const postEmployeeVacationFn = async (body: Record<string, unknown>) => {
   const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_VACATION({
     employeeId: body.employeeId as string,
@@ -467,6 +527,26 @@ export const postEmployeeFormalWarningFn = async (
   return data;
 };
 
+export const deleteEmployeeFormalWarningFn = async ({
+  employeeId,
+  formalWarningId,
+}: {
+  employeeId: string;
+  formalWarningId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.DELETE_EMPLOYEE_FORMAL_WARNING({
+    employeeId,
+    formalWarningId,
+  });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
 export const postEmployeeTrainingFn = async (body: Record<string, unknown>) => {
   const request = apiRoutes.EMPLOYEES.POST_EMPLOYEE_TRAINING({
     employeeId: body.employeeId as string,
@@ -478,6 +558,26 @@ export const postEmployeeTrainingFn = async (body: Record<string, unknown>) => {
     request,
     adapter: (APIData) => APIData,
     body: dataToSend,
+  });
+
+  return data;
+};
+
+export const deleteEmployeeTrainingFn = async ({
+  employeeId,
+  trainingId,
+}: {
+  employeeId: string;
+  trainingId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.DELETE_EMPLOYEE_TRAINING({
+    employeeId,
+    trainingId,
+  });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
   });
 
   return data;

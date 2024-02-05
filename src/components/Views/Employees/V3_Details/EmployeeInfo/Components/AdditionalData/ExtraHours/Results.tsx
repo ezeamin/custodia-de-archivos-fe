@@ -32,7 +32,7 @@ const Results = () => {
   // -------------------------------------------------
 
   const { data, isLoading, isFetching, isError, refetch, status } = useQuery({
-    queryKey: [`employeeExtraHours_${employeeId}`],
+    queryKey: ['employeeExtraHours', employeeId],
     queryFn: () => getEmployeeExtraHoursFn(employeeId!),
   });
 

@@ -49,7 +49,7 @@ const LicensesTableRow = (props: LicensesElementProps) => {
       setIsLoading(false);
       toast.success('Licencia eliminada con éxito');
       queryClient.invalidateQueries({
-        queryKey: [`employeeLicenses_${employeeId}`],
+        queryKey: ['employeeLicenses', employeeId],
       });
     },
   });
@@ -69,7 +69,7 @@ const LicensesTableRow = (props: LicensesElementProps) => {
   const handleClickDelete = () => {
     Swal.fire({
       title: '¿Está seguro?',
-      html: `<p>Eliminará la licencia <b>"${data.type.description}"</b> de este usuario. Esta acción no se puede revertir.</p>`,
+      html: `<p>Eliminará la licencia <b>"${data.type.description}"</b> de este empleado. Esta acción no se puede revertir.</p>`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

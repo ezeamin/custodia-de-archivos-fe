@@ -78,7 +78,7 @@ const AddNewTrainingModal = () => {
       reset();
       toast.success(`La capacitación fue registrada correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeTrainings_${employeeId}`],
+        queryKey: ['employeeTrainings', employeeId],
       });
     },
   });

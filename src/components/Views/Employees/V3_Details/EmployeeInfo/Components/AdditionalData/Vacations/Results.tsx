@@ -32,7 +32,7 @@ const Results = () => {
   // -------------------------------------------------
 
   const { data, isLoading, isFetching, isError, refetch, status } = useQuery({
-    queryKey: [`employeeVacations_${employeeId}`],
+    queryKey: ['employeeVacations', employeeId],
     queryFn: () => getEmployeeVacationsFn(employeeId!),
   });
 

@@ -31,7 +31,7 @@ const Results = () => {
   // -------------------------------------------------
 
   const { data, isLoading, isFetching, isError, refetch, status } = useQuery({
-    queryKey: [`employeeAbsences_${employeeId}`],
+    queryKey: ['employeeAbsences', employeeId],
     queryFn: () => getEmployeeAbsencesFn(employeeId!),
   });
 

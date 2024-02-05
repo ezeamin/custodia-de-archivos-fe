@@ -52,7 +52,7 @@ const AddNewVacationModal = () => {
       reset();
       toast.success(`Las vacaciones fueron registradas correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeVacations_${employeeId}`],
+        queryKey: ['employeeVacations', employeeId],
       });
     },
   });

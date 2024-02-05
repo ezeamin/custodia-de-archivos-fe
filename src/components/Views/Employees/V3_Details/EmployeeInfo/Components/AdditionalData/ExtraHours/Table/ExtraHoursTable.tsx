@@ -14,6 +14,7 @@ const ExtraHoursTable = (props: ExtraHoursProps) => {
           <th>Fecha</th>
           <th>Cantidad de horas extra</th>
           <th align="right">Observaciones</th>
+          <th align="center">Acciones</th>
         </tr>
       </thead>
       <tbody>

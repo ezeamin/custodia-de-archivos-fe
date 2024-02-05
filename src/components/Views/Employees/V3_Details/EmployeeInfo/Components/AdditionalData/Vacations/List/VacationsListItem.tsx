@@ -48,7 +48,7 @@ const VacationsListItem = (props: VacationsElementProps) => {
       setIsLoading(false);
       toast.success('Vacaciones eliminadas con éxito');
       queryClient.invalidateQueries({
-        queryKey: [`employeeVacations_${employeeId}`],
+        queryKey: ['employeeVacations', employeeId],
       });
     },
   });
