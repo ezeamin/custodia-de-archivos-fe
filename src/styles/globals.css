@@ -65,6 +65,11 @@ textarea {
   color: var(--input-text-color) !important;
 }
 
+input:disabled:not([type='checkbox']),
+textarea:disabled {
+  opacity: 0.6;
+}
+
 /* GLOBAL COMPONENTS ----------------------------------- */
 
 .header-scrolling {

@@ -52,6 +52,7 @@ export const getEmployeesAdapter = (
     area: employee.area,
     fileNumber: employee.fileNumber,
     status: employee.status,
+    driversLicenseDate: employee.driversLicenseDate,
   }));
 };
 
@@ -78,6 +79,7 @@ export const getEmployeeAdapter = (data: API_GetEmployee): Employee => ({
   workingHours: data.workingHours,
   user: data.user,
   familyMembers: data.familyMembers,
+  driversLicenseDate: data.driversLicenseDate,
 });
 
 export const getFamilyMemberInfoAdapter = (

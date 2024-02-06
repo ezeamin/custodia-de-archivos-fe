@@ -8,9 +8,9 @@ const LateArrivalsTable = (props: LateArrivalsProps) => {
   const { data } = props;
 
   return (
-    <Table rounded transparent zebra>
+    <Table rounded transparent zebra className="dark:bg-slate-700">
       <thead>
-        <tr>
+        <tr className="dark:bg-slate-900">
           <th>Fecha</th>
           <th>Hora de llegada</th>
           <th align="center">Observaciones</th>

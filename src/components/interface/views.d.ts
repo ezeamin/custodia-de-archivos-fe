@@ -125,6 +125,11 @@ export interface AddNewProps {
   modalName: string;
 }
 
+export interface DriversLicenseProps {
+  data: Employee['driversLicenseDate'];
+  short?: boolean;
+}
+
 export interface ObservationsMessageProps {
   id: string;
 }

@@ -8,9 +8,9 @@ const ExtraHoursTable = (props: ExtraHoursProps) => {
   const { data } = props;
 
   return (
-    <Table rounded transparent zebra>
+    <Table rounded transparent zebra className="dark:bg-slate-700">
       <thead>
-        <tr>
+        <tr className="dark:bg-slate-900">
           <th>Fecha</th>
           <th>Cantidad de horas extra</th>
           <th align="right">Observaciones</th>

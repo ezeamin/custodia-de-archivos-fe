@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 
+import DriversLicense from '../../../V3_Details/EmployeeInfo/DriversLicense';
 import EmployeeStatus from '../EmployeeStatus';
 
 import { EmployeesResultsTableRowProps } from '@/components/interface/views';
@@ -22,19 +23,22 @@ const ResultsTableRow = (props: EmployeesResultsTableRowProps) => {
         />
       </td>
       <td>
-        <p className="font-bold lg:font-normal">{`${employee.lastname}, ${employee.firstname}`}</p>
-        <p className="text-xs lg:hidden">Edad: {employee.age} años</p>
-        <p className="text-xs lg:hidden">
+        <p className="font-bold xl:font-normal">{`${employee.lastname}, ${employee.firstname}`}</p>
+        <p className="text-xs xl:hidden">Edad: {employee.age} años</p>
+        <p className="text-xs xl:hidden">
           Antiguedad: {employee.antiquity} años
         </p>
       </td>
-      <td className="hidden text-center lg:table-cell">{employee.age}</td>
-      <td className="hidden text-center lg:table-cell">{employee.antiquity}</td>
+      <td className="hidden text-center xl:table-cell">{employee.age}</td>
+      <td className="hidden text-center xl:table-cell">{employee.antiquity}</td>
       <td>
         <p>{employee.position}</p>
         <p className="text-xs xl:hidden">{employee.area.description}</p>
       </td>
       <td className="hidden xl:table-cell">{employee.area.description}</td>
+      <td>
+        <DriversLicense short data={employee.driversLicenseDate} />
+      </td>
       <td className="text-end">
         <Link
           className="btn btn-primary text-white"

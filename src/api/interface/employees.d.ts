@@ -32,6 +32,7 @@ export interface API_GetEmployees {
     description: string;
   };
   fileNumber: number;
+  driversLicenseDate: string | null;
   status: {
     id: string;
     description: 'active' | 'suspended' | 'inactive' | 'deleted';

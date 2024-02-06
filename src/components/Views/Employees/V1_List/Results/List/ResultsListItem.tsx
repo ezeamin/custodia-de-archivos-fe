@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 
+import DriversLicense from '../../../V3_Details/EmployeeInfo/DriversLicense';
 import EmployeeStatus from '../EmployeeStatus';
 
 import { EmployeesResultsListItemProps } from '@/components/interface/views';
@@ -44,6 +45,10 @@ const ResultsListItem = (props: EmployeesResultsListItemProps) => {
               width={70}
             />
           </div>
+        </div>
+        <div className="-mt-2 flex gap-2">
+          Carnet de manejo:{' '}
+          <DriversLicense short data={employee.driversLicenseDate} />
         </div>
         <div className="divider my-0" />
         <div className="card-actions">

@@ -135,6 +135,10 @@ const EditJobForm = (props: EmployeeInfoProps) => {
       setValue('position', employeeOriginalData.position);
       setValue('startDate', employeeOriginalData.startDate);
       setValue('endDate', employeeOriginalData.endDate);
+      setValue(
+        'driversLicenseDate',
+        employeeOriginalData.driversLicenseDate || undefined
+      );
     }
   }, [employeeOriginalData, setValue]);
 
@@ -231,6 +235,17 @@ const EditJobForm = (props: EmployeeInfoProps) => {
             disabled={isLoading}
             label="Fecha de egreso"
             name="endDate"
+            placeholder="01/01/2024"
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xs={12}>
+          <DateInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            helperText="Ingrese la fecha de expiración, si es que el empleado posee carnet de manejo"
+            label="Carnet de Manejo"
+            name="driversLicenseDate"
             placeholder="01/01/2024"
           />
         </Grid>

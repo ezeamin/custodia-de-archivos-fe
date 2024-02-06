@@ -2,6 +2,7 @@ import { createPortal } from 'react-dom';
 import { FaPencil } from 'react-icons/fa6';
 import { Link, useParams } from 'react-router-dom';
 
+import DriversLicense from './DriversLicense';
 import EditImageModal from './EditImageModal';
 import EmployeeDataField from './EmployeeDataField';
 import dayjs from 'dayjs';
@@ -55,6 +56,10 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
         <EmployeeDataField
           label="Horas de trabajo"
           value={data.workingHours ? `${data.workingHours} horas` : 'N/A'}
+        />
+        <EmployeeDataField
+          label="Carnet de manejo"
+          value={<DriversLicense data={data.driversLicenseDate} />}
         />
         <EmployeeDataField
           label="Fecha de ingreso"

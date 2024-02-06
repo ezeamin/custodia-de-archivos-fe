@@ -28,6 +28,7 @@ export const editJobInfoSchema = z.object({
     .positive({
       message: 'El campo Horas de trabajo debe ser un número positivo',
     }),
+  driversLicenseDate: dateRules(false),
 });
 
 export type EditJobInfoSchema = z.infer<typeof editJobInfoSchema>;

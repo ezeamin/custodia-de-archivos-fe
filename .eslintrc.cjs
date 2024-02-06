@@ -48,11 +48,12 @@ module.exports = {
   ignorePatterns: [
     'node_modules',
     'dist',
-    '.eslintrc.cjs',
-    'postcss.config.cjs',
+    '*.cjs',
     'tailwind.config.js',
     'commitlint.config.ts',
     'vite.config.ts',
+    'package.json',
+    '*.css',
   ],
   settings: {
     react: {

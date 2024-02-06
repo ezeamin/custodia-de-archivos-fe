@@ -6,7 +6,7 @@ const ResultsList = (props: EmployeesResultsListProps) => {
   const { data } = props;
 
   return (
-    <section className="flex flex-col gap-3 md:hidden">
+    <section className="flex flex-col gap-3 lg:hidden">
       {data.map((employee, index) => (
         <ResultsListItem employee={employee} index={index} key={employee.id} />
       ))}

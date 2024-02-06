@@ -8,9 +8,9 @@ const VacationsTable = (props: VacationsProps) => {
   const { data } = props;
 
   return (
-    <Table rounded transparent zebra>
+    <Table rounded transparent zebra className="dark:bg-slate-700">
       <thead>
-        <tr>
+        <tr className="dark:bg-slate-900">
           <th>Fecha de inicio</th>
           <th>Fecha de fin</th>
           <th>Cantidad de días</th>

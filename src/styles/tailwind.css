@@ -14,6 +14,10 @@
   @apply bg-gray-200 dark:bg-gray-700;
 }
 
+tr:last-child {
+  border-width: 0;
+}
+
 .modules-padding {
   @apply mb-14 px-7 py-5 md:mb-0 md:px-10 md:pt-10;
 }

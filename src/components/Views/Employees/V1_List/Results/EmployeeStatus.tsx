@@ -7,7 +7,7 @@ import { EmployeeStatusProps } from '@/components/interface/views';
 const EmployeeStatus = (props: EmployeeStatusProps) => {
   const { status, expanded, noBadge, className = '' } = props;
 
-  const isPortrait = usePortrait();
+  const isPortrait = usePortrait('lg');
 
   let color = '';
   let portraitColors = '';
