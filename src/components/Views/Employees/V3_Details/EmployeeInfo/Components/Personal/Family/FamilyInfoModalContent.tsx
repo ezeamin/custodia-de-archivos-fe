@@ -3,7 +3,7 @@ import { FaTrash } from 'react-icons/fa';
 import { FaPencil } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import EmployeeDataField from '../../EmployeeDataField';
+import EmployeeDataField from '../../../EmployeeDataField';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';

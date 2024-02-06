@@ -125,6 +125,10 @@ export interface AddNewProps {
   modalName: string;
 }
 
+export interface PersonalProps {
+  data: Employee | null;
+}
+
 export interface DriversLicenseProps {
   data: Employee['driversLicenseDate'];
   short?: boolean;

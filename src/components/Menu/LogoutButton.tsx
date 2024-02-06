@@ -74,7 +74,7 @@ const LogoutButton = (props: LogoutButtonProps): JSX.Element => {
   return (
     <Button
       className={cn(
-        'flex flex-nowrap items-center border-0 py-2 text-center hover:bg-red-500 hover:dark:bg-red-700',
+        'flex flex-nowrap items-center border-0 py-2 text-center hover:bg-red-500 hover:text-white hover:dark:bg-red-700',
         className
       )}
       colorDark="dark:bg-red-800"

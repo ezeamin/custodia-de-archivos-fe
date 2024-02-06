@@ -26,7 +26,7 @@ const MenuModuleButton = (props: MenuModuleButtonProps): JSX.Element | null => {
     <Link
       className={`${
         isActivePage ? selectedOptionColors : nonSelectedOptionColors
-      } mb-5 flex h-12 w-full items-center gap-x-4 rounded-lg px-4 py-2 font-bold shadow ${
+      } mb-5 flex h-12 w-full items-center gap-x-4 rounded-lg px-4 py-2 font-bold shadow transition-colors ${
         isActivePage ? 'justify-between' : ''
       }`}
       to={el.path}
