@@ -7,7 +7,7 @@ import GlobalEmployeeResults from '@/components/Views/Employees/V4_Edit/Tabs/Res
 
 import { uuidRegex } from '@/constants/regex/regex';
 
-const validEditTabs = ['personal', 'job', 'contact', 'family'];
+const validEditTabs = ['personal', 'job', 'contact', 'health'];
 
 const EditEmployeeView = () => {
   const { id: employeeId, subtab: editSubtab } = useParams();

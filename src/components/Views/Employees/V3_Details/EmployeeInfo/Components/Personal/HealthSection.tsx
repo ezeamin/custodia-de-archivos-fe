@@ -20,7 +20,7 @@ const HealthSection = (props: PersonalProps) => {
         <Link
           className="tooltip tooltip-left"
           data-tip="Editar"
-          to={`/employees/${employeeId}/health`}
+          to={`/employees/${employeeId}/edit/health`}
         >
           <Icon iconComponent={<FaPencil size="1em" />} title="Editar" />
         </Link>
