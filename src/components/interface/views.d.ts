@@ -129,9 +129,33 @@ export interface PersonalProps {
   data: Employee | null;
 }
 
+export interface LifeInsurancesListProps {
+  data: Employee['lifeInsurances'];
+}
+
+export interface LifeInsuranceButtonProps {
+  data: Employee['lifeInsurances'][0];
+}
+
+export interface LifeInsuranceModalData {
+  data: Employee['lifeInsurances'][0];
+}
+
+export interface LifeInsuranceInfoPanelProps {
+  data: Employee['lifeInsurances'][0];
+}
+
+export interface LifeInsuranceEditPanelProps {
+  data: Employee['lifeInsurances'][0];
+}
+
 export interface DriversLicenseProps {
   data: Employee['driversLicenseDate'];
   short?: boolean;
+}
+
+export interface FitMessageProps {
+  data: Employee['preoccupationalCheckup'] | null;
 }
 
 export interface ObservationsMessageProps {

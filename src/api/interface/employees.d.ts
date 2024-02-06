@@ -12,6 +12,19 @@ export interface API_Address {
   locality: BasicList;
 }
 
+export interface API_Beneficiary {
+  id: string;
+  name: string;
+  lastname: string;
+  dni: string;
+  relationship: {
+    id: string;
+    description: string;
+  };
+  phone: string;
+  address: API_Address;
+}
+
 export interface API_MinimalFamilyMember {
   id: string;
   name: string;
@@ -50,6 +63,21 @@ export interface API_GetEmployee extends API_GetEmployees {
   gender: BasicList;
   startDate: string;
   endDate: string | null;
+  healthInsurance: {
+    id: string;
+    name: string;
+    affiliateNumber: string;
+  } | null;
+  lifeInsurances: {
+    id: string;
+    name: string;
+    policyNumber: string;
+    beneficiaries: API_Beneficiary[];
+  }[];
+  preoccupationalCheckup: {
+    fit: boolean;
+    observations: string;
+  } | null;
   user: {
     id: string;
   } | null;

@@ -80,6 +80,9 @@ export const getEmployeeAdapter = (data: API_GetEmployee): Employee => ({
   user: data.user,
   familyMembers: data.familyMembers,
   driversLicenseDate: data.driversLicenseDate,
+  healthInsurance: data.healthInsurance,
+  preoccupationalCheckup: data.preoccupationalCheckup,
+  lifeInsurances: data.lifeInsurances,
 });
 
 export const getFamilyMemberInfoAdapter = (

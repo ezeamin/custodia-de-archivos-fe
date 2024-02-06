@@ -11,6 +11,11 @@ export const paths = {
     EMPLOYEE_DETAILS_EDIT: '/employees/:id/edit/:subtab',
     EMPLOYEE_FAMILY_CREATE: '/employees/:id/family',
     EMPLOYEE_FAMILY_EDIT: '/employees/:id/family/:memberId',
+    EMPLOYEE_LIFE_INSURANCE_CREATE: '/employees/:id/life-insurance',
+    EMPLOYEE_LIFE_INSURANCE_BENEFICIARY_CREATE:
+      '/employees/:id/life-insurance/:lifeInsuranceId/beneficiary',
+    EMPLOYEE_LIFE_INSURANCE_BENEFICIARY_EDIT:
+      '/employees/:id/life-insurance/:lifeInsuranceId/beneficiary/:beneficiaryId',
     CREATE: '/employees/create',
   },
   NOTIFICATIONS: {
