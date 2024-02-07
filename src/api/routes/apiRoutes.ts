@@ -433,6 +433,15 @@ export const apiRoutes = {
       url: `/employees/${employeeId}/family/${memberId}`,
       useToken: true,
     }),
+    POST_LIFE_INSURANCE: ({
+      employeeId,
+    }: {
+      employeeId: string;
+    }): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/${employeeId}/life-insurances`,
+      useToken: true,
+    }),
   },
   NOTIFICATIONS: {
     GET_NOTIFICATIONS: ({ params }: { params: string }): ApiRoute => ({

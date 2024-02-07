@@ -5,11 +5,13 @@ const FitMessage = (props: FitMessageProps) => {
 
   if (!data)
     return (
-      <h3 className="mt-2">Preocupacionales - Sin información de aptitud</h3>
+      <h3 className="mb-1 mt-3">
+        Preocupacionales - Sin información de aptitud
+      </h3>
     );
 
   return (
-    <h3 className="mb-1 mt-2">
+    <h3 className="mb-1 mt-3">
       Preocupacionales -{' '}
       {data.fit ? (
         <>

@@ -10,12 +10,14 @@ const AuthLayout = () => {
       <main className="lg:px-30 flex h-[90vh] w-full flex-col justify-center px-10 md:px-12 xl:px-48">
         <section>
           <article className="mb-10 flex flex-col items-center text-center md:mb-20">
-            <img
-              alt="Custodia de archivos"
-              className="animate-in-bottom mb-3 rounded-md"
-              src={logoImg}
-              width={150}
-            />
+            <div className="animate-in-bottom mb-3 w-[160px] overflow-hidden rounded-md bg-white px-3 py-2">
+              <img
+                alt="Custodia de archivos"
+                className="w-full"
+                src={logoImg}
+                width={150}
+              />
+            </div>
             <h1 className="animate-in-bottom a-delay-100 text-2xl font-bold">
               Portal de Empleados
             </h1>

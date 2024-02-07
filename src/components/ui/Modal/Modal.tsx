@@ -15,13 +15,16 @@ const Modal = (props: ModalProps) => {
     submitButton = false,
     submitButtonText = 'Guardar',
     loading = false,
+    disabledSubmitButton = false,
     footerChildren,
+    onClose = () => {},
   } = props;
 
   const { opened, closeModal, modalId } = useModal();
 
   const handleClose = () => {
     closeModal();
+    onClose();
   };
 
   if (modalId !== id) return null;
@@ -53,6 +56,7 @@ const Modal = (props: ModalProps) => {
             <Button
               lowerCase
               colorLight="btn-primary"
+              disabled={disabledSubmitButton}
               loading={loading}
               textColorLight="text-white"
               type="submit"

@@ -1,4 +1,5 @@
 import { AddDocumentSchema } from './addDocumentSchema';
+import { AddLifeInsuranceSchema } from './addLifeInsuranceSchema';
 import { AddNewAbsenceSchema } from './addNewAbsenceSchema';
 import { AddNewExtraHoursSchema } from './addNewExtraHoursSchema';
 import { AddNewFormalWarningSchema } from './addNewFormalWarningSchema';
@@ -32,4 +33,5 @@ export type EmployeesSchemas =
   | EditContactInfoSchema
   | EditJobInfoSchema
   | EditImageSchema
-  | FamilyMemberFormSchema;
+  | FamilyMemberFormSchema
+  | AddLifeInsuranceSchema;

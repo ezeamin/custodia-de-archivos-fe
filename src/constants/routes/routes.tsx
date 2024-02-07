@@ -15,7 +15,6 @@ import ResetPasswordView from '@/views/Auth/ResetPasswordView';
 import CreateBeneficiaryView from '@/views/Employees/CreateBeneficiaryView';
 import CreateEmployeeView from '@/views/Employees/CreateEmployeeView';
 import CreateFamilyMemberView from '@/views/Employees/CreateFamilyMemberView';
-import CreateLifeInsuranceView from '@/views/Employees/CreateLifeInsuranceView';
 import EditBeneficiaryView from '@/views/Employees/EditBeneficiaryView';
 import EditEmployeeView from '@/views/Employees/EditEmployeeView';
 import EditFamilyMemberView from '@/views/Employees/EditFamilyMemberView';
@@ -157,17 +156,6 @@ export const routes: Route[] = [
       {
         // TODO
         id: 3006,
-        title: 'Crear Seguro de Vida',
-        description: 'Crear Seguro de Vida',
-        path: paths.EMPLOYEES.EMPLOYEE_LIFE_INSURANCE_CREATE,
-        subpaths: [],
-        privateRoute: true,
-        element: <CreateLifeInsuranceView />,
-        allowedRoles: [userRoles.ADMIN],
-      },
-      {
-        // TODO
-        id: 3007,
         title: 'Crear Beneficiario de Seguro de Vida',
         description: 'Crear Beneficiario de Seguro de Vida',
         path: paths.EMPLOYEES.EMPLOYEE_LIFE_INSURANCE_BENEFICIARY_CREATE,
@@ -178,7 +166,7 @@ export const routes: Route[] = [
       },
       {
         // TODO
-        id: 3008,
+        id: 3007,
         title: 'Editar Beneficiario de Seguro de Vida',
         description: 'Editar Beneficiario de Seguro de Vida',
         path: paths.EMPLOYEES.EMPLOYEE_LIFE_INSURANCE_BENEFICIARY_EDIT,

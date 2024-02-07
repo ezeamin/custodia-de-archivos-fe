@@ -21,8 +21,8 @@ export interface API_Beneficiary {
     id: string;
     description: string;
   };
-  phone: string;
-  address: API_Address;
+  phone: string | null;
+  address: API_Address | null;
 }
 
 export interface API_MinimalFamilyMember {

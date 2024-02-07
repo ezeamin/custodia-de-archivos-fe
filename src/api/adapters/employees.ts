@@ -35,8 +35,6 @@ import {
   Vacation,
 } from '@/api/interface/employees';
 
-// TODO: Check if this information is all needed.
-
 export const getEmployeesAdapter = (
   data: API_GetEmployees[]
 ): MinimalEmployee[] => {

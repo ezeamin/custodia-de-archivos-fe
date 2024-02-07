@@ -723,3 +723,19 @@ export const getStreetsFn = async ({
 
   return data;
 };
+
+export const postLifeInsuranceFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.EMPLOYEES.POST_LIFE_INSURANCE({
+    employeeId: body.id as string,
+  });
+
+  const dataToSend = cleanUpDataToSend(body);
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    body: dataToSend,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
