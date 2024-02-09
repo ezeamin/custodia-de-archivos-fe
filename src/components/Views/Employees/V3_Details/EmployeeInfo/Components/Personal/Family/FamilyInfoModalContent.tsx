@@ -4,7 +4,7 @@ import { FaPencil } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import EmployeeDataField from '../../../EmployeeDataField';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 
@@ -21,13 +21,15 @@ const FamilyInfoModalContent = (props: FamilyInfoModalContentProps) => {
   const { id: employeeId } = useParams();
 
   const navigate = useNavigate();
-  const { closeModal, setModalData } = useModal();
+  const { closeModal } = useModal();
 
   // -------------------------------------------------
   // API
   // -------------------------------------------------
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const queryClient = useQueryClient();
 
   const { mutate: deleteFamilyMember } = useMutation({
     mutationFn: deleteFamilyMemberFn,
@@ -37,8 +39,10 @@ const FamilyInfoModalContent = (props: FamilyInfoModalContentProps) => {
     onSuccess: () => {
       setIsLoading(false);
       closeModal();
-      setModalData(null);
       toast.success('Familiar eliminado con éxito');
+      queryClient.invalidateQueries({
+        queryKey: ['employee', employeeId],
+      });
     },
   });
 

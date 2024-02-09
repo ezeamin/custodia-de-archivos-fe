@@ -442,6 +442,28 @@ export const apiRoutes = {
       url: `/employees/${employeeId}/life-insurances`,
       useToken: true,
     }),
+    PUT_LIFE_INSURANCE: ({
+      employeeId,
+      lifeInsuranceId,
+    }: {
+      employeeId: string;
+      lifeInsuranceId: string;
+    }): ApiRoute => ({
+      method: 'PUT',
+      url: `/employees/${employeeId}/life-insurances/${lifeInsuranceId}`,
+      useToken: true,
+    }),
+    DELETE_LIFE_INSURANCE: ({
+      employeeId,
+      lifeInsuranceId,
+    }: {
+      employeeId: string;
+      lifeInsuranceId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/life-insurances/${lifeInsuranceId}`,
+      useToken: true,
+    }),
   },
   NOTIFICATIONS: {
     GET_NOTIFICATIONS: ({ params }: { params: string }): ApiRoute => ({

@@ -75,7 +75,7 @@ export interface FamilyButtonProps {
   member: MinimalFamilyMember;
 }
 
-export interface FamilyModalData {
+export interface FamilyModalData extends ModalStore {
   data: string;
 }
 
@@ -137,16 +137,19 @@ export interface LifeInsuranceButtonProps {
   data: Employee['lifeInsurances'][0];
 }
 
-export interface LifeInsuranceModalData {
+export interface LifeInsuranceModalData extends ModalStore {
   data: Employee['lifeInsurances'][0];
 }
 
 export interface LifeInsuranceInfoPanelProps {
   data: Employee['lifeInsurances'][0];
+  onClickEdit: () => void;
+  onClickDelete: () => void;
 }
 
 export interface LifeInsuranceEditPanelProps {
   data: Employee['lifeInsurances'][0];
+  onFinishEdit: () => void;
 }
 
 export interface DriversLicenseProps {

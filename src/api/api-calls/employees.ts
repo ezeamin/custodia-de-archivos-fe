@@ -739,3 +739,44 @@ export const postLifeInsuranceFn = async (body: Record<string, unknown>) => {
 
   return data;
 };
+
+export const putLifeInsuranceFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.EMPLOYEES.PUT_LIFE_INSURANCE({
+    employeeId: body.employeeId as string,
+    lifeInsuranceId: body.lifeInsuranceId as string,
+  });
+
+  const dataToSend = {
+    ...body,
+    employeeId: undefined,
+    lifeInsuranceId: undefined,
+  };
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    body: dataToSend,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const deleteLifeInsuranceFn = async ({
+  employeeId,
+  lifeInsuranceId,
+}: {
+  employeeId: string;
+  lifeInsuranceId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.DELETE_LIFE_INSURANCE({
+    employeeId,
+    lifeInsuranceId,
+  });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};

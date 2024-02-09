@@ -76,6 +76,7 @@ const CreateLifeInsuranceModal = () => {
         className="overflow-x-hidden px-1 pb-1"
         disabledSubmitButton={!areAllFieldsFilled}
         id="lifeInsuranceForm"
+        loading={isLoading}
         title="Crear Seguro de Vida"
         onClose={reset}
       >

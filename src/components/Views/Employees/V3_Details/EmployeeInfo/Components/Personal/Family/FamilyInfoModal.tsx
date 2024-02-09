@@ -14,7 +14,7 @@ import { FamilyModalData } from '@/components/interface/views';
 
 const FamilyInfoModal = () => {
   const { id: employeeId } = useParams();
-  const { data: memberId } = useModal() as FamilyModalData;
+  const { data: memberId, modalId } = useModal() as FamilyModalData;
 
   // -------------------------------------------------
   // API
@@ -27,9 +27,13 @@ const FamilyInfoModal = () => {
     isSuccess,
     refetch,
   } = useQuery({
-    queryKey: ['familyMember', memberId],
+    queryKey: [
+      'familyMember',
+      memberId,
+      !!(memberId && employeeId && modalId === 'family'),
+    ],
     queryFn: () => getFamilyMemberInfoFn({ employeeId: employeeId!, memberId }),
-    enabled: !!(memberId && employeeId),
+    enabled: !!(memberId && employeeId && modalId === 'family'),
   });
 
   // -------------------------------------------------
