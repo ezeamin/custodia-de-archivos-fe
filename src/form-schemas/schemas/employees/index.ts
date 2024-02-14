@@ -7,6 +7,7 @@ import { AddNewLateArrivalSchema } from './addNewLateArrivalSchema';
 import { AddNewLicenseSchema } from './addNewLicenseSchema';
 import { AddNewTrainingSchema } from './addNewTrainingSchema';
 import { AddNewVacationSchema } from './addNewVacationSchema';
+import { BeneficiaryFormSchema } from './beneficiaryFormSchema';
 import { ChangeDocNameSchema } from './changeDocNameSchema';
 import { CreateSchema } from './createSchema';
 import { EditContactInfoSchema } from './editContactInfoSchema';
@@ -36,4 +37,5 @@ export type EmployeesSchemas =
   | EditImageSchema
   | FamilyMemberFormSchema
   | AddLifeInsuranceSchema
-  | EditHealthInfoSchema;
+  | EditHealthInfoSchema
+  | BeneficiaryFormSchema;

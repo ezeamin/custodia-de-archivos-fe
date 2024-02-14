@@ -102,7 +102,7 @@ const LifeInsuranceEditPanel = (props: LifeInsuranceEditPanelProps) => {
           placeholder="Sancor"
         />
       </Grid>
-      <Grid item lg={3} xs={12}>
+      <Grid item lg={4} xs={12}>
         <TextInput
           className="w-full"
           control={control}
@@ -113,7 +113,7 @@ const LifeInsuranceEditPanel = (props: LifeInsuranceEditPanelProps) => {
           type="number"
         />
       </Grid>
-      <Grid item lg={3} xs={12}>
+      <Grid item lg={2} xs={12}>
         <Button
           className="h-[48px] w-full flex-nowrap md:mt-[32px]"
           colorLight="btn-primary"

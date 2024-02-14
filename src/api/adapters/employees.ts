@@ -1,6 +1,7 @@
 import {
   Absence,
   API_GetAbsences,
+  API_GetBeneficiary,
   API_GetEmployee,
   API_GetEmployeeDocs,
   API_GetEmployees,
@@ -17,6 +18,7 @@ import {
   API_GetTrainings,
   API_GetTrainingsTypes,
   API_GetVacations,
+  Beneficiary,
   Employee,
   EmployeeDoc,
   ExtraHours,
@@ -239,6 +241,18 @@ export const getEmployeeExtraHoursAdapter = (
     observations: element.observations,
   }));
 };
+
+export const getBeneficiaryInfoAdapter = (
+  data: API_GetBeneficiary
+): Beneficiary => ({
+  id: data.id,
+  name: data.name,
+  lastname: data.lastname,
+  dni: data.dni,
+  gender: data.gender,
+  address: data.address,
+  relationship: data.relationship,
+});
 
 export const getStatesAdapter = (data: API_GetStates): State[] => {
   return data.provincias

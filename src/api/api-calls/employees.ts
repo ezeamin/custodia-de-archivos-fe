@@ -6,6 +6,7 @@ import { apiRoutes } from '@/api/routes/apiRoutes';
 import { cleanUpDataToSend } from '@/utilities/utils';
 
 import {
+  getBeneficiaryInfoAdapter,
   getEmployeeAbsencesAdapter,
   getEmployeeAdapter,
   getEmployeeDocsAdapter,
@@ -31,6 +32,7 @@ import { API_EmptyResponse } from '../interface';
 import {
   Absence,
   API_GetAbsences,
+  API_GetBeneficiary,
   API_GetEmployee,
   API_GetEmployeeDocs,
   API_GetEmployees,
@@ -47,8 +49,10 @@ import {
   API_GetTrainings,
   API_GetTrainingsTypes,
   API_GetVacations,
+  API_PostBeneficiary,
   API_PostEmployee,
   API_PostFamilyMember,
+  Beneficiary,
   Employee,
   EmployeeDoc,
   ExtraHours,
@@ -653,6 +657,7 @@ export const putFamilyMemberFn = async (body: Record<string, unknown>) => {
     employeeId: undefined,
   };
 
+  // TODO: Add response in case some person already exists, like the POST
   const data = await fetchFn<API_EmptyResponse>({
     request,
     body: dataToSend,
@@ -775,6 +780,74 @@ export const deleteLifeInsuranceFn = async ({
 
   const data = await fetchFn<API_EmptyResponse>({
     request,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const getBeneficiaryInfoFn = async ({
+  employeeId,
+  lifeInsuranceId,
+  beneficiaryId,
+}: {
+  employeeId: string;
+  lifeInsuranceId: string;
+  beneficiaryId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.GET_BENEFICIARY_INFO({
+    employeeId,
+    lifeInsuranceId,
+    beneficiaryId,
+  });
+
+  const data = await fetchFn<API_GetBeneficiary, Beneficiary>({
+    request,
+    adapter: getBeneficiaryInfoAdapter,
+  });
+
+  return data;
+};
+
+export const postBeneficiaryFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.EMPLOYEES.POST_BENEFICIARY({
+    employeeId: body.employeeId as string,
+    lifeInsuranceId: body.lifeInsuranceId as string,
+  });
+
+  const dataToSend = {
+    ...body,
+    employeeId: undefined,
+    lifeInsuranceId: undefined,
+  };
+
+  const data = await fetchFn<API_PostBeneficiary>({
+    request,
+    body: dataToSend,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const putBeneficiaryFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.EMPLOYEES.PUT_BENEFICIARY({
+    employeeId: body.employeeId as string,
+    lifeInsuranceId: body.lifeInsuranceId as string,
+    beneficiaryId: body.beneficiaryId as string,
+  });
+
+  const dataToSend = {
+    ...body,
+    employeeId: undefined,
+    lifeInsuranceId: undefined,
+    beneficiaryId: undefined,
+  };
+
+  // TODO: Add response in case some person already exists, like the POST
+  const data = await fetchFn<API_PostBeneficiary>({
+    request,
+    body: dataToSend,
     adapter: (APIData) => APIData,
   });
 

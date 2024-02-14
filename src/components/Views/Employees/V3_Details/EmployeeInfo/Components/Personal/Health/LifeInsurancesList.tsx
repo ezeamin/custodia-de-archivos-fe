@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
 
 import LifeInsuranceButton from './LifeInsuranceButton';
-import LifeInsuranceInfoModal from './LifeInsuranceInfoModal';
+import LifeInsuranceInfoModal from './Modal/LifeInsuranceInfoModal';
 
 import { Alert, Grid } from '@/components/ui';
 

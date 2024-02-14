@@ -2,6 +2,7 @@ import { ModalStore } from '@/stores/useModal';
 
 import {
   Absence,
+  Beneficiary,
   Employee,
   EmployeeDoc,
   ExtraHours,
@@ -65,6 +66,10 @@ export interface EmployeeDataFieldProps {
   label: string;
   value: string | number | React.ReactNode | undefined | null;
   className?: string;
+}
+
+export interface BeneficiaryFormProps {
+  beneficiaryOriginalData?: Beneficiary;
 }
 
 export interface FamilyListProps {
@@ -150,6 +155,12 @@ export interface LifeInsuranceInfoPanelProps {
 export interface LifeInsuranceEditPanelProps {
   data: Employee['lifeInsurances'][0];
   onFinishEdit: () => void;
+}
+
+export interface BeneficiariesProps {
+  employeeId: string;
+  isEditing: boolean;
+  lifeInsurance: Employee['lifeInsurances'][0];
 }
 
 export interface DriversLicenseProps {

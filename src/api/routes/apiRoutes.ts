@@ -464,6 +464,43 @@ export const apiRoutes = {
       url: `/employees/${employeeId}/life-insurances/${lifeInsuranceId}`,
       useToken: true,
     }),
+    GET_BENEFICIARY_INFO: ({
+      employeeId,
+      lifeInsuranceId,
+      beneficiaryId,
+    }: {
+      employeeId: string;
+      lifeInsuranceId: string;
+      beneficiaryId: string;
+    }): ApiRoute => ({
+      method: 'GET',
+      url: `/employees/${employeeId}/life-insurances/${lifeInsuranceId}/beneficiaries/${beneficiaryId}`,
+      useToken: true,
+    }),
+    POST_BENEFICIARY: ({
+      employeeId,
+      lifeInsuranceId,
+    }: {
+      employeeId: string;
+      lifeInsuranceId: string;
+    }): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/${employeeId}/life-insurances/${lifeInsuranceId}/beneficiaries`,
+      useToken: true,
+    }),
+    PUT_BENEFICIARY: ({
+      employeeId,
+      lifeInsuranceId,
+      beneficiaryId,
+    }: {
+      employeeId: string;
+      lifeInsuranceId: string;
+      beneficiaryId: string;
+    }): ApiRoute => ({
+      method: 'PUT',
+      url: `/employees/${employeeId}/life-insurances/${lifeInsuranceId}/beneficiaries/${beneficiaryId}`,
+      useToken: true,
+    }),
   },
   NOTIFICATIONS: {
     GET_NOTIFICATIONS: ({ params }: { params: string }): ApiRoute => ({

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
+import Beneficiaries from './Beneficiaries/Beneficiaries';
 import LifeInsuranceEditPanel from './LifeInsuranceEditPanel';
 import LifeInsuranceInfoPanel from './LifeInsuranceInfoPanel';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -102,19 +103,11 @@ const LifeInsuranceInfoModal = () => {
           onClickEdit={handleClickEdit}
         />
       )}
-      <section className="mt-5 flex flex-col items-center justify-between sm:flex-row">
-        <h2 className="mb-2 font-bold sm:mb-0">Beneficiarios</h2>
-        <Link
-          className="btn btn-primary mb-3 w-full text-white sm:mb-0 sm:w-auto"
-          to={`/employees/${employeeId}/life-insurance/${lifeInsurance?.id}/beneficiary`}
-          // to={`/employees/${employeeId}/life-insurance/${lifeInsurance?.id}/beneficiary/${beneficiary?.id}`}
-        >
-          AGREGAR BENEFICIARIO
-        </Link>
-      </section>
-      <p className="mt-3 text-center">
-        Acá iría la lista de beneficiarios lol xd
-      </p>
+      <Beneficiaries
+        employeeId={employeeId!}
+        isEditing={isEditing}
+        lifeInsurance={lifeInsurance}
+      />
     </Modal>
   );
 };

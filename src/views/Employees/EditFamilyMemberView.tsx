@@ -50,7 +50,7 @@ const EditFamilyMemberView = () => {
           buttonClassName="bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-700"
           buttonText="Cancelar edición"
           href={`/employees/${employeeId}/personal`}
-          title="Editar familiar"
+          title="Editar Familiar"
         />
         <ErrorMessage refetch={handleRetry} />;
       </>
@@ -64,7 +64,7 @@ const EditFamilyMemberView = () => {
           buttonClassName="bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-700"
           buttonText="Cancelar edición"
           href={`/employees/${employeeId}/personal`}
-          title="Editar familiar"
+          title="Editar Familiar"
         />
         <FamilyMemberForm memberOriginalData={familyMemberData?.data} />
       </>

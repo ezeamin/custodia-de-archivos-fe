@@ -12,16 +12,19 @@ export interface API_Address {
   locality: BasicList;
 }
 
-export interface API_Beneficiary {
+export interface API_GetBeneficiary {
   id: string;
   name: string;
   lastname: string;
+  gender: {
+    id: string;
+    description: string;
+  };
   dni: string;
   relationship: {
     id: string;
     description: string;
   };
-  phone: string | null;
   address: API_Address | null;
 }
 
@@ -72,7 +75,7 @@ export interface API_GetEmployee extends API_GetEmployees {
     id: string;
     name: string;
     policyNumber: string;
-    beneficiaries: API_Beneficiary[];
+    beneficiaries: API_GetBeneficiary[];
   }[];
   preoccupationalCheckup: {
     fit: boolean;
@@ -108,6 +111,14 @@ export interface API_PostFamilyMember {
   lastname: string;
   dni: string;
   phone: string | null;
+  address: string | null;
+}
+
+export interface API_PostBeneficiary {
+  name: string;
+  lastname: string;
+  dni: string;
+  gender: string;
   address: string | null;
 }
 
@@ -238,3 +249,4 @@ export interface Locality extends BasicList {}
 export interface Street extends BasicList {}
 export interface MinimalFamilyMember extends API_MinimalFamilyMember {}
 export interface FamilyMember extends API_GetFamilyMember {}
+export interface Beneficiary extends API_GetBeneficiary {}

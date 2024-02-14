@@ -1,7 +1,7 @@
 import { FaTrash } from 'react-icons/fa';
 import { FaPencil } from 'react-icons/fa6';
 
-import EmployeeDataField from '../../../EmployeeDataField';
+import EmployeeDataField from '../../../../EmployeeDataField';
 
 import { Button, Grid } from '@/components/ui';
 
