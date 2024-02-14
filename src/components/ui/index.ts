@@ -3,6 +3,7 @@ import Alert from './Alert/Alert';
 import Button from './Button/Button';
 import Card from './Card/Card';
 import Checkbox from './Checkbox/Checkbox';
+import CheckboxInput from './CheckboxInput/CheckboxInput';
 import Chip from './Chip/Chip';
 import ComboBoxInput from './ComboBoxInput/ComboBoxInput';
 import DateInput from './DateInput/DateInput';
@@ -36,6 +37,7 @@ export {
   Card,
   Chip,
   Checkbox,
+  CheckboxInput,
   ComboBoxInput,
   DateInput,
   Drawer,
