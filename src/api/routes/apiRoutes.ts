@@ -501,6 +501,19 @@ export const apiRoutes = {
       url: `/employees/${employeeId}/life-insurances/${lifeInsuranceId}/beneficiaries/${beneficiaryId}`,
       useToken: true,
     }),
+    DELETE_BENEFICIARY: ({
+      employeeId,
+      lifeInsuranceId,
+      beneficiaryId,
+    }: {
+      employeeId: string;
+      lifeInsuranceId: string;
+      beneficiaryId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/life-insurances/${lifeInsuranceId}/beneficiaries/${beneficiaryId}`,
+      useToken: true,
+    }),
   },
   NOTIFICATIONS: {
     GET_NOTIFICATIONS: ({ params }: { params: string }): ApiRoute => ({

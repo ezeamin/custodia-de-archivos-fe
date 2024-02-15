@@ -1,6 +1,9 @@
+import { FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-import { Button } from '@/components/ui';
+import BeneficiariesList from './BeneficiariesList';
+
+import { Icon } from '@/components/ui';
 
 import { BeneficiariesProps } from '@/components/interface/views';
 
@@ -8,29 +11,32 @@ const Beneficiaries = (props: BeneficiariesProps) => {
   const { employeeId, isEditing, lifeInsurance } = props;
   return (
     <>
-      <section className="mt-5 flex flex-col items-center justify-between sm:flex-row">
+      <section className="mb-2 mt-5 flex flex-col items-center justify-between sm:flex-row">
         <h2 className="mb-2 font-bold sm:mb-0">Beneficiarios</h2>
         {isEditing ? (
-          <Button
-            disabled
-            className="mb-3 w-full animate-none sm:mb-0 sm:w-auto"
-            colorLight="btn-primary"
-          >
-            AGREGAR BENEFICIARIO
-          </Button>
+          <button disabled className="disabled:text-gray-400" type="button">
+            <Icon
+              iconComponent={<FaPlus size="1em" />}
+              title="Agregar nuevo miembro"
+            />
+          </button>
         ) : (
           <Link
-            className="btn btn-primary mb-3 w-full text-white sm:mb-0 sm:w-auto"
+            className="tooltip tooltip-left"
+            data-tip="Agregar nuevo miembro"
             to={`/employees/${employeeId}/life-insurance/${lifeInsurance?.id}/beneficiary`}
-            // to={`/employees/${employeeId}/life-insurance/${lifeInsurance?.id}/beneficiary/${beneficiary?.id}`}
           >
-            AGREGAR BENEFICIARIO
+            <Icon
+              iconComponent={<FaPlus size="1em" />}
+              title="Agregar nuevo miembro"
+            />
           </Link>
         )}
       </section>
-      <p className="mt-3 text-center">
-        Acá iría la lista de beneficiarios lol xd
-      </p>
+      <BeneficiariesList
+        data={lifeInsurance.beneficiaries}
+        lifeInsuranceId={lifeInsurance.id}
+      />
     </>
   );
 };

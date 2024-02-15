@@ -26,6 +26,7 @@ export interface API_GetBeneficiary {
     description: string;
   };
   address: API_Address | null;
+  percentage: number | null;
 }
 
 export interface API_MinimalFamilyMember {

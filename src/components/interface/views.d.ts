@@ -72,6 +72,16 @@ export interface BeneficiaryFormProps {
   beneficiaryOriginalData?: Beneficiary;
 }
 
+export interface BeneficiariesListProps {
+  data: Beneficiary[];
+  lifeInsuranceId: string;
+}
+
+export interface BeneficiaryItemProps {
+  beneficiary: Beneficiary;
+  lifeInsuranceId: string;
+}
+
 export interface FamilyListProps {
   data: MinimalFamilyMember[];
 }

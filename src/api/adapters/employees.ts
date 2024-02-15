@@ -252,6 +252,7 @@ export const getBeneficiaryInfoAdapter = (
   gender: data.gender,
   address: data.address,
   relationship: data.relationship,
+  percentage: data.percentage,
 });
 
 export const getStatesAdapter = (data: API_GetStates): State[] => {

@@ -853,3 +853,26 @@ export const putBeneficiaryFn = async (body: Record<string, unknown>) => {
 
   return data;
 };
+
+export const deleteBeneficiaryFn = async ({
+  employeeId,
+  lifeInsuranceId,
+  beneficiaryId,
+}: {
+  employeeId: string;
+  lifeInsuranceId: string;
+  beneficiaryId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.DELETE_BENEFICIARY({
+    employeeId,
+    lifeInsuranceId,
+    beneficiaryId,
+  });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
