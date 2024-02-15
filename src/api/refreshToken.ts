@@ -38,10 +38,8 @@ export const refreshTokenFetch = async (
   // 3. Process the refresh token response
   if (refreshResult?.data) {
     // Adapt the response
-    const formatRes = postLoginAdapter(refreshResult);
+    const formatRes = postLoginAdapter(refreshResult.data);
     const newAccessToken = formatRes.token;
-
-    console.log(formatRes);
 
     // Login the user with the new token
     useSession.getState().login(newAccessToken);
