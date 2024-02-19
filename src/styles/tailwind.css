@@ -33,3 +33,9 @@ tr:last-child {
 .custom-skeleton {
   @apply animate-pulse bg-gray-300 dark:bg-gray-700;
 }
+
+[data-theme='dark'] {
+  .btn:not(.btn-error, .btn-primary, .btn-secondary, .btn-neutral) {
+    @apply border border-gray-500;
+  }
+}

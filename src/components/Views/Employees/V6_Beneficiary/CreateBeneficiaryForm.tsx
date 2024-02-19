@@ -10,7 +10,7 @@ import {
   getStatesFn,
   getStreetsFn,
   postBeneficiaryFn,
-  putFamilyMemberFn,
+  putBeneficiaryFn,
 } from '@/api/api-calls/employees';
 import {
   getGenderOptionsFn,
@@ -32,7 +32,7 @@ import { BasicList } from '@/interface';
 const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
   const { beneficiaryOriginalData } = props;
 
-  const { id: employeeId, lifeInsuranceId } = useParams();
+  const { id: employeeId, lifeInsuranceId, beneficiaryId } = useParams();
   const navigate = useNavigate();
 
   const isEditing = !!beneficiaryOriginalData;
@@ -55,6 +55,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
   const locality = watch('locality');
   const streetNumber = watch('streetNumber');
   const apt = watch('apt');
+  const percentage = watch('percentage');
   const areAllMandatoryFieldsFilled =
     name &&
     lastname &&
@@ -173,6 +174,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
                 state,
                 streetNumber,
                 apt,
+                percentage,
               });
             }
           });
@@ -190,7 +192,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
   });
 
   const { mutate: editBeneficiary } = useMutation({
-    mutationFn: putFamilyMemberFn,
+    mutationFn: putBeneficiaryFn,
     onError: () => {
       setIsLoading(false);
     },
@@ -199,7 +201,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
       reset();
       toast.success('Información del beneficiario editada con éxito');
       queryClient.invalidateQueries({
-        queryKey: ['familyMember', beneficiaryOriginalData?.id],
+        queryKey: ['beneficiary', beneficiaryOriginalData?.id],
       });
       queryClient.invalidateQueries({
         queryKey: ['employee', employeeId],
@@ -242,7 +244,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
         ...data,
         employeeId,
         lifeInsuranceId,
-        beneficiaryId: beneficiaryOriginalData?.id,
+        beneficiaryId,
         genderId: data.gender.id,
         relationshipId: data.relationship.id,
         gender: undefined,
@@ -288,6 +290,8 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
         if (beneficiaryOriginalData.address.state)
           setValue('state', beneficiaryOriginalData.address.state);
       }
+      if (beneficiaryOriginalData.percentage)
+        setValue('percentage', beneficiaryOriginalData.percentage);
     }
   }, [beneficiaryOriginalData, setValue, name, stateList]);
 
@@ -480,6 +484,17 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
             label="Departamento"
             name="apt"
             placeholder="1A"
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xs={12}>
+          <TextInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            helperText="Ingresar solo números, entre 0 y 100"
+            label="Porcentaje"
+            name="percentage"
+            placeholder="100"
           />
         </Grid>
       </Grid>

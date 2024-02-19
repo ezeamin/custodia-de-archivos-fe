@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaPercentage, FaTrash } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 import { FaPencil } from 'react-icons/fa6';
 import { Link, useParams } from 'react-router-dom';
 
@@ -47,8 +47,6 @@ const BeneficiaryItem = (props: BeneficiaryItemProps) => {
   // -------------------------------------------------
   // HANDLERS
   // -------------------------------------------------
-
-  const handleClickPercentage = () => {};
 
   const handleClickDeletion = () => {
     Swal.fire({
@@ -106,14 +104,6 @@ const BeneficiaryItem = (props: BeneficiaryItemProps) => {
         Dirección: <span className="font-bold">{formattedAddress}</span>
       </p>
       <div className="divider my-1" />
-      <Button
-        className="mb-2 w-full"
-        disabled={isLoading}
-        startIcon={<FaPercentage />}
-        onClick={handleClickPercentage}
-      >
-        EDITAR PORCENTAJE
-      </Button>
       <Grid container gap={2}>
         <Grid item sm={6} xs={12}>
           <Link

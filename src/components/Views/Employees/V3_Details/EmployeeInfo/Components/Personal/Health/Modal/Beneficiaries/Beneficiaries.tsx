@@ -3,12 +3,20 @@ import { Link } from 'react-router-dom';
 
 import BeneficiariesList from './BeneficiariesList';
 
-import { Icon } from '@/components/ui';
+import { Alert, Icon } from '@/components/ui';
 
 import { BeneficiariesProps } from '@/components/interface/views';
 
 const Beneficiaries = (props: BeneficiariesProps) => {
   const { employeeId, isEditing, lifeInsurance } = props;
+
+  const totalPercentage = lifeInsurance?.beneficiaries.reduce(
+    (acc, beneficiary) => acc + beneficiary.percentage,
+    0
+  );
+
+  if (!lifeInsurance) return null;
+
   return (
     <>
       <section className="mb-2 mt-5 flex flex-col items-center justify-between sm:flex-row">
@@ -33,9 +41,15 @@ const Beneficiaries = (props: BeneficiariesProps) => {
           </Link>
         )}
       </section>
+      {(totalPercentage > 100.1 || totalPercentage < 99.9) && (
+        <Alert className="mb-2" type="warning">
+          Atención: La suma de los porcentajes no da 100. Por favor, revise la
+          información ingresada
+        </Alert>
+      )}
       <BeneficiariesList
-        data={lifeInsurance.beneficiaries}
-        lifeInsuranceId={lifeInsurance.id}
+        data={lifeInsurance?.beneficiaries || []}
+        lifeInsuranceId={lifeInsurance?.id}
       />
     </>
   );
