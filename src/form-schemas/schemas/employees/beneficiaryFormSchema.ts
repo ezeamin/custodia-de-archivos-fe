@@ -40,6 +40,7 @@ export const beneficiaryFormSchema = z.object({
     .positive({
       message: 'El campo Porcentaje debe ser un número positivo',
     })
+    .max(100, 'El campo Porcentaje no puede ser mayor a 100')
     .default(100),
 });
 

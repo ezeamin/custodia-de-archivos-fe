@@ -18,6 +18,7 @@ import {
 } from '@/api/api-calls/params';
 
 import { useLoading, useZodForm } from '@/hooks';
+import { useModal } from '@/stores/useModal';
 
 import { Button, ComboBoxInput, Grid, TextInput } from '@/components/ui';
 
@@ -34,6 +35,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
 
   const { id: employeeId, lifeInsuranceId, beneficiaryId } = useParams();
   const navigate = useNavigate();
+  const { closeModal } = useModal();
 
   const isEditing = !!beneficiaryOriginalData;
 
@@ -188,6 +190,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
         queryKey: ['employee', employeeId],
       });
       navigate(`/employees/${employeeId}/personal`);
+      closeModal();
     },
   });
 
@@ -207,6 +210,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
         queryKey: ['employee', employeeId],
       });
       navigate(`/employees/${employeeId}/personal`);
+      closeModal();
     },
   });
 

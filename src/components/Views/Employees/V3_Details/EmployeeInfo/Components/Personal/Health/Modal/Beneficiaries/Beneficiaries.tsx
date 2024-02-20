@@ -19,7 +19,7 @@ const Beneficiaries = (props: BeneficiariesProps) => {
 
   return (
     <>
-      <section className="mb-2 mt-5 flex flex-col items-center justify-between sm:flex-row">
+      <section className="mb-2 mt-5 flex items-center justify-between">
         <h2 className="mb-2 font-bold sm:mb-0">Beneficiarios</h2>
         {isEditing ? (
           <button disabled className="disabled:text-gray-400" type="button">
@@ -41,11 +41,20 @@ const Beneficiaries = (props: BeneficiariesProps) => {
           </Link>
         )}
       </section>
-      {(totalPercentage > 100.1 || totalPercentage < 99.9) && (
-        <Alert className="mb-2" type="warning">
-          Atención: La suma de los porcentajes no da 100. Por favor, revise la
-          información ingresada
-        </Alert>
+      {lifeInsurance?.beneficiaries.length > 0 &&
+        (totalPercentage > 100.1 || totalPercentage < 99.9) && (
+          <Alert className="mb-2" type="warning">
+            Atención: La suma de los porcentajes no da 100. Por favor, revise la
+            información ingresada
+          </Alert>
+        )}
+      {lifeInsurance?.beneficiaries.length === 0 && (
+        <p className="my-3 text-center">
+          <span>
+            No hay beneficiarios registrados. Agregue uno nuevo desde el botón{' '}
+          </span>
+          <FaPlus className="ms-1 inline text-xs" />
+        </p>
       )}
       <BeneficiariesList
         data={lifeInsurance?.beneficiaries || []}

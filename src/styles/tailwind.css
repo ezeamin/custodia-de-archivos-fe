@@ -35,7 +35,7 @@ tr:last-child {
 }
 
 [data-theme='dark'] {
-  .btn:not(.btn-error, .btn-primary, .btn-secondary, .btn-neutral) {
+  .btn:not(.btn-error, .btn-primary, .btn-secondary, .btn-neutral, .btn-ghost) {
     @apply border border-gray-500;
   }
 }
