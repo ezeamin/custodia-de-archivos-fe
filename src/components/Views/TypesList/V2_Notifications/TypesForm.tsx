@@ -24,13 +24,13 @@ import {
   putNotificationTypeFn,
 } from '@/api/api-calls/typesList';
 import {
-  notificationTypeSchema,
-  NotificationTypeSchema,
-} from '@/form-schemas/schemas/typesList/notificationTypeSchema';
+  notificationsTypeSchema,
+  NotificationsTypeSchema,
+} from '@/form-schemas/schemas/typesList/notificationsTypeSchema';
 
 const TypesForm = () => {
   const { control, onSubmitMiddleware, areAllFieldsFilled, setValue, reset } =
-    useZodForm(notificationTypeSchema);
+    useZodForm(notificationsTypeSchema);
 
   const [isLoading, setIsLoading] = useState(false);
   const { search } = useLocation(); // ?edit=true&id=*
@@ -113,7 +113,7 @@ const TypesForm = () => {
   // HANDLERS
   // -----------------------------------------------------
 
-  const handleSubmit = (data: NotificationTypeSchema) => {
+  const handleSubmit = (data: NotificationsTypeSchema) => {
     setIsLoading(true);
 
     if (isEditing) {

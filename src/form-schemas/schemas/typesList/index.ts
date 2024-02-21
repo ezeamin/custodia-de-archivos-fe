@@ -1,8 +1,10 @@
-import { LicenseTypeSchema } from './licensesTypeSchema';
-import { NotificationTypeSchema } from './notificationTypeSchema';
-import { TrainingTypeSchema } from './trainingsTypeSchema';
+import { AreasTypeSchema } from './areasTypeSchema';
+import { LicensesTypeSchema } from './licensesTypeSchema';
+import { NotificationsTypeSchema } from './notificationsTypeSchema';
+import { TrainingsTypeSchema } from './trainingsTypeSchema';
 
 export type TypesListSchemas =
-  | NotificationTypeSchema
-  | LicenseTypeSchema
-  | TrainingTypeSchema;
+  | NotificationsTypeSchema
+  | LicensesTypeSchema
+  | TrainingsTypeSchema
+  | AreasTypeSchema;

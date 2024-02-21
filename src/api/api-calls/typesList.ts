@@ -3,7 +3,10 @@ import { apiRoutes } from '../routes/apiRoutes';
 
 import { cleanUpDataToSend } from '@/utilities/utils';
 
+import { getAreaAdapter } from '../adapters/params';
+
 import { API_EmptyResponse } from '../interface';
+import { API_GetAreas, Area } from '../interface/params';
 
 export const postNotificationTypeFn = async (body: Record<string, unknown>) => {
   const request = apiRoutes.NOTIFICATIONS.POST_NOTIFICATION_TYPE();
@@ -139,6 +142,60 @@ export const putEmployeeTrainingTypeFn = async (
 
 export const deleteEmployeeTrainingTypeFn = async (id: string) => {
   const request = apiRoutes.EMPLOYEES.DELETE_EMPLOYEE_TRAINING_TYPE({ id });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const getAreaFn = async (id: string) => {
+  const request = apiRoutes.PARAMS.GET_AREA({ id });
+
+  const data = await fetchFn<API_GetAreas, Area>({
+    request,
+    adapter: getAreaAdapter,
+  });
+
+  return data;
+};
+
+export const postAreaFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.PARAMS.POST_AREA();
+
+  const dataToSend = cleanUpDataToSend(body);
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body: dataToSend,
+  });
+
+  return data;
+};
+
+export const putAreaFn = async (body: Record<string, unknown>) => {
+  if (!body.id || typeof body.id !== 'string') {
+    throw new Error('Missing or invalid id');
+  }
+
+  const request = apiRoutes.PARAMS.PUT_AREA({ id: body.id });
+
+  const dataToSend = cleanUpDataToSend(body);
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    adapter: (APIData) => APIData,
+    body: dataToSend,
+  });
+
+  return data;
+};
+
+export const deleteAreaFn = async (id: string) => {
+  const request = apiRoutes.PARAMS.DELETE_AREA({ id });
 
   const data = await fetchFn<API_EmptyResponse>({
     request,

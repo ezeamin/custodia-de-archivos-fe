@@ -30,6 +30,7 @@ export const paths = {
     NOTIFICATIONS: '/types-list/notification-types',
     LICENSES: '/types-list/license-types',
     TRAININGS: '/types-list/training-types',
+    AREAS: '/types-list/areas-types',
   },
   SETTINGS: {
     MAIN: '/settings',

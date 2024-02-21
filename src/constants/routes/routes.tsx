@@ -34,6 +34,7 @@ import LoginLogsView from '@/views/Settings/LoginLogsView';
 import RemoveAdminView from '@/views/Settings/RemoveAdminView';
 import RemoveReadOnlyView from '@/views/Settings/RemoveReadOnlyView';
 import SettingsView from '@/views/Settings/SettingsView';
+import AreasTypesView from '@/views/TypesList/AreasTypesView';
 import LicensesTypesView from '@/views/TypesList/LicensesTypesView';
 import NotificationsTypesView from '@/views/TypesList/NotificationsTypesView';
 import TrainingsTypesView from '@/views/TypesList/TrainingsTypesView';
@@ -277,6 +278,16 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <TrainingsTypesView />,
+        allowedRoles: [userRoles.ADMIN],
+      },
+      {
+        id: 5004,
+        title: 'Tipos de areas',
+        description: 'Tipos de areas',
+        path: paths.TYPES_LIST.AREAS,
+        subpaths: [],
+        privateRoute: true,
+        element: <AreasTypesView />,
         allowedRoles: [userRoles.ADMIN],
       },
     ],

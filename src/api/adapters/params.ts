@@ -58,3 +58,8 @@ export const getCivilStatusAdapter = (
     description: area.description,
   }));
 };
+
+export const getAreaAdapter = (data: API_GetAreas): Area => ({
+  id: data.id,
+  description: data.description,
+});

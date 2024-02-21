@@ -20,6 +20,11 @@ const routes = [
     path: paths.TYPES_LIST.TRAININGS,
     name: 'Capacitaciones',
   },
+  {
+    id: 4,
+    path: paths.TYPES_LIST.AREAS,
+    name: 'Areas',
+  },
 ];
 
 const TypesListView = () => {

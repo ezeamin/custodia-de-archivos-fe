@@ -4,26 +4,21 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { getEmployeeTrainingTypeFn } from '@/api/api-calls/employees';
-
 import { useLoading, useZodForm } from '@/hooks';
 
-import { Button, Grid, TextAreaInput, TextInput } from '@/components/ui';
+import { Button, Grid, TextInput } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
 
+import { getAreaFn, postAreaFn, putAreaFn } from '@/api/api-calls/typesList';
 import {
-  postEmployeeTrainingTypeFn,
-  putEmployeeTrainingTypeFn,
-} from '@/api/api-calls/typesList';
-import {
-  trainingsTypeSchema,
-  TrainingsTypeSchema,
-} from '@/form-schemas/schemas/typesList/trainingsTypeSchema';
+  AreasTypeSchema,
+  areasTypeSchema,
+} from '@/form-schemas/schemas/typesList/areasTypeSchema';
 
 const TypesForm = () => {
   const { control, onSubmitMiddleware, areAllFieldsFilled, setValue, reset } =
-    useZodForm(trainingsTypeSchema);
+    useZodForm(areasTypeSchema);
 
   const [isLoading, setIsLoading] = useState(false);
   const { search } = useLocation(); // ?edit=true&id=*
@@ -45,38 +40,35 @@ const TypesForm = () => {
     isSuccess: isSuccessEditedData,
     status: statusEditedData,
   } = useQuery({
-    queryKey: [
-      `employeeTrainingType_${idBeingEdited}`,
-      isEditing && idBeingEdited,
-    ],
-    queryFn: () => getEmployeeTrainingTypeFn(idBeingEdited ?? ''),
+    queryKey: ['areaOptions', idBeingEdited, isEditing && idBeingEdited],
+    queryFn: () => getAreaFn(idBeingEdited ?? ''),
     enabled: !!(isEditing && idBeingEdited),
   });
 
   const { mutate: createType } = useMutation({
-    mutationFn: postEmployeeTrainingTypeFn,
+    mutationFn: postAreaFn,
     onError: () => {
       setIsLoading(false);
     },
     onSuccess: () => {
       setIsLoading(false);
       reset();
-      toast.success('Tipo de Capacitación creada con éxito');
-      queryClient.invalidateQueries({ queryKey: ['employeeTrainingsTypes'] });
+      toast.success('Area creada con éxito');
+      queryClient.invalidateQueries({ queryKey: ['areaOptions'] });
     },
   });
 
   const { mutate: editType } = useMutation({
-    mutationFn: putEmployeeTrainingTypeFn,
+    mutationFn: putAreaFn,
     onError: () => {
       setIsLoading(false);
     },
     onSuccess: () => {
       setIsLoading(false);
       reset(); // Clear form values
-      toast.success('Tipo de Capacitación modificada con éxito');
-      queryClient.invalidateQueries({ queryKey: ['employeeTrainingsTypes'] });
-      navigate(paths.TYPES_LIST.TRAININGS);
+      toast.success('Area modificada con éxito');
+      queryClient.invalidateQueries({ queryKey: ['areaOptions'] });
+      navigate(paths.TYPES_LIST.AREAS);
     },
   });
 
@@ -84,14 +76,14 @@ const TypesForm = () => {
 
   if (isErrorEditedData) {
     toast.error('Ocurrió un error al obtener la información');
-    navigate(paths.TYPES_LIST.TRAININGS);
+    navigate(paths.TYPES_LIST.AREAS);
   }
 
   // -----------------------------------------------------
   // HANDLERS
   // -----------------------------------------------------
 
-  const handleSubmit = (data: TrainingsTypeSchema) => {
+  const handleSubmit = (data: AreasTypeSchema) => {
     setIsLoading(true);
 
     if (isEditing) {
@@ -102,7 +94,8 @@ const TypesForm = () => {
   };
 
   const handleCancelEdit = () => {
-    navigate(paths.TYPES_LIST.TRAININGS);
+    reset();
+    navigate(paths.TYPES_LIST.AREAS);
   };
 
   // -----------------------------------------------------
@@ -112,8 +105,7 @@ const TypesForm = () => {
   // Set values in form if editing
   useEffect(() => {
     if (isEditing && isSuccessEditedData && dataBeingEdited?.data) {
-      setValue('title', dataBeingEdited?.data.title);
-      setValue('description', dataBeingEdited?.data.description);
+      setValue('title', dataBeingEdited?.data.description);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccessEditedData, isEditing, setValue]);
@@ -127,28 +119,14 @@ const TypesForm = () => {
       className="content-card animate-in-bottom a-delay-400 card"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
-      <Grid container gap={2}>
-        <Grid item xs={12}>
-          <TextInput
-            className="w-full"
-            control={control}
-            disabled={isLoading}
-            label="Nombre"
-            name="title"
-            placeholder="Capacitación de género"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextAreaInput
-            className="w-full"
-            control={control}
-            disabled={isLoading}
-            label="Descripción"
-            name="description"
-            placeholder="Este tipo de capacitación es para..."
-          />
-        </Grid>
-      </Grid>
+      <TextInput
+        className="w-full"
+        control={control}
+        disabled={isLoading}
+        label="Nombre del área"
+        name="title"
+        placeholder="Sistemas"
+      />
       <Grid container className="mt-4" gap={2}>
         <Grid item sm={isEditing ? 9 : 12} xs={12}>
           <Button

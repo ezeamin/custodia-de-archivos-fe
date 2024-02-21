@@ -17,13 +17,13 @@ import {
   putEmployeeLicenseTypeFn,
 } from '@/api/api-calls/typesList';
 import {
-  LicenseTypeSchema,
-  licenseTypeSchema,
+  licensesTypeSchema,
+  LicensesTypeSchema,
 } from '@/form-schemas/schemas/typesList/licensesTypeSchema';
 
 const TypesForm = () => {
   const { control, onSubmitMiddleware, areAllFieldsFilled, setValue, reset } =
-    useZodForm(licenseTypeSchema);
+    useZodForm(licensesTypeSchema);
 
   const [isLoading, setIsLoading] = useState(false);
   const { search } = useLocation(); // ?edit=true&id=*
@@ -99,7 +99,7 @@ const TypesForm = () => {
   // HANDLERS
   // -----------------------------------------------------
 
-  const handleSubmit = (data: LicenseTypeSchema) => {
+  const handleSubmit = (data: LicensesTypeSchema) => {
     setIsLoading(true);
 
     if (isEditing) {

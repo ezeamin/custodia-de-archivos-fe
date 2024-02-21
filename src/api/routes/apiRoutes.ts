@@ -26,6 +26,26 @@ export const apiRoutes = {
       url: `/params/areas${filterAssignable ? '?filterAssignable=true' : ''}`,
       useToken: true,
     }),
+    GET_AREA: ({ id }: { id: string }): ApiRoute => ({
+      method: 'GET',
+      url: `/params/areas/${id}`,
+      useToken: true,
+    }),
+    POST_AREA: (): ApiRoute => ({
+      method: 'POST',
+      url: '/params/areas',
+      useToken: true,
+    }),
+    PUT_AREA: ({ id }: { id: string }): ApiRoute => ({
+      method: 'PUT',
+      url: `/params/areas/${id}`,
+      useToken: true,
+    }),
+    DELETE_AREA: ({ id }: { id: string }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/params/areas/${id}`,
+      useToken: true,
+    }),
     GET_RELATIONSHIPS: (): ApiRoute => ({
       method: 'GET',
       url: '/params/relationships',

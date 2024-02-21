@@ -331,6 +331,15 @@ export interface TrainingTypesResultsListItemProps {
   index: number;
 }
 
+export interface AreaResultsListProps {
+  data: Area[];
+}
+
+export interface AreaResultsListItemProps {
+  area: Area;
+  index: number;
+}
+
 // --------------------------------------------------
 // SETTINGS
 // --------------------------------------------------
