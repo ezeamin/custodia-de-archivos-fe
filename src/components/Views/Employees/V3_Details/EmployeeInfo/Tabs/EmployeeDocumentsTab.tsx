@@ -2,7 +2,6 @@ import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
 
 import ChangeDocumentNameModal from '../Components/Documents/ChangeDocumentNameModal';
-import DocumentItem from '../Components/Documents/DocumentItem';
 import DocumentListModal from '../Components/Documents/DocumentListModal';
 import FolderItem from '../Components/Documents/FolderItem';
 import AddNewDocument from '../Components/Documents/NewDocument/AddNewDocument';

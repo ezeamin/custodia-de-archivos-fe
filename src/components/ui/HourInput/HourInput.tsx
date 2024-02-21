@@ -18,6 +18,7 @@ const HourInput = <T extends FormSchemas>(
     name,
     label,
     className = '',
+    defaultValue = '',
     ...rest
   } = props;
 
@@ -28,7 +29,7 @@ const HourInput = <T extends FormSchemas>(
       </label>
       <InputController
         control={control}
-        defaultValue=""
+        defaultValue={defaultValue}
         name={name}
         render={({ field, fieldState: { error } }) => (
           <HourPicker

@@ -20,6 +20,7 @@ const PasswordInput = <T extends FormSchemas>(
     hideLabel = false,
     name,
     label,
+    defaultValue = '',
     ...rest
   } = props;
 
@@ -38,7 +39,7 @@ const PasswordInput = <T extends FormSchemas>(
       )}
       <InputController
         control={control}
-        defaultValue=""
+        defaultValue={defaultValue}
         name={name}
         render={({ field, fieldState: { error } }) => (
           <div

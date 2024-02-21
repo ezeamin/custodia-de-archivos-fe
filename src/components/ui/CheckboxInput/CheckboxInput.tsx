@@ -16,13 +16,14 @@ const CheckboxInput = <T extends FormSchemas>(
     name,
     label,
     labelSide = 'left',
+    defaultValue = '',
     ...rest
   } = props;
 
   return (
     <InputController
       control={control}
-      defaultValue=""
+      defaultValue={defaultValue}
       name={name}
       render={({ field }) => (
         <div className="form-control">
