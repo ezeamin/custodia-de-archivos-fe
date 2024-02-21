@@ -20,8 +20,6 @@ const EmployeeHistoryTab = () => {
   const params = useParams();
   const { id: employeeId } = params;
 
-  // TODO: "field" should be changed to show a label on the backend
-
   // -------------------------------------------------
   // API
   // -------------------------------------------------
