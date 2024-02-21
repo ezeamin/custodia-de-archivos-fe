@@ -18,7 +18,7 @@ import {
 import { SearchFilterProps } from '@/components/interface/views';
 
 const SearchFilter = (props: SearchFilterProps) => {
-  const { queryKey, placeholder, className } = props;
+  const { queryKey, placeholder, className, defaultEntries = 10 } = props;
 
   const { control, onSubmitMiddleware, setValue, reset, watch } =
     useZodForm(searchSchema);
@@ -36,7 +36,7 @@ const SearchFilter = (props: SearchFilterProps) => {
     const params = new URLSearchParams(search);
     params.set('query', data.query);
     params.set('page', '0');
-    params.set('entries', '10');
+    params.set('entries', defaultEntries.toString());
 
     navigate(`${window.location.pathname}?${params.toString()}`);
 

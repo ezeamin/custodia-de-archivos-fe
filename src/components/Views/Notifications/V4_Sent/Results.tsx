@@ -5,6 +5,7 @@ import { getSentNotificationsFn } from '@/api/api-calls/notifications';
 
 import { useLoading } from '@/hooks';
 
+import SearchFilter from '@/components/Common/SearchFilter';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Pagination } from '@/components/ui';
 
@@ -18,13 +19,12 @@ const Results = () => {
     isFetching: isLoading,
     isError,
     refetch,
-    status,
   } = useQuery({
     queryKey: ['sent_notifications'],
     queryFn: () => getSentNotificationsFn(),
   });
 
-  useLoading(isLoading, status);
+  useLoading(isLoading, isLoading ? 'pending' : 'success');
 
   // -------------------------------------------------
   // HANDLERS
@@ -43,7 +43,7 @@ const Results = () => {
   }
 
   if (data?.data) {
-    if (data.data.length === 0)
+    if (data.data.length === 0 && !window.location.search.includes('query'))
       return (
         <section className="mt-5 overflow-hidden">
           <Alert className="mb-3" type="info">
@@ -59,8 +59,31 @@ const Results = () => {
         </section>
       );
 
+    if (data.data.length === 0 && window.location.search.includes('query')) {
+      return (
+        <section className="mt-5 overflow-hidden">
+          <SearchFilter
+            className="mb-4"
+            defaultEntries={12}
+            placeholder="Buscar por destinatario o tipo"
+            queryKey={['sent_notifications']}
+          />
+          <Alert className="mb-3" type="info">
+            No se encontraron resultados para la búsqueda. Lamentablemente, en
+            esta versión, el buscador no funciona con nombres de áreas.
+          </Alert>
+        </section>
+      );
+    }
+
     return (
       <section className="mt-5 overflow-hidden">
+        <SearchFilter
+          className="mb-4"
+          defaultEntries={12}
+          placeholder="Buscar por destinatario o tipo"
+          queryKey={['sent_notifications']}
+        />
         <ResultsList sent data={data.data} />
         {data.data.length > 12 && (
           <Pagination

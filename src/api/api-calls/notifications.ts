@@ -47,7 +47,9 @@ export const getNotificationsFn = async (read: boolean) => {
 };
 
 export const getSentNotificationsFn = async () => {
-  const query = new URLSearchParams();
+  const { search } = window.location;
+
+  const query = new URLSearchParams(search);
   query.set('sent', 'true');
 
   const request = apiRoutes.NOTIFICATIONS.GET_NOTIFICATIONS({
