@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getEmployeeDocsFn } from '@/api/api-calls/employees';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
-import { Alert, Grid } from '@/components/ui';
+import { Grid } from '@/components/ui';
 
 const EmployeeDocumentsTab = () => {
   // -------------------------------------------------
@@ -62,15 +62,6 @@ const EmployeeDocumentsTab = () => {
           <AddNewDocument />
         </div>
       </div>
-      {data?.data?.length && data.data.length > 0 ? (
-        <Alert closable className="mb-4 mt-2">
-          Una vez que se elimine un archivo, este no se podrá recuperar.
-        </Alert>
-      ) : (
-        <Alert className="mt-2">
-          Aún no se cargaron documentos para este empleado.
-        </Alert>
-      )}
       <Grid container gap={3}>
         {isFetching && (
           <>

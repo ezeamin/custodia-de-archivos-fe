@@ -111,7 +111,7 @@ const AddNewFolderModal = () => {
       setValue('name', modalData.folder.name);
       setValue('color', modalData.folder.color);
     }
-  }, [modalData]);
+  }, [modalData, setValue]);
 
   // -------------------------------------------------
   // RENDER

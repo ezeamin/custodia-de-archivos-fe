@@ -17,6 +17,7 @@ import { EditImageSchema } from './editImageSchema';
 import { EditJobInfoSchema } from './editJobInfoSchema';
 import { EditPersonalInfoSchema } from './editPersonalInfoSchema';
 import { FamilyMemberFormSchema } from './familyMemberFormSchema';
+import { SearchDocumentSchema } from './searchDocumentSchema';
 import { SearchSchema } from './searchSchema';
 
 // Join other Employees schemas with "|"
@@ -40,4 +41,5 @@ export type EmployeesSchemas =
   | FamilyMemberFormSchema
   | AddLifeInsuranceSchema
   | EditHealthInfoSchema
-  | BeneficiaryFormSchema;
+  | BeneficiaryFormSchema
+  | SearchDocumentSchema;
