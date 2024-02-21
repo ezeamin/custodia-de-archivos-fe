@@ -5,6 +5,7 @@ import {
   Beneficiary,
   Employee,
   EmployeeDoc,
+  EmployeeFolder,
   ExtraHours,
   FamilyMember,
   FormalWarning,
@@ -103,11 +104,32 @@ export interface FamilyInfoModalContentProps {
 }
 
 export interface EditDocumentsFormProps {
-  data: EmployeeDoc[];
+  data: EmployeeFolder[];
+}
+
+export interface FolderItemProps {
+  folder: EmployeeFolder | undefined;
 }
 
 export interface DocumentItemProps {
   doc: EmployeeDoc | undefined;
+}
+
+export interface DocumentListModalData extends ModalStore {
+  data: {
+    documents: EmployeeDoc[];
+  };
+}
+
+export interface NewFolderModalData extends ModalStore {
+  data: {
+    employeeId: string;
+    folder: {
+      id: string;
+      name: string;
+      color: string;
+    };
+  } | null;
 }
 
 export interface ChangeDocModalData extends ModalStore {

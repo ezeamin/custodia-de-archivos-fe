@@ -1,10 +1,14 @@
 import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
 
-import AddNewDocument from '../Components/Documents/AddNewDocument';
-import AddNewDocumentModal from '../Components/Documents/AddNewDocumentModal';
 import ChangeDocumentNameModal from '../Components/Documents/ChangeDocumentNameModal';
 import DocumentItem from '../Components/Documents/DocumentItem';
+import DocumentListModal from '../Components/Documents/DocumentListModal';
+import FolderItem from '../Components/Documents/FolderItem';
+import AddNewDocument from '../Components/Documents/NewDocument/AddNewDocument';
+import AddNewDocumentModal from '../Components/Documents/NewDocument/AddNewDocumentModal';
+import AddNewFolder from '../Components/Documents/NewFolder/AddNewFolder';
+import AddNewFolderModal from '../Components/Documents/NewFolder/AddNewFolderModal';
 import { useQuery } from '@tanstack/react-query';
 
 import { getEmployeeDocsFn } from '@/api/api-calls/employees';
@@ -25,7 +29,7 @@ const EmployeeDocumentsTab = () => {
   // -------------------------------------------------
 
   const { data, isFetching, isError, refetch } = useQuery({
-    queryKey: [`employeeDocs_${employeeId}`],
+    queryKey: ['employeeDocs', employeeId],
     queryFn: () => getEmployeeDocsFn(employeeId!),
   });
 
@@ -54,7 +58,10 @@ const EmployeeDocumentsTab = () => {
     <>
       <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between md:flex-col md:justify-between lg:flex-row lg:items-center">
         <h2 className="text-lg font-bold">Documentos</h2>
-        <AddNewDocument />
+        <div className="flex flex-col gap-2 sm:flex-row md:flex-row">
+          <AddNewFolder />
+          <AddNewDocument />
+        </div>
       </div>
       {data?.data?.length && data.data.length > 0 ? (
         <Alert closable className="mb-4 mt-2">
@@ -69,23 +76,25 @@ const EmployeeDocumentsTab = () => {
         {isFetching && (
           <>
             <Grid item className="mt-4" md={12} sm={6} xl={6} xs={12}>
-              <DocumentItem doc={undefined} />
+              <FolderItem folder={undefined} />
             </Grid>
             <Grid item className="mt-4" md={12} sm={6} xl={6} xs={12}>
-              <DocumentItem doc={undefined} />
+              <FolderItem folder={undefined} />
             </Grid>
           </>
         )}
         {!isFetching &&
-          data?.data?.map((doc) => (
-            <Grid item key={doc.id} md={12} sm={6} xl={6} xs={12}>
-              <DocumentItem doc={doc} />
+          data?.data?.map((folder) => (
+            <Grid item key={folder.id} md={12} sm={6} xl={6} xs={12}>
+              <FolderItem folder={folder} />
             </Grid>
           ))}
       </Grid>
 
+      {createPortal(<DocumentListModal />, document.body)}
       {createPortal(<ChangeDocumentNameModal />, document.body)}
       {createPortal(<AddNewDocumentModal />, document.body)}
+      {createPortal(<AddNewFolderModal />, document.body)}
     </>
   );
 };

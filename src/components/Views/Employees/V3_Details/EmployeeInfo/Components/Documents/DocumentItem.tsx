@@ -40,7 +40,7 @@ const DocumentItem = (props: DocumentItemProps) => {
       setIsLoading(false);
       toast.success(`El archivo ${doc?.name} fue eliminado correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeDocs_${employeeId}`],
+        queryKey: ['employeeDocs', employeeId],
       });
     },
   });
@@ -91,7 +91,7 @@ const DocumentItem = (props: DocumentItemProps) => {
   // Loading
   if (!doc) {
     return (
-      <article className="flex items-center justify-between gap-2 rounded-md border border-gray-400 p-3 lg:items-start lg:justify-normal lg:border-none lg:p-0">
+      <article className="mb-2 flex items-center justify-between gap-2 rounded-md border border-gray-400 p-3 lg:items-start lg:justify-normal lg:border-none lg:p-0">
         <div className="custom-skeleton h-20 w-20 rounded-md pl-3 lg:pl-0" />
         <div className="flex w-1/2 flex-col justify-between gap-3">
           <span className="custom-skeleton hidden h-[20px] w-1/2 rounded-md text-sm lg:block" />
@@ -112,39 +112,49 @@ const DocumentItem = (props: DocumentItemProps) => {
       : doc.name;
 
   return (
-    <article className="flex items-center justify-between gap-2 rounded-md border border-gray-400 p-3 lg:items-start lg:justify-normal lg:border-none lg:p-0">
-      <div className="flex h-20 w-20 flex-col items-center justify-center gap-2 rounded-md pl-3 lg:border lg:border-gray-400 lg:pl-0">
+    <article className="mb-2 flex flex-col items-center gap-2 rounded-md border border-gray-400 p-3 sm:flex-row lg:items-start lg:justify-normal lg:border-none lg:p-0">
+      <div className="hidden h-20 w-20 min-w-20 flex-col items-center justify-center gap-2 rounded-md p-3 sm:flex lg:border lg:border-gray-400">
         <Icon
           className="h-8 w-8"
           iconComponent={<IoDocumentAttach />}
           title="documento"
         />
         <span className="text-sm font-bold">{extension}</span>
-        <span className="text-center text-sm lg:hidden">{shortenedName}</span>
       </div>
-      <div className="flex flex-col justify-between gap-3">
-        <span className="hidden text-sm lg:block">{shortenedName}</span>
-        <div className="flex flex-col gap-2 lg:flex-row">
-          <Button
-            className="border border-gray-400 hover:border-gray-500 dark:hover:border-gray-300"
-            onClick={handleOpen}
-          >
-            Ver
-          </Button>
-          <Button
-            className="border border-gray-400 hover:border-gray-500 dark:hover:border-gray-300"
-            onClick={handleRename}
-          >
-            Renombrar
-          </Button>
-          <Button
-            className="btn-outline hover:animate-pulse"
-            colorLight="btn-error"
-            textColorLight="text-white"
-            onClick={handleDelete}
-          >
-            Eliminar
-          </Button>
+      <span className="lg:hidden">{shortenedName}</span>
+      <div className="flex w-full items-center justify-between gap-2 sm:justify-end lg:justify-between">
+        <div className="flex h-20 w-20 min-w-20 flex-col items-center justify-center gap-2 rounded-md p-3 sm:hidden md:hidden lg:border lg:border-gray-400 lg:pl-0">
+          <Icon
+            className="h-8 w-8"
+            iconComponent={<IoDocumentAttach />}
+            title="documento"
+          />
+          <span className="text-sm font-bold">{extension}</span>
+        </div>
+        <div className="flex flex-col justify-between gap-3 sm:justify-end">
+          <span className="hidden text-sm lg:block">{shortenedName}</span>
+          <div className="flex flex-col justify-end gap-2 sm:flex-row">
+            <Button
+              className="border border-gray-400 hover:border-gray-500 dark:hover:border-gray-300"
+              onClick={handleOpen}
+            >
+              Ver
+            </Button>
+            <Button
+              className="border border-gray-400 hover:border-gray-500 dark:hover:border-gray-300"
+              onClick={handleRename}
+            >
+              Renombrar
+            </Button>
+            <Button
+              className="btn-outline hover:animate-pulse"
+              colorLight="btn-error"
+              textColorLight="text-white"
+              onClick={handleDelete}
+            >
+              Eliminar
+            </Button>
+          </div>
         </div>
       </div>
     </article>

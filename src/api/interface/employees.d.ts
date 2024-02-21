@@ -123,10 +123,17 @@ export interface API_PostBeneficiary {
   address: string | null;
 }
 
-export interface API_GetEmployeeDocs {
+export interface API_EmployeeDocs {
   id: string;
   name: string;
   url: string;
+}
+
+export interface API_GetEmployeeDocs {
+  id: string;
+  name: string;
+  color: `#${string}`;
+  documents: API_EmployeeDocs[];
 }
 
 export interface API_GetHistory {
@@ -234,7 +241,8 @@ export interface API_GetStreets {
 
 export interface MinimalEmployee extends API_GetEmployees {}
 export interface Employee extends API_GetEmployee {}
-export interface EmployeeDoc extends API_GetEmployeeDocs {}
+export interface EmployeeFolder extends API_GetEmployeeDocs {}
+export interface EmployeeDoc extends API_EmployeeDocs {}
 export interface History extends API_GetHistory {}
 export interface Absence extends API_GetAbsences {}
 export interface Vacation extends API_GetVacations {}

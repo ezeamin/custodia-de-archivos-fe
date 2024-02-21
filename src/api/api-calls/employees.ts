@@ -54,7 +54,7 @@ import {
   API_PostFamilyMember,
   Beneficiary,
   Employee,
-  EmployeeDoc,
+  EmployeeFolder,
   ExtraHours,
   FamilyMember,
   FormalWarning,
@@ -98,7 +98,7 @@ export const getEmployeeFn = async (id: string) => {
 export const getEmployeeDocsFn = async (id: string) => {
   const request = apiRoutes.EMPLOYEES.GET_EMPLOYEE_DOCS({ id });
 
-  const data = await fetchFn<API_GetEmployeeDocs[], EmployeeDoc[]>({
+  const data = await fetchFn<API_GetEmployeeDocs[], EmployeeFolder[]>({
     request,
     adapter: getEmployeeDocsAdapter,
   });
@@ -143,6 +143,56 @@ export const putEmployeeImageFn = async (body: FormData) => {
   const data = await fetchFn<API_EmptyResponse>({
     request,
     body: dataToSend,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const postFolderFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.EMPLOYEES.POST_FOLDER({
+    employeeId: body.employeeId as string,
+  });
+
+  const dataToSend = body.body as Record<string, unknown>;
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    body: dataToSend,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const putFolderFn = async (body: Record<string, unknown>) => {
+  const request = apiRoutes.EMPLOYEES.PUT_FOLDER({
+    employeeId: body.employeeId as string,
+    folderId: body.folderId as string,
+  });
+
+  const dataToSend = body.body as Record<string, unknown>;
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
+    body: dataToSend,
+    adapter: (APIData) => APIData,
+  });
+
+  return data;
+};
+
+export const deleteFolderFn = async ({
+  employeeId,
+  folderId,
+}: {
+  employeeId: string;
+  folderId: string;
+}) => {
+  const request = apiRoutes.EMPLOYEES.DELETE_FOLDER({ employeeId, folderId });
+
+  const data = await fetchFn<API_EmptyResponse>({
+    request,
     adapter: (APIData) => APIData,
   });
 

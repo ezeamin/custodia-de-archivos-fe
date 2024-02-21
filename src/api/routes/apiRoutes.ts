@@ -152,6 +152,33 @@ export const apiRoutes = {
       url: `/employees/${id}/image`,
       useToken: true,
     }),
+    POST_FOLDER: ({ employeeId }: { employeeId: string }): ApiRoute => ({
+      method: 'POST',
+      url: `/employees/${employeeId}/docs/folders`,
+      useToken: true,
+    }),
+    PUT_FOLDER: ({
+      employeeId,
+      folderId,
+    }: {
+      employeeId: string;
+      folderId: string;
+    }): ApiRoute => ({
+      method: 'PUT',
+      url: `/employees/${employeeId}/docs/folders/${folderId}`,
+      useToken: true,
+    }),
+    DELETE_FOLDER: ({
+      employeeId,
+      folderId,
+    }: {
+      employeeId: string;
+      folderId: string;
+    }): ApiRoute => ({
+      method: 'DELETE',
+      url: `/employees/${employeeId}/docs/folders/${folderId}`,
+      useToken: true,
+    }),
     POST_FILE: ({ employeeId }: { employeeId: string }): ApiRoute => ({
       method: 'POST',
       url: `/employees/${employeeId}/docs`,

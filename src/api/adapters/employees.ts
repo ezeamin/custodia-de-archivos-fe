@@ -20,7 +20,7 @@ import {
   API_GetVacations,
   Beneficiary,
   Employee,
-  EmployeeDoc,
+  EmployeeFolder,
   ExtraHours,
   FamilyMember,
   FormalWarning,
@@ -100,11 +100,16 @@ export const getFamilyMemberInfoAdapter = (
 
 export const getEmployeeDocsAdapter = (
   data: API_GetEmployeeDocs[]
-): EmployeeDoc[] => {
-  return data.map((doc) => ({
-    id: doc.id,
-    name: doc.name,
-    url: doc.url,
+): EmployeeFolder[] => {
+  return data.map((folder) => ({
+    id: folder.id,
+    name: folder.name,
+    color: folder.color,
+    documents: folder.documents.map((doc) => ({
+      id: doc.id,
+      name: doc.name,
+      url: doc.url,
+    })),
   }));
 };
 

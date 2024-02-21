@@ -2,22 +2,23 @@ import { useModal } from '@/stores/useModal';
 
 import { Button } from '@/components/ui';
 
-const AddNewDocument = () => {
+const AddNewFolder = () => {
   const { openModal } = useModal();
 
   const handleOpen = () => {
-    openModal('addNewDocument');
+    openModal('addNewFolder');
   };
 
   return (
     <Button
-      className="w-full sm:w-auto md:w-full lg:w-auto"
+      outlineButton
+      className="w-full sm:w-auto lg:w-auto"
       colorLight="btn-primary"
       textColorLight="text-white"
       onClick={handleOpen}
     >
-      Nuevo documento
+      Nueva carpeta
     </Button>
   );
 };
-export default AddNewDocument;
+export default AddNewFolder;

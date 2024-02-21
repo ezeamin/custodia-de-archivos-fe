@@ -50,7 +50,7 @@ const ChangeDocumentNameModal = () => {
       closeModal();
       toast.success(`El archivo ${data.doc?.name} fue editado correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeDocs_${data.employeeId}`],
+        queryKey: ['employeeDocs', data.employeeId],
       });
     },
   });

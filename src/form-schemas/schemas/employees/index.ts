@@ -1,4 +1,5 @@
 import { AddDocumentSchema } from './addDocumentSchema';
+import { AddFolderSchema } from './addFolderSchema';
 import { AddLifeInsuranceSchema } from './addLifeInsuranceSchema';
 import { AddNewAbsenceSchema } from './addNewAbsenceSchema';
 import { AddNewExtraHoursSchema } from './addNewExtraHoursSchema';
@@ -23,6 +24,7 @@ export type EmployeesSchemas =
   | SearchSchema
   | CreateSchema
   | ChangeDocNameSchema
+  | AddFolderSchema
   | AddDocumentSchema
   | AddNewAbsenceSchema
   | AddNewLateArrivalSchema

@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { postFileFn } from '@/api/api-calls/employees';
+import { getEmployeeDocsFn, postFileFn } from '@/api/api-calls/employees';
 
-import { useZodForm } from '@/hooks';
+import { useLoading, useZodForm } from '@/hooks';
 import { useModal } from '@/stores/useModal';
 
-import { FileInput, Modal, TextInput } from '@/components/ui';
+import { ComboBoxInput, FileInput, Modal, TextInput } from '@/components/ui';
 
 import {
   AddDocumentSchema,
@@ -36,6 +36,27 @@ const AddNewDocumentModal = () => {
 
   const queryClient = useQueryClient();
 
+  const {
+    data: foldersData,
+    isLoading: isLoadingFolders,
+    isError: isErrorFolders,
+    status: statusFolders,
+  } = useQuery({
+    queryKey: ['employeeDocs', employeeId],
+    queryFn: () => getEmployeeDocsFn(employeeId!),
+  });
+
+  const folders = useMemo(
+    () =>
+      foldersData?.data
+        ?.map((folder) => ({
+          id: folder.id,
+          description: folder.name,
+        }))
+        .filter((folder) => folder.description !== 'Notificaciones'),
+    [foldersData]
+  );
+
   const { mutate: addFile } = useMutation({
     mutationFn: postFileFn,
     onError: () => {
@@ -49,10 +70,20 @@ const AddNewDocumentModal = () => {
       reset();
       toast.success(`El documento fue agregado correctamente`);
       queryClient.invalidateQueries({
-        queryKey: [`employeeDocs_${employeeId}`],
+        queryKey: ['employeeDocs', employeeId],
       });
     },
   });
+
+  useLoading(isLoadingFolders, statusFolders);
+
+  if (isErrorFolders) {
+    toast.error(
+      'Ocurrió un error cargando las carpetas. Reintente nuevamente más tarde.'
+    );
+    reset();
+    closeModal();
+  }
 
   // -------------------------------------------------
   // HANDLERS
@@ -63,6 +94,7 @@ const AddNewDocumentModal = () => {
 
     const fd = new FormData();
     fd.append('file', formData.file);
+    fd.append('folderId', formData.folder.id);
     fd.append('name', formData.name);
 
     if (!employeeId) {
@@ -97,6 +129,19 @@ const AddNewDocumentModal = () => {
           label="Documento"
           name="file"
           setValue={setValue}
+        />
+        <ComboBoxInput
+          className="mt-3 w-full"
+          control={control}
+          disabled={isLoading}
+          helperText={
+            folders?.length === 0
+              ? 'No se pueden agregar documentos a la carpeta "Notificaciones". Cree una nueva desde el botón "NUEVA CARPETA" detrás de esta ventana.'
+              : undefined
+          }
+          label="Carpeta"
+          name="folder"
+          options={folders || []}
         />
         <TextInput
           className="mt-3 w-full"
