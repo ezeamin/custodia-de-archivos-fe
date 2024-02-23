@@ -3,6 +3,8 @@ import { apiExternalRoutes } from '../routes/apiExternalRoutes';
 
 import { apiRoutes } from '@/api/routes/apiRoutes';
 
+import { useSession } from '@/stores/useSession';
+
 import { cleanUpDataToSend } from '@/utilities/utils';
 
 import {
@@ -71,6 +73,8 @@ import {
   Vacation,
 } from '../interface/employees';
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export const getEmployeesFn = async () => {
   const { search } = window.location;
 
@@ -102,6 +106,21 @@ export const getEmployeeDocsFn = async (id: string) => {
     request,
     adapter: getEmployeeDocsAdapter,
   });
+
+  return data;
+};
+
+export const getEmployeesReportFn = async () => {
+  const request = apiRoutes.EMPLOYEES.GET_EMPLOYEES_REPORT();
+
+  const res = await fetch(`${baseUrl}${request.url}`, {
+    method: request.method,
+    headers: {
+      Authorization: `Bearer ${useSession.getState().accessToken}`,
+    },
+  });
+
+  const data = await res.blob();
 
   return data;
 };

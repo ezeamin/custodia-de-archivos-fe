@@ -13,6 +13,7 @@ const Title = (props: TitleProps) => {
     onClick,
     href,
     buttonClassName = '',
+    secondaryButton = null,
     ...rest
   } = props;
 
@@ -28,23 +29,26 @@ const Title = (props: TitleProps) => {
       >
         <div className="flex justify-between gap-2">
           <h1 className="text-4xl font-bold">{title}</h1>
-          {showButton && (
-            <Link
-              className={cn(
-                'btn btn-primary hidden border-none text-white sm:inline-flex',
-                buttonClassName
-              )}
-              to={href}
-            >
-              {buttonText?.toUpperCase()}
-            </Link>
-          )}
+          <div className="flex items-center gap-2">
+            <div className="h-full lg:h-auto">{secondaryButton}</div>
+            {showButton && (
+              <Link
+                className={cn(
+                  'btn btn-primary hidden border-none text-white lg:inline-flex',
+                  buttonClassName
+                )}
+                to={href}
+              >
+                {buttonText?.toUpperCase()}
+              </Link>
+            )}
+          </div>
         </div>
         <div className="divider mt-1" />
         {showButton && (
           <Link
             className={cn(
-              'btn btn-primary mb-3 w-full border-none text-white sm:hidden',
+              'btn btn-primary mb-3 w-full border-none text-white lg:hidden',
               buttonClassName
             )}
             to={href}

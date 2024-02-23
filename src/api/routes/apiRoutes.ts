@@ -137,6 +137,11 @@ export const apiRoutes = {
       url: `/employees/${id}/docs`,
       useToken: true,
     }),
+    GET_EMPLOYEES_REPORT: (): ApiRoute => ({
+      method: 'GET',
+      url: '/employees/report',
+      useToken: true,
+    }),
     POST_EMPLOYEE: (): ApiRoute => ({
       method: 'POST',
       url: '/employees',

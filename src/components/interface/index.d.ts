@@ -7,6 +7,7 @@ import type { AnyProp } from '@/interface';
 
 export type TitleProps = {
   title: string;
+  secondaryButton?: React.ReactNode | null;
 } & (
   | {
       onClick: () => void;

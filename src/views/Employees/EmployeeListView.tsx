@@ -1,5 +1,6 @@
 import SearchFilter from '@/components/Common/SearchFilter';
 import Title from '@/components/Common/Title';
+import GetEmployeeReport from '@/components/Reports/GetEmployeeReport';
 import Legend from '@/components/Views/Employees/V1_List/Results/Legend';
 import Results from '@/components/Views/Employees/V1_List/Results/Results';
 
@@ -11,6 +12,7 @@ const EmployeeListView = () => {
       <Title
         buttonText="Crear nuevo empleado"
         href={paths.EMPLOYEES.CREATE}
+        secondaryButton={<GetEmployeeReport />}
         title="Listado de Empleados"
       />
       <section className="flex items-center justify-between">
