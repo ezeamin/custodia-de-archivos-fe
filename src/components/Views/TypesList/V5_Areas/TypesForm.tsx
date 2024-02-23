@@ -66,11 +66,20 @@ const TypesForm = () => {
     onError: () => {
       setIsLoading(false);
     },
-    onSuccess: () => {
+    onSuccess: (res) => {
       setIsLoading(false);
-      reset(); // Clear form values
-      toast.success('Area modificada con éxito');
+      reset();
+
       queryClient.invalidateQueries({ queryKey: ['areaOptions'] });
+
+      // If a user was created, this will come in the response
+      if (res?.data?.username) {
+        setModalData(res.data);
+        openModal('newAreaUser');
+      } else {
+        toast.success('Area modificada con éxito');
+      }
+
       navigate(paths.TYPES_LIST.AREAS);
     },
   });

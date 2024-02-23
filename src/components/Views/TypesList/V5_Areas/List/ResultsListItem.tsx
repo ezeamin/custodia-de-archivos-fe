@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { IoCheckmarkCircle } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -7,7 +8,7 @@ import Swal from 'sweetalert2';
 
 import { useLoading } from '@/hooks';
 
-import { Button, Grid } from '@/components/ui';
+import { Button, Grid, Icon } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
 
@@ -68,12 +69,23 @@ const ResultsListItem = (props: AreaResultsListItemProps) => {
   return (
     <article
       className="content-card animate-in-bottom indicator h-full w-full"
-      style={{ animationDelay: `${index * 200}ms` }}
+      style={{ animationDelay: `${index * 200}ms`, zIndex: 1000 - index }}
     >
       <div className="card-body flex flex-col justify-between p-0">
         <div>
-          <h2 className="card-title">{area.description}</h2>
+          <div className="flex justify-between">
+            <h2 className="card-title">{area.description}</h2>
+            {!!area.responsibleEmail && (
+              <Icon
+                className="tooltip tooltip-bottom text-green-500"
+                data-tip="Tiene usuario"
+                iconComponent={<IoCheckmarkCircle />}
+                title="Tiene usuario"
+              />
+            )}
+          </div>
           <p>Responsable: {area.responsibleEmail ?? 'N/A'}</p>
+          <p>Usuario: {area.username ?? 'N/A'}</p>
         </div>
         <footer>
           <div className="divider my-0" />

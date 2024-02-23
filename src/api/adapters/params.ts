@@ -48,6 +48,7 @@ export const getAreasAdapter = (data: API_GetAreas[]): Area[] => {
     id: area.id,
     description: area.description,
     responsibleEmail: area.responsibleEmail,
+    username: area.username,
   }));
 };
 
@@ -64,4 +65,5 @@ export const getAreaAdapter = (data: API_GetAreas): Area => ({
   id: data.id,
   description: data.description,
   responsibleEmail: data.responsibleEmail,
+  username: data.username,
 });

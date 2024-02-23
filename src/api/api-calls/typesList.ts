@@ -6,7 +6,7 @@ import { cleanUpDataToSend } from '@/utilities/utils';
 import { getAreaAdapter } from '../adapters/params';
 
 import { API_EmptyResponse } from '../interface';
-import { API_GetAreas, Area } from '../interface/params';
+import { API_GetAreas, API_PostArea, Area } from '../interface/params';
 
 export const postNotificationTypeFn = async (body: Record<string, unknown>) => {
   const request = apiRoutes.NOTIFICATIONS.POST_NOTIFICATION_TYPE();
@@ -167,7 +167,7 @@ export const postAreaFn = async (body: Record<string, unknown>) => {
 
   const dataToSend = cleanUpDataToSend(body);
 
-  const data = await fetchFn<API_EmptyResponse>({
+  const data = await fetchFn<API_PostArea>({
     request,
     adapter: (APIData) => APIData,
     body: dataToSend,
@@ -185,7 +185,7 @@ export const putAreaFn = async (body: Record<string, unknown>) => {
 
   const dataToSend = cleanUpDataToSend(body);
 
-  const data = await fetchFn<API_EmptyResponse>({
+  const data = await fetchFn<API_PostArea>({
     request,
     adapter: (APIData) => APIData,
     body: dataToSend,

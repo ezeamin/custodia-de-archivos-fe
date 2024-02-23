@@ -10,8 +10,13 @@ export interface API_GetRoles extends BasicList {}
 export interface API_GetGenders extends BasicList {}
 export interface API_GetAreas extends BasicList {
   responsibleEmail: string | null;
+  username: string | null;
 }
 export interface API_GetCivilStatus extends BasicList {}
+export interface API_PostArea {
+  username: string;
+  password: string;
+}
 
 // ----------------------------------------------------------------------
 // ADAPTERS

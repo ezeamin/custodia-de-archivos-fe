@@ -6,6 +6,7 @@
 .md\:tooltip::before {
   color: #ffffff !important;
   font-weight: 100;
+  z-index: 999999999;
 }
 
 .btn.btn-disabled,

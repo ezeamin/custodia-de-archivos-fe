@@ -42,6 +42,7 @@ const Icon = (props: IconProps): JSX.Element => {
     iconComponent: IconComponent,
     size = '17.5px',
     title: customTitle,
+    ...rest
   } = props;
 
   const defaultTitle = 'icon-title';
@@ -58,7 +59,7 @@ const Icon = (props: IconProps): JSX.Element => {
   );
 
   return (
-    <div className={className}>
+    <div className={className} {...rest}>
       <IconContext.Provider value={iconContextValue}>
         {IconComponent}
       </IconContext.Provider>

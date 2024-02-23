@@ -1,4 +1,6 @@
-export interface IconProps {
+import { AnyProp } from '@/interface';
+
+export interface IconProps extends AnyProp {
   className?: string;
   color?: `#${string}`;
   iconComponent: React.ReactNode;
