@@ -1,11 +1,17 @@
 import { IoCheckmarkCircle, IoCloseCircle } from 'react-icons/io5';
 
+import dayjs from 'dayjs';
+
 import { Icon } from '@/components/ui';
 
 import { AreaReceiverItemProps } from '@/components/interface/views';
 
 const AreaReceiverItem = (props: AreaReceiverItemProps) => {
   const { receiver } = props;
+
+  const timeRead = dayjs(receiver.timeReadNotification).format(
+    'DD/MM/YYYY HH:mm'
+  );
 
   return (
     <article className="flex h-full gap-2">
@@ -31,9 +37,7 @@ const AreaReceiverItem = (props: AreaReceiverItemProps) => {
             title="Estado"
           />
           <p className="text-sm">
-            {receiver.hasReadNotification
-              ? `Leído - ${receiver.timeReadNotification}`
-              : 'No leído'}
+            {receiver.hasReadNotification ? `Leído - ${timeRead}` : 'No leído'}
           </p>
         </div>
       </div>
