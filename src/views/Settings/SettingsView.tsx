@@ -19,6 +19,7 @@ const routes = {
         userRoles.ADMIN,
         userRoles.THIRD_PARTY,
         userRoles.EMPLOYEE,
+        userRoles.AREA,
       ],
     },
     {

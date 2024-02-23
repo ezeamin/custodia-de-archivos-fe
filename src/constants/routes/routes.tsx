@@ -66,6 +66,7 @@ export const routes: Route[] = [
           userRoles.ADMIN,
           userRoles.EMPLOYEE,
           userRoles.THIRD_PARTY,
+          userRoles.AREA,
         ],
       },
       {
@@ -80,10 +81,16 @@ export const routes: Route[] = [
           userRoles.ADMIN,
           userRoles.EMPLOYEE,
           userRoles.THIRD_PARTY,
+          userRoles.AREA,
         ],
       },
     ],
-    allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.THIRD_PARTY],
+    allowedRoles: [
+      userRoles.ADMIN,
+      userRoles.EMPLOYEE,
+      userRoles.THIRD_PARTY,
+      userRoles.AREA,
+    ],
   },
   {
     id: 2000,
@@ -95,7 +102,12 @@ export const routes: Route[] = [
     element: <HomeView />,
     privateRoute: true,
     hidden: true,
-    allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.THIRD_PARTY],
+    allowedRoles: [
+      userRoles.ADMIN,
+      userRoles.EMPLOYEE,
+      userRoles.THIRD_PARTY,
+      userRoles.AREA,
+    ],
   },
   {
     id: 3000,
@@ -112,7 +124,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <CreateEmployeeView />,
-        allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY],
+        allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY, userRoles.AREA],
       },
       {
         id: 3002,
@@ -122,7 +134,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <EmployeeDetailsView />,
-        allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY],
+        allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY, userRoles.AREA],
       },
       {
         id: 3003,
@@ -132,7 +144,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <EditEmployeeView />,
-        allowedRoles: [userRoles.ADMIN],
+        allowedRoles: [userRoles.ADMIN, userRoles.AREA],
       },
       {
         id: 3004,
@@ -142,7 +154,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <CreateFamilyMemberView />,
-        allowedRoles: [userRoles.ADMIN],
+        allowedRoles: [userRoles.ADMIN, userRoles.AREA],
       },
       {
         id: 3005,
@@ -152,10 +164,9 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <EditFamilyMemberView />,
-        allowedRoles: [userRoles.ADMIN],
+        allowedRoles: [userRoles.ADMIN, userRoles.AREA],
       },
       {
-        // TODO
         id: 3006,
         title: 'Crear Beneficiario de Seguro de Vida',
         description: 'Crear Beneficiario de Seguro de Vida',
@@ -163,10 +174,9 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <CreateBeneficiaryView />,
-        allowedRoles: [userRoles.ADMIN],
+        allowedRoles: [userRoles.ADMIN, userRoles.AREA],
       },
       {
-        // TODO
         id: 3007,
         title: 'Editar Beneficiario de Seguro de Vida',
         description: 'Editar Beneficiario de Seguro de Vida',
@@ -174,12 +184,12 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <EditBeneficiaryView />,
-        allowedRoles: [userRoles.ADMIN],
+        allowedRoles: [userRoles.ADMIN, userRoles.AREA],
       },
     ],
     privateRoute: true,
     element: <EmployeeListView />,
-    allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY],
+    allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY, userRoles.AREA],
   },
   {
     id: 4000,
@@ -196,7 +206,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <CreateNotificationView />,
-        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.AREA],
       },
       {
         id: 4002,
@@ -206,7 +216,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <NotificationsReadListView />,
-        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.AREA],
       },
       {
         id: 4003,
@@ -216,7 +226,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <NotificationDetailView />,
-        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.AREA],
       },
       {
         id: 4004,
@@ -226,7 +236,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <NotificationsSentListView />,
-        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.AREA],
       },
       {
         id: 4005,
@@ -236,12 +246,12 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <SentNotificationDetailView />,
-        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
+        allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.AREA],
       },
     ],
     privateRoute: true,
     element: <NotificationsView />,
-    allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE],
+    allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.AREA],
   },
   {
     id: 5000,
@@ -314,6 +324,7 @@ export const routes: Route[] = [
           userRoles.ADMIN,
           userRoles.EMPLOYEE,
           userRoles.THIRD_PARTY,
+          userRoles.AREA,
         ],
       },
       {
@@ -369,7 +380,12 @@ export const routes: Route[] = [
     ],
     privateRoute: true,
     element: <SettingsView />,
-    allowedRoles: [userRoles.ADMIN, userRoles.EMPLOYEE, userRoles.THIRD_PARTY],
+    allowedRoles: [
+      userRoles.ADMIN,
+      userRoles.EMPLOYEE,
+      userRoles.THIRD_PARTY,
+      userRoles.AREA,
+    ],
   },
 ];
 
@@ -385,4 +401,8 @@ export const employeeRoutes = routes.filter((route) =>
 
 export const readOnlyRoutes = routes.filter((route) =>
   route.allowedRoles.includes(userRoles.THIRD_PARTY)
+);
+
+export const areaRoutes = routes.filter((route) =>
+  route.allowedRoles.includes(userRoles.AREA)
 );

@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { useLoading, useZodForm } from '@/hooks';
+import { useModal } from '@/stores/useModal';
 
 import { Button, Grid, TextInput } from '@/components/ui';
 
@@ -23,6 +24,7 @@ const TypesForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { search } = useLocation(); // ?edit=true&id=*
   const navigate = useNavigate();
+  const { openModal, setModalData } = useModal();
 
   const isEditing = search.includes('edit=true') && search.includes('id=');
   const idBeingEdited = isEditing ? search.split('id=')[1] : null;
@@ -50,10 +52,11 @@ const TypesForm = () => {
     onError: () => {
       setIsLoading(false);
     },
-    onSuccess: () => {
+    onSuccess: (res) => {
       setIsLoading(false);
       reset();
-      toast.success('Area creada con éxito');
+      setModalData(res.data);
+      openModal('newAreaUser');
       queryClient.invalidateQueries({ queryKey: ['areaOptions'] });
     },
   });
@@ -106,8 +109,9 @@ const TypesForm = () => {
   useEffect(() => {
     if (isEditing && isSuccessEditedData && dataBeingEdited?.data) {
       setValue('title', dataBeingEdited?.data.description);
+      if (dataBeingEdited?.data.responsibleEmail)
+        setValue('responsibleEmail', dataBeingEdited?.data.responsibleEmail);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccessEditedData, isEditing, setValue]);
 
   // -----------------------------------------------------
@@ -119,14 +123,29 @@ const TypesForm = () => {
       className="content-card animate-in-bottom a-delay-400 card"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
-      <TextInput
-        className="w-full"
-        control={control}
-        disabled={isLoading}
-        label="Nombre del área"
-        name="title"
-        placeholder="Sistemas"
-      />
+      <Grid container gap={2}>
+        <Grid item lg={6} xs={12}>
+          <TextInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="Nombre del área *"
+            name="title"
+            placeholder="Sistemas"
+          />
+        </Grid>
+        <Grid item lg={6} xs={12}>
+          <TextInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="Email del responsable *"
+            name="responsibleEmail"
+            placeholder="jorge@gmail.com"
+            type="email"
+          />
+        </Grid>
+      </Grid>
       <Grid container className="mt-4" gap={2}>
         <Grid item sm={isEditing ? 9 : 12} xs={12}>
           <Button

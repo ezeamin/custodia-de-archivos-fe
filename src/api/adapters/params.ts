@@ -47,6 +47,7 @@ export const getAreasAdapter = (data: API_GetAreas[]): Area[] => {
   return data.map((area) => ({
     id: area.id,
     description: area.description,
+    responsibleEmail: area.responsibleEmail,
   }));
 };
 
@@ -62,4 +63,5 @@ export const getCivilStatusAdapter = (
 export const getAreaAdapter = (data: API_GetAreas): Area => ({
   id: data.id,
   description: data.description,
+  responsibleEmail: data.responsibleEmail,
 });

@@ -62,6 +62,11 @@ const PortraitMenu = (): JSX.Element => {
                     Usuario de solo lectura
                   </Alert>
                 )}
+                {user?.role === userRoles.AREA && (
+                  <Alert hideIcon className="mt-3 text-center" type="warning">
+                    Usuario de Área
+                  </Alert>
+                )}
               </section>
               <div className="duration-400 mx-auto -mb-5 mt-auto max-w-sm bg-white py-4 dark:bg-zinc-700">
                 {/* Botones de los Modulos */}

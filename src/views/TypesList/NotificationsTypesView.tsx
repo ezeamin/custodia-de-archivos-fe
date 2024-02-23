@@ -4,10 +4,16 @@ import DescriptionModal from '@/components/Views/TypesList/V2_Notifications/Moda
 import TypesForm from '@/components/Views/TypesList/V2_Notifications/TypesForm';
 import TypesList from '@/components/Views/TypesList/V2_Notifications/TypesList';
 
+import { paths } from '@/constants/routes/paths';
+
 const NotificationsTypesView = () => {
   return (
     <>
-      <Title title="Tipos de Notificaciones" />
+      <Title
+        buttonText="Crear notificacion"
+        href={paths.NOTIFICATIONS.CREATE}
+        title="Tipos de Notificaciones"
+      />
       <Alert closable className="animate-in-bottom a-delay-200 mb-3">
         Crea un nuevo tipo de notificación. El título y la descripción serán
         visibles al crear una notificacion de este tipo. Además, una

@@ -2,6 +2,7 @@ import { useSession } from '@/stores/useSession';
 
 import {
   adminRoutes,
+  areaRoutes,
   employeeRoutes,
   readOnlyRoutes,
 } from '@/constants/routes/routes';
@@ -21,6 +22,8 @@ const useGetUserAllowedRoutes = (): Route[] => {
       return employeeRoutes;
     case userRoles.THIRD_PARTY:
       return readOnlyRoutes;
+    case userRoles.AREA:
+      return areaRoutes;
     default:
       return [];
   }

@@ -49,8 +49,8 @@ const ResultsListItem = (props: AreaResultsListItemProps) => {
 
   const handleDelete = () => {
     Swal.fire({
-      title: '¿Está seguro?',
-      html: `<p>Eliminará el área <b>"${area.description}"</b>. Esta acción no se puede revertir. Esto NO eliminará el área de los empleados con este tipo.</p>`,
+      title: 'ATENCIÓN',
+      html: `<p>Eliminará el área <b>"${area.description}"</b>. De continuar, también se inhabilitará el usuario relacionado, y las comunicaciones que este haya recibido. Esta acción no se puede revertir. Esto NO eliminará el área de los empleados con este tipo.</p>`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -73,6 +73,7 @@ const ResultsListItem = (props: AreaResultsListItemProps) => {
       <div className="card-body flex flex-col justify-between p-0">
         <div>
           <h2 className="card-title">{area.description}</h2>
+          <p>Responsable: {area.responsibleEmail ?? 'N/A'}</p>
         </div>
         <footer>
           <div className="divider my-0" />

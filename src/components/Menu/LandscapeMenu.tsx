@@ -40,6 +40,11 @@ const LandscapeMenu = (props: LandscapeMenuProps): JSX.Element => {
               Usuario de solo lectura
             </Alert>
           )}
+          {user?.role === userRoles.AREA && (
+            <Alert hideIcon className="mt-3 text-center" type="warning">
+              Usuario de Área
+            </Alert>
+          )}
         </div>
 
         {/* Module Buttons */}
