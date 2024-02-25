@@ -64,7 +64,8 @@ const LifeInsuranceEditPanel = (props: LifeInsuranceEditPanelProps) => {
     setIsLoading(true);
 
     editLifeInsurance({
-      ...formData,
+      name: formData.name,
+      policyNumber: formData.policyNumber.toString(),
       employeeId,
       lifeInsuranceId: data.id,
     });

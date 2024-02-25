@@ -9,6 +9,7 @@ import { putCreateAdminFn } from '@/api/api-calls/users';
 
 import { Button } from '@/components/ui';
 
+import { userRoles } from '@/constants/userRoles/userRoles';
 import { displayLabelRole } from '@/utilities/utils';
 
 import { CreateAdminResultsElement } from '@/components/interface/views';
@@ -38,7 +39,7 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
       toast.success('El usuario ahora es administrador');
 
       queryClient.invalidateQueries({
-        queryKey: ['users'],
+        queryKey: ['users', userRoles.EMPLOYEE],
       });
       queryClient.invalidateQueries({
         queryKey: ['adminUsers'],

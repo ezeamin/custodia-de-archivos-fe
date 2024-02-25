@@ -10,6 +10,8 @@ import EmptyAlert from '@/components/Common/EmptyAlert';
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Pagination } from '@/components/ui';
 
+import { userRoles } from '@/constants/userRoles/userRoles';
+
 import { BasicUser } from '@/api/interface/users';
 
 const Results = () => {
@@ -18,8 +20,8 @@ const Results = () => {
   // -------------------------------------------------
 
   const { data, isLoading, isFetching, isError, refetch, status } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => getUsersFn({}),
+    queryKey: ['users', userRoles.EMPLOYEE],
+    queryFn: () => getUsersFn({ role: userRoles.EMPLOYEE }),
   });
 
   useLoading(isLoading, status, isFetching);

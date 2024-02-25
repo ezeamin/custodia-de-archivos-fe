@@ -60,7 +60,8 @@ const CreateLifeInsuranceModal = () => {
     setIsLoading(true);
 
     createLifeInsurance({
-      ...data,
+      name: data.name,
+      policyNumber: data.policyNumber.toString(),
       id: employeeId,
     });
   };

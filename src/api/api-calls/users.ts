@@ -24,7 +24,7 @@ export const getUsersFn = async ({ role }: { role?: UserRole }) => {
 
   if (role) {
     const concatenationSymbol = search.length === 0 ? '?' : '&';
-    search += `${concatenationSymbol}role=${role.toLowerCase()}`;
+    search += `${concatenationSymbol}role=${role.toUpperCase()}`;
   }
 
   const request = apiRoutes.USERS.GET_USERS({ params: search });

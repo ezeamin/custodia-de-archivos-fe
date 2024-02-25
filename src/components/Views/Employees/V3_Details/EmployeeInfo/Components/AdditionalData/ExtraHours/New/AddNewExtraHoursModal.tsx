@@ -87,7 +87,7 @@ const AddNewExtraHoursModal = () => {
         className="overflow-x-hidden p-1 pt-0"
         id="addNewExtraHours"
         loading={isLoading}
-        title="Nueva Llegada Tarde"
+        title="Nuevas Horas Extra"
       >
         <DateInput
           className="mb-2"
