@@ -129,7 +129,7 @@ const ComboBox = <T extends FieldValues>(
                 ariaHidden
                 unstyled
                 aria-label="Borrar selección"
-                className="absolute inset-y-[1px] right-[1px] flex h-auto items-center bg-gray-100 px-3 hover:bg-gray-200 disabled:bg-transparent disabled:text-gray-400 disabled:hover:bg-transparent dark:bg-transparent hover:dark:bg-slate-800"
+                className="absolute inset-y-[1px] right-[1px] flex h-auto items-center bg-gray-100 px-3 hover:bg-gray-200 disabled:bg-transparent disabled:text-gray-400 disabled:hover:bg-transparent dark:bg-transparent hover:dark:bg-slate-800 disabled:dark:bg-transparent disabled:hover:dark:bg-transparent"
                 disabled={disabled}
                 type="button"
                 onClick={handleClearSelection}

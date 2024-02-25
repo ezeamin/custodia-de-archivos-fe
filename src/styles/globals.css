@@ -60,7 +60,7 @@ body {
   background: transparent;
 }
 
-input:not([type='checkbox']),
+input:not([type='checkbox']):not(.numInput),
 textarea {
   color: var(--input-text-color) !important;
 }

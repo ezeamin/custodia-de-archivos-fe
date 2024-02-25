@@ -26,12 +26,16 @@ const Results = () => {
   // API
   // -------------------------------------------------
 
-  const { data, isLoading, isError, refetch, status } = useQuery({
+  const { data, error, isLoading, isError, refetch, status } = useQuery({
     queryKey: ['notification', notificationId],
     queryFn: () => getNotificationFn(notificationId!),
   });
 
   useLoading(isLoading, status);
+
+  if (isError && error?.message?.includes('permisos')) {
+    navigate(paths.NOTIFICATIONS.MAIN);
+  }
 
   // -------------------------------------------------
   // HANDLERS
