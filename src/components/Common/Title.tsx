@@ -34,7 +34,7 @@ const Title = (props: TitleProps) => {
             {showButton && (
               <Link
                 className={cn(
-                  'btn btn-primary hidden border-none text-white lg:inline-flex',
+                  'btn btn-primary hidden text-white lg:inline-flex',
                   buttonClassName
                 )}
                 to={href}
@@ -48,7 +48,7 @@ const Title = (props: TitleProps) => {
         {showButton && (
           <Link
             className={cn(
-              'btn btn-primary mb-3 w-full border-none text-white lg:hidden',
+              'btn btn-primary mb-3 w-full text-white lg:hidden',
               buttonClassName
             )}
             to={href}

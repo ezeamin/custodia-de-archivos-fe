@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { useLoading, useZodForm } from '@/hooks';
+import useScrollToTop from '@/hooks/useScrollToTop';
 import { useModal } from '@/stores/useModal';
 
 import { Button, Grid, TextInput } from '@/components/ui';
@@ -28,6 +29,8 @@ const TypesForm = () => {
 
   const isEditing = search.includes('edit=true') && search.includes('id=');
   const idBeingEdited = isEditing ? search.split('id=')[1] : null;
+
+  useScrollToTop('#types-form', isEditing);
 
   // -----------------------------------------------------
   // API
@@ -121,7 +124,7 @@ const TypesForm = () => {
       if (dataBeingEdited?.data.responsibleEmail)
         setValue('responsibleEmail', dataBeingEdited?.data.responsibleEmail);
     }
-  }, [isSuccessEditedData, isEditing, setValue]);
+  }, [isSuccessEditedData, isEditing, setValue, dataBeingEdited?.data]);
 
   // -----------------------------------------------------
   // RENDER
@@ -130,6 +133,7 @@ const TypesForm = () => {
   return (
     <form
       className="content-card animate-in-bottom a-delay-400 card"
+      id="types-form"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
       <Grid container gap={2}>

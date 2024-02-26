@@ -10,6 +10,7 @@ const NotificationsTypesView = () => {
   return (
     <>
       <Title
+        buttonClassName="btn-outline"
         buttonText="Crear notificacion"
         href={paths.NOTIFICATIONS.CREATE}
         title="Tipos de Notificaciones"

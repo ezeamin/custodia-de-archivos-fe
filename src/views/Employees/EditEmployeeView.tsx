@@ -27,7 +27,7 @@ const EditEmployeeView = () => {
   return (
     <>
       <Title
-        buttonClassName="bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-700"
+        buttonClassName="bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-700 border-none"
         buttonText="Cancelar edición"
         href={`/employees/${employeeId}/personal`}
         title="Editar Empleado"

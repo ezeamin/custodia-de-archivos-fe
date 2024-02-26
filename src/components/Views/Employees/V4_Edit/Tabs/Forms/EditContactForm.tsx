@@ -35,12 +35,13 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   );
 
   const email = watch('email');
+  const phone = watch('phone');
   const state = watch('state');
   const locality = watch('locality');
   const street = watch('street');
   const streetNumber = watch('streetNumber');
   const areAllMandatoryFieldsFilled =
-    email && state && street && locality && streetNumber;
+    email && phone && state && street && locality && streetNumber !== undefined;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -234,7 +235,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
             control={control}
             disabled={isLoading}
             helperText='Introduce el número con codigo de país y área, pero sin el "+", ejemplo: "5493815857499"'
-            label="Teléfono"
+            label="Teléfono *"
             name="phone"
             placeholder="5493815857499"
             type="tel"

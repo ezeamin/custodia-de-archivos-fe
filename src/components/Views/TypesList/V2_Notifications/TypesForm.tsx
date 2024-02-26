@@ -8,6 +8,7 @@ import { getNotificationTypeFn } from '@/api/api-calls/notifications';
 import { getRolesOptionsFn } from '@/api/api-calls/params';
 
 import { useLoading, useZodForm } from '@/hooks';
+import useScrollToTop from '@/hooks/useScrollToTop';
 
 import {
   Button,
@@ -38,6 +39,8 @@ const TypesForm = () => {
 
   const isEditing = search.includes('edit=true') && search.includes('id=');
   const idBeingEdited = isEditing ? search.split('id=')[1] : null;
+
+  useScrollToTop('#types-form', isEditing);
 
   // -----------------------------------------------------
   // API
@@ -151,6 +154,7 @@ const TypesForm = () => {
   return (
     <form
       className="content-card animate-in-bottom a-delay-400 card z-[30]"
+      id="types-form"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
       <Grid container gap={2}>

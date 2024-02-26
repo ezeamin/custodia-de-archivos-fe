@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import useScrollToTop from '../../stores/useScrollToTop';
+import useScrollToTop from '../../hooks/useScrollToTop';
 import { useTheme } from '@/stores/useTheme';
 
 import Header from '@/components/Header/Header';
