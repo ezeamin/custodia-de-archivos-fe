@@ -168,6 +168,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
                 lifeInsuranceId,
                 genderId: gender.id,
                 relationshipId: relationship.id,
+                birthdate: new Date(0),
                 dni,
                 name,
                 lastname,
