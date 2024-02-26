@@ -142,12 +142,14 @@ const EditHealthForm = (props: EmployeeInfoProps) => {
       </Grid>
       <div className="mt-5 flex flex-col justify-between gap-2 md:flex-row md:items-center">
         <h2 className="text-2xl">Preocupacionales</h2>
-        <CheckboxInput
-          control={control}
-          disabled={isLoading}
-          label="Apto"
-          name="preoccupationalCheckupFit"
-        />
+        <div className="rounded-lg bg-blue-200 px-3 dark:bg-blue-600 dark:text-white">
+          <CheckboxInput
+            control={control}
+            disabled={isLoading}
+            label="Apto"
+            name="preoccupationalCheckupFit"
+          />
+        </div>
       </div>
       <div className="divider mb-1 mt-0" />
       <TextAreaInput
