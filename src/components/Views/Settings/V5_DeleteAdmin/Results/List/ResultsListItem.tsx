@@ -9,6 +9,8 @@ import { deleteAdminFn } from '@/api/api-calls/users';
 
 import { Button } from '@/components/ui';
 
+import { userRoles } from '@/constants/userRoles/userRoles';
+
 import { CreateAdminResultsElement } from '@/components/interface/views';
 
 const ResultsListItem = (props: CreateAdminResultsElement) => {
@@ -34,7 +36,7 @@ const ResultsListItem = (props: CreateAdminResultsElement) => {
       toast.success('El usuario ya no es administrador');
 
       queryClient.invalidateQueries({
-        queryKey: ['users'],
+        queryKey: ['users', userRoles.EMPLOYEE, userRoles.ADMIN],
       });
       queryClient.invalidateQueries({
         queryKey: ['adminUsers'],

@@ -39,7 +39,7 @@ const ResultsListItem = (props: CreateAdminResultsElement) => {
       toast.success('El usuario ahora es administrador');
 
       queryClient.invalidateQueries({
-        queryKey: ['users', userRoles.EMPLOYEE],
+        queryKey: ['users', userRoles.EMPLOYEE, userRoles.ADMIN],
       });
       queryClient.invalidateQueries({
         queryKey: ['adminUsers'],

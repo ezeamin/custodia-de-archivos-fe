@@ -20,8 +20,8 @@ const Results = () => {
   // -------------------------------------------------
 
   const { data, isLoading, isFetching, isError, refetch, status } = useQuery({
-    queryKey: ['users', userRoles.EMPLOYEE],
-    queryFn: () => getUsersFn({ role: userRoles.EMPLOYEE }),
+    queryKey: ['users', userRoles.EMPLOYEE, userRoles.ADMIN],
+    queryFn: () => getUsersFn({ role: [userRoles.EMPLOYEE, userRoles.ADMIN] }),
   });
 
   useLoading(isLoading, status, isFetching);

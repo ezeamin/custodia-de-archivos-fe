@@ -19,12 +19,16 @@ import {
   LoginLog,
 } from '../interface/users';
 
-export const getUsersFn = async ({ role }: { role?: UserRole }) => {
+export const getUsersFn = async ({
+  role,
+}: {
+  role?: UserRole | UserRole[];
+}) => {
   let { search } = window.location;
 
   if (role) {
     const concatenationSymbol = search.length === 0 ? '?' : '&';
-    search += `${concatenationSymbol}role=${role.toUpperCase()}`;
+    search += `${concatenationSymbol}role=${typeof role === 'string' ? role.toUpperCase() : role.map((r) => r.toUpperCase()).join(',')}`;
   }
 
   const request = apiRoutes.USERS.GET_USERS({ params: search });
