@@ -67,7 +67,8 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
     state &&
     street &&
     locality &&
-    streetNumber;
+    streetNumber &&
+    percentage;
 
   // -------------------------------------------------
   // API
@@ -177,7 +178,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
                 state,
                 streetNumber,
                 apt,
-                percentage,
+                percentage: Number(percentage), // in the case it comes as a string
               });
             }
           });
