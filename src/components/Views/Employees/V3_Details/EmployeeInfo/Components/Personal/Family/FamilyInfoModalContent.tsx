@@ -14,7 +14,7 @@ import { useModal } from '@/stores/useModal';
 
 import { Button, Grid } from '@/components/ui';
 
-import { formatCuil } from '@/utilities/utils';
+import { formatAddress, formatCuil } from '@/utilities/utils';
 
 import { FamilyInfoModalContentProps } from '@/components/interface/views';
 
@@ -83,11 +83,7 @@ const FamilyInfoModalContent = (props: FamilyInfoModalContentProps) => {
   const formattedPhone = data.phone
     ? data.phone.replace(/(\d{2})(\d{4})(\d{4})/, '+$1 $2-$3')
     : 'N/A';
-  const formattedAddress = data.address
-    ? `${data.address.street.description} ${data.address.streetNumber}${
-        data.address.apt ? ` - Dpto. ${data.address.apt}` : ''
-      }, ${data.address.locality.description}, ${data.address.state.description}`
-    : 'N/A';
+  const formattedAddress = formatAddress(data?.address);
 
   return (
     <>

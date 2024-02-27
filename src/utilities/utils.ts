@@ -1,5 +1,6 @@
 import { userRoles } from '@/constants/userRoles/userRoles';
 
+import { API_Address } from '@/api/interface/employees';
 import { Route } from '@/constants/interface';
 
 /**
@@ -161,4 +162,14 @@ export const displayLabelRole = (role: string) => {
 export const formatCuil = (cuil: string) => {
   if (!cuil) return '';
   return cuil.replace(/(\d{2})(\d{2})(\d{3})(\d{3})(\d{1})/, '$1-$2.$3.$4-$5');
+};
+
+export const formatAddress = (address: API_Address | null | undefined) => {
+  return address
+    ? `${address.street.description} ${address.streetNumber}${
+        address.apt ? ` - Dpto. ${address.apt}` : ''
+      }, ${address.locality.description}, ${
+        address.state.description
+      } ${address.observations ? `(${address.observations})` : ''}`
+    : 'N/A';
 };

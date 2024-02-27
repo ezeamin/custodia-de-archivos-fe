@@ -30,6 +30,7 @@ export const beneficiaryFormSchema = z.object({
   apt: textRules(false, 'campo Departamento'),
   state: z.union([typeRules(true, 'campo Provincia'), z.null()]),
   locality: z.union([typeRules(true, 'campo Localidad'), z.null()]),
+  addressObservations: textRules(false, 'campo Observaciones'),
   percentage: z.coerce
     .number({
       invalid_type_error: 'El campo Porcentaje debe ser un número',

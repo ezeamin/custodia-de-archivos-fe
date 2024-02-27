@@ -10,6 +10,7 @@ export interface API_Address {
   apt: string | null;
   state: BasicList;
   locality: BasicList;
+  observations: string | null;
 }
 
 export interface API_GetBeneficiary {

@@ -24,6 +24,7 @@ export const editContactInfoSchema = z.object({
   apt: textRules(false, 'campo Departamento'),
   state: z.union([typeRules(true, 'campo Provincia'), z.null()]),
   locality: z.union([typeRules(true, 'campo Localidad'), z.null()]),
+  addressObservations: textRules(false, 'campo Observaciones'),
 });
 
 export type EditContactInfoSchema = z.infer<typeof editContactInfoSchema>;

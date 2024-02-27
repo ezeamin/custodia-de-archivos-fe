@@ -295,6 +295,11 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
           setValue('apt', beneficiaryOriginalData.address.apt);
         if (beneficiaryOriginalData.address.state)
           setValue('state', beneficiaryOriginalData.address.state);
+        if (beneficiaryOriginalData.address.observations)
+          setValue(
+            'addressObservations',
+            beneficiaryOriginalData.address.observations
+          );
       }
       if (beneficiaryOriginalData.percentage)
         setValue('percentage', beneficiaryOriginalData.percentage);
@@ -501,6 +506,16 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
             label="Porcentaje"
             name="percentage"
             placeholder="100"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="Observaciones de la dirección"
+            name="addressObservations"
+            placeholder="Manzana 3, Lote 4, Casa 5"
           />
         </Grid>
       </Grid>

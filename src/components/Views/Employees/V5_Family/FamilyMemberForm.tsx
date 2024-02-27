@@ -285,6 +285,11 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
           setValue('apt', memberOriginalData.address.apt);
         if (memberOriginalData.address.state)
           setValue('state', memberOriginalData.address.state);
+        if (memberOriginalData.address.observations)
+          setValue(
+            'addressObservations',
+            memberOriginalData.address.observations
+          );
       }
     }
   }, [memberOriginalData, setValue, name, stateList]);
@@ -480,6 +485,16 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
             label="Departamento"
             name="apt"
             placeholder="1A"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="Observaciones de la dirección"
+            name="addressObservations"
+            placeholder="Manzana 3, Lote 4, Casa 5"
           />
         </Grid>
       </Grid>

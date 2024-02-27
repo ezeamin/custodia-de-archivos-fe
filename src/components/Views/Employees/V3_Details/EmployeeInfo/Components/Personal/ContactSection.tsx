@@ -5,6 +5,8 @@ import EmployeeDataField from '../../EmployeeDataField';
 
 import { Grid, Icon } from '@/components/ui';
 
+import { formatAddress } from '@/utilities/utils';
+
 import { PersonalProps } from '@/components/interface/views';
 
 const ContactSection = (props: PersonalProps) => {
@@ -12,13 +14,7 @@ const ContactSection = (props: PersonalProps) => {
 
   const { id: employeeId } = useParams();
 
-  const formattedAddress = data?.address
-    ? `${data?.address.street.description} ${data?.address.streetNumber}${
-        data?.address.apt ? ` - Dpto. ${data?.address.apt}` : ''
-      }, ${data?.address.locality.description}, ${
-        data?.address.state.description
-      }`
-    : 'N/A';
+  const formattedAddress = formatAddress(data?.address);
   const formattedPhone = data?.phone
     ? data.phone.replace(/(\d{2})(\d{4})(\d{4})/, '+$1 $2-$3')
     : 'N/A';

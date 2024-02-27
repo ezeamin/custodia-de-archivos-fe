@@ -149,6 +149,11 @@ const EditContactForm = (props: EmployeeInfoProps) => {
           setValue('apt', employeeOriginalData.address.apt);
         if (employeeOriginalData.address.state)
           setValue('state', employeeOriginalData.address.state);
+        if (employeeOriginalData.address.observations)
+          setValue(
+            'addressObservations',
+            employeeOriginalData.address.observations
+          );
       }
     }
   }, [employeeOriginalData, setValue, email, stateList]);
@@ -301,6 +306,16 @@ const EditContactForm = (props: EmployeeInfoProps) => {
             label="Departamento"
             name="apt"
             placeholder="1A"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextInput
+            className="w-full"
+            control={control}
+            disabled={isLoading}
+            label="Observaciones de la dirección"
+            name="addressObservations"
+            placeholder="Manzana 3, Lote 4, Casa 5"
           />
         </Grid>
       </Grid>

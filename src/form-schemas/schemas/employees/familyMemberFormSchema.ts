@@ -30,6 +30,7 @@ export const familyMemberFormSchema = z.object({
       message: 'El campo Nro. de Calle debe ser un número positivo',
     }),
   apt: textRules(false, 'campo Departamento'),
+  addressObservations: textRules(false, 'campo Observaciones'),
   state: z.union([typeRules(true, 'campo Provincia'), z.null()]),
   locality: z.union([typeRules(true, 'campo Localidad'), z.null()]),
 });
