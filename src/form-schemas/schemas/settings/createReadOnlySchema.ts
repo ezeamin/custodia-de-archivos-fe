@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import {
-  dniRules,
+  cuilRules,
   emailRules,
   lastnameRules,
   nameRules,
@@ -12,7 +12,7 @@ export const createReadOnlySchema = z.object({
   name: nameRules(true),
   lastname: lastnameRules(true),
   email: emailRules(true),
-  dni: dniRules(true),
+  cuil: cuilRules(true),
   description: textRules(true, 'descripción', 100),
 });
 

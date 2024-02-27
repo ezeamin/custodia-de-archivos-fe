@@ -7,7 +7,7 @@ const LoginLogsView = () => {
     <>
       <Title title="Registros de inicios de sesión" />
       <SearchFilter
-        placeholder="Buscar por DNI (sin puntos)"
+        placeholder="Buscar por CUIL (sin puntos)"
         queryKey="loginLogs"
       />
       <Results />

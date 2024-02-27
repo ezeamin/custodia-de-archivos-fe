@@ -77,7 +77,10 @@ const FamilyInfoModalContent = (props: FamilyInfoModalContentProps) => {
   // RENDER
   // -------------------------------------------------
 
-  const formattedDni = data.dni.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const formattedCuil = data.cuil.replace(
+    /(\d{2})(\d{2})(\d{3})(\d{3})(\d{1})/,
+    '$1-$2.$3.$4-$5'
+  );
   const formattedPhone = data.phone
     ? data.phone.replace(/(\d{2})(\d{4})(\d{4})/, '+$1 $2-$3')
     : 'N/A';
@@ -96,7 +99,7 @@ const FamilyInfoModalContent = (props: FamilyInfoModalContentProps) => {
       <div className="divider" />
       <Grid container gap={2}>
         <Grid item md={6} xs={12}>
-          <EmployeeDataField label="DNI" value={formattedDni} />
+          <EmployeeDataField label="CUIL" value={formattedCuil} />
         </Grid>
         <Grid item md={6} xs={12}>
           <EmployeeDataField label="Teléfono" value={formattedPhone} />

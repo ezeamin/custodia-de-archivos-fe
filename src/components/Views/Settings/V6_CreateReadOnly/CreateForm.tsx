@@ -98,9 +98,9 @@ const CreateForm = () => {
               className="w-full"
               control={control}
               disabled={isLoading}
-              label="DNI (Sin puntos) *"
+              label="CUIL (Sin puntos) *"
               maxLength={8}
-              name="dni"
+              name="cuil"
               placeholder="15235647"
             />
           </Grid>

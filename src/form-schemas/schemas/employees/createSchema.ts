@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 import { z } from 'zod';
 
 import {
+  cuilRules,
   dateRules,
-  dniRules,
   emailRules,
   lastnameRules,
   nameRules,
@@ -16,7 +16,7 @@ export const createSchema = z
     name: nameRules(true),
     lastname: lastnameRules(true),
     email: emailRules(true),
-    dni: dniRules(true),
+    cuil: cuilRules(true),
     gender: typeRules(true, 'género'),
     startDate: dateRules(true),
     birthdate: dateRules(true),

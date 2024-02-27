@@ -16,7 +16,7 @@ const ResultsListItem = (props: DeleteReadOnlyUserResultsElement) => {
 
   const navigate = useNavigate();
 
-  const dni = user.username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const cuil = user.username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
 
   // -------------------------------------------------
   // API
@@ -87,7 +87,7 @@ const ResultsListItem = (props: DeleteReadOnlyUserResultsElement) => {
         <div className="flex justify-between gap-3">
           <div>
             <p>
-              DNI: <span className="font-bold">{dni}</span>
+              CUIL: <span className="font-bold">{cuil}</span>
             </p>
             <p>
               Descripción: <span className="font-bold">{user.description}</span>

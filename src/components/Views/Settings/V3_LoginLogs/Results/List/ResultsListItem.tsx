@@ -9,7 +9,7 @@ const ResultsListItem = (props: LoginLogsResultsElement) => {
   // RENDER
   // -------------------------------------------------
 
-  const dni = log.username
+  const cuil = log.username
     .toString()
     .replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
   const formattedDate = dayjs(log.date).format('DD/MM/YYYY - HH:mm:ss');
@@ -20,7 +20,7 @@ const ResultsListItem = (props: LoginLogsResultsElement) => {
       style={{ animationDelay: `${index! * 200}ms` }}
     >
       <div className="card-body p-0">
-        <h2 className="card-title">DNI: {dni}</h2>
+        <h2 className="card-title">CUIL: {cuil}</h2>
         <div>
           <p>
             IP: <span className="font-bold">{log.ipAddress}</span>

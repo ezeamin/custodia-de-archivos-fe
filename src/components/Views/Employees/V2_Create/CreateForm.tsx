@@ -85,7 +85,7 @@ const CreateForm = () => {
 
         Swal.fire({
           title: 'Atención',
-          html: `Ya existe una persona registrada bajo el DNI ${personData.dni} en el sistema.<br/><br/>
+          html: `Ya existe una persona registrada bajo el CUIL ${personData.cuil} en el sistema.<br/><br/>
           Nombre: <b>${personData.lastname}, ${personData.name}</b><br/>
           ${personData.phone ? `Teléfono: <b>${personData.phone}</b><br/>` : ''}
           ${personData.address ? `Dirección: <b>${personData.address}</b><br/>` : ''}
@@ -105,7 +105,7 @@ const CreateForm = () => {
             fd.append('name', body.name);
             fd.append('lastname', body.lastname);
             fd.append('email', body.email);
-            fd.append('dni', body.dni);
+            fd.append('cuil', body.cuil);
             fd.append('fileNumber', body.fileNumber);
             fd.append('genderId', body.genderId);
             fd.append('startDate', body.startDate);
@@ -149,7 +149,7 @@ const CreateForm = () => {
     fd.append('name', data.name);
     fd.append('lastname', data.lastname);
     fd.append('email', data.email);
-    fd.append('dni', data.dni);
+    fd.append('cuil', data.cuil);
     fd.append('fileNumber', data.fileNumber.toString());
     fd.append('genderId', data.gender.id);
     fd.append(
@@ -228,9 +228,9 @@ const CreateForm = () => {
             className="w-full"
             control={control}
             disabled={isLoading}
-            label="DNI"
+            label="CUIL"
             maxLength={8}
-            name="dni"
+            name="cuil"
             placeholder="15235647"
           />
         </Grid>

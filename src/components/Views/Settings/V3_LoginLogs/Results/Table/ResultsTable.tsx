@@ -13,7 +13,7 @@ const ResultsTable = (props: LoginLogsResults) => {
         <Table rounded transparent zebra>
           <thead>
             <tr>
-              <th>DNI</th>
+              <th>CUIL</th>
               <th className="lg:hidden">Información</th>
               <th className="hidden lg:table-cell">IP</th>
               <th className="hidden lg:table-cell">Dispositivo</th>

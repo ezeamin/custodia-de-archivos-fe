@@ -110,7 +110,7 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
     if (employeeOriginalData) {
       setValue('name', employeeOriginalData.firstname);
       setValue('lastname', employeeOriginalData.lastname);
-      setValue('dni', employeeOriginalData.dni.toString());
+      setValue('cuil', employeeOriginalData.cuil.toString());
       setValue('gender', employeeOriginalData.gender);
       setValue('birthdate', employeeOriginalData.birthdate);
       setValue('civilStatus', employeeOriginalData.civilStatus);
@@ -152,8 +152,8 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
             className="w-full"
             control={control}
             disabled={isLoading}
-            label="DNI"
-            name="dni"
+            label="CUIL"
+            name="cuil"
             placeholder="15235647"
           />
         </Grid>

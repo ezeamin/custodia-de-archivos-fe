@@ -7,7 +7,7 @@ const RemoveReadOnlyView = () => {
     <>
       <Title title="Eliminar usuarios de solo lectura" />
       <SearchFilter
-        placeholder="Buscar por DNI (sin puntos)"
+        placeholder="Buscar por CUIL (sin puntos)"
         queryKey="readOnlyUsers"
       />
       <Results />

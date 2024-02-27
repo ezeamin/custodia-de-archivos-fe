@@ -7,9 +7,9 @@ const HistoryListItem = (props: HistoryElementProps) => {
   const { data } = props;
 
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY - HH:mm:ss');
-  const formattedDni = data.user.description.replace(
-    /(\d{2})(\d{3})(\d{3})/,
-    '$1.$2.$3'
+  const formattedCuil = data.user.description.replace(
+    /(\d{2})(\d{2})(\d{3})(\d{3})(\d{1})/,
+    '$1-$2.$3.$4-$5'
   );
 
   const isJSON = data.field.includes('JSON');
@@ -22,7 +22,7 @@ const HistoryListItem = (props: HistoryElementProps) => {
           Fecha: <b>{formattedDate}</b>
         </li>
         <li>
-          Usuario: <b>{formattedDni}</b>
+          Usuario: <b>{formattedCuil}</b>
         </li>
         <div className="divider my-0" />
         <li>

@@ -77,9 +77,9 @@ const LoginForm = () => {
         className="animate-in-left a-delay-400 w-full"
         control={control}
         label="Nombre de usuario"
-        maxLength={8}
+        maxLength={11}
         name="username"
-        placeholder="DNI"
+        placeholder="CUIL"
       />
       <PasswordInput
         autoComplete="current-password"

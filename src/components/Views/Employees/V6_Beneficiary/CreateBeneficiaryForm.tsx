@@ -50,7 +50,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
   const name = watch('name');
   const lastname = watch('lastname');
   const gender = watch('gender');
-  const dni = watch('dni');
+  const cuil = watch('cuil');
   const relationship = watch('relationship');
   const street = watch('street');
   const state = watch('state');
@@ -62,7 +62,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
     name &&
     lastname &&
     gender &&
-    dni &&
+    cuil &&
     relationship &&
     state &&
     street &&
@@ -150,7 +150,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
         if (personData) {
           Swal.fire({
             title: 'Atención',
-            html: `Ya existe una persona registrada bajo el DNI ${dni} en el sistema.<br/><br/>
+            html: `Ya existe una persona registrada bajo el CUIL ${cuil} en el sistema.<br/><br/>
             Nombre: <b>${personData.lastname}, ${personData.name}</b><br/>
             ${personData.address ? `Dirección: <b>${personData.address}</b><br/>` : ''}
             <br/>De continuar, se registrará el beneficiario, y SOLO se actualizarán los datos faltantes (de haberlos).`,
@@ -170,7 +170,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
                 genderId: gender.id,
                 relationshipId: relationship.id,
                 birthdate: new Date(0),
-                dni,
+                cuil,
                 name,
                 lastname,
                 street,
@@ -279,8 +279,8 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
       setValue('name', beneficiaryOriginalData.name);
       if (beneficiaryOriginalData.lastname)
         setValue('lastname', beneficiaryOriginalData.lastname);
-      if (beneficiaryOriginalData.dni)
-        setValue('dni', beneficiaryOriginalData.dni);
+      if (beneficiaryOriginalData.cuil)
+        setValue('cuil', beneficiaryOriginalData.cuil);
       if (beneficiaryOriginalData.relationship)
         setValue('relationship', beneficiaryOriginalData.relationship);
       if (beneficiaryOriginalData.gender)
@@ -402,9 +402,9 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
             className="w-full"
             control={control}
             disabled={isLoading}
-            label="DNI (sin puntos) *"
+            label="CUIL (sin puntos) *"
             maxLength={8}
-            name="dni"
+            name="cuil"
             placeholder="1234578"
           />
         </Grid>

@@ -75,7 +75,7 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
   // RENDER
   // -------------------------------------------------
 
-  const dni = user.username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const cuil = user.username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
 
   return (
     <tr>
@@ -90,9 +90,9 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
       </td>
       <td>
         <p className="font-bold lg:font-normal">{`${user.lastname}, ${user.firstname}`}</p>
-        <p className="text-xs lg:hidden">DNI: {dni}</p>
+        <p className="text-xs lg:hidden">CUIL: {cuil}</p>
       </td>
-      <td className="hidden lg:table-cell">{dni}</td>
+      <td className="hidden lg:table-cell">{cuil}</td>
       <td className="text-end">
         <Button
           colorLight="btn-primary"

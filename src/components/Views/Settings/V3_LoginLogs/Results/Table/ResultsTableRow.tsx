@@ -9,14 +9,14 @@ const ResultsTableRow = (props: LoginLogsResultsElement) => {
   // RENDER
   // -------------------------------------------------
 
-  const dni = log.username
+  const cuil = log.username
     .toString()
     .replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
   const formattedDate = dayjs(log.date).format('DD/MM/YYYY - HH:mm:ss');
 
   return (
     <tr>
-      <td>{dni}</td>
+      <td>{cuil}</td>
       <td className="lg:hidden">
         <p className="text-xs">IP: {log.ipAddress}</p>
         <p className="text-xs">Dispositivo: {log.userAgent}</p>

@@ -20,7 +20,7 @@ export interface API_GetBeneficiary {
     id: string;
     description: string;
   };
-  dni: string;
+  cuil: string;
   relationship: {
     id: string;
     description: string;
@@ -37,7 +37,7 @@ export interface API_MinimalFamilyMember {
 
 export interface API_GetEmployees {
   id: string;
-  dni: string;
+  cuil: string;
   imgSrc: string;
   lastname: string;
   firstname: string;
@@ -91,7 +91,7 @@ export interface API_GetFamilyMember {
   id: string;
   name: string;
   lastname: string;
-  dni: string;
+  cuil: string;
   gender: BasicList;
   relationship: BasicList;
   phone: string;
@@ -102,7 +102,7 @@ export interface API_PostEmployee {
   body: Record<string, string>;
   name: string;
   lastname: string;
-  dni: string;
+  cuil: string;
   phone: string | null;
   address: string | null;
 }
@@ -110,7 +110,7 @@ export interface API_PostEmployee {
 export interface API_PostFamilyMember {
   name: string;
   lastname: string;
-  dni: string;
+  cuil: string;
   phone: string | null;
   address: string | null;
 }
@@ -118,7 +118,7 @@ export interface API_PostFamilyMember {
 export interface API_PostBeneficiary {
   name: string;
   lastname: string;
-  dni: string;
+  cuil: string;
   gender: string;
   address: string | null;
 }

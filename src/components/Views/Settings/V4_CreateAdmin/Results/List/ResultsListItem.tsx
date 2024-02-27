@@ -81,7 +81,7 @@ const ResultsListItem = (props: CreateAdminResultsElement) => {
   // -------------------------------------------------
 
   const role = displayLabelRole(user.role.description);
-  const dni = user.username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const cuil = user.username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
 
   return (
     <article
@@ -95,7 +95,7 @@ const ResultsListItem = (props: CreateAdminResultsElement) => {
         <div className="flex justify-between gap-3">
           <div>
             <p>
-              DNI: <span className="font-bold">{dni}</span>
+              CUIL: <span className="font-bold">{cuil}</span>
             </p>
             <p>
               Rol: <span className="font-bold">{role}</span>

@@ -69,7 +69,7 @@ const RecoverPassForm = () => {
       {responseData?.data?.email && (
         <Alert className="mb-3 mt-2">
           <p>
-            Se ha enviado un mail al correo electrónico asociado al DNI{' '}
+            Se ha enviado un mail al correo electrónico asociado al CUIL{' '}
             {username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3')}:
           </p>
           <p className="mt-1 text-center font-bold">
@@ -81,9 +81,9 @@ const RecoverPassForm = () => {
         className="animate-in-left a-delay-400 w-full"
         control={control}
         label="Nombre de usuario"
-        maxLength={8}
+        maxLength={11}
         name="username"
-        placeholder="DNI"
+        placeholder="CUIL"
       />
       <Button
         unbordered

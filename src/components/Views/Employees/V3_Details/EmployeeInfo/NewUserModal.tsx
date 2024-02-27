@@ -15,7 +15,7 @@ const NewUserModal = () => {
       </Alert>
       <div className="divider" />
       <p>
-        El usuario será el DNI del empleado, y la contraseña que se muestra a
+        El usuario será el CUIL del empleado, y la contraseña que se muestra a
         continuación será temporal. El empleado deberá cambiarla cuando se
         loguee por primera vez
       </p>

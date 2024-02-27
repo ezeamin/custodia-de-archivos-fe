@@ -15,7 +15,7 @@ const ResultsTable = (props: CreateAdminResults) => {
             <tr>
               <th className="w-16 text-center">Foto</th>
               <th className="hidden lg:table-cell">Apellido, Nombre</th>
-              <th className="hidden lg:table-cell">DNI</th>
+              <th className="hidden lg:table-cell">CUIL</th>
               <th className="lg:hidden">Información</th>
               <th className="hidden lg:table-cell">Rol</th>
               <th />

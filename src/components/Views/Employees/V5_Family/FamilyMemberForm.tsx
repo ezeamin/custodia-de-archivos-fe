@@ -49,7 +49,7 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
   const lastname = watch('lastname');
   const phone = watch('phone');
   const gender = watch('gender');
-  const dni = watch('dni');
+  const cuil = watch('cuil');
   const relationship = watch('relationship');
   const street = watch('street');
   const state = watch('state');
@@ -61,7 +61,7 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
     lastname &&
     gender &&
     phone &&
-    dni &&
+    cuil &&
     relationship &&
     state &&
     street &&
@@ -148,7 +148,7 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
         if (personData) {
           Swal.fire({
             title: 'Atención',
-            html: `Ya existe una persona registrada bajo el DNI ${dni} en el sistema.<br/><br/>
+            html: `Ya existe una persona registrada bajo el CUIL ${cuil} en el sistema.<br/><br/>
           Nombre: <b>${personData.lastname}, ${personData.name}</b><br/>
           ${personData.phone ? `Teléfono: <b>${personData.phone}</b><br/>` : ''}
           ${personData.address ? `Dirección: <b>${personData.address}</b><br/>` : ''}
@@ -167,7 +167,7 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
                 id: employeeId,
                 genderId: gender.id,
                 relationshipId: relationship.id,
-                dni,
+                cuil,
                 name,
                 lastname,
                 phone,
@@ -272,7 +272,7 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
       setValue('name', memberOriginalData.name);
       if (memberOriginalData.lastname)
         setValue('lastname', memberOriginalData.lastname);
-      if (memberOriginalData.dni) setValue('dni', memberOriginalData.dni);
+      if (memberOriginalData.cuil) setValue('cuil', memberOriginalData.cuil);
       if (memberOriginalData.relationship)
         setValue('relationship', memberOriginalData.relationship);
       if (memberOriginalData.gender)
@@ -380,9 +380,9 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
             className="w-full"
             control={control}
             disabled={isLoading}
-            label="DNI (sin puntos) *"
+            label="CUIL (sin puntos) *"
             maxLength={8}
-            name="dni"
+            name="cuil"
             placeholder="1234578"
           />
         </Grid>

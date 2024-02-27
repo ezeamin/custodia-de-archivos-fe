@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 import { z } from 'zod';
 
 import {
+  cuilRules,
   dateRules,
-  dniRules,
   lastnameRules,
   nameRules,
   typeRules,
@@ -13,7 +13,7 @@ export const editPersonalInfoSchema = z
   .object({
     name: nameRules(true),
     lastname: lastnameRules(true),
-    dni: dniRules(true),
+    cuil: cuilRules(true),
     gender: typeRules(true, 'Género'),
     birthdate: dateRules(true),
     civilStatus: typeRules(true, 'Estado Civil'),

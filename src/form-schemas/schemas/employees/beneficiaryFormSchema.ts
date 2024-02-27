@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 import {
+  cuilRules,
   dateRules,
-  dniRules,
   lastnameRules,
   nameRules,
   textRules,
@@ -12,7 +12,7 @@ import {
 export const beneficiaryFormSchema = z.object({
   name: nameRules(true),
   lastname: lastnameRules(true),
-  dni: dniRules(true),
+  cuil: cuilRules(true),
   gender: typeRules(true, 'género'),
   birthdate: dateRules(false).default('1970-01-01T00:00:00.000Z'),
   relationship: typeRules(true, 'parentesco'),

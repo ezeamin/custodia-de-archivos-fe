@@ -42,7 +42,7 @@ export const getEmployeesAdapter = (
 ): MinimalEmployee[] => {
   return data.map((employee) => ({
     id: employee.id,
-    dni: employee.dni,
+    cuil: employee.cuil,
     imgSrc: employee.imgSrc,
     lastname: employee.lastname,
     firstname: employee.firstname,
@@ -58,7 +58,7 @@ export const getEmployeesAdapter = (
 
 export const getEmployeeAdapter = (data: API_GetEmployee): Employee => ({
   id: data.id,
-  dni: data.dni,
+  cuil: data.cuil,
   imgSrc: data.imgSrc,
   lastname: data.lastname,
   firstname: data.firstname,
@@ -91,7 +91,7 @@ export const getFamilyMemberInfoAdapter = (
   id: data.id,
   name: data.name,
   lastname: data.lastname,
-  dni: data.dni,
+  cuil: data.cuil,
   gender: data.gender,
   phone: data.phone,
   address: data.address,
@@ -253,7 +253,7 @@ export const getBeneficiaryInfoAdapter = (
   id: data.id,
   name: data.name,
   lastname: data.lastname,
-  dni: data.dni,
+  cuil: data.cuil,
   gender: data.gender,
   address: data.address,
   relationship: data.relationship,

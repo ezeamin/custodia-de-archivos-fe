@@ -26,7 +26,7 @@ const ResultsListItem = (props: EmployeesResultsListItemProps) => {
               Edad: <span className="font-bold">{employee.age} años</span>
             </p>
             <p>
-              DNI: <span className="font-bold">{employee.dni}</span>
+              CUIL: <span className="font-bold">{employee.cuil}</span>
             </p>
             <p>
               Puesto: <span className="font-bold">{employee.position}</span>

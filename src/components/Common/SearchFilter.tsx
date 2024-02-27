@@ -81,7 +81,7 @@ const SearchFilter = (props: SearchFilterProps) => {
           control={control}
           label="Buscar"
           name="query"
-          placeholder={placeholder || 'Buscar por nombre, apellido, o DNI'}
+          placeholder={placeholder || 'Buscar por nombre, apellido, o CUIL'}
         />
         <Button
           className="input-bordered p-3 hover:border-gray-500 md:hidden"
@@ -109,7 +109,7 @@ const SearchFilter = (props: SearchFilterProps) => {
           control={control}
           label="Buscar"
           name="query"
-          placeholder={placeholder || 'Buscar por nombre, apellido, o DNI'}
+          placeholder={placeholder || 'Buscar por nombre, apellido, o CUIL'}
         />
         <Button
           className="input-bordered p-3 hover:border-gray-500"

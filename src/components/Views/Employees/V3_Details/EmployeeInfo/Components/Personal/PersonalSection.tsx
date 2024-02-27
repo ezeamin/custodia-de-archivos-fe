@@ -13,7 +13,10 @@ const PersonalSection = (props: PersonalProps) => {
 
   const { id: employeeId } = useParams();
 
-  const formattedDni = data?.dni.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const formattedCuil = data?.cuil.replace(
+    /(\d{2})(\d{2})(\d{3})(\d{3})(\d{1})/,
+    '$1-$2.$3.$4-$5'
+  );
   const formattedBirthdate = data?.birthdate
     ? dayjs(data.birthdate).format('DD/MM/YYYY')
     : '';
@@ -38,7 +41,7 @@ const PersonalSection = (props: PersonalProps) => {
           <EmployeeDataField label="Nombre(s)" value={data?.firstname} />
         </Grid>
         <Grid item lg={6} xs={12}>
-          <EmployeeDataField label="D.N.I." value={formattedDni} />
+          <EmployeeDataField label="CUIL" value={formattedCuil} />
         </Grid>
         <Grid item lg={6} xs={12}>
           <EmployeeDataField

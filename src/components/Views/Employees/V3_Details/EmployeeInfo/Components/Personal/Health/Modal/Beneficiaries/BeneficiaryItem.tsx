@@ -74,9 +74,9 @@ const BeneficiaryItem = (props: BeneficiaryItemProps) => {
   // RENDER
   // -------------------------------------------------
 
-  const formattedDni = beneficiary?.dni.replace(
-    /(\d{2})(\d{3})(\d{3})/,
-    '$1.$2.$3'
+  const formattedCuil = beneficiary?.cuil.replace(
+    /(\d{2})(\d{2})(\d{3})(\d{3})(\d{1})/,
+    '$1-$2.$3.$4-$5'
   );
   const formattedAddress = beneficiary?.address
     ? `${beneficiary?.address.street.description} ${beneficiary?.address.streetNumber}${
@@ -98,7 +98,7 @@ const BeneficiaryItem = (props: BeneficiaryItemProps) => {
       </div>
       <p className="text-sm">{beneficiary.relationship.description}</p>
       <p>
-        DNI: <span className="font-bold">{formattedDni}</span>
+        CUIL: <span className="font-bold">{formattedCuil}</span>
       </p>
       <p>
         Dirección: <span className="font-bold">{formattedAddress}</span>

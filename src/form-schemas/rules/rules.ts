@@ -250,34 +250,6 @@ export const emailRules = <T extends boolean = false>(required: T) => {
   return optionalWrapper(required, rule);
 };
 
-export const dniRules = <T extends boolean = false>(required: T) => {
-  const rule = z
-    .string()
-    .trim()
-    .regex(/^\d+$/, {
-      message: 'El DNI debe contener solo números',
-    })
-    .max(8, {
-      message: 'El DNI debe tener 7 u 8 caracteres',
-    })
-    .refine(
-      // Min length is 7 when it does have content (cannot use .min() because it's initially empty and optional)
-      (data) => {
-        if (required) {
-          return data.length >= 7;
-        }
-
-        return true;
-      },
-      {
-        message: 'El DNI debe tener 7 u 8 caracteres',
-      }
-    )
-    .default('');
-
-  return optionalWrapper(required, rule);
-};
-
 export const positionRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
