@@ -6,6 +6,8 @@ import dayjs from 'dayjs';
 
 import { Grid, Icon } from '@/components/ui';
 
+import { formatCuil } from '@/utilities/utils';
+
 import { PersonalProps } from '@/components/interface/views';
 
 const PersonalSection = (props: PersonalProps) => {
@@ -13,10 +15,7 @@ const PersonalSection = (props: PersonalProps) => {
 
   const { id: employeeId } = useParams();
 
-  const formattedCuil = data?.cuil.replace(
-    /(\d{2})(\d{2})(\d{3})(\d{3})(\d{1})/,
-    '$1-$2.$3.$4-$5'
-  );
+  const formattedCuil = formatCuil(data?.cuil || '');
   const formattedBirthdate = data?.birthdate
     ? dayjs(data.birthdate).format('DD/MM/YYYY')
     : '';

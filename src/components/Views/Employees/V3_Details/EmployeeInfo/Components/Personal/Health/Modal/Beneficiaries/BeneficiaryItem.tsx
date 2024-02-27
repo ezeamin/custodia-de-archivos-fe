@@ -13,6 +13,8 @@ import { useModal } from '@/stores/useModal';
 
 import { Button, Grid } from '@/components/ui';
 
+import { formatCuil } from '@/utilities/utils';
+
 import { BeneficiaryItemProps } from '@/components/interface/views';
 
 const BeneficiaryItem = (props: BeneficiaryItemProps) => {
@@ -74,10 +76,7 @@ const BeneficiaryItem = (props: BeneficiaryItemProps) => {
   // RENDER
   // -------------------------------------------------
 
-  const formattedCuil = beneficiary?.cuil.replace(
-    /(\d{2})(\d{2})(\d{3})(\d{3})(\d{1})/,
-    '$1-$2.$3.$4-$5'
-  );
+  const formattedCuil = formatCuil(beneficiary?.cuil);
   const formattedAddress = beneficiary?.address
     ? `${beneficiary?.address.street.description} ${beneficiary?.address.streetNumber}${
         beneficiary?.address.apt ? ` - Dpto. ${beneficiary?.address.apt}` : ''

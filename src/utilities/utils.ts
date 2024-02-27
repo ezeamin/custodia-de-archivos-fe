@@ -157,3 +157,8 @@ export const displayLabelRole = (role: string) => {
       return 'Sin rol';
   }
 };
+
+export const formatCuil = (cuil: string) => {
+  if (!cuil) return '';
+  return cuil.replace(/(\d{2})(\d{2})(\d{3})(\d{3})(\d{1})/, '$1-$2.$3.$4-$5');
+};

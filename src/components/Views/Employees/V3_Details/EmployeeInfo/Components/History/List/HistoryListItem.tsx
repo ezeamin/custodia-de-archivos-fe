@@ -1,16 +1,15 @@
 import HistoryListValue from './HistoryListValue';
 import dayjs from 'dayjs';
 
+import { formatCuil } from '@/utilities/utils';
+
 import { HistoryElementProps } from '@/components/interface/views';
 
 const HistoryListItem = (props: HistoryElementProps) => {
   const { data } = props;
 
   const formattedDate = dayjs(data.date).format('DD/MM/YYYY - HH:mm:ss');
-  const formattedCuil = data.user.description.replace(
-    /(\d{2})(\d{2})(\d{3})(\d{3})(\d{1})/,
-    '$1-$2.$3.$4-$5'
-  );
+  const formattedCuil = formatCuil(data.user.description);
 
   const isJSON = data.field.includes('JSON');
   const label = isJSON ? data.field.split(' - ')[0] : data.field;

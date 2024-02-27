@@ -14,6 +14,8 @@ import { useModal } from '@/stores/useModal';
 
 import { Button, Grid } from '@/components/ui';
 
+import { formatCuil } from '@/utilities/utils';
+
 import { FamilyInfoModalContentProps } from '@/components/interface/views';
 
 const FamilyInfoModalContent = (props: FamilyInfoModalContentProps) => {
@@ -77,10 +79,7 @@ const FamilyInfoModalContent = (props: FamilyInfoModalContentProps) => {
   // RENDER
   // -------------------------------------------------
 
-  const formattedCuil = data.cuil.replace(
-    /(\d{2})(\d{2})(\d{3})(\d{3})(\d{1})/,
-    '$1-$2.$3.$4-$5'
-  );
+  const formattedCuil = formatCuil(data.cuil);
   const formattedPhone = data.phone
     ? data.phone.replace(/(\d{2})(\d{4})(\d{4})/, '+$1 $2-$3')
     : 'N/A';
