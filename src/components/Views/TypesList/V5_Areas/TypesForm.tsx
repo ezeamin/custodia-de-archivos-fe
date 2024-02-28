@@ -143,6 +143,7 @@ const TypesForm = () => {
             control={control}
             disabled={isLoading}
             label="Nombre del área *"
+            maxLength={75}
             name="title"
             placeholder="Sistemas"
           />

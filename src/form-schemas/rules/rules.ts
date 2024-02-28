@@ -138,12 +138,12 @@ export const lastnameRules = <T extends boolean = false>(required: T) => {
   return optionalWrapper(required, rule);
 };
 
-export const nameRules = <T extends boolean = false>(required: T) => {
+export const nameRules = <T extends boolean = false>(required: T, max = 50) => {
   const rule = z
     .string()
     .trim()
-    .max(50, {
-      message: 'El Nombre debe tener como máximo 50 caracteres',
+    .max(max, {
+      message: `El Nombre debe tener como máximo ${max} caracteres`,
     })
     .refine(
       // Min length is 3 when it does have content (cannot use .min() because it's initially empty)
