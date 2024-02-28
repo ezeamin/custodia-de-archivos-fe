@@ -67,7 +67,6 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
     state &&
     street &&
     locality &&
-    streetNumber &&
     percentage;
 
   // -------------------------------------------------
@@ -176,7 +175,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
                 street,
                 locality,
                 state,
-                streetNumber,
+                streetNumber: streetNumber || 0,
                 apt,
                 percentage: Number(percentage), // in the case it comes as a string
               });
@@ -253,6 +252,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
         beneficiaryId,
         genderId: data.gender.id,
         relationshipId: data.relationship.id,
+        streetNumber: data.streetNumber || 0,
         gender: undefined,
         relationship: undefined,
       });
@@ -263,6 +263,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
         lifeInsuranceId,
         genderId: data.gender.id,
         relationshipId: data.relationship.id,
+        streetNumber: data.streetNumber || 0,
         gender: undefined,
         relationship: undefined,
       });
@@ -481,7 +482,7 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
             className="w-full"
             control={control}
             disabled={isLoading}
-            label="Nro *"
+            label="Nro"
             name="streetNumber"
             placeholder="135"
             type="number"

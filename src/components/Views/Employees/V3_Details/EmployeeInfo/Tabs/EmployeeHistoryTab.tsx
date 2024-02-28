@@ -88,7 +88,7 @@ const EmployeeHistoryTab = () => {
           <section className="sm:hidden md:block xl:hidden">
             <HistoryList data={data.data} />
           </section>
-          {data.data.length > 10 && (
+          {data.totalElements && data?.totalElements > 10 && (
             <Pagination
               queryKey={['employeeHist', employeeId!]}
               totalElements={data.totalElements || 1}

@@ -78,7 +78,7 @@ const Results = () => {
         <ResultsTable data={data.data as BasicUser[]} />
         <ResultsList data={data.data as BasicUser[]} />
 
-        {data.data.length > 10 && (
+        {data.totalElements && data?.totalElements > 10 && (
           <Pagination
             queryKey={['users']}
             totalElements={data.totalElements || 1}

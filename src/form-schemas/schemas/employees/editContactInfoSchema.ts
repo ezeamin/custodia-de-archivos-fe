@@ -18,7 +18,7 @@ export const editContactInfoSchema = z.object({
     .int({
       message: 'El campo Nro. de Calle debe ser un número entero',
     })
-    .positive({
+    .nonnegative({
       message: 'El campo Nro. de Calle debe ser un número positivo',
     }),
   apt: textRules(false, 'campo Departamento'),

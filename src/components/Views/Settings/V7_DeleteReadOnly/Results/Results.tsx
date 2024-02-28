@@ -62,7 +62,7 @@ const Results = () => {
         <ResultsTable data={data.data} />
         <ResultsList data={data.data} />
 
-        {data.data.length > 10 && (
+        {data.totalElements && data?.totalElements > 10 && (
           <Pagination
             queryKey={['readOnlyUsers']}
             totalElements={data.totalElements || 1}

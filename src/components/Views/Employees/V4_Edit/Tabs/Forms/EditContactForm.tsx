@@ -39,9 +39,8 @@ const EditContactForm = (props: EmployeeInfoProps) => {
   const state = watch('state');
   const locality = watch('locality');
   const street = watch('street');
-  const streetNumber = watch('streetNumber');
   const areAllMandatoryFieldsFilled =
-    email && phone && state && street && locality && streetNumber !== undefined;
+    email && phone && state && street && locality;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -129,7 +128,12 @@ const EditContactForm = (props: EmployeeInfoProps) => {
 
   const handleSubmit = (data: EditContactInfoSchema) => {
     setIsLoading(true);
-    editEmployee({ ...data, id: employeeOriginalData.id, skipCleanUp: true });
+    editEmployee({
+      ...data,
+      id: employeeOriginalData.id,
+      skipCleanUp: true,
+      streetNumber: data.streetNumber || 0,
+    });
   };
 
   // -------------------------------------------------
@@ -292,7 +296,7 @@ const EditContactForm = (props: EmployeeInfoProps) => {
             className="w-full"
             control={control}
             disabled={isLoading}
-            label="Nro *"
+            label="Nro"
             name="streetNumber"
             placeholder="135"
             type="number"

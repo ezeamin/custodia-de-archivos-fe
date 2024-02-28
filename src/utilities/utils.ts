@@ -166,7 +166,7 @@ export const formatCuil = (cuil: string) => {
 
 export const formatAddress = (address: API_Address | null | undefined) => {
   return address
-    ? `${address.street.description} ${address.streetNumber}${
+    ? `${address.street.description} ${address.streetNumber || ''}${
         address.apt ? ` - Dpto. ${address.apt}` : ''
       }, ${address.locality.description}, ${
         address.state.description

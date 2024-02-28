@@ -48,7 +48,11 @@ const HistoryTableValue = (props: { value: unknown; isJSON?: boolean }) => {
     );
   }
 
-  if (typeof value === 'string') {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    typeof value === 'boolean'
+  ) {
     return <p>{value}</p>;
   }
 

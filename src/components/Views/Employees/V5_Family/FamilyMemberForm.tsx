@@ -65,8 +65,7 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
     relationship &&
     state &&
     street &&
-    locality &&
-    streetNumber;
+    locality;
 
   // -------------------------------------------------
   // API
@@ -174,7 +173,7 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
                 street,
                 locality,
                 state,
-                streetNumber,
+                streetNumber: streetNumber || 0,
                 apt,
               });
             }
@@ -247,6 +246,7 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
         genderId: data.gender.id,
         relationshipId: data.relationship.id,
         employeeId,
+        streetNumber: data.streetNumber || 0,
         gender: undefined,
         relationship: undefined,
       });
@@ -256,6 +256,7 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
         id: employeeId,
         genderId: data.gender.id,
         relationshipId: data.relationship.id,
+        streetNumber: data.streetNumber || 0,
         gender: undefined,
         relationship: undefined,
       });
@@ -471,7 +472,7 @@ const FamilyMemberForm = (props: FamilyMemberFormProps) => {
             className="w-full"
             control={control}
             disabled={isLoading}
-            label="Nro *"
+            label="Nro"
             name="streetNumber"
             placeholder="135"
             type="number"
