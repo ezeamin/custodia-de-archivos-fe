@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 
+import { formatCuil } from '@/utilities/utils';
+
 import { LoginLogsResultsElement } from '@/components/interface/views';
 
 const ResultsTableRow = (props: LoginLogsResultsElement) => {
@@ -9,9 +11,7 @@ const ResultsTableRow = (props: LoginLogsResultsElement) => {
   // RENDER
   // -------------------------------------------------
 
-  const cuil = log.username
-    .toString()
-    .replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const cuil = formatCuil(log.username);
   const formattedDate = dayjs(log.date).format('DD/MM/YYYY - HH:mm:ss');
 
   return (

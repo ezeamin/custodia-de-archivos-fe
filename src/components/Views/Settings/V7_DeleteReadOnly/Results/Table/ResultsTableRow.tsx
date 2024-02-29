@@ -9,6 +9,8 @@ import { deleteReadOnlyUserFn } from '@/api/api-calls/users';
 
 import { Button } from '@/components/ui';
 
+import { formatCuil } from '@/utilities/utils';
+
 import { DeleteReadOnlyUserResultsElement } from '@/components/interface/views';
 
 const ResultsTableRow = (props: DeleteReadOnlyUserResultsElement) => {
@@ -16,7 +18,7 @@ const ResultsTableRow = (props: DeleteReadOnlyUserResultsElement) => {
 
   const navigate = useNavigate();
 
-  const cuil = user.username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const cuil = formatCuil(user.username);
 
   // -------------------------------------------------
   // API

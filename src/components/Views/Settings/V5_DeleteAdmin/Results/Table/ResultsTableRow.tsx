@@ -10,6 +10,7 @@ import { deleteAdminFn } from '@/api/api-calls/users';
 import { Button } from '@/components/ui';
 
 import { userRoles } from '@/constants/userRoles/userRoles';
+import { formatCuil } from '@/utilities/utils';
 
 import { CreateAdminResultsElement } from '@/components/interface/views';
 
@@ -75,7 +76,7 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
   // RENDER
   // -------------------------------------------------
 
-  const cuil = user.username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const cuil = formatCuil(user.username);
 
   return (
     <tr>

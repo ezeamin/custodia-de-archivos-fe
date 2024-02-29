@@ -10,7 +10,7 @@ import { putCreateAdminFn } from '@/api/api-calls/users';
 import { Button } from '@/components/ui';
 
 import { userRoles } from '@/constants/userRoles/userRoles';
-import { displayLabelRole } from '@/utilities/utils';
+import { displayLabelRole, formatCuil } from '@/utilities/utils';
 
 import { CreateAdminResultsElement } from '@/components/interface/views';
 
@@ -81,7 +81,7 @@ const ResultsTableRow = (props: CreateAdminResultsElement) => {
   // -------------------------------------------------
 
   const role = displayLabelRole(user.role.description);
-  const cuil = user.username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
+  const cuil = formatCuil(user.username);
 
   return (
     <tr>
