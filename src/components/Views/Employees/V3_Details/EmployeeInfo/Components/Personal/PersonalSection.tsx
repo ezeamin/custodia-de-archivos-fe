@@ -19,6 +19,7 @@ const PersonalSection = (props: PersonalProps) => {
   const formattedBirthdate = data?.birthdate
     ? dayjs(data.birthdate).format('DD/MM/YYYY')
     : '';
+  const age = data?.birthdate ? dayjs().diff(data.birthdate, 'year') : null;
 
   return (
     <article>
@@ -45,7 +46,9 @@ const PersonalSection = (props: PersonalProps) => {
         <Grid item lg={6} xs={12}>
           <EmployeeDataField
             label="Fecha de nacimiento"
-            value={formattedBirthdate}
+            value={
+              data?.birthdate ? `${formattedBirthdate} (${age} años)` : null
+            }
           />
         </Grid>
         <Grid item lg={6} xs={12}>

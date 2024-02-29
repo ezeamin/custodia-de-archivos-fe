@@ -24,6 +24,7 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
   const formattedEndDate = data.endDate
     ? dayjs(data.endDate).format('DD/MM/YYYY')
     : 'N/A';
+  const workingYears = dayjs().diff(data.startDate, 'year');
 
   const handleEditImage = () => {
     openModal('editImage');
@@ -34,7 +35,7 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
       <div className="relative sm:w-1/2 lg:w-auto">
         <img
           alt={data.lastname}
-          className="h-[230px] w-full rounded-md object-cover"
+          className="aspect-square w-full rounded-md object-cover"
           src={data.imgSrc}
         />
         <Button
@@ -63,7 +64,7 @@ const EmployeeJobDetails = (props: EmployeeInfoProps) => {
         />
         <EmployeeDataField
           label="Fecha de ingreso"
-          value={formattedStartDate}
+          value={`${formattedStartDate} (${workingYears} años)`}
         />
         <EmployeeDataField label="Fecha de egreso" value={formattedEndDate} />
         <Link className="btn btn-sm" to={`/employees/${employeeId}/edit/job`}>
