@@ -54,6 +54,7 @@ module.exports = {
     'vite.config.ts',
     'package.json',
     '*.css',
+    '*.html'
   ],
   settings: {
     react: {
