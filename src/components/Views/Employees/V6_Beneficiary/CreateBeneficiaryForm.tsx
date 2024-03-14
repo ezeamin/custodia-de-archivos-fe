@@ -409,9 +409,9 @@ const CreateBeneficiaryForm = (props: BeneficiaryFormProps) => {
             control={control}
             disabled={isLoading}
             label="CUIL (sin puntos) *"
-            maxLength={8}
+            maxLength={11}
             name="cuil"
-            placeholder="1234578"
+            placeholder="12345678910"
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>

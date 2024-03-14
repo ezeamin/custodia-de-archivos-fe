@@ -99,9 +99,9 @@ const CreateForm = () => {
               control={control}
               disabled={isLoading}
               label="CUIL (Sin puntos) *"
-              maxLength={8}
+              maxLength={11}
               name="cuil"
-              placeholder="15235647"
+              placeholder="12345678910"
             />
           </Grid>
           <Grid item sm={6} xs={12}>
