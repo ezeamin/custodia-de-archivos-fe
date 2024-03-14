@@ -153,8 +153,9 @@ const EditPersonalForm = (props: EmployeeInfoProps) => {
             control={control}
             disabled={isLoading}
             label="CUIL"
+            maxLength={11}
             name="cuil"
-            placeholder="15235647"
+            placeholder="12345678910"
           />
         </Grid>
         <Grid item lg={4} sm={6} xs={12}>
