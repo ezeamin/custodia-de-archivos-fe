@@ -13,6 +13,7 @@ import { useZodForm } from '@/hooks';
 import { Alert, Button, Icon, TextInput } from '@/components/ui';
 
 import { paths } from '@/constants/routes/paths';
+import { formatCuil } from '@/utilities/utils';
 
 import {
   RecoverPasswordSchema,
@@ -70,7 +71,7 @@ const RecoverPassForm = () => {
         <Alert className="mb-3 mt-2">
           <p>
             Se ha enviado un mail al correo electrónico asociado al CUIL{' '}
-            {username.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3')}:
+            {formatCuil(username)}:
           </p>
           <p className="mt-1 text-center font-bold">
             {responseData.data.email}
