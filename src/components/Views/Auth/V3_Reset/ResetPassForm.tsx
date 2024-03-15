@@ -97,7 +97,7 @@ const ResetPassForm = () => {
         control={control}
         helperText="La contraseña debe tener al menos 6 caracteres, entre ellos: una mayúscula, una minúscula y un número"
         label="Nueva contraseña"
-        maxLength={25}
+        maxLength={30}
         name="password"
         placeholder="Ingrese nueva contraseña"
       />
@@ -106,7 +106,7 @@ const ResetPassForm = () => {
         className="animate-in-left a-delay-400 mt-3 w-full"
         control={control}
         label="Repetir nueva contraseña"
-        maxLength={25}
+        maxLength={30}
         name="repeatPassword"
         placeholder="Repita nueva contraseña"
       />

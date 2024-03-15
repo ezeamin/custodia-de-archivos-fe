@@ -343,8 +343,8 @@ export const passwordRules = <T extends boolean = false>(required: T) => {
   const rule = z
     .string()
     .trim()
-    .max(25, {
-      message: 'La contraseña debe tener como máximo 25 caracteres',
+    .max(30, {
+      message: 'La contraseña debe tener como máximo 30 caracteres',
     })
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/, {
       message:
