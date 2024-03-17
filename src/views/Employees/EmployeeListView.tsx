@@ -5,6 +5,7 @@ import Legend from '@/components/Views/Employees/V1_List/Results/Legend';
 import Results from '@/components/Views/Employees/V1_List/Results/Results';
 
 import { paths } from '@/constants/routes/paths';
+import { userRoles } from '@/constants/userRoles/userRoles';
 
 const EmployeeListView = () => {
   return (
@@ -12,6 +13,7 @@ const EmployeeListView = () => {
       <Title
         buttonText="Crear nuevo empleado"
         href={paths.EMPLOYEES.CREATE}
+        onlyShowButtonsFor={[userRoles.ADMIN, userRoles.AREA]}
         secondaryButton={<GetEmployeeReport />}
         title="Listado de Empleados"
       />

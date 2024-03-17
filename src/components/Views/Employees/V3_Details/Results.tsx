@@ -12,12 +12,14 @@ import { postUserFn } from '@/api/api-calls/users';
 
 import { useLoading, usePortrait } from '@/hooks';
 import { useModal } from '@/stores/useModal';
+import { useSession } from '@/stores/useSession';
 
 import ErrorMessage from '@/components/Error/ErrorMessage';
 import { Alert, Button } from '@/components/ui';
 
 import { uuidRegex } from '@/constants/regex/regex';
 import { paths } from '@/constants/routes/paths';
+import { userRoles } from '@/constants/userRoles/userRoles';
 
 const Results = () => {
   // -------------------------------------------------
@@ -37,6 +39,8 @@ const Results = () => {
   const isPortrait = usePortrait();
 
   const { openModal, setModalData } = useModal();
+
+  const { user: loggedInUser } = useSession();
 
   // -------------------------------------------------
   // API
@@ -78,6 +82,8 @@ const Results = () => {
   };
 
   const handleCreateUser = () => {
+    if (loggedInUser?.role === userRoles.THIRD_PARTY) return;
+
     setIsLoadingCreateUser(true);
     createUser(employeeId!);
   };
@@ -96,9 +102,9 @@ const Results = () => {
   if (data?.data) {
     return (
       <>
-        {!data.data.user && (
+        {!data.data.user && loggedInUser?.role !== userRoles.THIRD_PARTY && (
           <Alert closable className="mb-3">
-            <b>Atencion: este empleado no tiene usuario asignado</b>. Si desea
+            <b>Atención: este empleado no tiene usuario asignado</b>. Si desea
             hacerlo, haga click en el siguiente botón.
             <div>
               <Button

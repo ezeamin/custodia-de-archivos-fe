@@ -124,7 +124,7 @@ export const routes: Route[] = [
         subpaths: [],
         privateRoute: true,
         element: <CreateEmployeeView />,
-        allowedRoles: [userRoles.ADMIN, userRoles.THIRD_PARTY, userRoles.AREA],
+        allowedRoles: [userRoles.ADMIN, userRoles.AREA],
       },
       {
         id: 3002,

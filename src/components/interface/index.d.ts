@@ -1,4 +1,6 @@
-import type { Route, RouteOption } from '@/constants/interface';
+import { UserRole } from '@/constants/userRoles/userRoles';
+
+import type { Route } from '@/constants/interface';
 import type { AnyProp } from '@/interface';
 
 // ----------------------------------------------------------------------
@@ -8,6 +10,7 @@ import type { AnyProp } from '@/interface';
 export type TitleProps = {
   title: string;
   secondaryButton?: React.ReactNode | null;
+  onlyShowButtonsFor?: UserRole[];
 } & (
   | {
       onClick: () => void;
@@ -49,7 +52,7 @@ export interface MenuModuleButtonProps extends AnyProps {
 }
 
 export interface MenuOptionButtonProps extends AnyProp {
-  option: RouteOption;
+  option: Route;
 }
 
 // ----------------------------------------------------------------------

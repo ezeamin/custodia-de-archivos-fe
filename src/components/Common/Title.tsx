@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 
 import { Button } from '../ui';
 
+import { useSession } from '@/stores/useSession';
+
 import { cn } from '@/utilities';
 
 import { TitleProps } from '@/components/interface';
@@ -14,11 +16,18 @@ const Title = (props: TitleProps) => {
     href,
     buttonClassName = '',
     secondaryButton = null,
+    onlyShowButtonsFor = [],
     ...rest
   } = props;
 
+  const { user } = useSession();
+
   const isLink = !!href;
-  const showButton = !!('href' in props || 'onClick' in props);
+  const showButton =
+    !!('href' in props || 'onClick' in props) &&
+    (onlyShowButtonsFor.length > 0
+      ? onlyShowButtonsFor.includes(user?.role ?? 'EMPLOYEE')
+      : true);
 
   if (isLink) {
     return (
@@ -30,7 +39,9 @@ const Title = (props: TitleProps) => {
         <div className="flex justify-between gap-2">
           <h1 className="text-4xl font-bold">{title}</h1>
           <div className="flex items-center gap-2">
-            <div className="h-full lg:h-auto">{secondaryButton}</div>
+            {showButton && (
+              <div className="h-full lg:h-auto">{secondaryButton}</div>
+            )}
             {showButton && (
               <Link
                 className={cn(

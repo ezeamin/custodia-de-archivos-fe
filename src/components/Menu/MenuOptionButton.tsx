@@ -14,6 +14,7 @@ const MenuOptionButton = (props: MenuOptionButtonProps): JSX.Element => {
     navigate(-1);
   };
 
+  // @ts-expect-error -- Path can be number, but setting that on type breaks everything
   if (option.path === -1)
     return (
       <Button
@@ -45,7 +46,7 @@ const MenuOptionButton = (props: MenuOptionButtonProps): JSX.Element => {
   return (
     <Link
       className="mb-5 flex h-10 items-center gap-x-4 rounded-lg bg-sky-100 px-4 shadow duration-500 dark:bg-slate-600 dark:text-white"
-      to={option.path}
+      to={option.path as string}
     >
       {option.description}
     </Link>

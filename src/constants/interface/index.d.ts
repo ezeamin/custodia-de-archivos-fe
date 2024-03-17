@@ -14,4 +14,5 @@ export interface Route {
   element: JSX.Element;
   privateRoute: boolean;
   allowedRoles: UserRole[];
+  action?: () => void;
 }
