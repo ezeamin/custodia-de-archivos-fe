@@ -39,9 +39,7 @@ const Title = (props: TitleProps) => {
         <div className="flex justify-between gap-2">
           <h1 className="text-4xl font-bold">{title}</h1>
           <div className="flex items-center gap-2">
-            {showButton && (
-              <div className="h-full lg:h-auto">{secondaryButton}</div>
-            )}
+            <div className="h-full lg:h-auto">{secondaryButton}</div>
             {showButton && (
               <Link
                 className={cn(
